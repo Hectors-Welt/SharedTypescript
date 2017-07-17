@@ -1,0 +1,9 @@
+{
+  "name": "shared-typescript",
+  "version": "1.0.0",
+  "dependencies": {
+    "popsicle": "^9.1.0",
+    "winston": "^2.3.1",
+    "winston-mongodb": "^2.0.10"
+  }
+}
