@@ -7,11 +7,19 @@
     "winston-mongodb": "^2.0.10"
   },
   "scripts": {
-    "clean": "rimraf dist && rimraf coverage",
+    "clean": "rimraf coverage",
     "build": "tsc -p ./",
+    "add": "git add --all && git commit --amend -C HEAD --no-verify",
     "test": "npm run clean && npm run build && mocha --opts test/mocha.opts",
     "cover": "npm run clean && npm run build && nyc --reporter=html --reporter=text-summary mocha --opts test/mocha.opts",
     "cover-all": "npm run clean && npm run build && nyc --all --reporter=html --reporter=text-summary mocha --opts test/mocha.opts"
+  },
+  "pre-commit": {
+    "run": [
+      "build",
+      "add"
+    ],
+    "silent": true
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
@@ -21,6 +29,7 @@
     "mocha": "^3.4.2",
     "nock": "^9.0.14",
     "nyc": "^11.0.3",
+    "pre-commit": "^1.2.2",
     "rimraf": "^2.6.1",
     "typescript": "^2.4.1"
   }
