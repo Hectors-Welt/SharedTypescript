@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rimraf coverage",
     "build": "tsc -p ./",
-    "add": "git add --all && git commit --amend -C HEAD --no-verify",
+    "add": "git add --all",
     "test": "npm run clean && npm run build && mocha --opts test/mocha.opts",
     "cover": "npm run clean && npm run build && nyc --reporter=html --reporter=text-summary mocha --opts test/mocha.opts",
     "cover-all": "npm run clean && npm run build && nyc --all --reporter=html --reporter=text-summary mocha --opts test/mocha.opts"
