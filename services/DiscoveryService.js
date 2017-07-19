@@ -5,6 +5,7 @@ const EventStoreSettings_1 = require("../models/EventStoreSettings");
 const MongoDbSettings_1 = require("../models/MongoDbSettings");
 const CustomerService_1 = require("../services/CustomerService");
 const EmployeesService_1 = require("../services/EmployeesService");
+const MembershipService_1 = require("../services/MembershipService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -107,6 +108,31 @@ class DiscoveryService {
             }
             else {
                 resolve(this.employeesService);
+            }
+        });
+    }
+    getMembershipService() {
+        return new Promise((resolve, reject) => {
+            if (!this.membershipService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/MembershipService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json'
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.membershipService = new MembershipService_1.default(result.body.host, result.body.port);
+                    resolve(this.membershipService);
+                })
+                    .catch((error) => {
+                    reject(new Error("failed to retrieve membership service from discovery service"));
+                });
+            }
+            else {
+                resolve(this.membershipService);
             }
         });
     }

@@ -4,15 +4,18 @@ import MongoDbSettings from '../models/MongoDbSettings'
 import IDiscoveryService from '../interfaces/IDiscoveryService'
 import ICustomerService from '../interfaces/ICustomerService'
 import IEmployeesService from '../interfaces/IEmployeesService'
+import IMembershipService from '../interfaces/IMembershipService'
 import CustomerService from '../services/CustomerService'
 import EmployeesService from '../services/EmployeesService'
+import MembershipService from '../services/MembershipService'
 
 class DiscoveryService implements IDiscoveryService {
 	public host: string
 	public port: number
 	public timer: NodeJS.Timer
 	private customerService: ICustomerService
-	private employeesService: IEmployeesService
+  private employeesService: IEmployeesService
+  private membershipService: IMembershipService
 
 	constructor(host: string, port: number) {
 		this.host = host;
@@ -125,6 +128,32 @@ class DiscoveryService implements IDiscoveryService {
 			}
 			else {
 				resolve(this.employeesService);
+			}
+		});
+  }
+  
+  getMembershipService(): Promise<IMembershipService> {
+		return new Promise((resolve, reject) => {
+			if (!this.membershipService) {
+				popsicle.request({
+					url: `http://${this.host}:${this.port}/MembershipService`,
+					method: 'GET',
+					headers: {
+						'content-type': 'application/json',
+						'accept': 'application/json'
+					},
+				})
+					.use(popsicle.plugins.parse('json'))
+					.then((result) => {
+						this.membershipService = new MembershipService(result.body.host, result.body.port);
+						resolve(this.membershipService);
+					})
+					.catch((error) => {
+						reject(new Error("failed to retrieve membership service from discovery service"));
+					});
+			}
+			else {
+				resolve(this.membershipService);
 			}
 		});
 	}

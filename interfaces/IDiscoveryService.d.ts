@@ -2,6 +2,7 @@ import EventStoreSettings from '../models/EventStoreSettings';
 import MongoDbSettings from '../models/MongoDbSettings';
 import ICustomerService from '../interfaces/ICustomerService';
 import IEmployeesService from '../interfaces/IEmployeesService';
+import IMembershipService from '../interfaces/IMembershipService';
 interface IDiscoveryService {
     host: string;
     port: number;
@@ -10,5 +11,6 @@ interface IDiscoveryService {
     getMongoDbSettings(): Promise<MongoDbSettings>;
     getCustomerService(): Promise<ICustomerService>;
     getEmployeesService(): Promise<IEmployeesService>;
+    getMembershipService(): Promise<IMembershipService>;
 }
 export default IDiscoveryService;
