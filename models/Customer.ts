@@ -1,10 +1,8 @@
-import Contact from './Contact'
-import PersonalData from './PersonalData'
+import { Contact } from './Contact'
+import { PersonalData } from './PersonalData'
 
-class Customer {
-    id: number
-    personalData: PersonalData
-    contact: Contact
+export class Customer {
+  id: number
+  personalData: PersonalData
+  contact: Contact
 }
-
-export default Customer

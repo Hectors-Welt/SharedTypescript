@@ -1,7 +1,5 @@
-import ContractTemplate from '../models/ContractTemplate'
+import { ContractTemplate } from '../models/ContractTemplate'
 
-interface IMembershipService {
-    getContractTemplatesAvailable(): Promise<ContractTemplate[]>
+export interface IMembershipService {
+  getContractTemplatesAvailable(): Promise<ContractTemplate[]>
 }
-
-export default IMembershipService

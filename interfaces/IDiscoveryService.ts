@@ -1,19 +1,17 @@
-import EventStoreSettings from '../models/EventStoreSettings'
-import MongoDbSettings from '../models/MongoDbSettings'
-import ICustomerService from '../interfaces/ICustomerService'
-import IEmployeesService from '../interfaces/IEmployeesService'
-import IMembershipService from '../interfaces/IMembershipService'
+import { EventStoreSettings } from '../models/EventStoreSettings'
+import { MongoDbSettings } from '../models/MongoDbSettings'
+import { ICustomerService } from '../interfaces/ICustomerService'
+import { IEmployeesService } from '../interfaces/IEmployeesService'
+import { IMembershipService } from '../interfaces/IMembershipService'
 
-interface IDiscoveryService {
-    host: string
-    port: number
+export interface IDiscoveryService {
+  host: string
+  port: number
 
-    startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number|string)
-    getEventStoreSettings(): Promise<EventStoreSettings>
-    getMongoDbSettings(): Promise<MongoDbSettings>
-    getCustomerService(): Promise<ICustomerService>  
-    getEmployeesService(): Promise<IEmployeesService>  
-    getMembershipService(): Promise<IMembershipService>
+  startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string)
+  getEventStoreSettings(): Promise<EventStoreSettings>
+  getMongoDbSettings(): Promise<MongoDbSettings>
+  getCustomerService(): Promise<ICustomerService>
+  getEmployeesService(): Promise<IEmployeesService>
+  getMembershipService(): Promise<IMembershipService>
 }
-
-export default IDiscoveryService
