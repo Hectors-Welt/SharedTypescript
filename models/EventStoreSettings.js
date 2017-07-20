@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class EventStoreSettings {
     constructor(settings) {
         if (!settings || !settings.host || !settings.tcpPort || !settings.httpPort) {
-            throw new Error("invalid data. ensure host and ports are present.");
+            throw new Error('invalid data. ensure host and ports are present.');
         }
         this.host = settings.host;
         this.tcpPort = settings.tcpPort;
@@ -12,4 +12,4 @@ class EventStoreSettings {
         this.password = settings.password;
     }
 }
-exports.default = EventStoreSettings;
+exports.EventStoreSettings = EventStoreSettings;

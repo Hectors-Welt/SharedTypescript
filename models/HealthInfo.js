@@ -22,4 +22,4 @@ class HealthInfo {
         };
     }
 }
-exports.default = HealthInfo;
+exports.HealthInfo = HealthInfo;

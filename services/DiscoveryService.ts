@@ -95,7 +95,7 @@ export class DiscoveryService implements IDiscoveryService {
             resolve(this.customerService);
           })
           .catch((error) => {
-            reject(new Error("failed to retrieve customer service from discovery service"));
+            reject(new Error('failed to retrieve customer service from discovery service'));
           });
       }
       else {
@@ -121,7 +121,7 @@ export class DiscoveryService implements IDiscoveryService {
             resolve(this.employeesService);
           })
           .catch((error) => {
-            reject(new Error("failed to retrieve employees service from discovery service"));
+            reject(new Error('failed to retrieve employees service from discovery service'));
           });
       }
       else {
@@ -147,7 +147,7 @@ export class DiscoveryService implements IDiscoveryService {
             resolve(this.membershipService);
           })
           .catch((error) => {
-            reject(new Error("failed to retrieve membership service from discovery service"));
+            reject(new Error('failed to retrieve membership service from discovery service'));
           });
       }
       else {

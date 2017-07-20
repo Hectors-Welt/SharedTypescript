@@ -13,8 +13,8 @@ class LoggerService {
         ];
         if (settings) {
             transports.push(new winston.transports.MongoDB({
-                level: "info",
-                db: settings.getConnectionUri("Logs"),
+                level: 'info',
+                db: settings.getConnectionUri('Logs'),
                 collection: serviceName
             }));
         }
@@ -30,4 +30,4 @@ class LoggerService {
         this.logger.error(message, error);
     }
 }
-exports.default = LoggerService;
+exports.LoggerService = LoggerService;

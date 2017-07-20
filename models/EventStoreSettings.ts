@@ -7,7 +7,7 @@ export class EventStoreSettings {
 
   constructor(settings: any) {
     if (!settings || !settings.host || !settings.tcpPort || !settings.httpPort) {
-      throw new Error("invalid data. ensure host and ports are present.");
+      throw new Error('invalid data. ensure host and ports are present.');
     }
 
     this.host = settings.host;

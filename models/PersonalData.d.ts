@@ -1,5 +1,4 @@
-declare class PersonalData {
+export declare class PersonalData {
     name: string;
     surname: string;
 }
-export default PersonalData;

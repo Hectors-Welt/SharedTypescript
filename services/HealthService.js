@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const HealthInfo_1 = require("../models/HealthInfo");
 class HealthService {
     constructor(version) {
-        this.healthInfo = new HealthInfo_1.default(version);
+        this.healthInfo = new HealthInfo_1.HealthInfo(version);
     }
     registerHealthy(check, message) {
         this.healthInfo.healthy[check] = message;
@@ -18,4 +18,4 @@ class HealthService {
         delete this.healthInfo.unhealthy[check];
     }
 }
-exports.default = HealthService;
+exports.HealthService = HealthService;

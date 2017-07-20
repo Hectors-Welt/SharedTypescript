@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class MongoDbSettings {
     constructor(settings) {
         if (!settings || !settings.host || !settings.port) {
-            throw new Error("invalid data. ensure host and port are present.");
+            throw new Error('invalid data. ensure host and port are present.');
         }
         this.host = settings.host;
         this.port = settings.port;
@@ -17,4 +17,4 @@ class MongoDbSettings {
         return db;
     }
 }
-exports.default = MongoDbSettings;
+exports.MongoDbSettings = MongoDbSettings;

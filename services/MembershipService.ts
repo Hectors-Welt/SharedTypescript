@@ -23,7 +23,7 @@ export class MembershipService implements IMembershipService {
           resolve(result.body);
         })
         .catch((error) => {
-          reject(new Error("failed to retrieve contract templates from membership service"));
+          reject(new Error('failed to retrieve contract templates from membership service'));
         })
     })
   }

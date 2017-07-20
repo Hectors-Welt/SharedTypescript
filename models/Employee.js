@@ -2,4 +2,4 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Employee {
 }
-exports.default = Employee;
+exports.Employee = Employee;

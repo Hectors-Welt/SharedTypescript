@@ -32,7 +32,7 @@ class DiscoveryService {
                 if (result.status !== 200) {
                     reject(new Error(`failed to retrieve eventstore settings from discovery service`));
                 }
-                resolve(new EventStoreSettings_1.default(result.body));
+                resolve(new EventStoreSettings_1.EventStoreSettings(result.body));
             })
                 .catch((error) => {
                 reject(new Error(`failed to retrieve eventstore settings from discovery service: ${error.message}`));
@@ -54,7 +54,7 @@ class DiscoveryService {
                 if (result.status !== 200) {
                     reject(new Error(`failed to retrieve mongodb settings from discovery service`));
                 }
-                resolve(new MongoDbSettings_1.default(result.body));
+                resolve(new MongoDbSettings_1.MongoDbSettings(result.body));
             })
                 .catch((error) => {
                 reject(new Error(`failed to retrieve mongodb settings from discovery service: ${error.message}`));
@@ -74,11 +74,11 @@ class DiscoveryService {
                 })
                     .use(popsicle.plugins.parse('json'))
                     .then((result) => {
-                    this.customerService = new CustomerService_1.default(result.body.host, result.body.port);
+                    this.customerService = new CustomerService_1.CustomerService(result.body.host, result.body.port);
                     resolve(this.customerService);
                 })
                     .catch((error) => {
-                    reject(new Error("failed to retrieve customer service from discovery service"));
+                    reject(new Error('failed to retrieve customer service from discovery service'));
                 });
             }
             else {
@@ -99,11 +99,11 @@ class DiscoveryService {
                 })
                     .use(popsicle.plugins.parse('json'))
                     .then((result) => {
-                    this.employeesService = new EmployeesService_1.default(result.body.host, result.body.port);
+                    this.employeesService = new EmployeesService_1.EmployeesService(result.body.host, result.body.port);
                     resolve(this.employeesService);
                 })
                     .catch((error) => {
-                    reject(new Error("failed to retrieve employees service from discovery service"));
+                    reject(new Error('failed to retrieve employees service from discovery service'));
                 });
             }
             else {
@@ -124,11 +124,11 @@ class DiscoveryService {
                 })
                     .use(popsicle.plugins.parse('json'))
                     .then((result) => {
-                    this.membershipService = new MembershipService_1.default(result.body.host, result.body.port);
+                    this.membershipService = new MembershipService_1.MembershipService(result.body.host, result.body.port);
                     resolve(this.membershipService);
                 })
                     .catch((error) => {
-                    reject(new Error("failed to retrieve membership service from discovery service"));
+                    reject(new Error('failed to retrieve membership service from discovery service'));
                 });
             }
             else {
@@ -165,4 +165,4 @@ class DiscoveryService {
         });
     }
 }
-exports.default = DiscoveryService;
+exports.DiscoveryService = DiscoveryService;

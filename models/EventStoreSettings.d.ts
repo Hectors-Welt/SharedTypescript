@@ -1,4 +1,4 @@
-declare class EventStoreSettings {
+export declare class EventStoreSettings {
     host: string;
     tcpPort: number;
     httpPort: number;
@@ -6,4 +6,3 @@ declare class EventStoreSettings {
     password: string;
     constructor(settings: any);
 }
-export default EventStoreSettings;

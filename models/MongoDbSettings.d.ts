@@ -1,4 +1,4 @@
-declare class MongoDbSettings {
+export declare class MongoDbSettings {
     host: string;
     port: number;
     username: string;
@@ -6,4 +6,3 @@ declare class MongoDbSettings {
     constructor(settings: any);
     getConnectionUri(database: string): string;
 }
-export default MongoDbSettings;

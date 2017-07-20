@@ -1,4 +1,4 @@
-declare class Employee {
+export declare class Employee {
     id: number;
     customerId: number;
     name: string;
@@ -6,4 +6,3 @@ declare class Employee {
     rights: string;
     roles: string[];
 }
-export default Employee;

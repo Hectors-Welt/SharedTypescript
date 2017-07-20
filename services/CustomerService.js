@@ -21,9 +21,9 @@ class CustomerService {
                 resolve(result.body);
             })
                 .catch((error) => {
-                reject(new Error("failed to retrieve customer from customer service"));
+                reject(new Error('failed to retrieve customer from customer service'));
             });
         });
     }
 }
-exports.default = CustomerService;
+exports.CustomerService = CustomerService;

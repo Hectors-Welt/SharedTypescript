@@ -1,6 +1,6 @@
-import IHealthService from '../interfaces/IHealthService';
-import HealthInfo from '../models/HealthInfo';
-declare class HealthService implements IHealthService {
+import { IHealthService } from '../interfaces/IHealthService';
+import { HealthInfo } from '../models/HealthInfo';
+export declare class HealthService implements IHealthService {
     healthInfo: HealthInfo;
     constructor(version: string);
     registerHealthy(check: string, message: string): void;
@@ -8,4 +8,3 @@ declare class HealthService implements IHealthService {
     registerUnhealthy(check: string, message: string): void;
     unregisterUnhealthy(check: string): void;
 }
-export default HealthService;

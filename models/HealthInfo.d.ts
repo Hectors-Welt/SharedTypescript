@@ -1,4 +1,4 @@
-declare class HealthInfo {
+export declare class HealthInfo {
     version: string;
     healthy: object;
     unhealthy: object;
@@ -13,4 +13,3 @@ declare class HealthInfo {
         isHealthy: boolean;
     };
 }
-export default HealthInfo;

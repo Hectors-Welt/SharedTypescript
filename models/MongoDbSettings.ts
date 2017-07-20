@@ -6,7 +6,7 @@ export class MongoDbSettings {
 
   constructor(settings: any) {
     if (!settings || !settings.host || !settings.port) {
-      throw new Error("invalid data. ensure host and port are present.");
+      throw new Error('invalid data. ensure host and port are present.');
     }
 
     this.host = settings.host;
