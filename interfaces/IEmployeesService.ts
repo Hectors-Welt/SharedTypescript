@@ -1,5 +1,5 @@
-import { Employee } from '../models/Employee'
+import { Employee } from '../models/Employee';
 
 export interface IEmployeesService {
-  validateEmployeeByCredentials(firstname: string, lastname: string, password: string): Promise<Employee>
+  validateEmployeeByCredentials(firstname: string, lastname: string, password: string): Promise<Employee>;
 }

@@ -10,9 +10,8 @@
     "clean": "rimraf coverage",
     "build": "tsc -p ./",
     "add": "git add --all",
-    "test": "npm run clean && npm run build && mocha --opts test/mocha.opts",
-    "cover": "npm run clean && npm run build && nyc --reporter=html --reporter=text-summary mocha --opts test/mocha.opts",
-    "cover-all": "npm run clean && npm run build && nyc --all --reporter=html --reporter=text-summary mocha --opts test/mocha.opts"
+    "test": "mocha --compilers ts:ts-node/register,tsx:ts-node/register test/**/*.ts",
+    "cover": "nyc --all --reporter=html --reporter=text-summary mocha --compilers ts:ts-node/register,tsx:ts-node/register test/**/*.ts"
   },
   "pre-commit": {
     "run": [
@@ -31,6 +30,8 @@
     "nyc": "^11.0.3",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.1",
+    "ts-node": "^3.2.1",
+    "tsc": "^1.20150623.0",
     "typescript": "^2.4.1"
   }
 }

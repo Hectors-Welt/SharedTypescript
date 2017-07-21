@@ -1,8 +1,8 @@
-import { Contact } from './Contact'
-import { PersonalData } from './PersonalData'
+import { Contact } from './Contact';
+import { PersonalData } from './PersonalData';
 
 export class Customer {
-  id: number
-  personalData: PersonalData
-  contact: Contact
+  id: number;
+  personalData: PersonalData;
+  contact: Contact;
 }

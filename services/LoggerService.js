@@ -8,19 +8,19 @@ class LoggerService {
             new winston.transports.Console({
                 colorize: true,
                 timestamp: true,
-                json: true
+                json: true,
             })
         ];
         if (settings) {
             transports.push(new winston.transports.MongoDB({
                 level: 'info',
                 db: settings.getConnectionUri('Logs'),
-                collection: serviceName
+                collection: serviceName,
             }));
         }
         this.logger = new winston.Logger({
             level: 'info',
-            transports: transports
+            transports: transports,
         });
     }
     info(message, payload) {

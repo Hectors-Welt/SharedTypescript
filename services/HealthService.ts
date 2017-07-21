@@ -1,8 +1,8 @@
-import { IHealthService } from '../interfaces/IHealthService'
-import { HealthInfo } from '../models/HealthInfo'
+import { IHealthService } from '../interfaces/IHealthService';
+import { HealthInfo } from '../models/HealthInfo';
 
 export class HealthService implements IHealthService {
-  healthInfo: HealthInfo
+  healthInfo: HealthInfo;
 
   constructor(version: string) {
     this.healthInfo = new HealthInfo(version);

@@ -1,4 +1,4 @@
 export interface ILoggerService {
-    info(message: string, payload: object): any;
+    info(message: string, payload: Object): any;
     error(message: string, error: Error): any;
 }

@@ -1,4 +1,4 @@
 export class ContractTemplate {
-  id: number
-  name: string
+  id: number;
+  name: string;
 }

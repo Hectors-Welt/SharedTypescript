@@ -1,8 +1,8 @@
 export class MongoDbSettings {
-  host: string
-  port: number
-  username: string
-  password: string
+  host: string;
+  port: number;
+  username: string;
+  password: string;
 
   constructor(settings: any) {
     if (!settings || !settings.host || !settings.port) {
@@ -16,10 +16,8 @@ export class MongoDbSettings {
   }
 
   getConnectionUri(database: string): string {
-    const db = this.username ?
+    return this.username ?
       `mongodb://${this.username}:${this.password}@${this.host}:${this.port}/${database}?authSource=admin` :
       `mongodb://${this.host}:${this.port}/${database}`;
-
-    return db;
   }
 }

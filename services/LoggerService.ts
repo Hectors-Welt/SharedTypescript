@@ -1,6 +1,6 @@
 let winston = require('winston');
 require('winston-mongodb').MongoDB;
-import { MongoDbSettings } from '../models/MongoDbSettings'
+import { MongoDbSettings } from '../models/MongoDbSettings';
 
 export class LoggerService {
   private logger: any;
@@ -10,29 +10,29 @@ export class LoggerService {
       new winston.transports.Console({
         colorize: true,
         timestamp: true,
-        json: true
+        json: true,
       })
-    ]
+    ];
 
     if (settings) {
       transports.push(new winston.transports.MongoDB({
         level: 'info',
         db: settings.getConnectionUri('Logs'),
-        collection: serviceName
+        collection: serviceName,
       }));
     }
 
     this.logger = new winston.Logger({
       level: 'info',
-      transports: transports
+      transports: transports,
     })
   }
 
-  public info(message: string, payload: object) {
+  public info(message: string, payload: Object) {
     this.logger.info(message, payload);
   }
 
   public error(message: string, error: Error) {
-    this.logger.error(message, error)
+    this.logger.error(message, error);
   }
 }

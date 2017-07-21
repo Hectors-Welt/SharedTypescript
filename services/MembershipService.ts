@@ -1,6 +1,6 @@
-import * as popsicle from 'popsicle'
-import { ContractTemplate } from '../models/ContractTemplate'
-import { IMembershipService } from '../interfaces/IMembershipService'
+import * as popsicle from 'popsicle';
+import { ContractTemplate } from '../models/ContractTemplate';
+import { IMembershipService } from '../interfaces/IMembershipService';
 
 export class MembershipService implements IMembershipService {
 
@@ -24,7 +24,7 @@ export class MembershipService implements IMembershipService {
         })
         .catch((error) => {
           reject(new Error('failed to retrieve contract templates from membership service'));
-        })
+        });
     })
   }
 }

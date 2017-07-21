@@ -1,5 +1,5 @@
-import { Customer } from '../models/Customer'
+import { Customer } from '../models/Customer';
 
 export interface ICustomerService {
-  getCustomerByCustomerId(customerId: number): Promise<Customer>
+  getCustomerByCustomerId(customerId: number): Promise<Customer>;
 }

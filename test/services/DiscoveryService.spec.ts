@@ -203,8 +203,8 @@ describe('DiscoveryService', () => {
         });
     });
 
-    describe('startSelfRegistration', function () {
-        it('should set timer for self registration', function () {
+    describe('startSelfRegistration', () => {
+        it('should set timer for self registration', () => {
             const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
             expect(service.timer).to.be.undefined;
             service.startSelfRegistration(serviceName, serviceVersion, servicePort);

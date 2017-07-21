@@ -1,9 +1,9 @@
 import { EventStoreSettings } from '../models/EventStoreSettings';
 import { MongoDbSettings } from '../models/MongoDbSettings';
 import { HectorDbSettings } from '../models/HectorDbSettings';
-import { ICustomerService } from '../interfaces/ICustomerService';
-import { IEmployeesService } from '../interfaces/IEmployeesService';
-import { IMembershipService } from '../interfaces/IMembershipService';
+import { ICustomerService } from './ICustomerService';
+import { IEmployeesService } from './IEmployeesService';
+import { IMembershipService } from './IMembershipService';
 export interface IDiscoveryService {
     host: string;
     port: number;

@@ -1,6 +1,6 @@
-import * as popsicle from 'popsicle'
-import { Customer } from '../models/Customer'
-import { ICustomerService } from '../interfaces/ICustomerService'
+import * as popsicle from 'popsicle';
+import { Customer } from '../models/Customer';
+import { ICustomerService } from '../interfaces/ICustomerService';
 
 export class CustomerService implements ICustomerService {
 
@@ -24,7 +24,7 @@ export class CustomerService implements ICustomerService {
         })
         .catch((error) => {
           reject(new Error('failed to retrieve customer from customer service'));
-        })
+        });
     })
   }
 }

@@ -1,6 +1,6 @@
-import * as popsicle from 'popsicle'
-import { Employee } from '../models/Employee'
-import { IEmployeesService } from '../interfaces/IEmployeesService'
+import * as popsicle from 'popsicle';
+import { Employee } from '../models/Employee';
+import { IEmployeesService } from '../interfaces/IEmployeesService';
 
 export class EmployeesService implements IEmployeesService {
 
@@ -34,7 +34,7 @@ export class EmployeesService implements IEmployeesService {
         })
         .catch((error) => {
           reject(new Error('failed to validate credentials at employees service'));
-        })
-    })
+        });
+    });
   }
 }

@@ -1,7 +1,7 @@
-import * as express from 'express'
+import * as express from 'express';
 
-import { Employee } from '../models/Employee'
+import { Employee } from '../models/Employee';
 
 export interface IRequest extends express.Request {
-  employee: Employee
+  employee: Employee,
 }

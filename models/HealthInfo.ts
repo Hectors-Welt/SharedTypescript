@@ -1,7 +1,7 @@
 export class HealthInfo {
   public version: string;
-  public healthy: object;
-  public unhealthy: object;
+  public healthy: Object;
+  public unhealthy: Object;
 
   public get timestamp() {
     return new Date().toJSON();
@@ -22,7 +22,7 @@ export class HealthInfo {
       healthy: this.healthy,
       unhealthy: this.unhealthy,
       timestamp: this.timestamp,
-      isHealthy: this.isHealthy
+      isHealthy: this.isHealthy,
     }
   }
 }

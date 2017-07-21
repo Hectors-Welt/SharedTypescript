@@ -6,17 +6,17 @@ import { IDiscoveryService } from '../interfaces/IDiscoveryService'
 import { ICustomerService } from '../interfaces/ICustomerService'
 import { IEmployeesService } from '../interfaces/IEmployeesService'
 import { IMembershipService } from '../interfaces/IMembershipService'
-import { CustomerService } from '../services/CustomerService'
-import { EmployeesService } from '../services/EmployeesService'
-import { MembershipService } from '../services/MembershipService'
+import { MembershipService } from './MembershipService';
+import { EmployeesService } from './EmployeesService';
+import { CustomerService } from './CustomerService';
 
 export class DiscoveryService implements IDiscoveryService {
-  public host: string
-  public port: number
-  public timer: NodeJS.Timer
-  private customerService: ICustomerService
-  private employeesService: IEmployeesService
-  private membershipService: IMembershipService
+  public host: string;
+  public port: number;
+  public timer: NodeJS.Timer;
+  private customerService: ICustomerService;
+  private employeesService: IEmployeesService;
+  private membershipService: IMembershipService;
 
   constructor(host: string, port: number) {
     this.host = host;

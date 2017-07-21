@@ -18,7 +18,7 @@ class HealthInfo {
             healthy: this.healthy,
             unhealthy: this.unhealthy,
             timestamp: this.timestamp,
-            isHealthy: this.isHealthy
+            isHealthy: this.isHealthy,
         };
     }
 }

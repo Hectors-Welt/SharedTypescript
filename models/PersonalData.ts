@@ -1,4 +1,4 @@
 export class PersonalData {
-  name: string
-  surname: string
+  name: string;
+  surname: string;
 }

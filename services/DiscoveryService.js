@@ -4,9 +4,9 @@ const popsicle = require("popsicle");
 const EventStoreSettings_1 = require("../models/EventStoreSettings");
 const MongoDbSettings_1 = require("../models/MongoDbSettings");
 const HectorDbSettings_1 = require("../models/HectorDbSettings");
-const CustomerService_1 = require("../services/CustomerService");
-const EmployeesService_1 = require("../services/EmployeesService");
-const MembershipService_1 = require("../services/MembershipService");
+const MembershipService_1 = require("./MembershipService");
+const EmployeesService_1 = require("./EmployeesService");
+const CustomerService_1 = require("./CustomerService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
