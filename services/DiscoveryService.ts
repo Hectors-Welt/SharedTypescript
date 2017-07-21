@@ -1,6 +1,7 @@
 import * as popsicle from 'popsicle'
 import { EventStoreSettings } from '../models/EventStoreSettings'
 import { MongoDbSettings } from '../models/MongoDbSettings'
+import { HectorDbSettings } from '../models/HectorDbSettings'
 import { IDiscoveryService } from '../interfaces/IDiscoveryService'
 import { ICustomerService } from '../interfaces/ICustomerService'
 import { IEmployeesService } from '../interfaces/IEmployeesService'
@@ -74,6 +75,29 @@ export class DiscoveryService implements IDiscoveryService {
         })
         .catch((error) => {
           reject(new Error(`failed to retrieve mongodb settings from discovery service: ${error.message}`));
+        })
+    })
+  }
+
+  getHectorDbSettings(): Promise<HectorDbSettings> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/connection`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json'
+        },
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if (result.status !== 200) {
+            reject(new Error(`failed to retrieve hector db settings from discovery service`))
+          }
+          resolve(new HectorDbSettings(result.body));
+        })
+        .catch((error) => {
+          reject(new Error(`failed to retrieve hector db settings from discovery service: ${error.message}`));
         })
     })
   }
