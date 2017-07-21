@@ -1,6 +1,6 @@
 export class HectorDbSettings {
   host: string
-  port: number
+  instance: string
   username: string
   password: string
   mdb1: string
@@ -13,12 +13,12 @@ export class HectorDbSettings {
   hpdotsystem: string
 
   constructor(settings: any) {
-    if (!settings || !settings.host || !settings.port) {
-      throw new Error("invalid data. ensure host and port are present.");
+    if (!settings || !settings.host || !settings.username || !settings.password) {
+      throw new Error("invalid data. ensure host and credentials are present.");
     }
 
     this.host = settings.host;
-    this.port = settings.port;
+    this.instance = settings.instance;
     this.username = settings.username;
     this.password = settings.password;
     this.mdb1 = settings.mdb1;
