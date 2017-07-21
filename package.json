@@ -11,7 +11,7 @@
     "build": "tsc -p ./",
     "add": "git add --all",
     "test": "mocha --compilers ts:ts-node/register,tsx:ts-node/register test/**/*.ts",
-    "cover": "nyc --all --reporter=html --reporter=text-summary mocha --compilers ts:ts-node/register,tsx:ts-node/register test/**/*.ts"
+    "cover": "npm run clean && nyc --all --reporter=html --reporter=text-summary mocha --compilers ts:ts-node/register,tsx:ts-node/register test/**/*.ts"
   },
   "pre-commit": {
     "run": [
