@@ -15,7 +15,7 @@ export class EmployeesService implements IEmployeesService {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
-          'accept': 'application/json'
+          'accept': 'application/json',
         },
         body: {
           name,

@@ -3,11 +3,11 @@
     "target": "es6",
     "module": "commonjs",
     "sourceMap": false,
-    "declaration": true
+    "declaration": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
-  "include": [
-    "**/*.ts"
-  ],
   "exclude": [
     "test",
     "node_modules"

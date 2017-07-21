@@ -15,7 +15,7 @@ export class CustomerService implements ICustomerService {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'accept': 'application/json'
+          'accept': 'application/json',
         },
       })
         .use(popsicle.plugins.parse('json'))

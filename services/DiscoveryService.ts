@@ -40,7 +40,7 @@ export class DiscoveryService implements IDiscoveryService {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'accept': 'application/json'
+          'accept': 'application/json',
         },
       })
         .use(popsicle.plugins.parse('json'))
@@ -63,7 +63,7 @@ export class DiscoveryService implements IDiscoveryService {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'accept': 'application/json'
+          'accept': 'application/json',
         },
       })
         .use(popsicle.plugins.parse('json'))
@@ -86,7 +86,7 @@ export class DiscoveryService implements IDiscoveryService {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'accept': 'application/json'
+          'accept': 'application/json',
         },
       })
         .use(popsicle.plugins.parse('json'))
@@ -110,7 +110,7 @@ export class DiscoveryService implements IDiscoveryService {
           method: 'GET',
           headers: {
             'content-type': 'application/json',
-            'accept': 'application/json'
+            'accept': 'application/json',
           },
         })
           .use(popsicle.plugins.parse('json'))
@@ -136,7 +136,7 @@ export class DiscoveryService implements IDiscoveryService {
           method: 'GET',
           headers: {
             'content-type': 'application/json',
-            'accept': 'application/json'
+            'accept': 'application/json',
           },
         })
           .use(popsicle.plugins.parse('json'))
@@ -162,7 +162,7 @@ export class DiscoveryService implements IDiscoveryService {
           method: 'GET',
           headers: {
             'content-type': 'application/json',
-            'accept': 'application/json'
+            'accept': 'application/json',
           },
         })
           .use(popsicle.plugins.parse('json'))
@@ -187,7 +187,7 @@ export class DiscoveryService implements IDiscoveryService {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
-          'accept': 'application/json'
+          'accept': 'application/json',
         },
         body: {
           serviceName: serviceName,
@@ -196,7 +196,7 @@ export class DiscoveryService implements IDiscoveryService {
           serviceVersion: serviceVersion,
           public: false,
           serviceType: 0,
-          proxyRoute: null
+          proxyRoute: null,
         }
       })
         .use(popsicle.plugins.parse('json'))

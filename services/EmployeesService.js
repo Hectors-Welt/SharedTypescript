@@ -13,7 +13,7 @@ class EmployeesService {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                    'accept': 'application/json'
+                    'accept': 'application/json',
                 },
                 body: {
                     name,
