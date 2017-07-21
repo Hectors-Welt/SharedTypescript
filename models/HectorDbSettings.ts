@@ -13,11 +13,11 @@ export class HectorDbSettings {
   hpdotsystem: string
 
   constructor(settings: any) {
-    if (!settings || !settings.host || !settings.username || !settings.password) {
+    if (!settings || !settings.server || !settings.username || !settings.password) {
       throw new Error("invalid data. ensure host and credentials are present.");
     }
 
-    this.host = settings.host;
+    this.host = settings.server;
     this.instance = settings.instance;
     this.username = settings.username;
     this.password = settings.password;
@@ -27,7 +27,7 @@ export class HectorDbSettings {
     this.mdb5 = settings.mdb5;
     this.mdb8 = settings.mdb8;
     this.mdb12 = settings.mdb12;
-    this.hpdotdata = settings.hpdotdata;
-    this.hpdotsystem = settings.hpdotsystem;
+    this.hpdotdata = settings.hpDotData;
+    this.hpdotsystem = settings.hpDotSystem;
   }
 }
