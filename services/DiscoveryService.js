@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const popsicle = require("popsicle");
 const EventStoreSettings_1 = require("../models/EventStoreSettings");
 const MongoDbSettings_1 = require("../models/MongoDbSettings");
+const HectorDbSettings_1 = require("../models/HectorDbSettings");
 const CustomerService_1 = require("../services/CustomerService");
 const EmployeesService_1 = require("../services/EmployeesService");
 const MembershipService_1 = require("../services/MembershipService");
@@ -58,6 +59,28 @@ class DiscoveryService {
             })
                 .catch((error) => {
                 reject(new Error(`failed to retrieve mongodb settings from discovery service: ${error.message}`));
+            });
+        });
+    }
+    getHectorDbSettings() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/connection`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error(`failed to retrieve hector db settings from discovery service`));
+                }
+                resolve(new HectorDbSettings_1.HectorDbSettings(result.body));
+            })
+                .catch((error) => {
+                reject(new Error(`failed to retrieve hector db settings from discovery service: ${error.message}`));
             });
         });
     }
