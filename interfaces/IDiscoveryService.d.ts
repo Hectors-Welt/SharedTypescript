@@ -5,6 +5,7 @@ import { ICustomerService } from './ICustomerService';
 import { IEmployeesService } from './IEmployeesService';
 import { IMembershipService } from './IMembershipService';
 import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationService';
+import { IPushNotificationService } from './IPushNotificationService';
 export interface IDiscoveryService {
     host: string;
     port: number;
@@ -16,4 +17,5 @@ export interface IDiscoveryService {
     getEmployeesService(): Promise<IEmployeesService>;
     getMembershipService(): Promise<IMembershipService>;
     getTwoFactorAuthenticationService(): Promise<ITwoFactorAuthenticationService>;
+    getPushNotificationService(): Promise<IPushNotificationService>;
 }
