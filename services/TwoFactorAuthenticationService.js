@@ -47,7 +47,6 @@ class TwoFactorAuthenticationService {
                     token
                 }
             })
-                .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status === 200)
                     resolve(true);
