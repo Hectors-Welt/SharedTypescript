@@ -1,4 +1,4 @@
-import { Employee } from '../models/Employee';
+import { Employee } from '../models/EmployeesService/Employee';
 import { IEmployeesService } from '../interfaces/IEmployeesService';
 export declare class EmployeesService implements IEmployeesService {
     private host;

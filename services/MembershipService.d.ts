@@ -1,4 +1,4 @@
-import { ContractTemplate } from '../models/ContractTemplate';
+import { ContractTemplate } from '../models/MembershipService/ContractTemplate';
 import { IMembershipService } from '../interfaces/IMembershipService';
 export declare class MembershipService implements IMembershipService {
     private host;

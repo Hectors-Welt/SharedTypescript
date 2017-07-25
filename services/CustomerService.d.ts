@@ -1,4 +1,4 @@
-import { Customer } from '../models/Customer';
+import { Customer } from '../models/CustomerService/Customer';
 import { ICustomerService } from '../interfaces/ICustomerService';
 export declare class CustomerService implements ICustomerService {
     private host;

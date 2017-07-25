@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const HealthInfo_1 = require("../models/HealthInfo");
+const HealthInfo_1 = require("../models/HealthService/HealthInfo");
 class HealthService {
     constructor(version) {
         this.healthInfo = new HealthInfo_1.HealthInfo(version);

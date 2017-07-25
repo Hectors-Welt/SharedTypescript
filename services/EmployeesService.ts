@@ -1,5 +1,5 @@
 import * as popsicle from 'popsicle';
-import { Employee } from '../models/Employee';
+import { Employee } from '../models/EmployeesService/Employee';
 import { IEmployeesService } from '../interfaces/IEmployeesService';
 
 export class EmployeesService implements IEmployeesService {

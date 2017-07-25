@@ -1,5 +1,5 @@
 import * as popsicle from 'popsicle';
-import { Customer } from '../models/Customer';
+import { Customer } from '../models/CustomerService/Customer';
 import { ICustomerService } from '../interfaces/ICustomerService';
 
 export class CustomerService implements ICustomerService {

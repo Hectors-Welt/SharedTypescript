@@ -1,5 +1,5 @@
 import { IHealthService } from '../interfaces/IHealthService';
-import { HealthInfo } from '../models/HealthInfo';
+import { HealthInfo } from '../models/HealthService/HealthInfo';
 export declare class HealthService implements IHealthService {
     healthInfo: HealthInfo;
     constructor(version: string);
