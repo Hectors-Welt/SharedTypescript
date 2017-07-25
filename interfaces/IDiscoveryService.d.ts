@@ -4,6 +4,7 @@ import { HectorDbSettings } from '../models/HectorDbSettings';
 import { ICustomerService } from './ICustomerService';
 import { IEmployeesService } from './IEmployeesService';
 import { IMembershipService } from './IMembershipService';
+import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationService';
 export interface IDiscoveryService {
     host: string;
     port: number;
@@ -14,4 +15,5 @@ export interface IDiscoveryService {
     getCustomerService(): Promise<ICustomerService>;
     getEmployeesService(): Promise<IEmployeesService>;
     getMembershipService(): Promise<IMembershipService>;
+    getTwoFactorAuthenticationService(): Promise<ITwoFactorAuthenticationService>;
 }
