@@ -1,6 +1,6 @@
 let winston = require('winston');
 require('winston-mongodb').MongoDB;
-import { MongoDbSettings } from '../models/MongoDbSettings';
+import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
 
 export class LoggerService {
   private logger: any;

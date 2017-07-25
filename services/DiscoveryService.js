@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const popsicle = require("popsicle");
-const EventStoreSettings_1 = require("../models/EventStoreSettings");
-const MongoDbSettings_1 = require("../models/MongoDbSettings");
-const HectorDbSettings_1 = require("../models/HectorDbSettings");
+const EventStoreSettings_1 = require("../models/DiscoveryService/EventStoreSettings");
+const MongoDbSettings_1 = require("../models/DiscoveryService/MongoDbSettings");
+const RabbitMqSettings_1 = require("../models/DiscoveryService/RabbitMqSettings");
+const HectorDbSettings_1 = require("../models/DiscoveryService/HectorDbSettings");
 const MembershipService_1 = require("./MembershipService");
 const EmployeesService_1 = require("./EmployeesService");
 const CustomerService_1 = require("./CustomerService");
@@ -61,6 +62,28 @@ class DiscoveryService {
             })
                 .catch((error) => {
                 reject(new Error(`failed to retrieve mongodb settings from discovery service: ${error.message}`));
+            });
+        });
+    }
+    getRabbitMqSettings() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/rabbitmq`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error(`failed to retrieve rabbitmq settings from discovery service`));
+                }
+                resolve(new RabbitMqSettings_1.RabbitMqSettings(result.body));
+            })
+                .catch((error) => {
+                reject(new Error(`failed to retrieve rabbitmq settings from discovery service: ${error.message}`));
             });
         });
     }

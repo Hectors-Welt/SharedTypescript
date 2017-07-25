@@ -1,4 +1,4 @@
-import { MongoDbSettings } from '../models/MongoDbSettings';
+import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
 export declare class LoggerService {
     private logger;
     constructor(settings: MongoDbSettings, serviceName: string);

@@ -1,7 +1,8 @@
 import * as popsicle from 'popsicle'
-import { EventStoreSettings } from '../models/EventStoreSettings'
-import { MongoDbSettings } from '../models/MongoDbSettings'
-import { HectorDbSettings } from '../models/HectorDbSettings'
+import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSettings'
+import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings'
+import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings'
+import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings'
 import { IDiscoveryService } from '../interfaces/IDiscoveryService'
 import { ICustomerService } from '../interfaces/ICustomerService'
 import { IEmployeesService } from '../interfaces/IEmployeesService'
@@ -81,6 +82,29 @@ export class DiscoveryService implements IDiscoveryService {
         })
         .catch((error) => {
           reject(new Error(`failed to retrieve mongodb settings from discovery service: ${error.message}`));
+        })
+    })
+  }
+
+  getRabbitMqSettings(): Promise<RabbitMqSettings> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/rabbitmq`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if (result.status !== 200) {
+            reject(new Error(`failed to retrieve rabbitmq settings from discovery service`))
+          }
+          resolve(new RabbitMqSettings(result.body));
+        })
+        .catch((error) => {
+          reject(new Error(`failed to retrieve rabbitmq settings from discovery service: ${error.message}`));
         })
     })
   }

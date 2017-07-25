@@ -1,6 +1,7 @@
-import { EventStoreSettings } from '../models/EventStoreSettings';
-import { MongoDbSettings } from '../models/MongoDbSettings';
-import { HectorDbSettings } from '../models/HectorDbSettings';
+import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSettings';
+import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
+import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings';
+import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings';
 import { ICustomerService } from './ICustomerService';
 import { IEmployeesService } from './IEmployeesService';
 import { IMembershipService } from './IMembershipService';
@@ -16,6 +17,8 @@ export interface IDiscoveryService {
   getEventStoreSettings(): Promise<EventStoreSettings>,
 
   getMongoDbSettings(): Promise<MongoDbSettings>;
+
+  getRabbitMqSettings(): Promise<RabbitMqSettings>;
 
   getHectorDbSettings(): Promise<HectorDbSettings>;
 
