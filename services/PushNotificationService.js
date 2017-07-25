@@ -59,6 +59,7 @@ class PushNotificationService {
                     'accept': 'application/json',
                 }
             })
+                .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status === 200)
                     resolve(result.body);

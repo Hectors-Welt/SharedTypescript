@@ -57,6 +57,7 @@ export class PushNotificationService implements IPushNotificationService {
           'accept': 'application/json',
         }
       })
+        .use(popsicle.plugins.parse('json'))
         .then((result) => {
           if (result.status === 200) resolve(result.body);
           else reject(new Error('failed to get subscriptions from push notification service'))
