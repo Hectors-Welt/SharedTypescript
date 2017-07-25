@@ -49,12 +49,10 @@ class TwoFactorAuthenticationService {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                if (result.status === 200) {
+                if (result.status === 200)
                     resolve(true);
-                }
-                else {
-                    reject(false);
-                }
+                else
+                    resolve(false);
             })
                 .catch((error) => {
                 reject(new Error('failed to validate token by two factor authentication service'));
