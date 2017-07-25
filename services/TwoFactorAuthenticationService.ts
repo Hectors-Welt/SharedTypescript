@@ -33,6 +33,7 @@ export class TwoFactorAuthenticationService implements ITwoFactorAuthenticationS
         });
     })
   }
+  
   validateToken(key: string, token: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
       popsicle.request({

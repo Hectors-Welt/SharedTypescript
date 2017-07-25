@@ -7,10 +7,12 @@ import { ICustomerService } from '../interfaces/ICustomerService'
 import { IEmployeesService } from '../interfaces/IEmployeesService'
 import { IMembershipService } from '../interfaces/IMembershipService'
 import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthenticationService'
+import { IPushNotificationService } from '../interfaces/IPushNotificationService'
 import { MembershipService } from './MembershipService'
 import { EmployeesService } from './EmployeesService'
 import { CustomerService } from './CustomerService'
 import { TwoFactorAuthenticationService } from './TwoFactorAuthenticationService'
+import { PushNotificationService } from './PushNotificationService'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -20,6 +22,7 @@ export class DiscoveryService implements IDiscoveryService {
   private employeesService: IEmployeesService;
   private membershipService: IMembershipService;
   private twoFactorAuthenticationService: ITwoFactorAuthenticationService;
+  private pushNotificationService: IPushNotificationService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -208,6 +211,33 @@ export class DiscoveryService implements IDiscoveryService {
       }
     });
   }
+
+  getPushNotificationService(): Promise<IPushNotificationService> {
+    return new Promise((resolve, reject) => {
+      if (!this.pushNotificationService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/PushNotificationService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+          .use(popsicle.plugins.parse('json'))
+          .then((result) => {
+            this.pushNotificationService = new PushNotificationService(result.body.host, result.body.port);
+            resolve(this.pushNotificationService);
+          })
+          .catch((error) => {
+            reject(new Error('failed to retrieve push notification service from discovery service'));
+          });
+      }
+      else {
+        resolve(this.pushNotificationService);
+      }
+    });
+  }
+
 
   private registerService(serviceName: string, serviceVersion: string, servicePort: number | string) {
     return new Promise((resolve, reject) => {

@@ -8,6 +8,7 @@ const MembershipService_1 = require("./MembershipService");
 const EmployeesService_1 = require("./EmployeesService");
 const CustomerService_1 = require("./CustomerService");
 const TwoFactorAuthenticationService_1 = require("./TwoFactorAuthenticationService");
+const PushNotificationService_1 = require("./PushNotificationService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -182,6 +183,31 @@ class DiscoveryService {
             }
             else {
                 resolve(this.twoFactorAuthenticationService);
+            }
+        });
+    }
+    getPushNotificationService() {
+        return new Promise((resolve, reject) => {
+            if (!this.pushNotificationService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/PushNotificationService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.pushNotificationService = new PushNotificationService_1.PushNotificationService(result.body.host, result.body.port);
+                    resolve(this.pushNotificationService);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve push notification service from discovery service'));
+                });
+            }
+            else {
+                resolve(this.pushNotificationService);
             }
         });
     }

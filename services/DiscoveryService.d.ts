@@ -7,6 +7,7 @@ import { ICustomerService } from '../interfaces/ICustomerService';
 import { IEmployeesService } from '../interfaces/IEmployeesService';
 import { IMembershipService } from '../interfaces/IMembershipService';
 import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthenticationService';
+import { IPushNotificationService } from '../interfaces/IPushNotificationService';
 export declare class DiscoveryService implements IDiscoveryService {
     host: string;
     port: number;
@@ -15,6 +16,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private employeesService;
     private membershipService;
     private twoFactorAuthenticationService;
+    private pushNotificationService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string): void;
     getEventStoreSettings(): Promise<EventStoreSettings>;
@@ -24,5 +26,6 @@ export declare class DiscoveryService implements IDiscoveryService {
     getEmployeesService(): Promise<IEmployeesService>;
     getMembershipService(): Promise<IMembershipService>;
     getTwoFactorAuthenticationService(): Promise<ITwoFactorAuthenticationService>;
+    getPushNotificationService(): Promise<IPushNotificationService>;
     private registerService(serviceName, serviceVersion, servicePort);
 }
