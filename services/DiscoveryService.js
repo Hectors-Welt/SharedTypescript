@@ -7,6 +7,7 @@ const HectorDbSettings_1 = require("../models/HectorDbSettings");
 const MembershipService_1 = require("./MembershipService");
 const EmployeesService_1 = require("./EmployeesService");
 const CustomerService_1 = require("./CustomerService");
+const TwoFactorAuthenticationService_1 = require("./TwoFactorAuthenticationService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -156,6 +157,31 @@ class DiscoveryService {
             }
             else {
                 resolve(this.membershipService);
+            }
+        });
+    }
+    getTwoFactorAuthenticationService() {
+        return new Promise((resolve, reject) => {
+            if (!this.twoFactorAuthenticationService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/TwoFactorAuthenticationService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.twoFactorAuthenticationService = new TwoFactorAuthenticationService_1.TwoFactorAuthenticationService(result.body.host, result.body.port);
+                    resolve(this.twoFactorAuthenticationService);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve two factor authentication service from discovery service'));
+                });
+            }
+            else {
+                resolve(this.twoFactorAuthenticationService);
             }
         });
     }

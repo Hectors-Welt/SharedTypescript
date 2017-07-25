@@ -6,9 +6,11 @@ import { IDiscoveryService } from '../interfaces/IDiscoveryService'
 import { ICustomerService } from '../interfaces/ICustomerService'
 import { IEmployeesService } from '../interfaces/IEmployeesService'
 import { IMembershipService } from '../interfaces/IMembershipService'
-import { MembershipService } from './MembershipService';
-import { EmployeesService } from './EmployeesService';
-import { CustomerService } from './CustomerService';
+import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthenticationService'
+import { MembershipService } from './MembershipService'
+import { EmployeesService } from './EmployeesService'
+import { CustomerService } from './CustomerService'
+import { TwoFactorAuthenticationService } from './TwoFactorAuthenticationService'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -17,6 +19,7 @@ export class DiscoveryService implements IDiscoveryService {
   private customerService: ICustomerService;
   private employeesService: IEmployeesService;
   private membershipService: IMembershipService;
+  private twoFactorAuthenticationService: ITwoFactorAuthenticationService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -176,6 +179,32 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         resolve(this.membershipService);
+      }
+    });
+  }
+
+  getTwoFactorAuthenticationService(): Promise<ITwoFactorAuthenticationService> {
+    return new Promise((resolve, reject) => {
+      if (!this.twoFactorAuthenticationService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/TwoFactorAuthenticationService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+          .use(popsicle.plugins.parse('json'))
+          .then((result) => {
+            this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(result.body.host, result.body.port);
+            resolve(this.twoFactorAuthenticationService);
+          })
+          .catch((error) => {
+            reject(new Error('failed to retrieve two factor authentication service from discovery service'));
+          });
+      }
+      else {
+        resolve(this.twoFactorAuthenticationService);
       }
     });
   }
