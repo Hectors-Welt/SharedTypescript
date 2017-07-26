@@ -113,5 +113,27 @@ class PushNotificationService {
             });
         });
     }
+    sendNotification(notification) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/sendNotification`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: notification
+            })
+                .then((result) => {
+                if (result.status === 200)
+                    resolve(result.body);
+                else
+                    reject(new Error('failed to send notification from push notification service'));
+            })
+                .catch((error) => {
+                reject(new Error('failed to send notification from push notification service'));
+            });
+        });
+    }
 }
 exports.PushNotificationService = PushNotificationService;

@@ -2,6 +2,8 @@ import * as popsicle from 'popsicle'
 
 import { IPushNotificationService } from '../interfaces/IPushNotificationService'
 import { DeviceRegistration} from '../models/PushNotificationService/DeviceRegistration'
+import { Notification } from '../models/PushNotificationService/Notification'
+import { NotificationLog } from '../models/PushNotificationService/NotificationLog'
 
 export class PushNotificationService implements IPushNotificationService {
   constructor(private host: string, private port: number) { }
@@ -108,4 +110,24 @@ export class PushNotificationService implements IPushNotificationService {
     })
   }
   
+  sendNotification(notification: Notification): Promise<NotificationLog> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/sendNotification`,
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+        body: notification
+      })
+        .then((result) => {
+          if (result.status === 200) resolve(result.body);
+          else reject(new Error('failed to send notification from push notification service'))
+        })
+        .catch((error) => {
+          reject(new Error('failed to send notification from push notification service'));
+        });
+    })
+  }
 }

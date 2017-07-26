@@ -1,5 +1,7 @@
 import { IPushNotificationService } from '../interfaces/IPushNotificationService';
 import { DeviceRegistration } from '../models/PushNotificationService/DeviceRegistration';
+import { Notification } from '../models/PushNotificationService/Notification';
+import { NotificationLog } from '../models/PushNotificationService/NotificationLog';
 export declare class PushNotificationService implements IPushNotificationService {
     private host;
     private port;
@@ -9,4 +11,5 @@ export declare class PushNotificationService implements IPushNotificationService
     getSubscriptions(deviceId: string, appId: string): Promise<string[]>;
     addSubscription(deviceId: string, appId: string, subscription: string): Promise<void>;
     deleteSubscription(deviceId: string, appId: string, subscription: string): Promise<void>;
+    sendNotification(notification: Notification): Promise<NotificationLog>;
 }
