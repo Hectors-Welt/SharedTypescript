@@ -16,6 +16,7 @@
   "pre-commit": {
     "run": [
       "clean",
+      "add",
       "build",
       "add"
     ],
