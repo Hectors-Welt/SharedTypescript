@@ -7,7 +7,7 @@
     "winston-mongodb": "^2.0.10"
   },
   "scripts": {
-    "clean": "rimraf coverage",
+    "clean": "rimraf coverage && rimraf **/*.js && rimraf **/*.d.ts",
     "build": "tsc -p ./",
     "add": "git add --all",
     "test": "mocha --compilers ts:ts-node/register,tsx:ts-node/register test/**/*.ts",
@@ -15,6 +15,7 @@
   },
   "pre-commit": {
     "run": [
+      "clean",
       "build",
       "add"
     ],
