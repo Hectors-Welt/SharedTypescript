@@ -10,11 +10,13 @@ import { IEmployeesService } from '../interfaces/IEmployeesService'
 import { IMembershipService } from '../interfaces/IMembershipService'
 import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthenticationService'
 import { IPushNotificationService } from '../interfaces/IPushNotificationService'
+import { IRatingService } from '../interfaces/IRatingService'
 import { MembershipService } from './MembershipService'
 import { EmployeesService } from './EmployeesService'
 import { CustomerService } from './CustomerService'
 import { TwoFactorAuthenticationService } from './TwoFactorAuthenticationService'
 import { PushNotificationService } from './PushNotificationService'
+import { RatingService } from './RatingService'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -25,6 +27,7 @@ export class DiscoveryService implements IDiscoveryService {
   private membershipService: IMembershipService;
   private twoFactorAuthenticationService: ITwoFactorAuthenticationService;
   private pushNotificationService: IPushNotificationService;
+  private ratingService: IRatingService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -259,6 +262,32 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         resolve(this.pushNotificationService);
+      }
+    });
+  }
+
+  getRatingService(): Promise<IRatingService> {
+    return new Promise((resolve, reject) => {
+      if (!this.ratingService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/RatingService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+          .use(popsicle.plugins.parse('json'))
+          .then((result) => {
+            this.ratingService = new RatingService(result.body.host, result.body.port);
+            resolve(this.ratingService);
+          })
+          .catch((error) => {
+            reject(new Error('failed to retrieve rating service from discovery service'));
+          });
+      }
+      else {
+        resolve(this.ratingService);
       }
     });
   }

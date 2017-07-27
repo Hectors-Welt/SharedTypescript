@@ -8,6 +8,7 @@ import { IEmployeesService } from './IEmployeesService';
 import { IMembershipService } from './IMembershipService';
 import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationService'
 import { IPushNotificationService } from './IPushNotificationService'
+import { IRatingService } from './IRatingService'
 
 export interface IDiscoveryService {
   host: string
@@ -32,4 +33,6 @@ export interface IDiscoveryService {
   getTwoFactorAuthenticationService(): Promise<ITwoFactorAuthenticationService>;
 
   getPushNotificationService(): Promise<IPushNotificationService>;
+
+  getRatingService(): Promise<IRatingService>;
 }

@@ -10,6 +10,7 @@ const EmployeesService_1 = require("./EmployeesService");
 const CustomerService_1 = require("./CustomerService");
 const TwoFactorAuthenticationService_1 = require("./TwoFactorAuthenticationService");
 const PushNotificationService_1 = require("./PushNotificationService");
+const RatingService_1 = require("./RatingService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -231,6 +232,31 @@ class DiscoveryService {
             }
             else {
                 resolve(this.pushNotificationService);
+            }
+        });
+    }
+    getRatingService() {
+        return new Promise((resolve, reject) => {
+            if (!this.ratingService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/RatingService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.ratingService = new RatingService_1.RatingService(result.body.host, result.body.port);
+                    resolve(this.ratingService);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve rating service from discovery service'));
+                });
+            }
+            else {
+                resolve(this.ratingService);
             }
         });
     }
