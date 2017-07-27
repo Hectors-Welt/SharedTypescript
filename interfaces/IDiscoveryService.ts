@@ -2,6 +2,7 @@ import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSetting
 import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
 import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings';
 import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings';
+import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum';
 import { ICustomerService } from './ICustomerService';
 import { IEmployeesService } from './IEmployeesService';
 import { IMembershipService } from './IMembershipService';
@@ -12,7 +13,7 @@ export interface IDiscoveryService {
   host: string
   port: number
 
-  startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string)
+  startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType)
 
   getEventStoreSettings(): Promise<EventStoreSettings>,
 
