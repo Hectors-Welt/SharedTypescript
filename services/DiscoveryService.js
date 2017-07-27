@@ -15,8 +15,8 @@ class DiscoveryService {
         this.host = host;
         this.port = port;
     }
-    startSelfRegistration(serviceName, serviceVersion, servicePort) {
-        this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort)
+    startSelfRegistration(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType) {
+        this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType)
             .catch((error) => {
             clearInterval(this.timer);
         }), 5 * 1000);
@@ -234,7 +234,7 @@ class DiscoveryService {
             }
         });
     }
-    registerService(serviceName, serviceVersion, servicePort) {
+    registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/`,
@@ -248,9 +248,9 @@ class DiscoveryService {
                     port: servicePort,
                     timeToLive: new Date(new Date().getTime() + (5 * 1000)).toJSON(),
                     serviceVersion: serviceVersion,
-                    public: false,
-                    serviceType: 0,
-                    proxyRoute: null,
+                    public: isPublic,
+                    serviceType: serviceType,
+                    proxyRoute: proxyRoute,
                 }
             })
                 .use(popsicle.plugins.parse('json'))

@@ -3,6 +3,7 @@ import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSetting
 import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings'
 import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings'
 import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings'
+import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum'
 import { IDiscoveryService } from '../interfaces/IDiscoveryService'
 import { ICustomerService } from '../interfaces/ICustomerService'
 import { IEmployeesService } from '../interfaces/IEmployeesService'
@@ -30,10 +31,10 @@ export class DiscoveryService implements IDiscoveryService {
     this.port = port;
   }
 
-  startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string) {
+  startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType) {
 
     this.timer = setInterval(() =>
-      this.registerService(serviceName, serviceVersion, servicePort)
+      this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType)
         .catch((error) => {
           clearInterval(this.timer);
         })
@@ -263,7 +264,7 @@ export class DiscoveryService implements IDiscoveryService {
   }
 
 
-  private registerService(serviceName: string, serviceVersion: string, servicePort: number | string) {
+  private registerService(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType) {
     return new Promise((resolve, reject) => {
       popsicle.request({
         url: `http://${this.host}:${this.port}/`,
@@ -277,9 +278,9 @@ export class DiscoveryService implements IDiscoveryService {
           port: servicePort,
           timeToLive: new Date(new Date().getTime() + (5 * 1000)).toJSON(),
           serviceVersion: serviceVersion,
-          public: false,
-          serviceType: 0,
-          proxyRoute: null,
+          public: isPublic,
+          serviceType: serviceType,
+          proxyRoute: proxyRoute,
         }
       })
         .use(popsicle.plugins.parse('json'))
