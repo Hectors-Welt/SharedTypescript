@@ -11,6 +11,7 @@ const CustomerService_1 = require("./CustomerService");
 const TwoFactorAuthenticationService_1 = require("./TwoFactorAuthenticationService");
 const PushNotificationService_1 = require("./PushNotificationService");
 const RatingService_1 = require("./RatingService");
+const LegacyAppsiteBackend_1 = require("./LegacyAppsiteBackend");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -257,6 +258,31 @@ class DiscoveryService {
             }
             else {
                 resolve(this.ratingService);
+            }
+        });
+    }
+    getLegacyAppsiteBackend() {
+        return new Promise((resolve, reject) => {
+            if (!this.legacyAppsiteBackend) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/LegacyAppsiteBackend`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.legacyAppsiteBackend = new LegacyAppsiteBackend_1.LegacyAppsiteBackend(result.body.host, result.body.port);
+                    resolve(this.legacyAppsiteBackend);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve legacy appsite backend from discovery service'));
+                });
+            }
+            else {
+                resolve(this.legacyAppsiteBackend);
             }
         });
     }

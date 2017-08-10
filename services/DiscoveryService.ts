@@ -11,12 +11,14 @@ import { IMembershipService } from '../interfaces/IMembershipService'
 import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthenticationService'
 import { IPushNotificationService } from '../interfaces/IPushNotificationService'
 import { IRatingService } from '../interfaces/IRatingService'
+import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
 import { MembershipService } from './MembershipService'
 import { EmployeesService } from './EmployeesService'
 import { CustomerService } from './CustomerService'
 import { TwoFactorAuthenticationService } from './TwoFactorAuthenticationService'
 import { PushNotificationService } from './PushNotificationService'
 import { RatingService } from './RatingService'
+import { LegacyAppsiteBackend } from './LegacyAppsiteBackend'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -28,6 +30,7 @@ export class DiscoveryService implements IDiscoveryService {
   private twoFactorAuthenticationService: ITwoFactorAuthenticationService;
   private pushNotificationService: IPushNotificationService;
   private ratingService: IRatingService;
+  private legacyAppsiteBackend: ILegacyAppsiteBackend;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -288,6 +291,32 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         resolve(this.ratingService);
+      }
+    });
+  }
+
+  getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend> {
+    return new Promise((resolve, reject) => {
+      if (!this.legacyAppsiteBackend) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/LegacyAppsiteBackend`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+          .use(popsicle.plugins.parse('json'))
+          .then((result) => {
+            this.legacyAppsiteBackend = new LegacyAppsiteBackend(result.body.host, result.body.port);
+            resolve(this.legacyAppsiteBackend);
+          })
+          .catch((error) => {
+            reject(new Error('failed to retrieve legacy appsite backend from discovery service'));
+          });
+      }
+      else {
+        resolve(this.legacyAppsiteBackend);
       }
     });
   }

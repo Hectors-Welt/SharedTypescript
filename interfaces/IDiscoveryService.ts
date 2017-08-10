@@ -9,6 +9,7 @@ import { IMembershipService } from './IMembershipService';
 import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationService'
 import { IPushNotificationService } from './IPushNotificationService'
 import { IRatingService } from './IRatingService'
+import { ILegacyAppsiteBackend } from './ILegacyAppsiteBackend'
 
 export interface IDiscoveryService {
   host: string
@@ -35,4 +36,6 @@ export interface IDiscoveryService {
   getPushNotificationService(): Promise<IPushNotificationService>;
 
   getRatingService(): Promise<IRatingService>;
+
+  getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>
 }
