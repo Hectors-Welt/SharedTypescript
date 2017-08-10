@@ -55,5 +55,29 @@ class LegacyAppsiteBackend {
             });
         });
     }
+    getCoursetypes() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/config/coursetypes`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error('failed to get coursetypes from legacy appsite backend'));
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get coursetypes from legacy appsite backend'));
+            });
+        });
+    }
 }
 exports.LegacyAppsiteBackend = LegacyAppsiteBackend;
