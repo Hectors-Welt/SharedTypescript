@@ -8,4 +8,5 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     getCoursetypes(): Promise<any>;
     getCourselevels(): Promise<any>;
     getClubs(): Promise<any>;
+    getInstructors(clubId: number): Promise<any>;
 }

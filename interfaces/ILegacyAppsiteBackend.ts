@@ -4,4 +4,5 @@ export interface ILegacyAppsiteBackend {
   getCoursetypes(): Promise<any>
   getCourselevels(): Promise<any>
   getClubs(): Promise<any>
+  getInstructors(clubId: number): Promise<any>
 }
