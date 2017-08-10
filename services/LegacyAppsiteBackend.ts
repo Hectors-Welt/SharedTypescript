@@ -205,4 +205,30 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
         });
     });
   }
+
+  getClasses(clubId: number, filter: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/clubs/${clubId}/classes`,
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+        body: filter
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if (result.status !== 200) {
+            reject(new Error('failed to get classes from legacy appsite backend'));
+          }
+          else {
+            resolve(result.body);
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to get classes from legacy appsite backend'));
+        });
+    });
+  }
 }
