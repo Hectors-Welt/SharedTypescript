@@ -3,4 +3,5 @@ export interface ILegacyAppsiteBackend {
     getAppsettings(): Promise<any>;
     getCoursetypes(): Promise<any>;
     getCourselevels(): Promise<any>;
+    getClubs(): Promise<any>;
 }
