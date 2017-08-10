@@ -6,4 +6,5 @@ export interface ILegacyAppsiteBackend {
     getClubs(): Promise<any>;
     getInstructors(clubId: number): Promise<any>;
     getRooms(clubId: number): Promise<any>;
+    getCourses(clubId: number): Promise<any>;
 }
