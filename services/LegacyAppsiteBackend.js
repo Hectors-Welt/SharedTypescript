@@ -199,7 +199,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getClasses(clubId, filter) {
+    getClasses(clubId, filter, accesstoken) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/clubs/${clubId}/classes`,
@@ -207,6 +207,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
+                    'appsite-access-token': accesstoken
                 },
                 body: filter
             })

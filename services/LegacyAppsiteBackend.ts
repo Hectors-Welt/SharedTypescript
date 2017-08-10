@@ -206,7 +206,7 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     });
   }
 
-  getClasses(clubId: number, filter: any): Promise<any> {
+  getClasses(clubId: number, filter: any, accesstoken: string): Promise<any> {
     return new Promise((resolve, reject) => {
       popsicle.request({
         url: `http://${this.host}:${this.port}/clubs/${clubId}/classes`,
@@ -214,6 +214,7 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
         headers: {
           'content-type': 'application/json',
           'accept': 'application/json',
+          'appsite-access-token': accesstoken
         },
         body: filter
       })
