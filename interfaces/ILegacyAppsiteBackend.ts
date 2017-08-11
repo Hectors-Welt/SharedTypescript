@@ -10,4 +10,5 @@ export interface ILegacyAppsiteBackend {
   getClasses(clubId: number, filter: any, accesstoken: string): Promise<any>
   getPriceInformation(clubId: number, classId: number, accesstoken: string): Promise<any>
   doReservation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>
+  doCancellation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>
 }

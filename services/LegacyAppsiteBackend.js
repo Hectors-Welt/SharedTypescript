@@ -274,7 +274,35 @@ class LegacyAppsiteBackend {
                 }
             })
                 .catch((error) => {
-                reject(new Error('failed to do reservation from legacy appsite backend'));
+                reject(new Error('failed to do reservation on legacy appsite backend'));
+            });
+        });
+    }
+    doCancellation(clubId, classId, accesstoken, password) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}/cancellation`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                    'appsite-access-token': accesstoken
+                },
+                body: {
+                    password
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to do cancellation on legacy appsite backend'));
             });
         });
     }
