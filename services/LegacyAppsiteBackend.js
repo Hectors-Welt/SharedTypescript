@@ -20,7 +20,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to login at legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -44,7 +44,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get appsettings from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -68,7 +68,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get coursetypes from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -92,7 +92,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get courselevels from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -116,7 +116,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get clubs from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -140,7 +140,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get instructors from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -164,7 +164,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get rooms from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -188,7 +188,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get courses from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -214,7 +214,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get classes from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -239,7 +239,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to get price information from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
@@ -267,7 +267,7 @@ class LegacyAppsiteBackend {
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
                 if (result.status !== 200) {
-                    reject(new Error('failed to do reservation from legacy appsite backend'));
+                    reject(result.body);
                 }
                 else {
                     resolve(result.body);
