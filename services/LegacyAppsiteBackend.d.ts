@@ -15,4 +15,5 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     getPriceInformation(clubId: number, classId: number, accesstoken: string): Promise<any>;
     doReservation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>;
     doCancellation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>;
+    getProfile(accesstoken: string): Promise<any>;
 }
