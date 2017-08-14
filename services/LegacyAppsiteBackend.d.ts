@@ -13,6 +13,7 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     getRooms(clubId: number): Promise<any>;
     getCourses(clubId: number): Promise<any>;
     getClasses(clubId: number, filter: any, accesstoken: string): Promise<any>;
+    getClass(clubId: number, classId: number, accesstoken: string): Promise<any>;
     getPriceInformation(clubId: number, classId: number, accesstoken: string): Promise<any>;
     doReservation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>;
     doCancellation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>;
