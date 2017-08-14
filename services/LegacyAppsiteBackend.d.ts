@@ -4,6 +4,7 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     private port;
     constructor(host: string, port: number);
     login(loginRequest: any): Promise<any>;
+    getSession(accesstoken: string): Promise<any>;
     getAppsettings(): Promise<any>;
     getCoursetypes(): Promise<any>;
     getCourselevels(): Promise<any>;

@@ -31,6 +31,31 @@ class LegacyAppsiteBackend {
             });
         });
     }
+    getSession(accesstoken) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/session`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                    'appsite-access-token': accesstoken
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get session from legacy appsite backend'));
+            });
+        });
+    }
     getAppsettings() {
         return new Promise((resolve, reject) => {
             popsicle.request({

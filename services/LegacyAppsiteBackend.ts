@@ -31,6 +31,32 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     });
   }
 
+  getSession(accesstoken: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/session`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          'appsite-access-token': accesstoken
+        }
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if (result.status !== 200) {
+            reject(result.body);
+          }
+          else {
+            resolve(result.body);
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to get session from legacy appsite backend'));
+        });
+    });
+  }
+
   getAppsettings(): Promise<any> {
     return new Promise((resolve, reject) => {
       popsicle.request({
