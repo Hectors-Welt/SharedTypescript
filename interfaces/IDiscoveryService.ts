@@ -12,6 +12,7 @@ import { IRatingService } from './IRatingService'
 import { ILegacyAppsiteBackend } from './ILegacyAppsiteBackend'
 import { IAccountingService } from './IAccountingService'
 import { ICheckinOutService } from './ICheckinOutService'
+import { IArticlesService } from './IArticlesService'
 
 export interface IDiscoveryService {
   host: string
@@ -44,4 +45,6 @@ export interface IDiscoveryService {
   getAccountingService(): Promise<IAccountingService>
 
   getCheckinOutService(): Promise<ICheckinOutService>
+
+  getArticlesService(): Promise<IArticlesService>
 }

@@ -14,6 +14,7 @@ import { IRatingService } from '../interfaces/IRatingService'
 import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
 import { IAccountingService } from '../interfaces/IAccountingService'
 import { ICheckinOutService } from '../interfaces/ICheckinOutService'
+import { IArticlesService } from '../interfaces/IArticlesService'
 import { MembershipService } from './MembershipService'
 import { EmployeesService } from './EmployeesService'
 import { CustomerService } from './CustomerService'
@@ -23,6 +24,7 @@ import { RatingService } from './RatingService'
 import { LegacyAppsiteBackend } from './LegacyAppsiteBackend'
 import { AccountingService } from './AccountingService'
 import { CheckinOutService } from './CheckinOutService'
+import {ArticlesService } from './ArticlesService'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -37,6 +39,7 @@ export class DiscoveryService implements IDiscoveryService {
   private legacyAppsiteBackend: ILegacyAppsiteBackend;
   private accountingService: IAccountingService;
   private checkinOutService: ICheckinOutService;
+  private articlesService: IArticlesService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -375,6 +378,32 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         resolve(this.checkinOutService);
+      }
+    });
+  }
+
+  getArticlesService(): Promise<IArticlesService> {
+    return new Promise((resolve, reject) => {
+      if (!this.articlesService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/ArticlesService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+          .use(popsicle.plugins.parse('json'))
+          .then((result) => {
+            this.articlesService = new ArticlesService(result.body.host, result.body.port);
+            resolve(this.articlesService);
+          })
+          .catch((error) => {
+            reject(new Error('failed to retrieve articles service from discovery service'));
+          });
+      }
+      else {
+        resolve(this.articlesService);
       }
     });
   }

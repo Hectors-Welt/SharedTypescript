@@ -14,6 +14,7 @@ const RatingService_1 = require("./RatingService");
 const LegacyAppsiteBackend_1 = require("./LegacyAppsiteBackend");
 const AccountingService_1 = require("./AccountingService");
 const CheckinOutService_1 = require("./CheckinOutService");
+const ArticlesService_1 = require("./ArticlesService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -335,6 +336,31 @@ class DiscoveryService {
             }
             else {
                 resolve(this.checkinOutService);
+            }
+        });
+    }
+    getArticlesService() {
+        return new Promise((resolve, reject) => {
+            if (!this.articlesService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/ArticlesService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.articlesService = new ArticlesService_1.ArticlesService(result.body.host, result.body.port);
+                    resolve(this.articlesService);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve articles service from discovery service'));
+                });
+            }
+            else {
+                resolve(this.articlesService);
             }
         });
     }

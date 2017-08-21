@@ -14,6 +14,7 @@ import { IRatingService } from '../interfaces/IRatingService';
 import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend';
 import { IAccountingService } from '../interfaces/IAccountingService';
 import { ICheckinOutService } from '../interfaces/ICheckinOutService';
+import { IArticlesService } from '../interfaces/IArticlesService';
 export declare class DiscoveryService implements IDiscoveryService {
     host: string;
     port: number;
@@ -27,6 +28,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private legacyAppsiteBackend;
     private accountingService;
     private checkinOutService;
+    private articlesService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): void;
     getEventStoreSettings(): Promise<EventStoreSettings>;
@@ -42,5 +44,6 @@ export declare class DiscoveryService implements IDiscoveryService {
     getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>;
     getAccountingService(): Promise<IAccountingService>;
     getCheckinOutService(): Promise<ICheckinOutService>;
+    getArticlesService(): Promise<IArticlesService>;
     private registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType);
 }
