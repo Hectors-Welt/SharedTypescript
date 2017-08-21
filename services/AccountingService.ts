@@ -8,7 +8,7 @@ export class AccountingService implements IAccountingService {
   getClubAccountInformation(customerId: number): Promise<ClubAccountInformation> {
     return new Promise((resolve, reject) => {
       popsicle.request({
-        url: `http://${this.host}:${this.port}/getClubAccountInformation/${customerId}`,
+        url: `http://${this.host}:${this.port}/getClubAccountInformationByCustomerId/${customerId}`,
         method: 'GET',
         headers: {
           'content-type': 'application/json',
