@@ -34,7 +34,7 @@ class ArticlesService {
                     'content-type': 'application/json',
                     'accept': 'application/json',
                 },
-                json: {
+                body: {
                     customerId: customerId,
                     articleId: articleId,
                     note: 'Snacky-Buchung',
