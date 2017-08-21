@@ -13,6 +13,7 @@ import { IPushNotificationService } from '../interfaces/IPushNotificationService
 import { IRatingService } from '../interfaces/IRatingService';
 import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend';
 import { IAccountingService } from '../interfaces/IAccountingService';
+import { ICheckinOutService } from '../interfaces/ICheckinOutService';
 export declare class DiscoveryService implements IDiscoveryService {
     host: string;
     port: number;
@@ -25,6 +26,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private ratingService;
     private legacyAppsiteBackend;
     private accountingService;
+    private checkinOutService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): void;
     getEventStoreSettings(): Promise<EventStoreSettings>;
@@ -39,5 +41,6 @@ export declare class DiscoveryService implements IDiscoveryService {
     getRatingService(): Promise<IRatingService>;
     getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>;
     getAccountingService(): Promise<IAccountingService>;
+    getCheckinOutService(): Promise<ICheckinOutService>;
     private registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType);
 }

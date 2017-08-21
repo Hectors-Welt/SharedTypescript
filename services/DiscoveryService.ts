@@ -13,6 +13,7 @@ import { IPushNotificationService } from '../interfaces/IPushNotificationService
 import { IRatingService } from '../interfaces/IRatingService'
 import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
 import { IAccountingService } from '../interfaces/IAccountingService'
+import { ICheckinOutService } from '../interfaces/ICheckinOutService'
 import { MembershipService } from './MembershipService'
 import { EmployeesService } from './EmployeesService'
 import { CustomerService } from './CustomerService'
@@ -21,6 +22,7 @@ import { PushNotificationService } from './PushNotificationService'
 import { RatingService } from './RatingService'
 import { LegacyAppsiteBackend } from './LegacyAppsiteBackend'
 import { AccountingService } from './AccountingService'
+import { CheckinOutService } from './CheckinOutService'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -34,6 +36,7 @@ export class DiscoveryService implements IDiscoveryService {
   private ratingService: IRatingService;
   private legacyAppsiteBackend: ILegacyAppsiteBackend;
   private accountingService: IAccountingService;
+  private checkinOutService: ICheckinOutService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -346,6 +349,32 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         resolve(this.accountingService);
+      }
+    });
+  }
+
+  getCheckinOutService(): Promise<ICheckinOutService> {
+    return new Promise((resolve, reject) => {
+      if (!this.checkinOutService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/CheckinOutService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+          .use(popsicle.plugins.parse('json'))
+          .then((result) => {
+            this.checkinOutService = new CheckinOutService(result.body.host, result.body.port);
+            resolve(this.checkinOutService);
+          })
+          .catch((error) => {
+            reject(new Error('failed to retrieve checkinout service from discovery service'));
+          });
+      }
+      else {
+        resolve(this.checkinOutService);
       }
     });
   }

@@ -11,6 +11,7 @@ import { IPushNotificationService } from './IPushNotificationService'
 import { IRatingService } from './IRatingService'
 import { ILegacyAppsiteBackend } from './ILegacyAppsiteBackend'
 import { IAccountingService } from './IAccountingService'
+import { ICheckinOutService } from './ICheckinOutService'
 
 export interface IDiscoveryService {
   host: string
@@ -41,4 +42,6 @@ export interface IDiscoveryService {
   getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>
 
   getAccountingService(): Promise<IAccountingService>
+
+  getCheckinOutService(): Promise<ICheckinOutService>
 }
