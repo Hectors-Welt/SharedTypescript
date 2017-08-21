@@ -18,7 +18,12 @@ class CustomerService {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                resolve(result.body);
+                if (result.statusCode === 404) {
+                    resolve(null);
+                }
+                else {
+                    resolve(result.body);
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to retrieve customer from customer service'));
@@ -37,7 +42,12 @@ class CustomerService {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                resolve(result.body);
+                if (result.statusCode === 404) {
+                    resolve(null);
+                }
+                else {
+                    resolve(result.body);
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to retrieve customer from customer service'));
