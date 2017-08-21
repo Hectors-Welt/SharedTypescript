@@ -18,7 +18,7 @@ class CustomerService {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                if (result.statusCode === 404) {
+                if (result.status === 404) {
                     resolve(null);
                 }
                 else {
@@ -42,7 +42,7 @@ class CustomerService {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                if (result.statusCode === 404) {
+                if (result.status === 404) {
                     resolve(null);
                 }
                 else {

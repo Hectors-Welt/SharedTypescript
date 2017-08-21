@@ -18,7 +18,7 @@ export class CustomerService implements ICustomerService {
       })
         .use(popsicle.plugins.parse('json'))
         .then((result) => {
-          if(result.statusCode === 404) {
+          if(result.status === 404) {
             resolve(null);
           }
           else {
@@ -43,7 +43,7 @@ export class CustomerService implements ICustomerService {
       })
         .use(popsicle.plugins.parse('json'))
         .then((result) => {
-          if(result.statusCode === 404) {
+          if(result.status === 404) {
             resolve(null);
           }
           else {
