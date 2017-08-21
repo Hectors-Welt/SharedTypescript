@@ -5,4 +5,5 @@ export declare class CustomerService implements ICustomerService {
     private port;
     constructor(host: string, port: number);
     getCustomerByCustomerId(customerId: number): Promise<Customer>;
+    getCustomerByTagId(tagId: number): Promise<Customer>;
 }
