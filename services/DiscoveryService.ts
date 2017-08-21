@@ -12,6 +12,7 @@ import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthent
 import { IPushNotificationService } from '../interfaces/IPushNotificationService'
 import { IRatingService } from '../interfaces/IRatingService'
 import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
+import { IAccountingService } from '../interfaces/IAccountingService'
 import { MembershipService } from './MembershipService'
 import { EmployeesService } from './EmployeesService'
 import { CustomerService } from './CustomerService'
@@ -19,6 +20,7 @@ import { TwoFactorAuthenticationService } from './TwoFactorAuthenticationService
 import { PushNotificationService } from './PushNotificationService'
 import { RatingService } from './RatingService'
 import { LegacyAppsiteBackend } from './LegacyAppsiteBackend'
+import { AccountingService } from './AccountingService'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -31,6 +33,7 @@ export class DiscoveryService implements IDiscoveryService {
   private pushNotificationService: IPushNotificationService;
   private ratingService: IRatingService;
   private legacyAppsiteBackend: ILegacyAppsiteBackend;
+  private accountingService: IAccountingService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -321,6 +324,31 @@ export class DiscoveryService implements IDiscoveryService {
     });
   }
 
+  getAccountingService(): Promise<IAccountingService> {
+    return new Promise((resolve, reject) => {
+      if (!this.accountingService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/AccountingService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+          .use(popsicle.plugins.parse('json'))
+          .then((result) => {
+            this.accountingService = new AccountingService(result.body.host, result.body.port);
+            resolve(this.accountingService);
+          })
+          .catch((error) => {
+            reject(new Error('failed to retrieve accounting service from discovery service'));
+          });
+      }
+      else {
+        resolve(this.accountingService);
+      }
+    });
+  }
 
   private registerService(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType) {
     return new Promise((resolve, reject) => {

@@ -12,6 +12,7 @@ const TwoFactorAuthenticationService_1 = require("./TwoFactorAuthenticationServi
 const PushNotificationService_1 = require("./PushNotificationService");
 const RatingService_1 = require("./RatingService");
 const LegacyAppsiteBackend_1 = require("./LegacyAppsiteBackend");
+const AccountingService_1 = require("./AccountingService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -283,6 +284,31 @@ class DiscoveryService {
             }
             else {
                 resolve(this.legacyAppsiteBackend);
+            }
+        });
+    }
+    getAccountingService() {
+        return new Promise((resolve, reject) => {
+            if (!this.accountingService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/AccountingService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.accountingService = new AccountingService_1.AccountingService(result.body.host, result.body.port);
+                    resolve(this.accountingService);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve accounting service from discovery service'));
+                });
+            }
+            else {
+                resolve(this.accountingService);
             }
         });
     }

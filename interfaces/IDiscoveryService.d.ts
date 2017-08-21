@@ -10,6 +10,7 @@ import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationServi
 import { IPushNotificationService } from './IPushNotificationService';
 import { IRatingService } from './IRatingService';
 import { ILegacyAppsiteBackend } from './ILegacyAppsiteBackend';
+import { IAccountingService } from './IAccountingService';
 export interface IDiscoveryService {
     host: string;
     port: number;
@@ -25,4 +26,5 @@ export interface IDiscoveryService {
     getPushNotificationService(): Promise<IPushNotificationService>;
     getRatingService(): Promise<IRatingService>;
     getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>;
+    getAccountingService(): Promise<IAccountingService>;
 }
