@@ -1,6 +1,8 @@
 import { BookingInformation } from '../models/ArticlesService/BookingInformation'
+import { Article } from '../models/ArticlesService/Article'
 
 export interface IArticlesService {
-  lookupBookingInformation(customerId: number, articleId: number) : Promise<BookingInformation>
+  getArticles(): Promise<Article[]>
+  lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation>
   bookArticle(customerId: number, articleId: number): Promise<void>
 }

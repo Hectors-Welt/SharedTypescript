@@ -6,6 +6,25 @@ class ArticlesService {
         this.host = host;
         this.port = port;
     }
+    getArticles() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/getArticles`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                resolve(result.body);
+            })
+                .catch((error) => {
+                reject(new Error('failed to retrieve articles from articles service'));
+            });
+        });
+    }
     lookupBookingInformation(customerId, articleId) {
         return new Promise((resolve, reject) => {
             popsicle.request({

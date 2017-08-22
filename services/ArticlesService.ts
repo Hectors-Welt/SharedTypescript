@@ -1,9 +1,30 @@
 import * as popsicle from 'popsicle'
 import { IArticlesService } from '../interfaces/IArticlesService'
 import { BookingInformation } from '../models/ArticlesService/BookingInformation'
+import { Article } from '../models/ArticlesService/Article'
 
 export class ArticlesService implements IArticlesService {
   constructor(private host: string, private port: number) { }
+
+  getArticles(): Promise<Article[]> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/getArticles`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          resolve(result.body);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve articles from articles service'));
+        });
+    })
+  }
 
   lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation> {
     return new Promise((resolve, reject) => {
