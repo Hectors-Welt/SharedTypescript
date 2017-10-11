@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const popsicle = require("popsicle");
+const LocationInfo_1 = require("../models/DiscoveryService/LocationInfo");
 const EventStoreSettings_1 = require("../models/DiscoveryService/EventStoreSettings");
 const MongoDbSettings_1 = require("../models/DiscoveryService/MongoDbSettings");
 const RabbitMqSettings_1 = require("../models/DiscoveryService/RabbitMqSettings");
@@ -25,6 +26,28 @@ class DiscoveryService {
             .catch((error) => {
             clearInterval(this.timer);
         }), 5 * 1000);
+    }
+    getLocationInfo() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubInfo`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error(`failed to retrieve location info from discovery service`));
+                }
+                resolve(new LocationInfo_1.LocationInfo(result.body));
+            })
+                .catch((error) => {
+                reject(new Error(`failed to retrieve location info from discovery service: ${error.message}`));
+            });
+        });
     }
     getEventStoreSettings() {
         return new Promise((resolve, reject) => {

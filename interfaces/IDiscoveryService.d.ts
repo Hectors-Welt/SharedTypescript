@@ -1,3 +1,4 @@
+import { LocationInfo } from '../models/DiscoveryService/LocationInfo';
 import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSettings';
 import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
 import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings';
@@ -17,6 +18,7 @@ export interface IDiscoveryService {
     host: string;
     port: number;
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): any;
+    getLocationInfo(): Promise<LocationInfo>;
     getEventStoreSettings(): Promise<EventStoreSettings>;
     getMongoDbSettings(): Promise<MongoDbSettings>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;

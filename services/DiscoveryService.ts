@@ -1,4 +1,5 @@
 import * as popsicle from 'popsicle'
+import { LocationInfo } from '../models/DiscoveryService/LocationInfo'
 import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSettings'
 import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings'
 import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings'
@@ -54,6 +55,29 @@ export class DiscoveryService implements IDiscoveryService {
           clearInterval(this.timer);
         })
       , 5 * 1000);
+  }
+
+  getLocationInfo(): Promise<LocationInfo> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/clubInfo`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if (result.status !== 200) {
+            reject(new Error(`failed to retrieve location info from discovery service`))
+          }
+          resolve(new LocationInfo(result.body));
+        })
+        .catch((error) => {
+          reject(new Error(`failed to retrieve location info from discovery service: ${error.message}`));
+        })
+    })
   }
 
   getEventStoreSettings(): Promise<EventStoreSettings> {
