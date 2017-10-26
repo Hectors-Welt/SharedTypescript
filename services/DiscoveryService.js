@@ -6,6 +6,7 @@ const EventStoreSettings_1 = require("../models/DiscoveryService/EventStoreSetti
 const MongoDbSettings_1 = require("../models/DiscoveryService/MongoDbSettings");
 const RabbitMqSettings_1 = require("../models/DiscoveryService/RabbitMqSettings");
 const HectorDbSettings_1 = require("../models/DiscoveryService/HectorDbSettings");
+const BraintreeSettings_1 = require("../models/DiscoveryService/BraintreeSettings");
 const MembershipService_1 = require("./MembershipService");
 const EmployeesService_1 = require("./EmployeesService");
 const CustomerService_1 = require("./CustomerService");
@@ -134,6 +135,28 @@ class DiscoveryService {
             })
                 .catch((error) => {
                 reject(new Error(`failed to retrieve hector db settings from discovery service: ${error.message}`));
+            });
+        });
+    }
+    getBraintreeSettings() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/braintree`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error(`failed to retrieve braintree settings from discovery service`));
+                }
+                resolve(new BraintreeSettings_1.BraintreeSettings(result.body));
+            })
+                .catch((error) => {
+                reject(new Error(`failed to retrieve hector braintree from discovery service: ${error.message}`));
             });
         });
     }

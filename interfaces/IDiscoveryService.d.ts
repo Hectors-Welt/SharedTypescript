@@ -3,6 +3,7 @@ import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSetting
 import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
 import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings';
 import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings';
+import { BraintreeSettings } from '../models/DiscoveryService/BraintreeSettings';
 import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum';
 import { ICustomerService } from './ICustomerService';
 import { IEmployeesService } from './IEmployeesService';
@@ -23,6 +24,7 @@ export interface IDiscoveryService {
     getMongoDbSettings(): Promise<MongoDbSettings>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
+    getBraintreeSettings(): Promise<BraintreeSettings>;
     getCustomerService(): Promise<ICustomerService>;
     getEmployeesService(): Promise<IEmployeesService>;
     getMembershipService(): Promise<IMembershipService>;

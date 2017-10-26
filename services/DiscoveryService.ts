@@ -4,6 +4,7 @@ import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSetting
 import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings'
 import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings'
 import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings'
+import { BraintreeSettings } from '../models/DiscoveryService/BraintreeSettings'
 import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum'
 import { IDiscoveryService } from '../interfaces/IDiscoveryService'
 import { ICustomerService } from '../interfaces/ICustomerService'
@@ -168,6 +169,29 @@ export class DiscoveryService implements IDiscoveryService {
         })
         .catch((error) => {
           reject(new Error(`failed to retrieve hector db settings from discovery service: ${error.message}`));
+        })
+    })
+  }
+
+  getBraintreeSettings(): Promise<BraintreeSettings> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/braintree`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if (result.status !== 200) {
+            reject(new Error(`failed to retrieve braintree settings from discovery service`))
+          }
+          resolve(new BraintreeSettings(result.body));
+        })
+        .catch((error) => {
+          reject(new Error(`failed to retrieve hector braintree from discovery service: ${error.message}`));
         })
     })
   }
