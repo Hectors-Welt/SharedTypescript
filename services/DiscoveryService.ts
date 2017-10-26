@@ -17,6 +17,7 @@ import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
 import { IAccountingService } from '../interfaces/IAccountingService'
 import { ICheckinOutService } from '../interfaces/ICheckinOutService'
 import { IArticlesService } from '../interfaces/IArticlesService'
+import { IMailingService } from '../interfaces/IMailingService'
 import { MembershipService } from './MembershipService'
 import { EmployeesService } from './EmployeesService'
 import { CustomerService } from './CustomerService'
@@ -26,7 +27,8 @@ import { RatingService } from './RatingService'
 import { LegacyAppsiteBackend } from './LegacyAppsiteBackend'
 import { AccountingService } from './AccountingService'
 import { CheckinOutService } from './CheckinOutService'
-import {ArticlesService } from './ArticlesService'
+import { ArticlesService } from './ArticlesService'
+import { MailingService } from './MailingService'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -42,6 +44,7 @@ export class DiscoveryService implements IDiscoveryService {
   private accountingService: IAccountingService;
   private checkinOutService: ICheckinOutService;
   private articlesService: IArticlesService;
+  private mailingService: IMailingService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -194,6 +197,32 @@ export class DiscoveryService implements IDiscoveryService {
           reject(new Error(`failed to retrieve hector braintree from discovery service: ${error.message}`));
         })
     })
+  }
+
+  getMailingService(): Promise<IMailingService> {
+    return new Promise((resolve, reject) => {
+      if (!this.mailingService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/MailingService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+          .use(popsicle.plugins.parse('json'))
+          .then((result) => {
+            this.mailingService = new MailingService(result.body.host, result.body.port);
+            resolve(this.mailingService);
+          })
+          .catch((error) => {
+            reject(new Error('failed to retrieve miling service from discovery service'));
+          });
+      }
+      else {
+        resolve(this.mailingService);
+      }
+    });
   }
 
   getCustomerService(): Promise<ICustomerService> {

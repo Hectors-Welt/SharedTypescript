@@ -17,6 +17,7 @@ const LegacyAppsiteBackend_1 = require("./LegacyAppsiteBackend");
 const AccountingService_1 = require("./AccountingService");
 const CheckinOutService_1 = require("./CheckinOutService");
 const ArticlesService_1 = require("./ArticlesService");
+const MailingService_1 = require("./MailingService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -158,6 +159,31 @@ class DiscoveryService {
                 .catch((error) => {
                 reject(new Error(`failed to retrieve hector braintree from discovery service: ${error.message}`));
             });
+        });
+    }
+    getMailingService() {
+        return new Promise((resolve, reject) => {
+            if (!this.mailingService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/MailingService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.mailingService = new MailingService_1.MailingService(result.body.host, result.body.port);
+                    resolve(this.mailingService);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve miling service from discovery service'));
+                });
+            }
+            else {
+                resolve(this.mailingService);
+            }
         });
     }
     getCustomerService() {

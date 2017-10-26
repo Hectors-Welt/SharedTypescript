@@ -15,6 +15,8 @@ import { ILegacyAppsiteBackend } from './ILegacyAppsiteBackend'
 import { IAccountingService } from './IAccountingService'
 import { ICheckinOutService } from './ICheckinOutService'
 import { IArticlesService } from './IArticlesService'
+import { IMailingService } from './IMailingService'
+
 
 export interface IDiscoveryService {
   host: string
@@ -33,6 +35,8 @@ export interface IDiscoveryService {
   getHectorDbSettings(): Promise<HectorDbSettings>;
 
   getBraintreeSettings(): Promise<BraintreeSettings>;
+
+  getMailingService(): Promise<IMailingService>;
 
   getCustomerService(): Promise<ICustomerService>;
 

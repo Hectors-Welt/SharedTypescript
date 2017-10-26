@@ -17,6 +17,7 @@ import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend';
 import { IAccountingService } from '../interfaces/IAccountingService';
 import { ICheckinOutService } from '../interfaces/ICheckinOutService';
 import { IArticlesService } from '../interfaces/IArticlesService';
+import { IMailingService } from '../interfaces/IMailingService';
 export declare class DiscoveryService implements IDiscoveryService {
     host: string;
     port: number;
@@ -31,6 +32,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private accountingService;
     private checkinOutService;
     private articlesService;
+    private mailingService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): void;
     getLocationInfo(): Promise<LocationInfo>;
@@ -39,6 +41,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
+    getMailingService(): Promise<IMailingService>;
     getCustomerService(): Promise<ICustomerService>;
     getEmployeesService(): Promise<IEmployeesService>;
     getMembershipService(): Promise<IMembershipService>;
