@@ -406,5 +406,128 @@ class LegacyAppsiteBackend {
             });
         });
     }
+    getAppointmentCategories(clubId) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubs/${clubId}/appointmentCategories`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get appointment categories from legacy appsite backend'));
+            });
+        });
+    }
+    getAppointmentTypesByCategory(clubId, categoryId) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubs/${clubId}/appointmentCategories/${categoryId}/appointmentTypes`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get appointment types from legacy appsite backend'));
+            });
+        });
+    }
+    getInstructorsByAppointmentType(clubId, appointmentTypeId) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubs/${clubId}/appointmentTypes/${appointmentTypeId}/instructors`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get instructors from legacy appsite backend'));
+            });
+        });
+    }
+    lookupReservationTimeBlocks(clubId, lookupRequest) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/lookupFreeTimeBlocks`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+                },
+                body: lookupRequest
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get free time blocks from legacy appsite backend'));
+            });
+        });
+    }
+    bookAppointment(clubId, timeblock, accesstoken) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/bookAppointment`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                    'appsite-access-token': accesstoken
+                },
+                body: timeblock
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to book appointment at legacy appsite backend'));
+            });
+        });
+    }
 }
 exports.LegacyAppsiteBackend = LegacyAppsiteBackend;

@@ -1,5 +1,5 @@
 export interface ILegacyAppsiteBackend {
-  login(loginRequest: any) : Promise<any>
+  login(loginRequest: any): Promise<any>
   getSession(accesstoken: string): Promise<any>
   getAppsettings(): Promise<any>
   getCoursetypes(): Promise<any>
@@ -15,4 +15,9 @@ export interface ILegacyAppsiteBackend {
   doCancellation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>
   getProfile(accesstoken: string): Promise<any>
   getMemberClasses(accesstoken: string): Promise<any>
+  getAppointmentCategories(clubId: number): Promise<any>
+  getAppointmentTypesByCategory(clubId: number, categoryId: number): Promise<any>
+  getInstructorsByAppointmentType(clubId: number, appointmentTypeId: number): Promise<any>
+  lookupReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>
+  bookAppointment(clubId: number, timeblock: any, accesstoken: string): Promise<any>
 }
