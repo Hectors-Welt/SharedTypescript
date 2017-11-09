@@ -1,10 +1,11 @@
 import * as popsicle from 'popsicle'
-import { IRatingService } from  '../interfaces/IRatingService'
+import { IRatingService } from '../interfaces/IRatingService'
 import { RatingResult } from '../models/RatingService/RatingResult'
 import { RatingItemType } from '../models/RatingService/RatingItemTypeEnum'
 
 export class RatingService implements IRatingService {
-  constructor(private host: string, private port: number) { }
+  constructor(private host: string, private port: number) {
+  }
 
   addRatingResult(ratingResult: RatingResult): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -17,13 +18,16 @@ export class RatingService implements IRatingService {
         },
         body: ratingResult
       })
-        .then((result) => {
-          if (result.status === 201) resolve();
-          else reject(new Error('failed to send rating result to rating service'))
-        })
-        .catch((error) => {
-          reject(new Error('failed to send rating result to rating service'));
-        });
+      .then((result) => {
+        if (result.status === 201) {
+          resolve();
+        } else {
+          reject(new Error('failed to send rating result to rating service'))
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to send rating result to rating service'));
+      });
     })
   }
 
@@ -37,14 +41,17 @@ export class RatingService implements IRatingService {
           'accept': 'application/json',
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status === 200) resolve(result.body);
-          else reject(new Error('failed to get rating results from rating service'))
-        })
-        .catch((error) => {
-          reject(new Error('failed to get rating results from rating service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status === 200) {
+          resolve(result.body);
+        } else {
+          reject(new Error('failed to get rating results from rating service'))
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get rating results from rating service'));
+      });
     })
-  }  
+  }
 }

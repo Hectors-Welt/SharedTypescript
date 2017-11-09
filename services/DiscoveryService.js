@@ -18,6 +18,7 @@ const AccountingService_1 = require("./AccountingService");
 const CheckinOutService_1 = require("./CheckinOutService");
 const ArticlesService_1 = require("./ArticlesService");
 const MailingService_1 = require("./MailingService");
+const SMSService_1 = require("./SMSService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -178,11 +179,36 @@ class DiscoveryService {
                     resolve(this.mailingService);
                 })
                     .catch((error) => {
-                    reject(new Error('failed to retrieve miling service from discovery service'));
+                    reject(new Error('failed to retrieve mailing service from discovery service'));
                 });
             }
             else {
                 resolve(this.mailingService);
+            }
+        });
+    }
+    getSMSService() {
+        return new Promise((resolve, reject) => {
+            if (!this.smsService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/SMSService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.smsService = new SMSService_1.SMSService(result.body.host, result.body.port);
+                    resolve(this.smsService);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve sms service from discovery service'));
+                });
+            }
+            else {
+                resolve(this.smsService);
             }
         });
     }

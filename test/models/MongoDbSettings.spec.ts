@@ -1,49 +1,52 @@
-import {expect} from 'chai';
-import { MongoDbSettings } from '../..//models/MongoDbSettings'
+import { expect } from 'chai';
+import { MongoDbSettings } from '../../models/DiscoveryService/MongoDbSettings';
 
 describe('MongoDbSettings', () => {
 
-    describe('constructor validation', () =>{
-        const validationError = 'invalid data. ensure host and port are present.';
+  describe('constructor validation', () => {
+    const validationError = 'invalid data. ensure host and port are present.';
 
-        it('should throw error when invalid data passed in', () => {
-            expect(()=>new MongoDbSettings({})).to.throw(validationError);
-        });
-
-        it('should succeed with valid data passed in', () => {
-            expect(()=>new MongoDbSettings({host:'host', port:12345})).to.not.throw(validationError);
-        });
+    it('should throw error when invalid data passed in', () => {
+      expect(() => new MongoDbSettings({})).to.throw(validationError);
     });
 
-    describe('getConnectionUri', function(){
-        it('should return authSource=admin when credentials provided', function(){
-            const host = 'host';
-            const port = 12345;
-            const username = 'username';
-            const password = 'password';
-            const database = 'database';
+    it('should succeed with valid data passed in', () => {
+      expect(() => new MongoDbSettings({
+        host: 'host',
+        port: 12345
+      })).to.not.throw(validationError);
+    });
+  });
 
-            const settings = new MongoDbSettings({
-                host: host,
-                port: port,
-                username: username,
-                password: password ,
-            });
+  describe('getConnectionUri', function () {
+    it('should return authSource=admin when credentials provided', function () {
+      const host = 'host';
+      const port = 12345;
+      const username = 'username';
+      const password = 'password';
+      const database = 'database';
 
-            expect(settings.getConnectionUri(database)).to.equal(`mongodb://${username}:${password}@${host}:${port}/${database}?authSource=admin`);
-        });
+      const settings = new MongoDbSettings({
+        host: host,
+        port: port,
+        username: username,
+        password: password,
+      });
 
-        it('should return simple uri without credentials provided', function(){
-            const host = 'host';
-            const port = 12345;
-            const database = 'database';
+      expect(settings.getConnectionUri(database)).to.equal(`mongodb://${username}:${password}@${host}:${port}/${database}?authSource=admin`);
+    });
 
-            const settings = new MongoDbSettings({
-                host: host,
-                port: port,
-            });
+    it('should return simple uri without credentials provided', function () {
+      const host = 'host';
+      const port = 12345;
+      const database = 'database';
 
-            expect(settings.getConnectionUri(database)).to.equal(`mongodb://${host}:${port}/${database}`);
-        })
+      const settings = new MongoDbSettings({
+        host: host,
+        port: port,
+      });
+
+      expect(settings.getConnectionUri(database)).to.equal(`mongodb://${host}:${port}/${database}`);
     })
+  })
 });

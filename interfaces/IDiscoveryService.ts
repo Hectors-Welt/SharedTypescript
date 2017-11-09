@@ -17,7 +17,6 @@ import { ICheckinOutService } from './ICheckinOutService'
 import { IArticlesService } from './IArticlesService'
 import { IMailingService } from './IMailingService'
 
-
 export interface IDiscoveryService {
   host: string
   port: number

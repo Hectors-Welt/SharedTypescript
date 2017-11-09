@@ -4,7 +4,8 @@ import { ICustomerService } from '../interfaces/ICustomerService';
 
 export class CustomerService implements ICustomerService {
 
-  constructor(private host: string, private port: number) { }
+  constructor(private host: string, private port: number) {
+  }
 
   getCustomerByCustomerId(customerId: number): Promise<Customer> {
     return new Promise((resolve, reject) => {
@@ -16,18 +17,18 @@ export class CustomerService implements ICustomerService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if(result.status === 404) {
-            resolve(null);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to retrieve customer from customer service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status === 404) {
+          resolve(null);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve customer from customer service'));
+      });
     })
   }
 
@@ -41,18 +42,18 @@ export class CustomerService implements ICustomerService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if(result.status === 404) {
-            resolve(null);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to retrieve customer from customer service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status === 404) {
+          resolve(null);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve customer from customer service'));
+      });
     })
   }
 }

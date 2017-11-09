@@ -1,4 +1,4 @@
-import {NotificationResult} from './NotificationResult'
+import { NotificationResult } from './NotificationResult'
 
 export class NotificationResponse {
   multicast_id: string;

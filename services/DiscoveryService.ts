@@ -29,6 +29,8 @@ import { AccountingService } from './AccountingService'
 import { CheckinOutService } from './CheckinOutService'
 import { ArticlesService } from './ArticlesService'
 import { MailingService } from './MailingService'
+import { ISMSService } from '../interfaces/ISMSService';
+import { SMSService } from './SMSService';
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -45,6 +47,7 @@ export class DiscoveryService implements IDiscoveryService {
   private checkinOutService: ICheckinOutService;
   private articlesService: IArticlesService;
   private mailingService: IMailingService;
+  private smsService: ISMSService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -54,7 +57,7 @@ export class DiscoveryService implements IDiscoveryService {
   startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType) {
 
     this.timer = setInterval(() =>
-      this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType)
+        this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType)
         .catch((error) => {
           clearInterval(this.timer);
         })
@@ -71,16 +74,16 @@ export class DiscoveryService implements IDiscoveryService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(new Error(`failed to retrieve location info from discovery service`))
-          }
-          resolve(new LocationInfo(result.body));
-        })
-        .catch((error) => {
-          reject(new Error(`failed to retrieve location info from discovery service: ${error.message}`));
-        })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(new Error(`failed to retrieve location info from discovery service`))
+        }
+        resolve(new LocationInfo(result.body));
+      })
+      .catch((error) => {
+        reject(new Error(`failed to retrieve location info from discovery service: ${error.message}`));
+      })
     })
   }
 
@@ -94,16 +97,16 @@ export class DiscoveryService implements IDiscoveryService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(new Error(`failed to retrieve eventstore settings from discovery service`))
-          }
-          resolve(new EventStoreSettings(result.body));
-        })
-        .catch((error) => {
-          reject(new Error(`failed to retrieve eventstore settings from discovery service: ${error.message}`));
-        })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(new Error(`failed to retrieve eventstore settings from discovery service`))
+        }
+        resolve(new EventStoreSettings(result.body));
+      })
+      .catch((error) => {
+        reject(new Error(`failed to retrieve eventstore settings from discovery service: ${error.message}`));
+      })
     })
   }
 
@@ -117,16 +120,16 @@ export class DiscoveryService implements IDiscoveryService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(new Error(`failed to retrieve mongodb settings from discovery service`))
-          }
-          resolve(new MongoDbSettings(result.body));
-        })
-        .catch((error) => {
-          reject(new Error(`failed to retrieve mongodb settings from discovery service: ${error.message}`));
-        })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(new Error(`failed to retrieve mongodb settings from discovery service`))
+        }
+        resolve(new MongoDbSettings(result.body));
+      })
+      .catch((error) => {
+        reject(new Error(`failed to retrieve mongodb settings from discovery service: ${error.message}`));
+      })
     })
   }
 
@@ -140,16 +143,16 @@ export class DiscoveryService implements IDiscoveryService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(new Error(`failed to retrieve rabbitmq settings from discovery service`))
-          }
-          resolve(new RabbitMqSettings(result.body));
-        })
-        .catch((error) => {
-          reject(new Error(`failed to retrieve rabbitmq settings from discovery service: ${error.message}`));
-        })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(new Error(`failed to retrieve rabbitmq settings from discovery service`))
+        }
+        resolve(new RabbitMqSettings(result.body));
+      })
+      .catch((error) => {
+        reject(new Error(`failed to retrieve rabbitmq settings from discovery service: ${error.message}`));
+      })
     })
   }
 
@@ -163,16 +166,16 @@ export class DiscoveryService implements IDiscoveryService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(new Error(`failed to retrieve hector db settings from discovery service`))
-          }
-          resolve(new HectorDbSettings(result.body));
-        })
-        .catch((error) => {
-          reject(new Error(`failed to retrieve hector db settings from discovery service: ${error.message}`));
-        })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(new Error(`failed to retrieve hector db settings from discovery service`))
+        }
+        resolve(new HectorDbSettings(result.body));
+      })
+      .catch((error) => {
+        reject(new Error(`failed to retrieve hector db settings from discovery service: ${error.message}`));
+      })
     })
   }
 
@@ -186,16 +189,16 @@ export class DiscoveryService implements IDiscoveryService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(new Error(`failed to retrieve braintree settings from discovery service`))
-          }
-          resolve(new BraintreeSettings(result.body));
-        })
-        .catch((error) => {
-          reject(new Error(`failed to retrieve hector braintree from discovery service: ${error.message}`));
-        })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(new Error(`failed to retrieve braintree settings from discovery service`))
+        }
+        resolve(new BraintreeSettings(result.body));
+      })
+      .catch((error) => {
+        reject(new Error(`failed to retrieve hector braintree from discovery service: ${error.message}`));
+      })
     })
   }
 
@@ -210,17 +213,43 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.mailingService = new MailingService(result.body.host, result.body.port);
-            resolve(this.mailingService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve miling service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.mailingService = new MailingService(result.body.host, result.body.port);
+          resolve(this.mailingService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve mailing service from discovery service'));
+        });
       }
       else {
         resolve(this.mailingService);
+      }
+    });
+  }
+
+  getSMSService(): Promise<ISMSService> {
+    return new Promise((resolve, reject) => {
+      if (!this.smsService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/SMSService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.smsService = new SMSService(result.body.host, result.body.port);
+          resolve(this.smsService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve sms service from discovery service'));
+        });
+      }
+      else {
+        resolve(this.smsService);
       }
     });
   }
@@ -236,14 +265,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.customerService = new CustomerService(result.body.host, result.body.port);
-            resolve(this.customerService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve customer service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.customerService = new CustomerService(result.body.host, result.body.port);
+          resolve(this.customerService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve customer service from discovery service'));
+        });
       }
       else {
         resolve(this.customerService);
@@ -262,14 +291,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.employeesService = new EmployeesService(result.body.host, result.body.port);
-            resolve(this.employeesService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve employees service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.employeesService = new EmployeesService(result.body.host, result.body.port);
+          resolve(this.employeesService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve employees service from discovery service'));
+        });
       }
       else {
         resolve(this.employeesService);
@@ -288,14 +317,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.membershipService = new MembershipService(result.body.host, result.body.port);
-            resolve(this.membershipService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve membership service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.membershipService = new MembershipService(result.body.host, result.body.port);
+          resolve(this.membershipService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve membership service from discovery service'));
+        });
       }
       else {
         resolve(this.membershipService);
@@ -314,14 +343,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(result.body.host, result.body.port);
-            resolve(this.twoFactorAuthenticationService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve two factor authentication service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(result.body.host, result.body.port);
+          resolve(this.twoFactorAuthenticationService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve two factor authentication service from discovery service'));
+        });
       }
       else {
         resolve(this.twoFactorAuthenticationService);
@@ -340,14 +369,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.pushNotificationService = new PushNotificationService(result.body.host, result.body.port);
-            resolve(this.pushNotificationService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve push notification service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.pushNotificationService = new PushNotificationService(result.body.host, result.body.port);
+          resolve(this.pushNotificationService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve push notification service from discovery service'));
+        });
       }
       else {
         resolve(this.pushNotificationService);
@@ -366,14 +395,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.ratingService = new RatingService(result.body.host, result.body.port);
-            resolve(this.ratingService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve rating service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.ratingService = new RatingService(result.body.host, result.body.port);
+          resolve(this.ratingService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve rating service from discovery service'));
+        });
       }
       else {
         resolve(this.ratingService);
@@ -392,14 +421,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.legacyAppsiteBackend = new LegacyAppsiteBackend(result.body.host, result.body.port);
-            resolve(this.legacyAppsiteBackend);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve legacy appsite backend from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.legacyAppsiteBackend = new LegacyAppsiteBackend(result.body.host, result.body.port);
+          resolve(this.legacyAppsiteBackend);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve legacy appsite backend from discovery service'));
+        });
       }
       else {
         resolve(this.legacyAppsiteBackend);
@@ -418,14 +447,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.accountingService = new AccountingService(result.body.host, result.body.port);
-            resolve(this.accountingService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve accounting service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.accountingService = new AccountingService(result.body.host, result.body.port);
+          resolve(this.accountingService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve accounting service from discovery service'));
+        });
       }
       else {
         resolve(this.accountingService);
@@ -444,14 +473,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.checkinOutService = new CheckinOutService(result.body.host, result.body.port);
-            resolve(this.checkinOutService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve checkinout service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.checkinOutService = new CheckinOutService(result.body.host, result.body.port);
+          resolve(this.checkinOutService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve checkinout service from discovery service'));
+        });
       }
       else {
         resolve(this.checkinOutService);
@@ -470,14 +499,14 @@ export class DiscoveryService implements IDiscoveryService {
             'accept': 'application/json',
           },
         })
-          .use(popsicle.plugins.parse('json'))
-          .then((result) => {
-            this.articlesService = new ArticlesService(result.body.host, result.body.port);
-            resolve(this.articlesService);
-          })
-          .catch((error) => {
-            reject(new Error('failed to retrieve articles service from discovery service'));
-          });
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.articlesService = new ArticlesService(result.body.host, result.body.port);
+          resolve(this.articlesService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve articles service from discovery service'));
+        });
       }
       else {
         resolve(this.articlesService);
@@ -504,13 +533,13 @@ export class DiscoveryService implements IDiscoveryService {
           proxyRoute: proxyRoute,
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          resolve();
-        })
-        .catch((error) => {
-          reject(new Error(`could not reach DiscoveryService: ${error.message}`));
-        })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        resolve();
+      })
+      .catch((error) => {
+        reject(new Error(`could not reach DiscoveryService: ${error.message}`));
+      })
     });
   }
 }

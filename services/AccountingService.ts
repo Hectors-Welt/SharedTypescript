@@ -3,7 +3,8 @@ import { IAccountingService } from '../interfaces/IAccountingService'
 import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation'
 
 export class AccountingService implements IAccountingService {
-  constructor(private host: string, private port: number) { }
+  constructor(private host: string, private port: number) {
+  }
 
   getClubAccountInformation(customerId: number): Promise<ClubAccountInformation> {
     return new Promise((resolve, reject) => {
@@ -15,13 +16,13 @@ export class AccountingService implements IAccountingService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          resolve(result.body);
-        })
-        .catch((error) => {
-          reject(new Error('failed to retrieve club account information from accounting service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        resolve(result.body);
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve club account information from accounting service'));
+      });
     })
   }
 }

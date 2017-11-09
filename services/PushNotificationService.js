@@ -18,10 +18,12 @@ class PushNotificationService {
                 body: deviceRegistration
             })
                 .then((result) => {
-                if (result.status === 201)
+                if (result.status === 201) {
                     resolve();
-                else
+                }
+                else {
                     reject(new Error('failed to register device at push notification service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to register device at push notification service'));
@@ -39,10 +41,12 @@ class PushNotificationService {
                 }
             })
                 .then((result) => {
-                if (result.status === 200)
+                if (result.status === 200) {
                     resolve();
-                else
+                }
+                else {
                     reject(new Error('failed to unregister device from push notification service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to unregister device from push notification service'));
@@ -61,10 +65,12 @@ class PushNotificationService {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                if (result.status === 200)
+                if (result.status === 200) {
                     resolve(result.body);
-                else
+                }
+                else {
                     reject(new Error('failed to get subscriptions from push notification service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to get subscriptions from push notification service'));
@@ -82,10 +88,12 @@ class PushNotificationService {
                 }
             })
                 .then((result) => {
-                if (result.status === 201)
+                if (result.status === 201) {
                     resolve();
-                else
+                }
+                else {
                     reject(new Error('failed to add subscription at push notification service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to add subscription at push notification service'));
@@ -103,10 +111,12 @@ class PushNotificationService {
                 }
             })
                 .then((result) => {
-                if (result.status === 200)
+                if (result.status === 200) {
                     resolve();
-                else
+                }
+                else {
                     reject(new Error('failed to remove subscription from push notification service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to remove subscription from push notification service'));
@@ -125,10 +135,12 @@ class PushNotificationService {
                 body: notification
             })
                 .then((result) => {
-                if (result.status === 200)
+                if (result.status === 200) {
                     resolve(result.body);
-                else
+                }
+                else {
                     reject(new Error('failed to send notification from push notification service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to send notification from push notification service'));
