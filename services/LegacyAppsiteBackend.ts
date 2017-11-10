@@ -548,4 +548,57 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
         });
     });
   }
+
+  lookupCounselingReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/lookupFreeCounselingTimeBlocks`,
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json'
+        },
+        body: lookupRequest
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if (result.status !== 200) {
+            reject(result.body);
+          }
+          else {
+            resolve(result.body);
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to get free counseling time blocks from legacy appsite backend'));
+        });
+    });
+  }
+
+  bookCounselingAppointment(clubId: number, reservationRequest: any, accesstoken: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/bookCounselingAppointment`,
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          'appsite-access-token': accesstoken
+        },
+        body: reservationRequest
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if (result.status !== 200) {
+            reject(result.body);
+          }
+          else {
+            resolve(result.body);
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to book counseling appointment at legacy appsite backend'));
+        });
+    });
+  }
 }
