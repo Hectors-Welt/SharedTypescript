@@ -4,7 +4,8 @@ import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthent
 
 export class TwoFactorAuthenticationService implements ITwoFactorAuthenticationService {
 
-  constructor(private host: string, private port: number) { }
+  constructor(private host: string, private port: number) {
+  }
 
   generateToken(key: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -19,21 +20,21 @@ export class TwoFactorAuthenticationService implements ITwoFactorAuthenticationS
           key
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status === 200) {
-            resolve(result.body.token);
-          }
-          else {
-            reject(new Error("two factor authentication service responded with status " + result.status))
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to retrieve token from two factor authentication service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status === 200) {
+          resolve(result.body.token);
+        }
+        else {
+          reject(new Error("two factor authentication service responded with status " + result.status))
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve token from two factor authentication service'));
+      });
     })
   }
-  
+
   validateToken(key: string, token: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
       popsicle.request({
@@ -48,13 +49,16 @@ export class TwoFactorAuthenticationService implements ITwoFactorAuthenticationS
           token
         }
       })
-        .then((result) => {
-          if (result.status === 200) resolve(true);
-          else resolve(false);
-        })
-        .catch((error) => {
-          reject(new Error('failed to validate token by two factor authentication service'));
-        });
+      .then((result) => {
+        if (result.status === 200) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to validate token by two factor authentication service'));
+      });
     })
   }
 

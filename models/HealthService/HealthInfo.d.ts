@@ -2,9 +2,9 @@ export declare class HealthInfo {
     version: string;
     healthy: Object;
     unhealthy: Object;
+    constructor(version: string);
     readonly timestamp: string;
     readonly isHealthy: boolean;
-    constructor(version: string);
     toJSON(): {
         version: string;
         healthy: Object;

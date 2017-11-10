@@ -23,18 +23,18 @@ export class EmployeesService implements IEmployeesService {
           password
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(new Error('failed to validate credentials at employees service'));
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
           reject(new Error('failed to validate credentials at employees service'));
-        });
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to validate credentials at employees service'));
+      });
     });
   }
 }

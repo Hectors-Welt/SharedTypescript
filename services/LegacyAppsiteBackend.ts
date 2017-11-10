@@ -2,8 +2,9 @@ import * as popsicle from 'popsicle'
 import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
 
 export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
-  
-  constructor(private host: string, private port: number) { }
+
+  constructor(private host: string, private port: number) {
+  }
 
   login(loginRequest: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -16,18 +17,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
         },
         body: loginRequest
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to login at legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to login at legacy appsite backend'));
+      });
     });
   }
 
@@ -42,18 +43,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'appsite-access-token': accesstoken
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get session from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get session from legacy appsite backend'));
+      });
     });
   }
 
@@ -67,18 +68,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json',
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get appsettings from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get appsettings from legacy appsite backend'));
+      });
     });
   }
 
@@ -92,18 +93,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json',
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get coursetypes from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get coursetypes from legacy appsite backend'));
+      });
     });
   }
 
@@ -117,18 +118,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json',
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get courselevels from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get courselevels from legacy appsite backend'));
+      });
     });
   }
 
@@ -142,18 +143,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json',
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get clubs from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get clubs from legacy appsite backend'));
+      });
     });
   }
 
@@ -167,18 +168,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json',
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get instructors from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get instructors from legacy appsite backend'));
+      });
     });
   }
 
@@ -192,18 +193,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json',
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get rooms from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get rooms from legacy appsite backend'));
+      });
     });
   }
 
@@ -217,18 +218,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json',
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get courses from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get courses from legacy appsite backend'));
+      });
     });
   }
 
@@ -244,18 +245,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
         },
         body: filter
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get classes from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get classes from legacy appsite backend'));
+      });
     });
   }
 
@@ -270,18 +271,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'appsite-access-token': accesstoken
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get class from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get class from legacy appsite backend'));
+      });
     });
   }
 
@@ -296,18 +297,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'appsite-access-token': accesstoken
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get price information from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get price information from legacy appsite backend'));
+      });
     });
   }
 
@@ -325,18 +326,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           password
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to do reservation on legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to do reservation on legacy appsite backend'));
+      });
     });
   }
 
@@ -354,18 +355,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           password
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to do cancellation on legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to do cancellation on legacy appsite backend'));
+      });
     });
   }
 
@@ -380,18 +381,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'appsite-access-token': accesstoken
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get member profile from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get member profile from legacy appsite backend'));
+      });
     });
   }
 
@@ -406,18 +407,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'appsite-access-token': accesstoken
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get member classes from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get member classes from legacy appsite backend'));
+      });
     });
   }
 
@@ -431,18 +432,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json'
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get appointment categories from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get appointment categories from legacy appsite backend'));
+      });
     });
   }
 
@@ -456,18 +457,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json'
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get appointment types from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get appointment types from legacy appsite backend'));
+      });
     });
   }
 
@@ -481,18 +482,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json'
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get instructors from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get instructors from legacy appsite backend'));
+      });
     });
   }
 
@@ -507,18 +508,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
         },
         body: lookupRequest
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get free time blocks from legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get free time blocks from legacy appsite backend'));
+      });
     });
   }
 
@@ -534,18 +535,18 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
         },
         body: timeblock
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to book appointment at legacy appsite backend'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to book appointment at legacy appsite backend'));
+      });
     });
   }
 

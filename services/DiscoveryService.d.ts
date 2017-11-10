@@ -18,6 +18,7 @@ import { IAccountingService } from '../interfaces/IAccountingService';
 import { ICheckinOutService } from '../interfaces/ICheckinOutService';
 import { IArticlesService } from '../interfaces/IArticlesService';
 import { IMailingService } from '../interfaces/IMailingService';
+import { ISMSService } from '../interfaces/ISMSService';
 export declare class DiscoveryService implements IDiscoveryService {
     host: string;
     port: number;
@@ -33,6 +34,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private checkinOutService;
     private articlesService;
     private mailingService;
+    private smsService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): void;
     getLocationInfo(): Promise<LocationInfo>;
@@ -42,6 +44,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
     getMailingService(): Promise<IMailingService>;
+    getSMSService(): Promise<ISMSService>;
     getCustomerService(): Promise<ICustomerService>;
     getEmployeesService(): Promise<IEmployeesService>;
     getMembershipService(): Promise<IMembershipService>;

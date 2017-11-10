@@ -48,10 +48,12 @@ class TwoFactorAuthenticationService {
                 }
             })
                 .then((result) => {
-                if (result.status === 200)
+                if (result.status === 200) {
                     resolve(true);
-                else
+                }
+                else {
                     resolve(false);
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to validate token by two factor authentication service'));

@@ -18,10 +18,12 @@ class RatingService {
                 body: ratingResult
             })
                 .then((result) => {
-                if (result.status === 201)
+                if (result.status === 201) {
                     resolve();
-                else
+                }
+                else {
                     reject(new Error('failed to send rating result to rating service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to send rating result to rating service'));
@@ -40,10 +42,12 @@ class RatingService {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                if (result.status === 200)
+                if (result.status === 200) {
                     resolve(result.body);
-                else
+                }
+                else {
                     reject(new Error('failed to get rating results from rating service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to get rating results from rating service'));

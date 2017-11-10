@@ -3,7 +3,8 @@ import { ICheckinOutService } from '../interfaces/ICheckinOutService'
 import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus'
 
 export class CheckinOutService implements ICheckinOutService {
-  constructor(private host: string, private port: number) { }  
+  constructor(private host: string, private port: number) {
+  }
 
   getCheckinStatus(customerId: number): Promise<CheckinStatus> {
     return new Promise((resolve, reject) => {
@@ -15,13 +16,13 @@ export class CheckinOutService implements ICheckinOutService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          resolve(result.body);
-        })
-        .catch((error) => {
-          reject(new Error('failed to retrieve checkin status from checkinout service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        resolve(result.body);
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve checkin status from checkinout service'));
+      });
     })
   }
 }

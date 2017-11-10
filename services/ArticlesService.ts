@@ -4,7 +4,8 @@ import { BookingInformation } from '../models/ArticlesService/BookingInformation
 import { Article } from '../models/ArticlesService/Article'
 
 export class ArticlesService implements IArticlesService {
-  constructor(private host: string, private port: number) { }
+  constructor(private host: string, private port: number) {
+  }
 
   getArticles(): Promise<Article[]> {
     return new Promise((resolve, reject) => {
@@ -16,13 +17,13 @@ export class ArticlesService implements IArticlesService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          resolve(result.body);
-        })
-        .catch((error) => {
-          reject(new Error('failed to retrieve articles from articles service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        resolve(result.body);
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve articles from articles service'));
+      });
     })
   }
 
@@ -36,13 +37,13 @@ export class ArticlesService implements IArticlesService {
           'accept': 'application/json',
         },
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          resolve(result.body);
-        })
-        .catch((error) => {
-          reject(new Error('failed to retrieve booking information from articles service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        resolve(result.body);
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve booking information from articles service'));
+      });
     })
   }
 
@@ -62,13 +63,13 @@ export class ArticlesService implements IArticlesService {
           employeeId: -6
         }
       })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          resolve(result.body);
-        })
-        .catch((error) => {
-          reject(new Error('failed to book article at articles service'));
-        });
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        resolve(result.body);
+      })
+      .catch((error) => {
+        reject(new Error('failed to book article at articles service'));
+      });
     })
   }
 }
