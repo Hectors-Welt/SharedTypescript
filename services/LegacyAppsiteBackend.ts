@@ -576,15 +576,14 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     });
   }
 
-  bookCounselingAppointment(clubId: number, reservationRequest: any, accesstoken: string): Promise<any> {
+  bookCounselingAppointment(clubId: number, reservationRequest: any): Promise<any> {
     return new Promise((resolve, reject) => {
       popsicle.request({
         url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/bookCounselingAppointment`,
         method: 'POST',
         headers: {
           'content-type': 'application/json',
-          'accept': 'application/json',
-          'appsite-access-token': accesstoken
+          'accept': 'application/json'
         },
         body: reservationRequest
       })

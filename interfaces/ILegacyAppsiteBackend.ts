@@ -41,5 +41,5 @@ export interface ILegacyAppsiteBackend {
 
   bookAppointment(clubId: number, timeblock: any, accesstoken: string): Promise<any>
   lookupCounselingReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>
-  bookCounselingAppointment(clubId: number, reservationRequest: any, accesstoken: string): Promise<any>
+  bookCounselingAppointment(clubId: number, reservationRequest: any): Promise<any>
 }
