@@ -6,5 +6,5 @@ export interface IArticlesService {
 
   lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation>
 
-  bookArticle(customerId: number, articleId: number): Promise<void>
+  bookArticle(customerId: number, articleId: number, note: string, employeeId: number): Promise<void>
 }

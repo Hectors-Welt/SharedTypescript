@@ -47,7 +47,7 @@ export class ArticlesService implements IArticlesService {
     })
   }
 
-  bookArticle(customerId: number, articleId: number): Promise<void> {
+  bookArticle(customerId: number, articleId: number, note: string, employeeId: number): Promise<void> {
     return new Promise((resolve, reject) => {
       popsicle.request({
         url: `http://${this.host}:${this.port}/bookArticle`,
@@ -59,8 +59,8 @@ export class ArticlesService implements IArticlesService {
         body: {
           customerId: customerId,
           articleId: articleId,
-          note: 'Snacky-Buchung',
-          employeeId: -6
+          note: note,
+          employeeId: employeeId
         }
       })
       .use(popsicle.plugins.parse('json'))

@@ -7,5 +7,5 @@ export declare class ArticlesService implements IArticlesService {
     constructor(host: string, port: number);
     getArticles(): Promise<Article[]>;
     lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation>;
-    bookArticle(customerId: number, articleId: number): Promise<void>;
+    bookArticle(customerId: number, articleId: number, note: string, employeeId: number): Promise<void>;
 }

@@ -44,7 +44,7 @@ class ArticlesService {
             });
         });
     }
-    bookArticle(customerId, articleId) {
+    bookArticle(customerId, articleId, note, employeeId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/bookArticle`,
@@ -56,8 +56,8 @@ class ArticlesService {
                 body: {
                     customerId: customerId,
                     articleId: articleId,
-                    note: 'Snacky-Buchung',
-                    employeeId: -6
+                    note: note,
+                    employeeId: employeeId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
