@@ -6,7 +6,8 @@ import { TemplateModel } from '../models/TemplateDesigner/TemplateModel';
 export class TemplateDesigner implements ITemplateDesigner {
   headers: any = {
     'content-type': 'application/json',
-    'accept': 'application/json',
+    accept: 'application/json',
+    referer: `http://${this.host}:${this.port}/`,
   };
 
   constructor(private host: string, private port: number) {
@@ -20,7 +21,22 @@ export class TemplateDesigner implements ITemplateDesigner {
       body: data,
     })
     .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
+    .then(result => result.body.url)
+    .catch(() => new Error('failed to call render on template service'));
+  }
+
+  renderHtml(url: string, data: any, asUrl?: boolean): Promise<any> {
+    return popsicle.request({
+      url: `http://${this.host}:${this.port}/api/renderHtml${asUrl ? '?url' : ''}`,
+      method: 'POST',
+      headers: this.headers,
+      body: {
+        url,
+        data,
+      },
+    })
+    .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next())
+    .then(result => asUrl ? result.body.url : result.body)
     .catch(() => new Error('failed to call render on template service'));
   }
 

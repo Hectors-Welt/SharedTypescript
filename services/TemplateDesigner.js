@@ -8,7 +8,8 @@ class TemplateDesigner {
         this.port = port;
         this.headers = {
             'content-type': 'application/json',
-            'accept': 'application/json',
+            accept: 'application/json',
+            referer: `http://${this.host}:${this.port}/`,
         };
     }
     render(data, templateId, type = RenderFileType_1.RenderFileType.PDF) {
@@ -19,7 +20,21 @@ class TemplateDesigner {
             body: data,
         })
             .use(popsicle.plugins.parse('json'))
-            .then(result => result.body)
+            .then(result => result.body.url)
+            .catch(() => new Error('failed to call render on template service'));
+    }
+    renderHtml(url, data, asUrl) {
+        return popsicle.request({
+            url: `http://${this.host}:${this.port}/api/renderHtml${asUrl ? '?url' : ''}`,
+            method: 'POST',
+            headers: this.headers,
+            body: {
+                url,
+                data,
+            },
+        })
+            .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next())
+            .then(result => asUrl ? result.body.url : result.body)
             .catch(() => new Error('failed to call render on template service'));
     }
     getModels() {
