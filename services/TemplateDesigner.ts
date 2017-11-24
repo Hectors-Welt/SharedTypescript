@@ -14,7 +14,7 @@ export class TemplateDesigner implements ITemplateDesigner {
 
   render(data: any, templateId: any, type: RenderFileType = RenderFileType.PDF): Promise<any> {
     return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/render${templateId}?type=${type}`,
+      url: `http://${this.host}:${this.port}/api/render/${templateId}?type=${type}`,
       method: 'POST',
       headers: this.headers,
       body: data,

@@ -19,6 +19,7 @@ const CheckinOutService_1 = require("./CheckinOutService");
 const ArticlesService_1 = require("./ArticlesService");
 const MailingService_1 = require("./MailingService");
 const SMSService_1 = require("./SMSService");
+const TemplateDesigner_1 = require("./TemplateDesigner");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -488,6 +489,31 @@ class DiscoveryService {
                 .catch((error) => {
                 reject(new Error(`could not reach DiscoveryService: ${error.message}`));
             });
+        });
+    }
+    getTemplateDesigner() {
+        return new Promise((resolve, reject) => {
+            if (!this.templateDesigner) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/TemplateDesigner`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.templateDesigner = new TemplateDesigner_1.TemplateDesigner(result.body.host, result.body.port);
+                    resolve(this.templateDesigner);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve template designer from discovery service'));
+                });
+            }
+            else {
+                resolve(this.templateDesigner);
+            }
         });
     }
 }

@@ -16,6 +16,7 @@ import { IAccountingService } from './IAccountingService';
 import { ICheckinOutService } from './ICheckinOutService';
 import { IArticlesService } from './IArticlesService';
 import { IMailingService } from './IMailingService';
+import { ITemplateDesigner } from './ITemplateDesigner';
 export interface IDiscoveryService {
     host: string;
     port: number;
@@ -37,4 +38,5 @@ export interface IDiscoveryService {
     getAccountingService(): Promise<IAccountingService>;
     getCheckinOutService(): Promise<ICheckinOutService>;
     getArticlesService(): Promise<IArticlesService>;
+    getTemplateDesigner(): Promise<ITemplateDesigner>;
 }

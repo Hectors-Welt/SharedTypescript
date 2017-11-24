@@ -13,7 +13,7 @@ class TemplateDesigner {
     }
     render(data, templateId, type = RenderFileType_1.RenderFileType.PDF) {
         return popsicle.request({
-            url: `http://${this.host}:${this.port}/api/render${templateId}?type=${type}`,
+            url: `http://${this.host}:${this.port}/api/render/${templateId}?type=${type}`,
             method: 'POST',
             headers: this.headers,
             body: data,

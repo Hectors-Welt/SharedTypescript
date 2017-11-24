@@ -18,6 +18,8 @@ import { IAccountingService } from '../interfaces/IAccountingService'
 import { ICheckinOutService } from '../interfaces/ICheckinOutService'
 import { IArticlesService } from '../interfaces/IArticlesService'
 import { IMailingService } from '../interfaces/IMailingService'
+import { ISMSService } from '../interfaces/ISMSService'
+import { ITemplateDesigner } from '../interfaces/ITemplateDesigner'
 import { MembershipService } from './MembershipService'
 import { EmployeesService } from './EmployeesService'
 import { CustomerService } from './CustomerService'
@@ -29,8 +31,8 @@ import { AccountingService } from './AccountingService'
 import { CheckinOutService } from './CheckinOutService'
 import { ArticlesService } from './ArticlesService'
 import { MailingService } from './MailingService'
-import { ISMSService } from '../interfaces/ISMSService';
-import { SMSService } from './SMSService';
+import { SMSService } from './SMSService'
+import { TemplateDesigner } from './TemplateDesigner'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -48,6 +50,7 @@ export class DiscoveryService implements IDiscoveryService {
   private articlesService: IArticlesService;
   private mailingService: IMailingService;
   private smsService: ISMSService;
+  private templateDesigner: ITemplateDesigner;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -540,6 +543,32 @@ export class DiscoveryService implements IDiscoveryService {
       .catch((error) => {
         reject(new Error(`could not reach DiscoveryService: ${error.message}`));
       })
+    });
+  }
+
+  getTemplateDesigner(): Promise<ITemplateDesigner> {
+    return new Promise((resolve, reject) => {
+      if (!this.templateDesigner) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/TemplateDesigner`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.templateDesigner = new TemplateDesigner(result.body.host, result.body.port);
+          resolve(this.templateDesigner);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve template designer from discovery service'));
+        });
+      }
+      else {
+        resolve(this.templateDesigner);
+      }
     });
   }
 }
