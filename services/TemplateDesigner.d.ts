@@ -6,7 +6,7 @@ export declare class TemplateDesigner implements ITemplateDesigner {
     private port;
     headers: any;
     constructor(host: string, port: number);
-    render(data: any, templateId: any, type?: RenderFileType): Promise<any>;
+    render(data: any, templateId: any, type?: RenderFileType, asUrl?: boolean): Promise<any>;
     renderHtml(url: string, data: any, asUrl?: boolean): Promise<any>;
     getModels(): Promise<Array<TemplateModel>>;
     getModel(id: string): Promise<TemplateModel>;

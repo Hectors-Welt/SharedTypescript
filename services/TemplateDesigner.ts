@@ -13,15 +13,15 @@ export class TemplateDesigner implements ITemplateDesigner {
   constructor(private host: string, private port: number) {
   }
 
-  render(data: any, templateId: any, type: RenderFileType = RenderFileType.PDF): Promise<any> {
+  render(data: any, templateId: any, type: RenderFileType = RenderFileType.PDF, asUrl?: boolean): Promise<any> {
     return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/render/${templateId}?type=${type}`,
+      url: `http://${this.host}:${this.port}/api/render/${templateId}?type=${type}${asUrl ? '&url' : ''}`,
       method: 'POST',
       headers: this.headers,
       body: data,
     })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body.url)
+    .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next())
+    .then(result => asUrl ? result.body.url : result.body)
     .catch(() => new Error('failed to call render on template service'));
   }
 
@@ -37,7 +37,7 @@ export class TemplateDesigner implements ITemplateDesigner {
     })
     .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next())
     .then(result => asUrl ? result.body.url : result.body)
-    .catch(() => new Error('failed to call render on template service'));
+    .catch(() => new Error('failed to call renderHtml on template service'));
   }
 
   getModels(): Promise<Array<TemplateModel>> {
