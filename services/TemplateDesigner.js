@@ -23,9 +23,9 @@ class TemplateDesigner {
             .then(result => asUrl ? result.body.url : result.body)
             .catch(() => new Error('failed to call render on template service'));
     }
-    renderHtml(url, data, asUrl) {
+    renderUrl(url, data, asUrl) {
         return popsicle.request({
-            url: `http://${this.host}:${this.port}/api/renderHtml${asUrl ? '?url' : ''}`,
+            url: `http://${this.host}:${this.port}/api/renderUrl${asUrl ? '?url' : ''}`,
             method: 'POST',
             headers: this.headers,
             body: {
@@ -35,7 +35,7 @@ class TemplateDesigner {
         })
             .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next())
             .then(result => asUrl ? result.body.url : result.body)
-            .catch(() => new Error('failed to call renderHtml on template service'));
+            .catch(() => new Error('failed to call renderUrl on template service'));
     }
     getModels() {
         return popsicle.request({
