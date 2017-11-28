@@ -22,6 +22,7 @@ export interface IDiscoveryService {
     port: number;
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): any;
     getLocationInfo(): Promise<LocationInfo>;
+    getEnvironment(): Promise<any>;
     getEventStoreSettings(): Promise<EventStoreSettings>;
     getMongoDbSettings(): Promise<MongoDbSettings>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;

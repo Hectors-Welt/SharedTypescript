@@ -53,6 +53,28 @@ class DiscoveryService {
             });
         });
     }
+    getEnvironment() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/environment`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error(`failed to retrieve environment from discovery service`));
+                }
+                resolve(result.body);
+            })
+                .catch((error) => {
+                reject(new Error(`failed to retrieve environment from discovery service: ${error.message}`));
+            });
+        });
+    }
     getEventStoreSettings() {
         return new Promise((resolve, reject) => {
             popsicle.request({

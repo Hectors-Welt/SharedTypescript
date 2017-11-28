@@ -40,6 +40,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): void;
     getLocationInfo(): Promise<LocationInfo>;
+    getEnvironment(): Promise<any>;
     getEventStoreSettings(): Promise<EventStoreSettings>;
     getMongoDbSettings(): Promise<MongoDbSettings>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;

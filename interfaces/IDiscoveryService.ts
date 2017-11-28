@@ -26,6 +26,8 @@ export interface IDiscoveryService {
 
   getLocationInfo(): Promise<LocationInfo>;
 
+  getEnvironment(): Promise<any>;
+
   getEventStoreSettings(): Promise<EventStoreSettings>;
 
   getMongoDbSettings(): Promise<MongoDbSettings>;
