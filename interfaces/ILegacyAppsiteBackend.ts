@@ -11,6 +11,8 @@ export interface ILegacyAppsiteBackend {
 
   getClubs(): Promise<any>
 
+  getEmployeesPresent(clubId: number): Promise<any>
+
   getInstructors(clubId: number): Promise<any>
 
   getInstructor(clubId: number, instructorId: number): Promise<any>
