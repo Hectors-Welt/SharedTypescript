@@ -13,6 +13,8 @@ export interface ILegacyAppsiteBackend {
 
   getMembershipTemplates(): Promise<any>
 
+  getCountries(): Promise<any>
+
   getClubs(): Promise<any>
 
   getEmployeesPresent(clubId: number): Promise<any>
