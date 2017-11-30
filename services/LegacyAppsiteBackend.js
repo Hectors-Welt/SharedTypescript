@@ -152,6 +152,30 @@ class LegacyAppsiteBackend {
             });
         });
     }
+    getMembershipTemplates() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/config/membershipTemplates`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get membership templates from legacy appsite backend'));
+            });
+        });
+    }
     getClubs() {
         return new Promise((resolve, reject) => {
             popsicle.request({

@@ -11,6 +11,8 @@ export interface ILegacyAppsiteBackend {
 
   getFruttiAboArticles(): Promise<any>
 
+  getMembershipTemplates(): Promise<any>
+
   getClubs(): Promise<any>
 
   getEmployeesPresent(clubId: number): Promise<any>
