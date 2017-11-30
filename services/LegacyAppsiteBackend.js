@@ -176,6 +176,30 @@ class LegacyAppsiteBackend {
             });
         });
     }
+    getInstructor(clubId, instructorId) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubs/${clubId}/instructors/${instructorId}`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get instructor from legacy appsite backend'));
+            });
+        });
+    }
     getRooms(clubId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
