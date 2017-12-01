@@ -547,7 +547,7 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
   getProfile(accesstoken: string): Promise<any> {
     return new Promise((resolve, reject) => {
       popsicle.request({
-        url: `http://${this.host}:${this.port}/member`,
+        url: `http://${this.host}:${this.port}/me`,
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -573,7 +573,7 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
   getMemberClasses(accesstoken: string): Promise<any> {
     return new Promise((resolve, reject) => {
       popsicle.request({
-        url: `http://${this.host}:${this.port}/member/classes`,
+        url: `http://${this.host}:${this.port}/me/classes`,
         method: 'GET',
         headers: {
           'content-type': 'application/json',
