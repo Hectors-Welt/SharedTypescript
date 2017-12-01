@@ -11,6 +11,7 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     getFruttiAboArticles(): Promise<any>;
     getMembershipTemplates(): Promise<any>;
     getCountries(): Promise<any>;
+    getTitles(): Promise<any>;
     getClubs(): Promise<any>;
     getEmployeesPresent(clubId: number): Promise<any>;
     getInstructors(clubId: number): Promise<any>;
