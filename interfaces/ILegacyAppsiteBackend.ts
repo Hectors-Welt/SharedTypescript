@@ -25,6 +25,8 @@ export interface ILegacyAppsiteBackend {
 
   getInstructor(clubId: number, instructorId: number): Promise<any>
 
+  getInstructorPicture(clubId: number, instructorId: number): Promise<any>
+
   getRooms(clubId: number): Promise<any>
 
   getCourses(clubId: number): Promise<any>
