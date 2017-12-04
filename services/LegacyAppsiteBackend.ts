@@ -580,9 +580,7 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           'accept': 'application/json',
           'appsite-access-token': accesstoken
         },
-        body: {
-          address
-        }
+        body: address
       })
       .use(popsicle.plugins.parse('json'))
       .then((result) => {
