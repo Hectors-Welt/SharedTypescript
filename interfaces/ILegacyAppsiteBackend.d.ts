@@ -22,6 +22,7 @@ export interface ILegacyAppsiteBackend {
     doCancellation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>;
     getProfile(accesstoken: string): Promise<any>;
     updateAddress(accesstoken: string, address: any): Promise<void>;
+    updateBankAccount(accesstoken: string, bankAccount: any): Promise<void>;
     getMemberClasses(accesstoken: string): Promise<any>;
     getAppointmentCategories(clubId: number): Promise<any>;
     getAppointmentTypesByCategory(clubId: number, categoryId: number): Promise<any>;
