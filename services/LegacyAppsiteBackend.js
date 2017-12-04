@@ -562,7 +562,7 @@ class LegacyAppsiteBackend {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                if (result.status !== 200) {
+                if (result.status !== 204) {
                     reject(result.body);
                 }
                 else {
