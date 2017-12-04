@@ -43,6 +43,8 @@ export interface ILegacyAppsiteBackend {
 
   getProfile(accesstoken: string): Promise<any>
 
+  updateAddress(accesstoken: string, address: any): Promise<any>
+
   getMemberClasses(accesstoken: string): Promise<any>
 
   getAppointmentCategories(clubId: number): Promise<any>

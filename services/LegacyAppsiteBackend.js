@@ -546,6 +546,34 @@ class LegacyAppsiteBackend {
             });
         });
     }
+    updateAddress(accesstoken, address) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/me/address`,
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                    'appsite-access-token': accesstoken
+                },
+                body: {
+                    address
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to update address at legacy appsite backend'));
+            });
+        });
+    }
     getMemberClasses(accesstoken) {
         return new Promise((resolve, reject) => {
             popsicle.request({
