@@ -570,7 +570,7 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     });
   }
 
-  updateAddress(accesstoken: string, address: any): Promise<any> {
+  updateAddress(accesstoken: string, address: any): Promise<void> {
     return new Promise((resolve, reject) => {
       popsicle.request({
         url: `http://${this.host}:${this.port}/me/address`,
@@ -590,7 +590,7 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
           reject(result.body);
         }
         else {
-          resolve(result.body);
+          resolve();
         }
       })
       .catch((error) => {

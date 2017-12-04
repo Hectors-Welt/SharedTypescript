@@ -43,7 +43,7 @@ export interface ILegacyAppsiteBackend {
 
   getProfile(accesstoken: string): Promise<any>
 
-  updateAddress(accesstoken: string, address: any): Promise<any>
+  updateAddress(accesstoken: string, address: any): Promise<void>
 
   getMemberClasses(accesstoken: string): Promise<any>
 

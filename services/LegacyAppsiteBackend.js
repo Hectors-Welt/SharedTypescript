@@ -566,7 +566,7 @@ class LegacyAppsiteBackend {
                     reject(result.body);
                 }
                 else {
-                    resolve(result.body);
+                    resolve();
                 }
             })
                 .catch((error) => {
