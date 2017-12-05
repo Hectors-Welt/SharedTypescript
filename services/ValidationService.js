@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const IbanTools = require("ibantools");
 const validator_1 = require("validator");
 const fs = require("fs");
+const path = require("path");
 const popsicle = require("popsicle");
 const csvtojson = require("csvtojson");
 const SclInfo_1 = require("../models/ValidationService/SclInfo");
@@ -16,6 +17,10 @@ class ValidationService {
             method: 'GET'
         })
             .then((result) => {
+            console.log(result);
+            if (result.status != 200) {
+                return Promise.reject(new Error("file not found"));
+            }
             const csv = result.body.split('\n').slice(2).join('\n');
             csvtojson({
                 delimiter: ";",
@@ -27,11 +32,11 @@ class ValidationService {
                 self.sclEntries[data.bic] = new SclInfo_1.SclInfo(data);
             })
                 .on('end', () => {
-                fs.writeFileSync("SCL.json", JSON.stringify(self.sclEntries));
+                fs.writeFileSync(path.resolve(process.cwd(), 'SCL.json'), JSON.stringify(self.sclEntries));
             });
         })
             .catch(error => {
-            this.sclEntries = require('../SCL.json');
+            this.sclEntries = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'SCL.json'), 'utf8').toString());
         });
     }
     isIbanValid(iban) {

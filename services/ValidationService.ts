@@ -1,6 +1,7 @@
 import * as IbanTools from 'ibantools'
 import validator from 'validator'
 import * as fs from 'fs'
+import * as path from 'path'
 import * as popsicle from 'popsicle'
 import * as csvtojson from 'csvtojson'
 
@@ -20,25 +21,28 @@ export class ValidationService implements IValidationService {
             url,
             method: 'GET'
         })
-            .then((result) => {
-                const csv = result.body.split('\n').slice(2).join('\n');
-
-                csvtojson({
-                    delimiter: ";",
-                    noheader: true,
-                    headers: ["bic", "name", "sct", "sdd", "cor1", "b2b", "scc"]
-                })
-                    .fromString(csv)
-                    .on('json', (data, index) => {
-                        self.sclEntries[data.bic] = new SclInfo(data);
-                    })
-                    .on('end', () => {
-                        fs.writeFileSync("SCL.json", JSON.stringify(self.sclEntries));
-                    })
+        .then((result) => {
+            console.log(result);
+            if (result.status != 200) {
+                return Promise.reject(new Error("file not found"));
+            }
+            const csv = result.body.split('\n').slice(2).join('\n');
+            csvtojson({
+                delimiter: ";",
+                noheader: true,
+                headers: ["bic", "name", "sct", "sdd", "cor1", "b2b", "scc"]
             })
-            .catch(error => {
-                this.sclEntries = require('../SCL.json');
-            })            
+                .fromString(csv)
+                .on('json', (data, index) => {
+                    self.sclEntries[data.bic] = new SclInfo(data);
+                })
+                .on('end', () => {
+                    fs.writeFileSync(path.resolve(process.cwd(),'SCL.json'), JSON.stringify(self.sclEntries));
+                });
+        })
+        .catch(error => {
+            this.sclEntries = JSON.parse(fs.readFileSync(path.resolve(process.cwd(),'SCL.json'), 'utf8').toString());
+        });         
     }
 
     isIbanValid(iban: string): boolean {
