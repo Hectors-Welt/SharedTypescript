@@ -1,5 +1,5 @@
 import * as IbanTools from 'ibantools'
-import validator from 'validator'
+import * as validator from 'validator'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as popsicle from 'popsicle'

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const IbanTools = require("ibantools");
-const validator_1 = require("validator");
+const validator = require("validator");
 const fs = require("fs");
 const path = require("path");
 const popsicle = require("popsicle");
@@ -49,7 +49,7 @@ class ValidationService {
         return this.sclEntries[bic] || this.sclEntries[bic.substr(0, 8)];
     }
     isEmailValid(email) {
-        return validator_1.default.isEmail(email);
+        return validator.isEmail(email);
     }
 }
 exports.ValidationService = ValidationService;
