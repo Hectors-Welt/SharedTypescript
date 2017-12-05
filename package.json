@@ -2,7 +2,9 @@
   "name": "shared-typescript",
   "version": "1.0.0",
   "dependencies": {
+    "ibantools": "^1.5.1",
     "popsicle": "^9.1.0",
+    "validator": "^9.1.2",
     "winston": "^2.4.0",
     "winston-mongodb": "^3.0.1"
   },
