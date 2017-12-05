@@ -623,6 +623,33 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
       });
     });
   }
+
+  updateContactData(accesstoken: string, contactData: any): Promise<void> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/me/contactData`,
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          'appsite-access-token': accesstoken
+        },
+        body: contactData
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 204) {
+          reject(result.body);
+        }
+        else {
+          resolve();
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to update contact data at legacy appsite backend'));
+      });
+    });
+  }
   
   getMemberClasses(accesstoken: string): Promise<any> {
     return new Promise((resolve, reject) => {

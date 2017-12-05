@@ -46,6 +46,8 @@ export interface ILegacyAppsiteBackend {
   updateAddress(accesstoken: string, address: any): Promise<void>
 
   updateBankAccount(accesstoken: string, bankAccount: any): Promise<void>
+  
+  updateContactData(accesstoken: string, contactData: any): Promise<void>
 
   getMemberClasses(accesstoken: string): Promise<any>
 
