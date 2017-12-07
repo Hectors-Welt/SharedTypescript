@@ -26,10 +26,7 @@ class DiscoveryService {
         this.port = port;
     }
     startSelfRegistration(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType) {
-        this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType)
-            .catch((error) => {
-            clearInterval(this.timer);
-        }), 5 * 1000);
+        this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
     }
     getLocationInfo() {
         return new Promise((resolve, reject) => {

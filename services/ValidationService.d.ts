@@ -1,4 +1,4 @@
-import { IValidationService } from "../interfaces/IValidationService";
+import { IValidationService } from '../interfaces/IValidationService';
 import { SclInfo } from '../models/ValidationService/SclInfo';
 export declare class ValidationService implements IValidationService {
     private sclEntries;

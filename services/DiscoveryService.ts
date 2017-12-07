@@ -58,13 +58,7 @@ export class DiscoveryService implements IDiscoveryService {
   }
 
   startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType) {
-
-    this.timer = setInterval(() =>
-        this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType)
-        .catch((error) => {
-          clearInterval(this.timer);
-        })
-      , 5 * 1000);
+    this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
   }
 
   getLocationInfo(): Promise<LocationInfo> {
