@@ -6,6 +6,6 @@ export class SendEmailRequest {
   replyTo: string
   subject: string
   text: string
-  html: string
+  html: any
   attachments: any
 }
