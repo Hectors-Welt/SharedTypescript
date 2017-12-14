@@ -26,6 +26,7 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     doCancellation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>;
     getProfile(accesstoken: string): Promise<any>;
     getMemberAvatar(accesstoken: string): Promise<any>;
+    getSepaBookings(accesstoken: string): Promise<any>;
     updateAddress(accesstoken: string, address: any): Promise<void>;
     updateBankAccount(accesstoken: string, bankAccount: any): Promise<void>;
     updateContactData(accesstoken: string, contactData: any): Promise<void>;
