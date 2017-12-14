@@ -47,6 +47,8 @@ export interface ILegacyAppsiteBackend {
 
   getSepaBookings(accesstoken: string): Promise<any>
 
+  getCheckins(accesstoken: string): Promise<any>
+
   updateAddress(accesstoken: string, address: any): Promise<void>
 
   updateBankAccount(accesstoken: string, bankAccount: any): Promise<void>
