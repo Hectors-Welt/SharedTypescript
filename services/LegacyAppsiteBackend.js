@@ -546,6 +546,31 @@ class LegacyAppsiteBackend {
             });
         });
     }
+    getMemberAvatar(accesstoken) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/me/avatar`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                    'appsite-access-token': accesstoken
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(result.body);
+                }
+                else {
+                    resolve(result.body);
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get member avatar from legacy appsite backend'));
+            });
+        });
+    }
     updateAddress(accesstoken, address) {
         return new Promise((resolve, reject) => {
             popsicle.request({
