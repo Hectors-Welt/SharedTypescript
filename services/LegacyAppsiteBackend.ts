@@ -648,6 +648,32 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     });
   }
 
+  getSalesInfo(accesstoken: string, days: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/me/salesInfo/${days}`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          'appsite-access-token': accesstoken
+        }
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get sales info from legacy appsite backend'));
+      });
+    });
+  }
+
   updateAddress(accesstoken: string, address: any): Promise<void> {
     return new Promise((resolve, reject) => {
       popsicle.request({
