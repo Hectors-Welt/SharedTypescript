@@ -42,6 +42,7 @@ export interface ILegacyAppsiteBackend {
   updateContactData(accesstoken: string, contactData: any): Promise<void>
   getMemberClasses(accesstoken: string): Promise<any>
   getAppointments(accesstoken: string): Promise<any>
+  getRecommendations(accesstoken: string): Promise<any>
 
   getPublicUser(username: string): Promise<any>
   getPublicUserAvatar(username: string): Promise<any>

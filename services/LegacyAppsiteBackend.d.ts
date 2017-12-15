@@ -34,6 +34,7 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     updateContactData(accesstoken: string, contactData: any): Promise<void>;
     getMemberClasses(accesstoken: string): Promise<any>;
     getAppointments(accesstoken: string): Promise<any>;
+    getRecommendations(accesstoken: string): Promise<any>;
     getAppointmentCategories(clubId: number): Promise<any>;
     getAppointmentTypesByCategory(clubId: number, categoryId: number): Promise<any>;
     getInstructorsByAppointmentType(clubId: number, appointmentTypeId: number): Promise<any>;
