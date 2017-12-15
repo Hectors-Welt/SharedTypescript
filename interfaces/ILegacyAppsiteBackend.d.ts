@@ -20,6 +20,13 @@ export interface ILegacyAppsiteBackend {
     getPriceInformation(clubId: number, classId: number, accesstoken: string): Promise<any>;
     doReservation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>;
     doCancellation(clubId: number, classId: number, accesstoken: string, password: string): Promise<any>;
+    getAppointmentCategories(clubId: number): Promise<any>;
+    getAppointmentTypesByCategory(clubId: number, categoryId: number): Promise<any>;
+    getInstructorsByAppointmentType(clubId: number, appointmentTypeId: number): Promise<any>;
+    lookupReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>;
+    bookAppointment(clubId: number, timeblock: any, accesstoken: string): Promise<any>;
+    lookupCounselingReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>;
+    bookCounselingAppointment(clubId: number, reservationRequest: any): Promise<any>;
     getProfile(accesstoken: string): Promise<any>;
     getMemberAvatar(accesstoken: string): Promise<any>;
     getSepaBookings(accesstoken: string): Promise<any>;
@@ -29,11 +36,5 @@ export interface ILegacyAppsiteBackend {
     updateBankAccount(accesstoken: string, bankAccount: any): Promise<void>;
     updateContactData(accesstoken: string, contactData: any): Promise<void>;
     getMemberClasses(accesstoken: string): Promise<any>;
-    getAppointmentCategories(clubId: number): Promise<any>;
-    getAppointmentTypesByCategory(clubId: number, categoryId: number): Promise<any>;
-    getInstructorsByAppointmentType(clubId: number, appointmentTypeId: number): Promise<any>;
-    lookupReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>;
-    bookAppointment(clubId: number, timeblock: any, accesstoken: string): Promise<any>;
-    lookupCounselingReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>;
-    bookCounselingAppointment(clubId: number, reservationRequest: any): Promise<any>;
+    getPublicUser(username: string): Promise<any>;
 }

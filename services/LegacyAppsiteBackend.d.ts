@@ -40,4 +40,5 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     bookAppointment(clubId: number, timeblock: any, accesstoken: string): Promise<any>;
     lookupCounselingReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>;
     bookCounselingAppointment(clubId: number, reservationRequest: any): Promise<any>;
+    getPublicUser(username: string): Promise<any>;
 }
