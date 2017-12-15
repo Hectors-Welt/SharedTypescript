@@ -781,14 +781,15 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     });
   }
 
-  getAppointments(username: string): Promise<any> {
+  getAppointments(accesstoken: string): Promise<any> {
     return new Promise((resolve, reject) => {
       popsicle.request({
         url: `http://${this.host}:${this.port}/me/appointments`,
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'accept': 'application/json'
+          'accept': 'application/json',
+          'appsite-access-token': accesstoken
         }
       })
       .use(popsicle.plugins.parse('json'))
