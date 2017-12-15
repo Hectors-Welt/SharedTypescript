@@ -781,6 +781,31 @@ export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     });
   }
 
+  getAppointments(username: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/me/appointments}`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json'
+        }
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(result.body);
+        }
+        else {
+          resolve(result.body);
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to get appointments from legacy appsite backend'));
+      });
+    });
+  }
+
   getAppointmentCategories(clubId: number): Promise<any> {
     return new Promise((resolve, reject) => {
       popsicle.request({
