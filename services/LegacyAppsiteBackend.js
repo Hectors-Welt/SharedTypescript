@@ -6,56 +6,6 @@ class LegacyAppsiteBackend {
         this.host = host;
         this.port = port;
     }
-    login(loginRequest) {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/login`,
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-                body: loginRequest
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(result.body);
-                }
-                else {
-                    resolve(result.body);
-                }
-            })
-                .catch((error) => {
-                reject(new Error('failed to login at legacy appsite backend'));
-            });
-        });
-    }
-    getSession(accesstoken) {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/session`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                    'appsite-access-token': accesstoken
-                }
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(result.body);
-                }
-                else {
-                    resolve(result.body);
-                }
-            })
-                .catch((error) => {
-                reject(new Error('failed to get session from legacy appsite backend'));
-            });
-        });
-    }
     getAppsettings() {
         return new Promise((resolve, reject) => {
             popsicle.request({
@@ -389,7 +339,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getClasses(clubId, filter, accesstoken) {
+    getClasses(clubId, filter, customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/clubs/${clubId}/classes`,
@@ -397,7 +347,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 },
                 body: filter
             })
@@ -415,7 +365,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getClass(clubId, classId, accesstoken) {
+    getClass(clubId, classId, customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}`,
@@ -423,7 +373,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -440,7 +390,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getPriceInformation(clubId, classId, accesstoken) {
+    getPriceInformation(clubId, classId, customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}/priceinformation`,
@@ -448,7 +398,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -465,7 +415,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    doReservation(clubId, classId, accesstoken, password) {
+    doReservation(clubId, classId, customerId, password) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}/reservation`,
@@ -473,7 +423,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 },
                 body: {
                     password
@@ -493,7 +443,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    doCancellation(clubId, classId, accesstoken, password) {
+    doCancellation(clubId, classId, customerId, password) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}/cancellation`,
@@ -501,7 +451,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 },
                 body: {
                     password
@@ -521,7 +471,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getProfile(accesstoken) {
+    getProfile(customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me`,
@@ -529,7 +479,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -546,7 +496,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getMemberAvatar(accesstoken) {
+    getMemberAvatar(customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/avatar`,
@@ -554,7 +504,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -571,7 +521,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getSepaBookings(accesstoken) {
+    getSepaBookings(customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/sepaBookings`,
@@ -579,7 +529,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -596,7 +546,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getCheckins(accesstoken) {
+    getCheckins(customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/checkins`,
@@ -604,7 +554,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -621,7 +571,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getSalesInfo(accesstoken, days) {
+    getSalesInfo(customerId, days) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/salesInfo/${days}`,
@@ -629,7 +579,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -646,7 +596,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    updateAddress(accesstoken, address) {
+    updateAddress(customerId, address) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/address`,
@@ -654,7 +604,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 },
                 body: address
             })
@@ -672,7 +622,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    updateBankAccount(accesstoken, bankAccount) {
+    updateBankAccount(customerId, bankAccount) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/bankAccount`,
@@ -680,7 +630,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 },
                 body: bankAccount
             })
@@ -698,7 +648,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    updateContactData(accesstoken, contactData) {
+    updateContactData(customerId, contactData) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/contactData`,
@@ -706,7 +656,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 },
                 body: contactData
             })
@@ -724,7 +674,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getMemberClasses(accesstoken) {
+    getMemberClasses(customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/classes`,
@@ -732,7 +682,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -749,7 +699,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getAppointments(accesstoken) {
+    getAppointments(customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/appointments`,
@@ -757,7 +707,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -774,7 +724,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    getRecommendations(accesstoken) {
+    getRecommendations(customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/me/recommendations`,
@@ -782,7 +732,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 }
             })
                 .use(popsicle.plugins.parse('json'))
@@ -896,7 +846,7 @@ class LegacyAppsiteBackend {
             });
         });
     }
-    bookAppointment(clubId, timeblock, accesstoken) {
+    bookAppointment(clubId, timeblock, customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({
                 url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/bookAppointment`,
@@ -904,7 +854,7 @@ class LegacyAppsiteBackend {
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
-                    'appsite-access-token': accesstoken
+                    'x-customer-id': customerId
                 },
                 body: timeblock
             })
