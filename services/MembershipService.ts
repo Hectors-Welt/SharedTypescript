@@ -48,4 +48,24 @@ export class MembershipService implements IMembershipService {
       });
     })
   }
+
+  getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/getContractsTerminatedByCustomerId/${customerId}`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        resolve(result.body);
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve contracts from membership service'));
+      });
+    })
+  }
 }

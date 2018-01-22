@@ -12,4 +12,6 @@ export class Contract {
   possibleDateOfEnd: string;
   templateId: number;
   isMainContract: boolean;
+  cancelledOn: string;
+  cancelledTo: string;
 }
