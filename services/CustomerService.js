@@ -104,5 +104,30 @@ class CustomerService {
             });
         });
     }
+    updateContactData(customerId, contact) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/customer/${customerId}/contact`,
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: contact
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 204) {
+                    reject(new Error('failed to update contact data at customer service'));
+                }
+                else {
+                    resolve();
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to update contact data at customer service'));
+            });
+        });
+    }
 }
 exports.CustomerService = CustomerService;
