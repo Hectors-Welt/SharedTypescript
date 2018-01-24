@@ -4,6 +4,7 @@ import { ICustomerService } from '../interfaces/ICustomerService';
 import { Address } from '../models/CustomerService/Address';
 import { BankAccount } from '../models/CustomerService/BankAccount';
 import { Contact } from '../models/CustomerService/Contact';
+import { File } from '../models/CustomerService/File';
 
 export class CustomerService implements ICustomerService {
 
@@ -56,6 +57,31 @@ export class CustomerService implements ICustomerService {
       })
       .catch((error) => {
         reject(new Error('failed to retrieve customer from customer service'));
+      });
+    })
+  }
+
+  getProfilePicture(customerId: number): Promise<File> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/customer/${customerId}/profilePicture`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status === 200) {
+          resolve(result.body);
+        }
+        else {
+          reject(new Error('failed to retrieve profile picture from customer service'));  
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve profile picture from customer service'));
       });
     })
   }
