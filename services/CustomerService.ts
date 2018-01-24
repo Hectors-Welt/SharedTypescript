@@ -1,6 +1,7 @@
 import * as popsicle from 'popsicle';
 import { Customer } from '../models/CustomerService/Customer';
 import { ICustomerService } from '../interfaces/ICustomerService';
+import { Address } from '../models/CustomerService/Address';
 
 export class CustomerService implements ICustomerService {
 
@@ -55,5 +56,31 @@ export class CustomerService implements ICustomerService {
         reject(new Error('failed to retrieve customer from customer service'));
       });
     })
+  }
+
+  updateAddress(customerId: number, address: Address): Promise<void> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/customer/${customerId}/address`,
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+        body: address
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 204) {
+          reject(new Error('failed to update address at customer service'));
+        }
+        else {
+          resolve();
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to update address at customer service'));
+      });
+    });
   }
 }

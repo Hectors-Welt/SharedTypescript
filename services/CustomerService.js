@@ -54,5 +54,30 @@ class CustomerService {
             });
         });
     }
+    updateAddress(customerId, address) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/customer/${customerId}/address`,
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: address
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 204) {
+                    reject(new Error('failed to update address at customer service'));
+                }
+                else {
+                    resolve();
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to update address at customer service'));
+            });
+        });
+    }
 }
 exports.CustomerService = CustomerService;
