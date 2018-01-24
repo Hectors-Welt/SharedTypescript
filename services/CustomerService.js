@@ -79,5 +79,30 @@ class CustomerService {
             });
         });
     }
+    updateBankAccount(customerId, bankAccount) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/customer/${customerId}/bankAccount`,
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: bankAccount
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 204) {
+                    reject(new Error('failed to update bank account at customer service'));
+                }
+                else {
+                    resolve();
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to update bank account at customer service'));
+            });
+        });
+    }
 }
 exports.CustomerService = CustomerService;
