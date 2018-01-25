@@ -21,6 +21,7 @@ import { IMailingService } from '../interfaces/IMailingService';
 import { ISMSService } from '../interfaces/ISMSService';
 import { ITemplateDesigner } from '../interfaces/ITemplateDesigner';
 import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
+import { CloudServicesSettings } from '../models/DiscoveryService/CloudServicesSettings';
 export declare class DiscoveryService implements IDiscoveryService {
     host: string;
     port: number;
@@ -48,6 +49,8 @@ export declare class DiscoveryService implements IDiscoveryService {
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
+    getCloudServicesSettings(): Promise<CloudServicesSettings>;
+    getClubs(): Promise<any>;
     getMailingService(): Promise<IMailingService>;
     getSMSService(): Promise<ISMSService>;
     getCustomerService(): Promise<ICustomerService>;

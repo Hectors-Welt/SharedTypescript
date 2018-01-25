@@ -21,6 +21,7 @@ const MailingService_1 = require("./MailingService");
 const SMSService_1 = require("./SMSService");
 const TemplateDesigner_1 = require("./TemplateDesigner");
 const CourseManagementService_1 = require("./CourseManagementService");
+const CloudServicesSettings_1 = require("../models/DiscoveryService/CloudServicesSettings");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -180,6 +181,50 @@ class DiscoveryService {
             })
                 .catch((error) => {
                 reject(new Error(`failed to retrieve hector braintree from discovery service: ${error.message}`));
+            });
+        });
+    }
+    getCloudServicesSettings() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/cloudServices`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error(`failed to retrieve cloud services settings from discovery service`));
+                }
+                resolve(new CloudServicesSettings_1.CloudServicesSettings(result.body));
+            })
+                .catch((error) => {
+                reject(new Error(`failed to retrieve cloud services settings from discovery service: ${error.message}`));
+            });
+        });
+    }
+    getClubs() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/clubs`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error(`failed to retrieve clubs from discovery service`));
+                }
+                resolve(new CloudServicesSettings_1.CloudServicesSettings(result.body));
+            })
+                .catch((error) => {
+                reject(new Error(`failed to retrieve clubs from discovery service: ${error.message}`));
             });
         });
     }

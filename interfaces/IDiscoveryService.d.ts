@@ -18,6 +18,7 @@ import { IArticlesService } from './IArticlesService';
 import { IMailingService } from './IMailingService';
 import { ITemplateDesigner } from './ITemplateDesigner';
 import { ICourseManagementService } from './ICourseManagamentService';
+import { CloudServicesSettings } from '../models/DiscoveryService/CloudServicesSettings';
 export interface IDiscoveryService {
     host: string;
     port: number;
@@ -42,4 +43,6 @@ export interface IDiscoveryService {
     getArticlesService(): Promise<IArticlesService>;
     getTemplateDesigner(): Promise<ITemplateDesigner>;
     getCourseManagementService(): Promise<ICourseManagementService>;
+    getCloudServicesSettings(): Promise<CloudServicesSettings>;
+    getClubs(): Promise<any>;
 }
