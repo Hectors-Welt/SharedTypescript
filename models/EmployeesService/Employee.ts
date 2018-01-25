@@ -5,4 +5,5 @@ export class Employee {
   surname: string;
   rights: string[];
   roles: string[];
+  studioIds: number[];
 }

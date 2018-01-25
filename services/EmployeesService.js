@@ -79,5 +79,27 @@ class EmployeesService {
             });
         });
     }
+    getAllEmployees() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/employees`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status !== 200) {
+                    reject(new Error(`failed to retrieve employees from employees service`));
+                }
+                resolve(result.body);
+            })
+                .catch((error) => {
+                reject(new Error(`failed to retrieve employees from employees service: ${error.message}`));
+            });
+        });
+    }
 }
 exports.EmployeesService = EmployeesService;
