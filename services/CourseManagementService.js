@@ -19,7 +19,12 @@ class CourseManagementService {
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
-                resolve(result.body);
+                if (result.status == 200) {
+                    resolve(result.body);
+                }
+                else {
+                    reject(new Error('failed to get classes from course management service'));
+                }
             })
                 .catch((error) => {
                 reject(new Error('failed to get classes from course management service'));
