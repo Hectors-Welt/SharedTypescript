@@ -17,6 +17,7 @@ import { ICheckinOutService } from './ICheckinOutService';
 import { IArticlesService } from './IArticlesService';
 import { IMailingService } from './IMailingService';
 import { ITemplateDesigner } from './ITemplateDesigner';
+import { ICourseManagementService } from './ICourseManagamentService';
 export interface IDiscoveryService {
     host: string;
     port: number;
@@ -40,4 +41,5 @@ export interface IDiscoveryService {
     getCheckinOutService(): Promise<ICheckinOutService>;
     getArticlesService(): Promise<IArticlesService>;
     getTemplateDesigner(): Promise<ITemplateDesigner>;
+    getCourseManagementService(): Promise<ICourseManagementService>;
 }

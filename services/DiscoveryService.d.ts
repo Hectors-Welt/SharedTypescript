@@ -20,6 +20,7 @@ import { IArticlesService } from '../interfaces/IArticlesService';
 import { IMailingService } from '../interfaces/IMailingService';
 import { ISMSService } from '../interfaces/ISMSService';
 import { ITemplateDesigner } from '../interfaces/ITemplateDesigner';
+import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
 export declare class DiscoveryService implements IDiscoveryService {
     host: string;
     port: number;
@@ -37,6 +38,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private mailingService;
     private smsService;
     private templateDesigner;
+    private courseManagementService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): void;
     getLocationInfo(): Promise<LocationInfo>;
@@ -60,4 +62,5 @@ export declare class DiscoveryService implements IDiscoveryService {
     getArticlesService(): Promise<IArticlesService>;
     private registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType);
     getTemplateDesigner(): Promise<ITemplateDesigner>;
+    getCourseManagementService(): Promise<ICourseManagementService>;
 }

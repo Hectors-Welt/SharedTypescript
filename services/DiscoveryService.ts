@@ -33,6 +33,8 @@ import { ArticlesService } from './ArticlesService'
 import { MailingService } from './MailingService'
 import { SMSService } from './SMSService'
 import { TemplateDesigner } from './TemplateDesigner'
+import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
+import { CourseManagementService } from './CourseManagementService';
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -51,6 +53,7 @@ export class DiscoveryService implements IDiscoveryService {
   private mailingService: IMailingService;
   private smsService: ISMSService;
   private templateDesigner: ITemplateDesigner;
+  private courseManagementService: ICourseManagementService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -585,6 +588,32 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         resolve(this.templateDesigner);
+      }
+    });
+  }
+
+  getCourseManagementService(): Promise<ICourseManagementService> {
+    return new Promise((resolve, reject) => {
+      if (!this.courseManagementService) {
+        popsicle.request({
+          url: `http://${this.host}:${this.port}/CourseManagementService`,
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          this.courseManagementService = new CourseManagementService(result.body.host, result.body.port);
+          resolve(this.courseManagementService);
+        })
+        .catch((error) => {
+          reject(new Error('failed to retrieve template designer from discovery service'));
+        });
+      }
+      else {
+        resolve(this.courseManagementService);
       }
     });
   }

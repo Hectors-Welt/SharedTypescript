@@ -20,6 +20,7 @@ const ArticlesService_1 = require("./ArticlesService");
 const MailingService_1 = require("./MailingService");
 const SMSService_1 = require("./SMSService");
 const TemplateDesigner_1 = require("./TemplateDesigner");
+const CourseManagementService_1 = require("./CourseManagementService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -532,6 +533,31 @@ class DiscoveryService {
             }
             else {
                 resolve(this.templateDesigner);
+            }
+        });
+    }
+    getCourseManagementService() {
+        return new Promise((resolve, reject) => {
+            if (!this.courseManagementService) {
+                popsicle.request({
+                    url: `http://${this.host}:${this.port}/CourseManagementService`,
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                })
+                    .use(popsicle.plugins.parse('json'))
+                    .then((result) => {
+                    this.courseManagementService = new CourseManagementService_1.CourseManagementService(result.body.host, result.body.port);
+                    resolve(this.courseManagementService);
+                })
+                    .catch((error) => {
+                    reject(new Error('failed to retrieve template designer from discovery service'));
+                });
+            }
+            else {
+                resolve(this.courseManagementService);
             }
         });
     }
