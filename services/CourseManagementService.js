@@ -9,7 +9,7 @@ class CourseManagementService {
     getClasses(filter) {
         return new Promise((resolve, reject) => {
             popsicle.request({
-                url: `http://${this.host}:${this.port}/getClasses`,
+                url: `http://${this.host}:${this.port}/classes/filter`,
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
