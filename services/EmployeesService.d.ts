@@ -5,5 +5,6 @@ export declare class EmployeesService implements IEmployeesService {
     private port;
     constructor(host: string, port: number);
     validateEmployeeByCredentials(name: string, surname: string, password: string): Promise<Employee>;
-    getEmployeeByCustomerId(customerId: number): Promise<any>;
+    getEmployeeByCustomerId(customerId: number): Promise<Employee>;
+    getEmployeesPresent(studioId: number): Promise<Employee[]>;
 }

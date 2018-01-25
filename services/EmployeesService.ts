@@ -36,7 +36,7 @@ export class EmployeesService implements IEmployeesService {
     });
   }
 
-  getEmployeeByCustomerId(customerId: number): Promise<any> {
+  getEmployeeByCustomerId(customerId: number): Promise<Employee> {
     return new Promise((resolve, reject) => {
       popsicle.request({
         url: `http://${this.host}:${this.port}/getEmployeeByCustomerId/${customerId}`,
@@ -55,6 +55,29 @@ export class EmployeesService implements IEmployeesService {
       })
       .catch((error) => {
         reject(new Error(`failed to retrieve employee from employees service: ${error.message}`));
+      })
+    })
+  }
+
+  getEmployeesPresent(studioId: number): Promise<Employee[]> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/getEmployeesPresentInClub/${studioId}`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(new Error(`failed to retrieve employees from employees service`))
+        }
+        resolve(result.body);
+      })
+      .catch((error) => {
+        reject(new Error(`failed to retrieve employees from employees service: ${error.message}`));
       })
     })
   }

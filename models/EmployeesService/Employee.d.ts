@@ -3,6 +3,6 @@ export declare class Employee {
     customerId: number;
     name: string;
     surname: string;
-    rights: string;
+    rights: string[];
     roles: string[];
 }
