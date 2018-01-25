@@ -264,7 +264,7 @@ export class DiscoveryService implements IDiscoveryService {
         if (result.status !== 200) {
           reject(new Error(`failed to retrieve clubs from discovery service`))
         }
-        resolve(new CloudServicesSettings(result.body));
+        resolve(result.body);
       })
       .catch((error) => {
         reject(new Error(`failed to retrieve clubs from discovery service: ${error.message}`));

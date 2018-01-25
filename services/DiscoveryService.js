@@ -221,7 +221,7 @@ class DiscoveryService {
                 if (result.status !== 200) {
                     reject(new Error(`failed to retrieve clubs from discovery service`));
                 }
-                resolve(new CloudServicesSettings_1.CloudServicesSettings(result.body));
+                resolve(result.body);
             })
                 .catch((error) => {
                 reject(new Error(`failed to retrieve clubs from discovery service: ${error.message}`));
