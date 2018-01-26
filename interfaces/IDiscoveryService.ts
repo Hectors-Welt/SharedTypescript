@@ -69,4 +69,6 @@ export interface IDiscoveryService {
   getCloudServicesSettings(): Promise<CloudServicesSettings>
 
   getClubs(): Promise<any>
+
+  getTitles(): Promise<any>
 }

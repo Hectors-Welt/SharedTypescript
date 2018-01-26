@@ -45,4 +45,5 @@ export interface IDiscoveryService {
     getCourseManagementService(): Promise<ICourseManagementService>;
     getCloudServicesSettings(): Promise<CloudServicesSettings>;
     getClubs(): Promise<any>;
+    getTitles(): Promise<any>;
 }

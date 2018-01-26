@@ -51,6 +51,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getBraintreeSettings(): Promise<BraintreeSettings>;
     getCloudServicesSettings(): Promise<CloudServicesSettings>;
     getClubs(): Promise<any>;
+    getTitles(): Promise<any>;
     getMailingService(): Promise<IMailingService>;
     getSMSService(): Promise<ISMSService>;
     getCustomerService(): Promise<ICustomerService>;

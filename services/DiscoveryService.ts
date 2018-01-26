@@ -272,6 +272,29 @@ export class DiscoveryService implements IDiscoveryService {
     })
   }
 
+  getTitles(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/titles`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status !== 200) {
+          reject(new Error(`failed to retrieve titles from discovery service`))
+        }
+        resolve(result.body);
+      })
+      .catch((error) => {
+        reject(new Error(`failed to retrieve titles from discovery service: ${error.message}`));
+      })
+    })
+  }
+
   getMailingService(): Promise<IMailingService> {
     return new Promise((resolve, reject) => {
       if (!this.mailingService) {
