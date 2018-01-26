@@ -6,6 +6,7 @@ import { Class } from "../models/CourseManagamentService/Class";
 import { Course } from '../models/CourseManagamentService/Course';
 import { CourseType } from '../models/CourseManagamentService/CourseType';
 import { CourseLevel } from '../models/CourseManagamentService/CourseLevel';
+import { Room } from '../models/CourseManagamentService/Room';
 
 export class CourseManagementService implements ICourseManagementService {
   constructor(private host: string, private port: number) {}
@@ -107,6 +108,31 @@ export class CourseManagementService implements ICourseManagementService {
         })
         .catch((error) => {
           reject(new Error('failed to get course levels from course management service'));
+        });
+    })
+  }
+
+  getRooms(): Promise<Room[]> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/rooms`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        }
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if(result.status == 200){
+            resolve(result.body);
+          }
+          else {
+            reject(new Error('failed to get rooms from course management service'));  
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to get rooms from course management service'));
         });
     })
   }

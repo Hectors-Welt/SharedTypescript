@@ -3,10 +3,12 @@ import { Class } from "../models/CourseManagamentService/Class";
 import { Course } from "../models/CourseManagamentService/Course";
 import { CourseType } from "../models/CourseManagamentService/CourseType";
 import { CourseLevel } from "../models/CourseManagamentService/CourseLevel";
+import { Room } from "../models/CourseManagamentService/Room";
 
 export interface ICourseManagementService {
     getClasses(filter: ClassFilter): Promise<Class[]>
     getCourses(): Promise<Course[]>
     getCourseTypes(): Promise<CourseType[]>
     getCourseLevels(): Promise<CourseLevel[]>
+    getRooms(): Promise<Room[]>
 }
