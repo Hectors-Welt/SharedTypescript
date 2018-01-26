@@ -79,5 +79,29 @@ class CourseManagementService {
             });
         });
     }
+    getCourseLevels() {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/courseLevels`,
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status == 200) {
+                    resolve(result.body);
+                }
+                else {
+                    reject(new Error('failed to get course levels from course management service'));
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get course levels from course management service'));
+            });
+        });
+    }
 }
 exports.CourseManagementService = CourseManagementService;
