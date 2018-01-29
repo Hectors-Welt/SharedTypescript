@@ -8,6 +8,7 @@ import { Room } from "../models/CourseManagamentService/Room";
 export interface ICourseManagementService {
     getClasses(filter: ClassFilter): Promise<Class[]>
     getPriceInformation(classId: number, customerId: number): Promise<any>
+    doReservation(classId: number, customerId: number): Promise<any>
 
     getCourses(): Promise<Course[]>
     getCourseTypes(): Promise<CourseType[]>

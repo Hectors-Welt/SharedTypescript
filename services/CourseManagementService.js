@@ -55,6 +55,30 @@ class CourseManagementService {
             });
         });
     }
+    doReservation(classId, customerId) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/classes/${classId}/doReservationForCustomerId/${customerId}`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status == 200) {
+                    resolve(result.body);
+                }
+                else {
+                    reject(new Error('failed to do reservation at course management service'));
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to do reservation at course management service'));
+            });
+        });
+    }
     getCourses() {
         return new Promise((resolve, reject) => {
             popsicle.request({
