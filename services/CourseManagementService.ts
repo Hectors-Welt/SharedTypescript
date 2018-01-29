@@ -106,6 +106,9 @@ export class CourseManagementService implements ICourseManagementService {
           if(result.status == 200){
             resolve(result.body);
           }
+          else if(result.status == 400){
+            reject(result.body);
+          }
           else {
             reject(new Error('failed to do reservation at course management service'));  
           }
@@ -130,6 +133,9 @@ export class CourseManagementService implements ICourseManagementService {
         .then((result) => {
           if(result.status == 200){
             resolve(result.body);
+          }
+          else if(result.status == 400){
+            reject(result.body);
           }
           else {
             reject(new Error('failed to do reservation at course management service'));  

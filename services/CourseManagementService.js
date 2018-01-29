@@ -97,6 +97,9 @@ class CourseManagementService {
                 if (result.status == 200) {
                     resolve(result.body);
                 }
+                else if (result.status == 400) {
+                    reject(result.body);
+                }
                 else {
                     reject(new Error('failed to do reservation at course management service'));
                 }
@@ -120,6 +123,9 @@ class CourseManagementService {
                 .then((result) => {
                 if (result.status == 200) {
                     resolve(result.body);
+                }
+                else if (result.status == 400) {
+                    reject(result.body);
                 }
                 else {
                     reject(new Error('failed to do reservation at course management service'));
