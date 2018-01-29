@@ -8,6 +8,7 @@ export interface ICourseManagementService {
     getClasses(filter: ClassFilter): Promise<Class[]>;
     getPriceInformation(classId: number, customerId: number): Promise<any>;
     doReservation(classId: number, customerId: number): Promise<any>;
+    doCancellation(classId: number, customerId: number): Promise<any>;
     getCourses(): Promise<Course[]>;
     getCourseTypes(): Promise<CourseType[]>;
     getCourseLevels(): Promise<CourseLevel[]>;
