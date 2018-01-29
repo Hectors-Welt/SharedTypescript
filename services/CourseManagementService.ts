@@ -37,6 +37,35 @@ export class CourseManagementService implements ICourseManagementService {
     })
   }
 
+  getClass(classId: number, customerId?: number): Promise<any> {
+    const url = customerId 
+      ? `http://${this.host}:${this.port}/classes/${classId}/withReservationInformationForCustomerId/${customerId}` 
+      : `http://${this.host}:${this.port}/classes/${classId}`;
+
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: url,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        }
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if(result.status == 200){
+            resolve(result.body);
+          }
+          else {
+            reject(new Error('failed to get class from course management service'));  
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to get class from course management service'));
+        });
+    })
+  }
+
   getPriceInformation(classId: number, customerId: number): Promise<any> {
     return new Promise((resolve, reject) => {
       popsicle.request({

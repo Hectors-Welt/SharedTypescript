@@ -6,6 +6,7 @@ import { CourseLevel } from "../models/CourseManagamentService/CourseLevel";
 import { Room } from "../models/CourseManagamentService/Room";
 export interface ICourseManagementService {
     getClasses(filter: ClassFilter): Promise<Class[]>;
+    getClass(classId: number, customerId?: number): Promise<Class>;
     getPriceInformation(classId: number, customerId: number): Promise<any>;
     doReservation(classId: number, customerId: number): Promise<any>;
     doCancellation(classId: number, customerId: number): Promise<any>;
