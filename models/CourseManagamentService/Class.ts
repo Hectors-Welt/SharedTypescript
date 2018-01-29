@@ -8,8 +8,8 @@ import { ClassAttendee } from "./ClassAttendee";
 
 export class Class {
   id: number
-  beginning: string
-  ending: string
+  begin: string
+  end: string
   course: Course
   instructor: Instructor
   courseLevel: CourseLevel

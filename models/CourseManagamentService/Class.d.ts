@@ -7,8 +7,8 @@ import { ReservationInformation } from "./ReservationInformation";
 import { ClassAttendee } from "./ClassAttendee";
 export declare class Class {
     id: number;
-    beginning: string;
-    ending: string;
+    begin: string;
+    end: string;
     course: Course;
     instructor: Instructor;
     courseLevel: CourseLevel;
