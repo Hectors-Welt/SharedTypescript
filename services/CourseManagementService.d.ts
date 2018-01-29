@@ -10,6 +10,7 @@ export declare class CourseManagementService implements ICourseManagementService
     private port;
     constructor(host: string, port: number);
     getClasses(filter: ClassFilter): Promise<Class[]>;
+    getPriceInformation(classId: number, customerId: number): Promise<any>;
     getCourses(): Promise<Course[]>;
     getCourseTypes(): Promise<CourseType[]>;
     getCourseLevels(): Promise<CourseLevel[]>;
