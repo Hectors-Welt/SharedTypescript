@@ -7,6 +7,7 @@ import { Course } from '../models/CourseManagamentService/Course';
 import { CourseType } from '../models/CourseManagamentService/CourseType';
 import { CourseLevel } from '../models/CourseManagamentService/CourseLevel';
 import { Room } from '../models/CourseManagamentService/Room';
+import { Appointment } from '../models/CourseManagamentService/Appointment';
 
 export class CourseManagementService implements ICourseManagementService {
   constructor(private host: string, private port: number) {}
@@ -243,6 +244,31 @@ export class CourseManagementService implements ICourseManagementService {
         })
         .catch((error) => {
           reject(new Error('failed to get rooms from course management service'));
+        });
+    })
+  }
+
+  getAppointments(customerId?: number): Promise<Appointment[]> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/appointments/byCustomerId/${customerId}`,
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        }
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if(result.status == 200){
+            resolve(result.body);
+          }
+          else {
+            reject(new Error('failed to get appointments from course management service'));  
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to get appointments from course management service'));
         });
     })
   }

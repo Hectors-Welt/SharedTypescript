@@ -5,6 +5,7 @@ import { Course } from '../models/CourseManagamentService/Course';
 import { CourseType } from '../models/CourseManagamentService/CourseType';
 import { CourseLevel } from '../models/CourseManagamentService/CourseLevel';
 import { Room } from '../models/CourseManagamentService/Room';
+import { Appointment } from '../models/CourseManagamentService/Appointment';
 export declare class CourseManagementService implements ICourseManagementService {
     private host;
     private port;
@@ -18,4 +19,5 @@ export declare class CourseManagementService implements ICourseManagementService
     getCourseTypes(): Promise<CourseType[]>;
     getCourseLevels(): Promise<CourseLevel[]>;
     getRooms(): Promise<Room[]>;
+    getAppointments(customerId?: number): Promise<Appointment[]>;
 }
