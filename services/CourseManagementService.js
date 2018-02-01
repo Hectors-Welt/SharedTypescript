@@ -279,5 +279,30 @@ class CourseManagementService {
             });
         });
     }
+    lookupCounselingTimeBlocks(searchRequest) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/appointments/lookupCounselingTimeBlocks`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: searchRequest
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status == 200) {
+                    resolve(result.body);
+                }
+                else {
+                    reject(new Error('failed to get time blocks from course management service'));
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get time blocks from course management service'));
+            });
+        });
+    }
 }
 exports.CourseManagementService = CourseManagementService;
