@@ -1,20 +1,15 @@
-import { Course } from "./Course";
-import { CourseLevel } from "./CourseLevel";
-import { Instructor } from "./Instructor";
-import { CourseType } from "./CourseType";
-import { Room } from "./Room";
 import { ReservationInformation } from "./ReservationInformation";
 import { ClassAttendee } from "./ClassAttendee";
 export declare class Class {
     id: number;
     begin: string;
     end: string;
-    course: Course;
-    instructor: Instructor;
-    courseLevel: CourseLevel;
-    courseTypes: CourseType[];
+    courseId: number;
+    instructorId: number;
+    courseLevelId: number;
+    courseTypeIds: number[];
     reservationInformation: ReservationInformation;
-    room: Room;
+    roomId: number;
     studioId: number;
     isCancelled: boolean;
     isReplacement: boolean;
