@@ -13,7 +13,6 @@ export declare class CourseManagementService implements ICourseManagementService
     private port;
     constructor(host: string, port: number);
     getClasses(filter: ClassFilter): Promise<Class[]>;
-    getClass(classId: number, customerId?: number): Promise<any>;
     getPriceInformation(classId: number, customerId: number): Promise<any>;
     doReservation(classId: number, customerId: number): Promise<any>;
     doCancellation(classId: number, customerId: number): Promise<any>;
