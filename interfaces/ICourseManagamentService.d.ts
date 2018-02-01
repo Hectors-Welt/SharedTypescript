@@ -5,6 +5,8 @@ import { CourseType } from "../models/CourseManagamentService/CourseType";
 import { CourseLevel } from "../models/CourseManagamentService/CourseLevel";
 import { Room } from "../models/CourseManagamentService/Room";
 import { Appointment } from "../models/CourseManagamentService/Appointment";
+import { AppointmentSearch } from "../models/CourseManagamentService/AppointmentSearch";
+import { TimeBlock } from "../models/CourseManagamentService/TimeBlock";
 export interface ICourseManagementService {
     getClasses(filter: ClassFilter): Promise<Class[]>;
     getClass(classId: number, customerId?: number): Promise<Class>;
@@ -16,4 +18,6 @@ export interface ICourseManagementService {
     getCourseLevels(): Promise<CourseLevel[]>;
     getRooms(): Promise<Room[]>;
     getAppointments(customerId: number): Promise<Appointment[]>;
+    lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
+    bookAppointment(customerId: number, timeBlock: TimeBlock): Promise<void>;
 }

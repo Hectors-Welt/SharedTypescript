@@ -256,5 +256,55 @@ class CourseManagementService {
             });
         });
     }
+    lookupFreeTimeBlocks(searchRequest) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/appointments/lookupFreeTimeBlocks`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: searchRequest
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status == 200) {
+                    resolve(result.body);
+                }
+                else {
+                    reject(new Error('failed to get time blocks from course management service'));
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to get time blocks from course management service'));
+            });
+        });
+    }
+    bookAppointment(customerId, timeBlock) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/appointments/bookAppointmentForCustomerId/${customerId}`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: timeBlock
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status == 200) {
+                    resolve();
+                }
+                else {
+                    reject(new Error('failed to book appointment at course management service'));
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to book appointment at course management service'));
+            });
+        });
+    }
 }
 exports.CourseManagementService = CourseManagementService;

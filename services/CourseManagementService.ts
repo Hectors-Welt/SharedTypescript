@@ -8,6 +8,8 @@ import { CourseType } from '../models/CourseManagamentService/CourseType';
 import { CourseLevel } from '../models/CourseManagamentService/CourseLevel';
 import { Room } from '../models/CourseManagamentService/Room';
 import { Appointment } from '../models/CourseManagamentService/Appointment';
+import { AppointmentSearch } from '../models/CourseManagamentService/AppointmentSearch';
+import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 
 export class CourseManagementService implements ICourseManagementService {
   constructor(private host: string, private port: number) {}
@@ -269,6 +271,58 @@ export class CourseManagementService implements ICourseManagementService {
         })
         .catch((error) => {
           reject(new Error('failed to get appointments from course management service'));
+        });
+    })
+  }
+
+  lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/appointments/lookupFreeTimeBlocks`,
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+        body: searchRequest
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if(result.status == 200){
+            resolve(result.body);
+          }
+          else {
+            reject(new Error('failed to get time blocks from course management service'));  
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to get time blocks from course management service'));
+        });
+    })
+  }
+
+  bookAppointment(customerId: number, timeBlock: TimeBlock): Promise<void> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/appointments/bookAppointmentForCustomerId/${customerId}`,
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+        body: timeBlock
+      })
+        .use(popsicle.plugins.parse('json'))
+        .then((result) => {
+          if(result.status == 200){
+            resolve();
+          }
+          else {
+            reject(new Error('failed to book appointment at course management service'));  
+          }
+        })
+        .catch((error) => {
+          reject(new Error('failed to book appointment at course management service'));
         });
     })
   }
