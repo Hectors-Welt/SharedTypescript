@@ -10,6 +10,7 @@ import { Room } from '../models/CourseManagamentService/Room';
 import { Appointment } from '../models/CourseManagamentService/Appointment';
 import { AppointmentSearch } from '../models/CourseManagamentService/AppointmentSearch';
 import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
+import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
 
 export class CourseManagementService implements ICourseManagementService {
   constructor(private host: string, private port: number) {}
@@ -272,16 +273,16 @@ export class CourseManagementService implements ICourseManagementService {
     })
   }
 
-  bookAppointment(customerId: number, timeBlock: TimeBlock): Promise<void> {
+  bookAppointment(appointmentRequest: AppointmentBooking): Promise<void> {
     return new Promise((resolve, reject) => {
       popsicle.request({
-        url: `http://${this.host}:${this.port}/appointments/bookAppointmentForCustomerId/${customerId}`,
+        url: `http://${this.host}:${this.port}/appointments/bookAppointment`,
         method: 'POST',
         headers: {
           'content-type': 'application/json',
           'accept': 'application/json',
         },
-        body: timeBlock
+        body: appointmentRequest
       })
         .use(popsicle.plugins.parse('json'))
         .then((result) => {

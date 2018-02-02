@@ -7,6 +7,7 @@ import { Room } from "../models/CourseManagamentService/Room";
 import { Appointment } from "../models/CourseManagamentService/Appointment";
 import { AppointmentSearch } from "../models/CourseManagamentService/AppointmentSearch";
 import { TimeBlock } from "../models/CourseManagamentService/TimeBlock";
+import { AppointmentBooking } from "../models/CourseManagamentService/AppointmentBooking";
 
 export interface ICourseManagementService {
     getClasses(filter: ClassFilter): Promise<Class[]>
@@ -21,6 +22,6 @@ export interface ICourseManagementService {
 
     getAppointments(customerId: number): Promise<Appointment[]>
     lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>
-    bookAppointment(customerId: number, timeBlock: TimeBlock): Promise<void>
+    bookAppointment(bookingRequest: AppointmentBooking): Promise<void>
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>
 }

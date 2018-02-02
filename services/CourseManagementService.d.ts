@@ -8,6 +8,7 @@ import { Room } from '../models/CourseManagamentService/Room';
 import { Appointment } from '../models/CourseManagamentService/Appointment';
 import { AppointmentSearch } from '../models/CourseManagamentService/AppointmentSearch';
 import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
+import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
 export declare class CourseManagementService implements ICourseManagementService {
     private host;
     private port;
@@ -22,6 +23,6 @@ export declare class CourseManagementService implements ICourseManagementService
     getRooms(): Promise<Room[]>;
     getAppointments(customerId?: number): Promise<Appointment[]>;
     lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
-    bookAppointment(customerId: number, timeBlock: TimeBlock): Promise<void>;
+    bookAppointment(appointmentRequest: AppointmentBooking): Promise<void>;
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
 }

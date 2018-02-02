@@ -254,16 +254,16 @@ class CourseManagementService {
             });
         });
     }
-    bookAppointment(customerId, timeBlock) {
+    bookAppointment(appointmentRequest) {
         return new Promise((resolve, reject) => {
             popsicle.request({
-                url: `http://${this.host}:${this.port}/appointments/bookAppointmentForCustomerId/${customerId}`,
+                url: `http://${this.host}:${this.port}/appointments/bookAppointment`,
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
                     'accept': 'application/json',
                 },
-                body: timeBlock
+                body: appointmentRequest
             })
                 .use(popsicle.plugins.parse('json'))
                 .then((result) => {
