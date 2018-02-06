@@ -241,7 +241,7 @@ export class DiscoveryService implements IDiscoveryService {
         if (result.status !== 200) {
           reject(new Error(`failed to retrieve cloud services settings from discovery service`))
         }
-        resolve(new CloudServicesSettings(result.body));
+        resolve(result.body);
       })
       .catch((error) => {
         reject(new Error(`failed to retrieve cloud services settings from discovery service: ${error.message}`));

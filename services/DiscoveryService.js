@@ -21,7 +21,6 @@ const MailingService_1 = require("./MailingService");
 const SMSService_1 = require("./SMSService");
 const TemplateDesigner_1 = require("./TemplateDesigner");
 const CourseManagementService_1 = require("./CourseManagementService");
-const CloudServicesSettings_1 = require("../models/DiscoveryService/CloudServicesSettings");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -199,7 +198,7 @@ class DiscoveryService {
                 if (result.status !== 200) {
                     reject(new Error(`failed to retrieve cloud services settings from discovery service`));
                 }
-                resolve(new CloudServicesSettings_1.CloudServicesSettings(result.body));
+                resolve(result.body);
             })
                 .catch((error) => {
                 reject(new Error(`failed to retrieve cloud services settings from discovery service: ${error.message}`));
