@@ -39,6 +39,7 @@ export class ValidationService implements IValidationService {
   }
 
   isBicValid(bic: string): boolean {
+    if(bic.length < 8 || bic.length == 9 || bic.length == 10 || bic.length > 11) return false;
     return !!this.getSclInfo(bic);
   }
 

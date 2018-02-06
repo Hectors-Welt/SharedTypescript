@@ -34,6 +34,8 @@ class ValidationService {
         return IbanTools.isValidIBAN(iban);
     }
     isBicValid(bic) {
+        if (bic.length < 8 || bic.length == 9 || bic.length == 10 || bic.length > 11)
+            return false;
         return !!this.getSclInfo(bic);
     }
     getSclInfo(bic) {
