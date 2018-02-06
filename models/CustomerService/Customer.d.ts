@@ -11,4 +11,6 @@ export declare class Customer {
     contact: Contact;
     address: Address;
     paymentInformation: PaymentInformation;
+    recruiterId?: number;
+    supervisorId?: number;
 }
