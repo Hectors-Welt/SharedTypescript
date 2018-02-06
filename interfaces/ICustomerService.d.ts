@@ -4,6 +4,7 @@ import { BankAccount } from '../models/CustomerService/BankAccount';
 import { Contact } from '../models/CustomerService/Contact';
 import { File } from '../models/CustomerService/File';
 export interface ICustomerService {
+    findDoublets(name: string, birthday: string): Promise<Customer[]>;
     getCustomerByCustomerId(customerId: number): Promise<Customer>;
     getCustomerByTagId(tagId: number): Promise<Customer>;
     getProfilePicture(customerId: number): Promise<File>;

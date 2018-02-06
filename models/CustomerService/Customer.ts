@@ -6,6 +6,8 @@ import { PaymentInformation } from './PaymentInformation';
 export class Customer {
   id: number;
   defaultStudioNumber: number;
+  status: string;
+  isCheckinBlocked: boolean;
   personalData: PersonalData;
   contact: Contact;
   address: Address;

@@ -8,6 +8,7 @@ export declare class CustomerService implements ICustomerService {
     private host;
     private port;
     constructor(host: string, port: number);
+    findDoublets(name: string, birthday: string): Promise<Customer[]>;
     getCustomerByCustomerId(customerId: number): Promise<Customer>;
     getCustomerByTagId(tagId: number): Promise<Customer>;
     getProfilePicture(customerId: number): Promise<File>;

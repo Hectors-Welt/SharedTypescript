@@ -6,6 +6,34 @@ class CustomerService {
         this.host = host;
         this.port = port;
     }
+    findDoublets(name, birthday) {
+        return new Promise((resolve, reject) => {
+            popsicle.request({
+                url: `http://${this.host}:${this.port}/findDoublets`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: {
+                    name,
+                    birthday
+                }
+            })
+                .use(popsicle.plugins.parse('json'))
+                .then((result) => {
+                if (result.status === 200) {
+                    resolve(result.body);
+                }
+                else {
+                    reject(new Error('failed to retrieve customer from customer service'));
+                }
+            })
+                .catch((error) => {
+                reject(new Error('failed to retrieve customer from customer service'));
+            });
+        });
+    }
     getCustomerByCustomerId(customerId) {
         return new Promise((resolve, reject) => {
             popsicle.request({

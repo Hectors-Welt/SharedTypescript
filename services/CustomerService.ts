@@ -11,6 +11,35 @@ export class CustomerService implements ICustomerService {
   constructor(private host: string, private port: number) {
   }
 
+  findDoublets(name: string, birthday: string): Promise<Customer[]> {
+    return new Promise((resolve, reject) => {
+      popsicle.request({
+        url: `http://${this.host}:${this.port}/findDoublets`,
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+        body: {
+          name,
+          birthday
+        }
+      })
+      .use(popsicle.plugins.parse('json'))
+      .then((result) => {
+        if (result.status === 200) {
+          resolve(result.body);
+        }
+        else {
+          reject(new Error('failed to retrieve customer from customer service'));
+        }
+      })
+      .catch((error) => {
+        reject(new Error('failed to retrieve customer from customer service'));
+      });
+    })
+  }
+
   getCustomerByCustomerId(customerId: number): Promise<Customer> {
     return new Promise((resolve, reject) => {
       popsicle.request({
