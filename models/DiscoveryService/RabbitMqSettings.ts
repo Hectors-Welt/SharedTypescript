@@ -1,9 +1,9 @@
 export class RabbitMqSettings {
-  host: string
-  port: number
-  vhost: string
-  username: string
-  password: string
+  host: string;
+  port: number;
+  vhost: string;
+  username: string;
+  password: string;
 
   constructor(settings: any) {
     if (!settings || !settings.host || !settings.port || !settings.vhost) {

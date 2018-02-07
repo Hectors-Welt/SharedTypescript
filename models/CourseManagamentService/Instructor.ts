@@ -1,4 +1,4 @@
 export class Instructor {
-    id: number
-    name: string
+  id: number;
+  name: string;
 }

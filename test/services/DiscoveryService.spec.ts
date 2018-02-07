@@ -1,57 +1,53 @@
 import { expect } from 'chai';
-import * as nock from 'nock'
+import * as nock from 'nock';
 import { MongoDbSettings } from '../../models/DiscoveryService/MongoDbSettings';
 import { DiscoveryService } from '../../services/DiscoveryService';
 import { EventStoreSettings } from '../../models/DiscoveryService/EventStoreSettings';
 import { ServiceType } from '../../models/DiscoveryService/ServiceTypeEnum';
 
-const discoveryServiceHost = 'localhost';
-const discoveryServicePort = 12345;
-const serviceName = 'testService';
-const serviceVersion = '1.0.0';
-const servicePort = 54321;
-
 describe('DiscoveryService', () => {
+
+  before(() => {
+    this.discoveryServiceHost = 'localhost';
+    this.discoveryServicePort = 12345;
+    this.serviceName = 'testService';
+    this.serviceVersion = '1.0.0';
+    this.servicePort = 54321;
+    this.service = new DiscoveryService(this.discoveryServiceHost, this.discoveryServicePort);
+    this.nock = nock(this.service.baseUrl)
+    .defaultReplyHeaders({
+      'Content-Type': 'application/json',
+    });
+  });
 
   describe('MongoDbSettings', () => {
     const mongoDbSettings = new MongoDbSettings({
       host: 'mongodb',
       port: 27107,
       username: null,
-      password: null
+      password: null,
     });
 
-    it('should resolve settings', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should resolve settings', async () => {
+      this.nock
       .get('/mongodb')
       .reply(200, mongoDbSettings);
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getMongoDbSettings()
-      .then((settings) => {
-        expect(settings).not.to.be.null;
-        expect(settings).to.deep.equal(mongoDbSettings);
-        done();
-      })
+      const service = await this.service.getMongoDbSettings();
+      expect(service).not.to.be.null;
+      expect(service).to.deep.equal(mongoDbSettings);
     });
 
-    it('should reject when settings not available', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should reject when settings not available', async () => {
+      this.nock
       .get('/mongodb')
       .reply(404);
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getMongoDbSettings()
-      .catch((error) => {
-        expect(error.message).to.equal('failed to retrieve mongodb settings from discovery service');
-        done();
-      })
+      try {
+        await this.service.getMongoDbSettings();
+      } catch (err) {
+        expect(err.message).to.equal('failed to retrieve mongodb settings from discovery service: not reachable');
+      }
     });
   });
 
@@ -61,155 +57,100 @@ describe('DiscoveryService', () => {
       tcpPort: 1113,
       httpPort: 2113,
       username: null,
-      password: null
+      password: null,
     });
 
-    it('should resolve settings', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should resolve settings', async () => {
+      this.nock
       .get('/eventstore')
       .reply(200, eventStoreSettings);
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getEventStoreSettings()
-      .then((settings) => {
-        expect(settings).not.to.be.null;
-        expect(settings).to.deep.equal(eventStoreSettings);
-        done();
-      });
+      const service = await this.service.getEventStoreSettings();
+      expect(service).not.to.be.null;
+      expect(service).to.deep.equal(eventStoreSettings);
     });
 
-    it('should reject when settings not available', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should reject when settings not available', async () => {
+      this.nock
       .get('/eventstore')
       .reply(404);
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getEventStoreSettings()
-      .catch((error) => {
-        expect(error.message).to.equal('failed to retrieve eventstore settings from discovery service');
-        done();
-      });
+      try {
+        await this.service.getEventStoreSettings();
+      } catch (err) {
+        expect(err.message).to.equal('failed to retrieve eventstore settings from discovery service: not reachable');
+      }
     });
   });
 
   describe('GetCustomerService', () => {
-    it('should create a new instance of customer service', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should create a new instance of customer service', async () => {
+      this.nock
       .get('/CustomerService')
       .reply(200, { host: 'localhost', port: 55555 });
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getCustomerService()
-      .then((service) => {
-        expect(service).not.to.be.null;
-        done();
-      });
+      const service = await this.service.getCustomerService();
+      expect(service).not.to.be.null;
     });
 
-    it('should fail with customer service not registered at discovery service', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should fail with customer service not registered at discovery service', async () => {
+      this.nock
       .get('/CustomerService')
       .reply(404);
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getCustomerService()
-      .catch((error) => {
-        expect(error.message).to.equal('failed to retrieve customer service from discovery service');
-        done();
-      });
+      try {
+        await this.service.getCustomerService();
+      } catch (err) {
+        expect(err.message).to.equal('failed to retrieve customer service from discovery service: not reachable');
+      }
     });
 
-    it('should return cached instance of customer service once loaded', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should return cached instance of customer service once loaded', async () => {
+      this.nock
       .get('/CustomerService')
       .reply(200, { host: 'localhost', port: 55555 });
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getCustomerService()
-      .then((customerService) => {
-        return service.getCustomerService()
-      })
-      .then((customerService) => {
-        expect(customerService).not.to.be.null;
-        done();
-      });
+      const service = await this.service.getCustomerService();
+      expect(service).not.to.be.null;
     });
   });
 
   describe('GetEmployeesService', () => {
-    it('should create a new instance of employees service', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should create a new instance of employees service', async () => {
+      this.nock
       .get('/EmployeesService')
       .reply(200, { host: 'localhost', port: 55555 });
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getEmployeesService()
-      .then((employeesService) => {
-        expect(employeesService).not.to.be.null;
-        done();
-      });
+      const service = await this.service.getEmployeesService();
+      expect(service).not.to.be.null;
     });
 
-    it('should fail with employees service not registered at discovery service', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should fail with employees service not registered at discovery service', async () => {
+      this.nock
       .get('/EmployeesService')
       .reply(404);
-
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getEmployeesService()
-      .catch((error) => {
-        expect(error.message).to.equal('failed to retrieve employees service from discovery service');
-        done();
-      });
+      try {
+        await this.service.getEmployeesService();
+      } catch (err) {
+        expect(err.message).to.equal('failed to retrieve employees service from discovery service: not reachable');
+      }
     });
 
-    it('should return cached instance of employees service once loaded', (done) => {
-      nock(`http://${discoveryServiceHost}:${discoveryServicePort}`)
-      .defaultReplyHeaders({
-        'Content-Type': 'application/json',
-      })
+    it('should return cached instance of employees service once loaded', async () => {
+      this.nock
       .get('/EmployeesService')
       .reply(200, { host: 'localhost', port: 55555 });
 
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      service.getEmployeesService()
-      .then((employeesService) => {
-        return service.getEmployeesService()
-      })
-      .then((employeesService) => {
-        expect(employeesService).not.to.be.null;
-        done();
-      });
+      const service = await this.service.getEmployeesService();
+      expect(service).not.to.be.null;
     });
   });
 
   describe('startSelfRegistration', () => {
     it('should set timer for self registration', () => {
-      const service = new DiscoveryService(discoveryServiceHost, discoveryServicePort);
-      expect(service.timer).to.be.undefined;
-      service.startSelfRegistration(serviceName, serviceVersion, servicePort, null, false, ServiceType.Internal);
-      expect(service.timer).not.to.be.undefined;
+      expect(this.service.timer).to.be.undefined;
+      this.service.startSelfRegistration(this.serviceName, this.serviceVersion, this.servicePort, null, false, ServiceType.Internal);
+      expect(this.service.timer).not.to.be.undefined;
     });
   });
 });

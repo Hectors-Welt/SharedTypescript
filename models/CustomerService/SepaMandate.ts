@@ -1,4 +1,4 @@
 export class SepaMandate {
-    mandateReference: string
-    signatureDate: string
+  mandateReference: string;
+  signatureDate: string;
 }

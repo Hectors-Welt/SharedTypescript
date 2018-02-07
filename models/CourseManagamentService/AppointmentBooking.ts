@@ -1,8 +1,8 @@
-import { TimeBlock } from "./TimeBlock";
+import { TimeBlock } from './TimeBlock';
 
 export class AppointmentBooking {
-    customerId: number
-    note: string
-    createSystem: string
-    timeBlock: TimeBlock
+  customerId: number;
+  note: string;
+  createSystem: string;
+  timeBlock: TimeBlock;
 }

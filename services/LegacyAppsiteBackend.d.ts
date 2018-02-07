@@ -2,6 +2,7 @@ import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend';
 export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     private host;
     private port;
+    baseUrl: string;
     constructor(host: string, port: number);
     getAppsettings(): Promise<any>;
     getCoursetypes(): Promise<any>;
@@ -33,11 +34,11 @@ export declare class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
     getMemberClasses(customerId: number): Promise<any>;
     getAppointments(customerId: number): Promise<any>;
     getRecommendations(customerId: number): Promise<any>;
+    bookAppointment(clubId: number, timeblock: any, customerId: number): Promise<any>;
     getAppointmentCategories(clubId: number): Promise<any>;
     getAppointmentTypesByCategory(clubId: number, categoryId: number): Promise<any>;
     getInstructorsByAppointmentType(clubId: number, appointmentTypeId: number): Promise<any>;
     lookupReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>;
-    bookAppointment(clubId: number, timeblock: any, customerId: number): Promise<any>;
     lookupCounselingReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any>;
     bookCounselingAppointment(clubId: number, reservationRequest: any): Promise<any>;
     getPublicUser(username: string): Promise<any>;

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class HectorDbSettings {
     constructor(settings) {
         if (!settings || !settings.server || !settings.username || !settings.password) {
-            throw new Error("invalid data. ensure host and credentials are present.");
+            throw new Error('invalid data. ensure host and credentials are present.');
         }
         this.host = settings.server;
         this.instance = settings.instance;

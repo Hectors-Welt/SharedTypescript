@@ -4,7 +4,7 @@ import { TemplateModel } from '../models/TemplateDesigner/TemplateModel';
 export declare class TemplateDesigner implements ITemplateDesigner {
     private host;
     private port;
-    headers: any;
+    baseUrl: string;
     constructor(host: string, port: number);
     render(data: any, templateId: any, type?: RenderFileType, asUrl?: boolean): Promise<any>;
     renderUrl(url: string, data: any, asUrl?: boolean): Promise<any>;

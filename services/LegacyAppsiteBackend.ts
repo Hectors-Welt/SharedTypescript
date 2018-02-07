@@ -1,1013 +1,322 @@
-import * as popsicle from 'popsicle'
 import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
+import { ApiClient } from './ApiClient';
 
 export class LegacyAppsiteBackend implements ILegacyAppsiteBackend {
+  baseUrl: string;
 
   constructor(private host: string, private port: number) {
+    this.baseUrl = `http://${host}:${port}`;
   }
 
-  getAppsettings(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/config/appsettings`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get appsettings from legacy appsite backend'));
-      });
-    });
+  async getAppsettings(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/config/appsettings`);
+    } catch (err) {
+      throw new Error('failed to get appsettings from legacy appsite backend');
+    }
   }
 
-  getCoursetypes(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/config/coursetypes`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get coursetypes from legacy appsite backend'));
-      });
-    });
+  async getCoursetypes(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/config/coursetypes`);
+    } catch (err) {
+      throw new Error('failed to get coursetypes from legacy appsite backend');
+    }
   }
 
-  getCourselevels(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/config/courselevels`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get courselevels from legacy appsite backend'));
-      });
-    });
+  async getCourselevels(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/config/courselevels`);
+    } catch (err) {
+      throw new Error('failed to get courselevels from legacy appsite backend');
+    }
   }
 
-  getFruttiAboArticles(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/config/fruttiaboarticles`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get fruttiabo articles from legacy appsite backend'));
-      });
-    });
+  async getFruttiAboArticles(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/config/fruttiaboarticles`);
+    } catch (err) {
+      throw new Error('failed to get fruttiabo articles from legacy appsite backend');
+    }
   }
 
-  getMembershipTemplates(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/config/membershipTemplates`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get membership templates from legacy appsite backend'));
-      });
-    });
+  async getMembershipTemplates(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/config/membershipTemplates`);
+    } catch (err) {
+      throw new Error('failed to get membership templates from legacy appsite backend');
+    }
   }
 
-  getCountries(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/config/countries`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get countries from legacy appsite backend'));
-      });
-    });
+  async getCountries(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/config/countries`);
+    } catch (err) {
+      throw new Error('failed to get countries from legacy appsite backend');
+    }
   }
 
-  getTitles(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/config/titles`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get titles from legacy appsite backend'));
-      });
-    });
+  async getTitles(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/config/titles`);
+    } catch (err) {
+      throw new Error('failed to get titles from legacy appsite backend');
+    }
   }
 
-  getClubs(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get clubs from legacy appsite backend'));
-      });
-    });
+  async getClubs(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs`);
+    } catch (err) {
+      throw new Error('failed to get clubs from legacy appsite backend');
+    }
   }
 
-  getEmployeesPresent(clubId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/employeesPresent`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get employees from legacy appsite backend'));
-      });
-    });
+  async getEmployeesPresent(clubId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/employeesPresent`);
+    } catch (err) {
+      throw new Error('failed to get employees from legacy appsite backend');
+    }
   }
 
-  getInstructors(clubId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/instructors`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get instructors from legacy appsite backend'));
-      });
-    });
+  async getInstructors(clubId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/instructors`);
+    } catch (err) {
+      throw new Error('failed to get instructors from legacy appsite backend');
+    }
   }
 
-  getInstructor(clubId: number, instructorId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/instructors/${instructorId}`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get instructor from legacy appsite backend'));
-      });
-    });
+  async getInstructor(clubId: number, instructorId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/instructors/${instructorId}`);
+    } catch (err) {
+      throw new Error('failed to get instructor from legacy appsite backend');
+    }
   }
 
-  getInstructorPicture(clubId: number, instructorId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/instructors/${instructorId}/picture`,
-        method: 'GET',
-        headers: {
-          
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get instructor picture from legacy appsite backend'));
-      });
-    });
+  async getInstructorPicture(clubId: number, instructorId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/instructors/${instructorId}/picture`);
+    } catch (err) {
+      throw new Error('failed to get instructor picture from legacy appsite backend');
+    }
   }
 
-  getRooms(clubId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/rooms`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get rooms from legacy appsite backend'));
-      });
-    });
+  async getRooms(clubId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/rooms`);
+    } catch (err) {
+      throw new Error('failed to get rooms from legacy appsite backend');
+    }
   }
 
-  getCourses(clubId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/courses`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get courses from legacy appsite backend'));
-      });
-    });
+  async getCourses(clubId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/courses`);
+    } catch (err) {
+      throw new Error('failed to get courses from legacy appsite backend');
+    }
   }
 
-  getClasses(clubId: number, filter: any, customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/classes`,
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        },
-        body: filter
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get classes from legacy appsite backend'));
-      });
-    });
+  async getClasses(clubId: number, filter: any, customerId: number): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/clubs/${clubId}/classes`, filter, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get classes from legacy appsite backend');
+    }
   }
 
-  getClass(clubId: number, classId: number, customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get class from legacy appsite backend'));
-      });
-    });
+  async getClass(clubId: number, classId: number, customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/classes/${classId}`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get class from legacy appsite backend');
+    }
   }
 
-  getPriceInformation(clubId: number, classId: number, customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}/priceinformation`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get price information from legacy appsite backend'));
-      });
-    });
+  async getPriceInformation(clubId: number, classId: number, customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/classes/${classId}/priceinformation`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get price information from legacy appsite backend');
+    }
   }
 
-  doReservation(clubId: number, classId: number, customerId: number, password: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}/reservation`,
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        },
-        body: {
-          password
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to do reservation on legacy appsite backend'));
-      });
-    });
+  async doReservation(clubId: number, classId: number, customerId: number, password: string): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/clubs/${clubId}/classes/${classId}/reservation`, { password }, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to do reservation on legacy appsite backend');
+    }
   }
 
-  doCancellation(clubId: number, classId: number, customerId: number, password: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/classes/${classId}/cancellation`,
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        },
-        body: {
-          password
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to do cancellation on legacy appsite backend'));
-      });
-    });
+  async doCancellation(clubId: number, classId: number, customerId: number, password: string): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/clubs/${clubId}/classes/${classId}/cancellation`, { password }, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to do cancellation on legacy appsite backend');
+    }
   }
 
-  getProfile(customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get member profile from legacy appsite backend'));
-      });
-    });
+  async getProfile(customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/me`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get member profile from legacy appsite backend');
+    }
   }
 
-  getMemberAvatar(customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/avatar`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get member avatar from legacy appsite backend'));
-      });
-    });
+  async getMemberAvatar(customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/me/avatar`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get member avatar from legacy appsite backend');
+    }
   }
 
-  getSepaBookings(customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/sepaBookings`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get sepa bookings from legacy appsite backend'));
-      });
-    });
+  async getSepaBookings(customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/me/sepaBookings`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get sepa bookings from legacy appsite backend');
+    }
   }
 
-  getCheckins(customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/checkins`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get checkins from legacy appsite backend'));
-      });
-    });
+  async getCheckins(customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/me/checkins`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get checkins from legacy appsite backend');
+    }
   }
 
-  getSalesInfo(customerId: number, days: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/salesInfo/${days}`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get sales info from legacy appsite backend'));
-      });
-    });
+  async getSalesInfo(customerId: number, days: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/me/salesInfo/${days}`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get sales info from legacy appsite backend');
+    }
   }
 
-  updateAddress(customerId: number, address: any): Promise<void> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/address`,
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        },
-        body: address
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 204) {
-          reject(result.body);
-        }
-        else {
-          resolve();
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to update address at legacy appsite backend'));
-      });
-    });
+  async updateAddress(customerId: number, address: any): Promise<void> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/me/address`, address, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to update address at legacy appsite backend');
+    }
   }
 
-  updateBankAccount(customerId: number, bankAccount: any): Promise<void> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/bankAccount`,
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        },
-        body: bankAccount
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 204) {
-          reject(result.body);
-        }
-        else {
-          resolve();
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to update bank account at legacy appsite backend'));
-      });
-    });
+  async updateBankAccount(customerId: number, bankAccount: any): Promise<void> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/me/bankAccount`, bankAccount, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to update bank account at legacy appsite backend');
+    }
   }
 
-  updateContactData(customerId: number, contactData: any): Promise<void> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/contactData`,
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        },
-        body: contactData
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 204) {
-          reject(result.body);
-        }
-        else {
-          resolve();
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to update contact data at legacy appsite backend'));
-      });
-    });
-  }
-  
-  getMemberClasses(customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/classes`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get member classes from legacy appsite backend'));
-      });
-    });
+  async updateContactData(customerId: number, contactData: any): Promise<void> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/me/contactData`, contactData, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to update contact data at legacy appsite backend');
+    }
   }
 
-  getAppointments(customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/appointments`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get appointments from legacy appsite backend'));
-      });
-    });
+  async getMemberClasses(customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/me/classes`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get member classes from legacy appsite backend');
+    }
   }
 
-  getRecommendations(customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/me/recommendations`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get recommendations from legacy appsite backend'));
-      });
-    });
+  async getAppointments(customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/me/appointments`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get appointments from legacy appsite backend');
+    }
   }
 
-  getAppointmentCategories(clubId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointmentCategories`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get appointment categories from legacy appsite backend'));
-      });
-    });
+  async getRecommendations(customerId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/me/recommendations`, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to get recommendations from legacy appsite backend');
+    }
   }
 
-  getAppointmentTypesByCategory(clubId: number, categoryId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointmentCategories/${categoryId}/appointmentTypes`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get appointment types from legacy appsite backend'));
-      });
-    });
+  async bookAppointment(clubId: number, timeblock: any, customerId: number): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/clubs/${clubId}/appointments/bookAppointment`, timeblock, { 'x-customer-id': customerId });
+    } catch (err) {
+      throw new Error('failed to book appointment at legacy appsite backend');
+    }
   }
 
-  getInstructorsByAppointmentType(clubId: number, appointmentTypeId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointmentTypes/${appointmentTypeId}/instructors`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get instructors from legacy appsite backend'));
-      });
-    });
+  async getAppointmentCategories(clubId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/appointmentCategories`);
+    } catch (err) {
+      throw new Error('failed to get appointment categories from legacy appsite backend');
+    }
   }
 
-  lookupReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/lookupFreeTimeBlocks`,
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        },
-        body: lookupRequest
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get free time blocks from legacy appsite backend'));
-      });
-    });
+  async getAppointmentTypesByCategory(clubId: number, categoryId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/appointmentCategories/${categoryId}/appointmentTypes`);
+    } catch (err) {
+      throw new Error('failed to get appointment types from legacy appsite backend');
+    }
   }
 
-  bookAppointment(clubId: number, timeblock: any, customerId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/bookAppointment`,
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'x-customer-id': customerId
-        },
-        body: timeblock
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 201) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to book appointment at legacy appsite backend'));
-      });
-    });
+  async getInstructorsByAppointmentType(clubId: number, appointmentTypeId: number): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/appointmentTypes/${appointmentTypeId}/instructors`);
+    } catch (err) {
+      throw new Error('failed to get instructors from legacy appsite backend');
+    }
   }
 
-  lookupCounselingReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/lookupFreeCounselingTimeBlocks`,
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        },
-        body: lookupRequest
-      })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 200) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to get free counseling time blocks from legacy appsite backend'));
-        });
-    });
+  async lookupReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/appointments/lookupFreeTimeBlocks`);
+    } catch (err) {
+      throw new Error('failed to get free time blocks from legacy appsite backend');
+    }
   }
 
-  bookCounselingAppointment(clubId: number, reservationRequest: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/clubs/${clubId}/appointments/bookCounselingAppointment`,
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        },
-        body: reservationRequest
-      })
-        .use(popsicle.plugins.parse('json'))
-        .then((result) => {
-          if (result.status !== 201) {
-            reject(result.body);
-          }
-          else {
-            resolve(result.body);
-          }
-        })
-        .catch((error) => {
-          reject(new Error('failed to book counseling appointment at legacy appsite backend'));
-        });
-    });
+  async lookupCounselingReservationTimeBlocks(clubId: number, lookupRequest: any): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clubs/${clubId}/appointments/lookupFreeCounselingTimeBlocks`);
+    } catch (err) {
+      throw new Error('failed to get free counseling time blocks from legacy appsite backend');
+    }
   }
 
-  getPublicUser(username: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/public/user/${username}`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get public user information from legacy appsite backend'));
-      });
-    });
+  async bookCounselingAppointment(clubId: number, reservationRequest: any): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/clubs/${clubId}/appointments/bookCounselingAppointment`, reservationRequest);
+    } catch (err) {
+      throw new Error('failed to book counseling appointment at legacy appsite backend');
+    }
   }
 
-  getPublicUserAvatar(username: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/public/user/${username}/avatar`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        if (result.status !== 200) {
-          reject(result.body);
-        }
-        else {
-          resolve(result.body);
-        }
-      })
-      .catch((error) => {
-        reject(new Error('failed to get public user avatar from legacy appsite backend'));
-      });
-    });
+  async getPublicUser(username: string): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/public/user/${username}`);
+    } catch (err) {
+      throw new Error('failed to get public user information from legacy appsite backend');
+    }
+  }
+
+  async getPublicUserAvatar(username: string): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/public/user/${username}/avatar`);
+    } catch (err) {
+      throw new Error('failed to get public user avatar from legacy appsite backend');
+    }
   }
 }

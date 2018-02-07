@@ -1,17 +1,19 @@
-let winston = require('winston');
-require('winston-mongodb').MongoDB;
+import { ILoggerService } from '../interfaces/ILoggerService';
 import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
 
-export class LoggerService {
+let winston = require('winston');
+require('winston-mongodb').MongoDB;
+
+export class LoggerService implements ILoggerService {
   private logger: any;
 
-  constructor(settings: MongoDbSettings, serviceName: string) {
+  constructor(private settings: MongoDbSettings, private serviceName: string) {
     let transports = [
       new winston.transports.Console({
         colorize: true,
         timestamp: true,
         json: true,
-      })
+      }),
     ];
 
     if (settings) {
@@ -24,7 +26,7 @@ export class LoggerService {
 
     this.logger = new winston.Logger({
       level: 'info',
-      transports: transports,
+      transports,
     })
   }
 

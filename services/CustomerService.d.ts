@@ -7,6 +7,7 @@ import { File } from '../models/CustomerService/File';
 export declare class CustomerService implements ICustomerService {
     private host;
     private port;
+    baseUrl: string;
     constructor(host: string, port: number);
     findDoublets(name: string, birthday: string): Promise<Customer[]>;
     getCustomerByCustomerId(customerId: number): Promise<Customer>;

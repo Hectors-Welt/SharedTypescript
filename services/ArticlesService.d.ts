@@ -4,6 +4,7 @@ import { Article } from '../models/ArticlesService/Article';
 export declare class ArticlesService implements IArticlesService {
     private host;
     private port;
+    baseUrl: string;
     constructor(host: string, port: number);
     getArticles(): Promise<Article[]>;
     lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation>;

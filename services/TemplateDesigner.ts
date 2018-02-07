@@ -2,99 +2,94 @@ import * as popsicle from 'popsicle';
 import { ITemplateDesigner } from '../interfaces/ITemplateDesigner';
 import { RenderFileType } from '../models/TemplateDesigner/RenderFileType';
 import { TemplateModel } from '../models/TemplateDesigner/TemplateModel';
+import { ApiClient } from './ApiClient';
 
 export class TemplateDesigner implements ITemplateDesigner {
-  headers: any = {
-    'content-type': 'application/json',
-    accept: 'application/json',
-    referer: `http://${this.host}:${this.port}/`,
-  };
+  baseUrl: string;
 
   constructor(private host: string, private port: number) {
+    this.baseUrl = `http://${host}:${port}/api`;
   }
 
-  render(data: any, templateId: any, type: RenderFileType = RenderFileType.PDF, asUrl?: boolean): Promise<any> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/render/${templateId}?type=${type}${asUrl ? '&url' : ''}`,
-      method: 'POST',
-      headers: this.headers,
-      body: data,
-    })
-    .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next())
-    .then(result => asUrl ? result.body.url : result.body)
-    .catch(() => new Error('failed to call render on template service'));
+  async render(data: any, templateId: any, type: RenderFileType = RenderFileType.PDF, asUrl?: boolean): Promise<any> {
+    try {
+      const result = await popsicle.request({
+        url: `${this.baseUrl}/render/${templateId}?type=${type}${asUrl ? '&url' : ''}`,
+        method: 'POST',
+        headers: Object.assign({}, ApiClient.headers, { referer: this.baseUrl }),
+        body: data,
+      })
+      .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next());
+
+      if (asUrl) {
+        return result.body.url;
+      }
+      return result.body;
+    } catch (err) {
+      throw new Error('failed to call render on template service');
+    }
   }
 
-  renderUrl(url: string, data: any, asUrl?: boolean): Promise<any> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/renderUrl${asUrl ? '?url' : ''}`,
-      method: 'POST',
-      headers: this.headers,
-      body: {
-        url,
-        data,
-      },
-    })
-    .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next())
-    .then(result => asUrl ? result.body.url : result.body)
-    .catch(() => new Error('failed to call renderUrl on template service'));
+  async renderUrl(url: string, data: any, asUrl?: boolean): Promise<any> {
+    try {
+      const result = await popsicle.request({
+        url: `${this.baseUrl}/renderUrl${asUrl ? '?url' : ''}`,
+        method: 'POST',
+        headers: Object.assign({}, ApiClient.headers, { referer: this.baseUrl }),
+        body: {
+          url,
+          data,
+        },
+      })
+      .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next());
+
+      if (asUrl) {
+        return result.body.url;
+      }
+      return result.body;
+    } catch (err) {
+      throw new Error('failed to call renderUrl on template service');
+    }
   }
 
-  getModels(): Promise<Array<TemplateModel>> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/models`,
-      method: 'GET',
-      headers: this.headers,
-    })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
-    .catch(() => new Error('failed to call getModels on template service'));
+  async getModels(): Promise<Array<TemplateModel>> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/models`);
+    } catch (err) {
+      throw new Error('failed to call getModels on template service');
+    }
   }
 
-  getModel(id: string): Promise<TemplateModel> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/model/${id}`,
-      method: 'GET',
-      headers: this.headers,
-    })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
-    .catch(() => new Error('failed to call getModel on template service'));
+  async getModel(id: string): Promise<TemplateModel> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/model/${id}`);
+    } catch (err) {
+      throw new Error('failed to call getModel on template service');
+    }
   }
 
-  updateModel(id: string, data: TemplateModel): Promise<any> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/model/${id}`,
-      method: 'PUT',
-      headers: this.headers,
-      body: data,
-    })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
-    .catch(() => new Error('failed to call updateModel on template service'));
+  async updateModel(id: string, data: TemplateModel): Promise<any> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/model/${id}`, data);
+    } catch (err) {
+      throw new Error('failed to call updateModel on template service');
+    }
   }
 
-  createModel(id: string, data: TemplateModel): Promise<any> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/model/${id}`,
-      method: 'POST',
-      headers: this.headers,
-      body: data,
-    })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
-    .catch(() => new Error('failed to call createModel on template service'));
+  async createModel(id: string, data: TemplateModel): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/model/${id}`, data);
+    } catch (err) {
+      throw new Error('failed to call createModel on template service');
+    }
   }
 
-  deleteModel(id: string): Promise<any> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/model/${id}`,
-      method: 'DELETE',
-      headers: this.headers,
-    })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
-    .catch(() => new Error('failed to call deleteModel on template service'));
+  async deleteModel(id: string): Promise<any> {
+    try {
+      return await ApiClient.DELETE(`${this.baseUrl}/model/${id}`);
+    } catch (err) {
+      throw new Error('failed to call deleteModel on template service');
+    }
   }
 
 }

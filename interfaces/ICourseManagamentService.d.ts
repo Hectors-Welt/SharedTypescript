@@ -1,13 +1,13 @@
-import { ClassFilter } from "../models/CourseManagamentService/ClassFilter";
-import { Class } from "../models/CourseManagamentService/Class";
-import { Course } from "../models/CourseManagamentService/Course";
-import { CourseType } from "../models/CourseManagamentService/CourseType";
-import { CourseLevel } from "../models/CourseManagamentService/CourseLevel";
-import { Room } from "../models/CourseManagamentService/Room";
-import { Appointment } from "../models/CourseManagamentService/Appointment";
-import { AppointmentSearch } from "../models/CourseManagamentService/AppointmentSearch";
-import { TimeBlock } from "../models/CourseManagamentService/TimeBlock";
-import { AppointmentBooking } from "../models/CourseManagamentService/AppointmentBooking";
+import { ClassFilter } from '../models/CourseManagamentService/ClassFilter';
+import { Class } from '../models/CourseManagamentService/Class';
+import { Course } from '../models/CourseManagamentService/Course';
+import { CourseType } from '../models/CourseManagamentService/CourseType';
+import { CourseLevel } from '../models/CourseManagamentService/CourseLevel';
+import { Room } from '../models/CourseManagamentService/Room';
+import { Appointment } from '../models/CourseManagamentService/Appointment';
+import { AppointmentSearch } from '../models/CourseManagamentService/AppointmentSearch';
+import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
+import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
 export interface ICourseManagementService {
     getClasses(filter: ClassFilter): Promise<Class[]>;
     getPriceInformation(classId: number, customerId: number): Promise<any>;

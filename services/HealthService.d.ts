@@ -1,6 +1,7 @@
 import { IHealthService } from '../interfaces/IHealthService';
 import { HealthInfo } from '../models/HealthService/HealthInfo';
 export declare class HealthService implements IHealthService {
+    private version;
     healthInfo: HealthInfo;
     constructor(version: string);
     registerHealthy(check: string, message: string): void;

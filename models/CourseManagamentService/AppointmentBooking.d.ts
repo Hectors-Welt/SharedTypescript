@@ -1,4 +1,4 @@
-import { TimeBlock } from "./TimeBlock";
+import { TimeBlock } from './TimeBlock';
 export declare class AppointmentBooking {
     customerId: number;
     note: string;

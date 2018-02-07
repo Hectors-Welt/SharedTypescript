@@ -5,6 +5,7 @@ import { NotificationLog } from '../models/PushNotificationService/NotificationL
 export declare class PushNotificationService implements IPushNotificationService {
     private host;
     private port;
+    baseUrl: string;
     constructor(host: string, port: number);
     registerDevice(deviceRegistration: DeviceRegistration): Promise<void>;
     unregisterDevice(deviceId: string, appId: string): Promise<void>;

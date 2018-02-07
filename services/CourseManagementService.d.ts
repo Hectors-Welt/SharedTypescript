@@ -12,6 +12,7 @@ import { AppointmentBooking } from '../models/CourseManagamentService/Appointmen
 export declare class CourseManagementService implements ICourseManagementService {
     private host;
     private port;
+    baseUrl: string;
     constructor(host: string, port: number);
     getClasses(filter: ClassFilter): Promise<Class[]>;
     getPriceInformation(classId: number, customerId: number): Promise<any>;

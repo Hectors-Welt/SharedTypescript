@@ -1,75 +1,41 @@
-import * as popsicle from 'popsicle'
 import { IArticlesService } from '../interfaces/IArticlesService'
 import { BookingInformation } from '../models/ArticlesService/BookingInformation'
 import { Article } from '../models/ArticlesService/Article'
+import { ApiClient } from './ApiClient';
 
 export class ArticlesService implements IArticlesService {
+  baseUrl: string;
+
   constructor(private host: string, private port: number) {
+    this.baseUrl = `http://${host}:${port}`;
   }
 
-  getArticles(): Promise<Article[]> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/getArticles`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        resolve(result.body);
-      })
-      .catch((error) => {
-        reject(new Error('failed to retrieve articles from articles service'));
-      });
-    })
+  async getArticles(): Promise<Article[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getArticles`);
+    } catch (err) {
+      throw new Error('failed to retrieve articles from articles service');
+    }
   }
 
-  lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/getBookingInformationForArticleId/${articleId}/AndCustomerId/${customerId}`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        resolve(result.body);
-      })
-      .catch((error) => {
-        reject(new Error('failed to retrieve booking information from articles service'));
-      });
-    })
+  async lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getBookingInformationForArticleId/${articleId}/AndCustomerId/${customerId}`);
+    } catch (err) {
+      throw new Error('failed to retrieve booking information from articles service');
+    }
   }
 
-  bookArticle(customerId: number, articleId: number, note: string, employeeId: number): Promise<void> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/bookArticle`,
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-        body: {
-          customerId: customerId,
-          articleId: articleId,
-          note: note,
-          employeeId: employeeId
-        }
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        resolve(result.body);
-      })
-      .catch((error) => {
-        reject(new Error('failed to book article at articles service'));
+  async bookArticle(customerId: number, articleId: number, note: string, employeeId: number): Promise<void> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/bookArticle`, {
+        customerId,
+        articleId,
+        note,
+        employeeId,
       });
-    })
+    } catch (err) {
+      throw new Error('failed to book article at articles service');
+    }
   }
 }

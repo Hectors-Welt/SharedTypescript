@@ -1,4 +1,4 @@
 export class CheckinStatus {
-  isCheckedIn: boolean
-  checkedIn: string
+  isCheckedIn: boolean;
+  checkedIn: string;
 }

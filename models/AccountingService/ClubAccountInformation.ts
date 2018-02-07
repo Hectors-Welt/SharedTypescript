@@ -1,4 +1,4 @@
 export class ClubAccountInformation {
-  bistroAccountBalance: number
-  membershipAccountBalance: number
+  bistroAccountBalance: number;
+  membershipAccountBalance: number;
 }

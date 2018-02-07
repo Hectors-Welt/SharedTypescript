@@ -1,4 +1,4 @@
 export class ClassAttendee {
-    customerId: number
-    status: string
+  customerId: number;
+  status: string;
 }

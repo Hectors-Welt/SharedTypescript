@@ -4,12 +4,14 @@ let winston = require('winston');
 require('winston-mongodb').MongoDB;
 class LoggerService {
     constructor(settings, serviceName) {
+        this.settings = settings;
+        this.serviceName = serviceName;
         let transports = [
             new winston.transports.Console({
                 colorize: true,
                 timestamp: true,
                 json: true,
-            })
+            }),
         ];
         if (settings) {
             transports.push(new winston.transports.MongoDB({
@@ -20,7 +22,7 @@ class LoggerService {
         }
         this.logger = new winston.Logger({
             level: 'info',
-            transports: transports,
+            transports,
         });
     }
     info(message, payload) {

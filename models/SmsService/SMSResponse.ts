@@ -13,6 +13,5 @@ export class SMSResponse {
   failCount: number;
   failedAt: Date;
   lastFinishedAt: Date;
-
 }
 

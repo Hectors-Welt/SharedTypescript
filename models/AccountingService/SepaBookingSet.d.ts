@@ -1,4 +1,4 @@
-import { SepaBookingPosition } from "./SepaBookingPosition";
+import { SepaBookingPosition } from './SepaBookingPosition';
 export declare class SepaBookingSet {
     id: number;
     amount: number;

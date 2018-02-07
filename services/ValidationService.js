@@ -11,10 +11,7 @@ const url = 'http://www.bundesbank.de/Redaktion/DE/Downloads/Aufgaben/Unbarer_Za
 class ValidationService {
     constructor() {
         this.sclEntries = {};
-        popsicle.request({
-            url,
-            method: 'GET',
-        })
+        popsicle.get(url)
             .then((result) => {
             if (result.status != 200) {
                 return Promise.reject(new Error('file not found'));
@@ -34,8 +31,9 @@ class ValidationService {
         return IbanTools.isValidIBAN(iban);
     }
     isBicValid(bic) {
-        if (bic.length < 8 || bic.length == 9 || bic.length == 10 || bic.length > 11)
+        if (bic.length < 8 || bic.length == 9 || bic.length == 10 || bic.length > 11) {
             return false;
+        }
         return !!this.getSclInfo(bic);
     }
     getSclInfo(bic) {

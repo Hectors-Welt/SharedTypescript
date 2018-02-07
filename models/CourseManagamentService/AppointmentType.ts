@@ -1,4 +1,4 @@
 export class AppointmentType {
-    id: number
-    name: string
+  id: number;
+  name: string;
 }

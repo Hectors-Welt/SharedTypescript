@@ -1,629 +1,370 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const popsicle = require("popsicle");
 const LocationInfo_1 = require("../models/DiscoveryService/LocationInfo");
 const EventStoreSettings_1 = require("../models/DiscoveryService/EventStoreSettings");
 const MongoDbSettings_1 = require("../models/DiscoveryService/MongoDbSettings");
 const RabbitMqSettings_1 = require("../models/DiscoveryService/RabbitMqSettings");
 const HectorDbSettings_1 = require("../models/DiscoveryService/HectorDbSettings");
 const BraintreeSettings_1 = require("../models/DiscoveryService/BraintreeSettings");
-const MembershipService_1 = require("./MembershipService");
-const EmployeesService_1 = require("./EmployeesService");
-const CustomerService_1 = require("./CustomerService");
-const TwoFactorAuthenticationService_1 = require("./TwoFactorAuthenticationService");
-const PushNotificationService_1 = require("./PushNotificationService");
-const RatingService_1 = require("./RatingService");
 const LegacyAppsiteBackend_1 = require("./LegacyAppsiteBackend");
-const AccountingService_1 = require("./AccountingService");
-const CheckinOutService_1 = require("./CheckinOutService");
-const ArticlesService_1 = require("./ArticlesService");
-const MailingService_1 = require("./MailingService");
-const SMSService_1 = require("./SMSService");
 const TemplateDesigner_1 = require("./TemplateDesigner");
-const CourseManagementService_1 = require("./CourseManagementService");
+const ApiClient_1 = require("./ApiClient");
+const Membershipservice_1 = require("./Membershipservice");
+const Employeesservice_1 = require("./Employeesservice");
+const Customerservice_1 = require("./Customerservice");
+const TwoFactorAuthenticationservice_1 = require("./TwoFactorAuthenticationservice");
+const PushNotificationservice_1 = require("./PushNotificationservice");
+const Ratingservice_1 = require("./Ratingservice");
+const Accountingservice_1 = require("./Accountingservice");
+const CheckinOutservice_1 = require("./CheckinOutservice");
+const Articlesservice_1 = require("./Articlesservice");
+const Mailingservice_1 = require("./Mailingservice");
+const SMSservice_1 = require("./SMSservice");
+const CourseManagementservice_1 = require("./CourseManagementservice");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
         this.port = port;
+        this.baseUrl = `http://${host}:${port}`;
     }
     startSelfRegistration(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType) {
-        this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
+        return __awaiter(this, void 0, void 0, function* () {
+            this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
+        });
     }
     getLocationInfo() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/clubInfo`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve location info from discovery service`));
-                }
-                resolve(new LocationInfo_1.LocationInfo(result.body));
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve location info from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return new LocationInfo_1.LocationInfo(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/clubInfo`));
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve location info from discovery service: ${err.message}`);
+            }
         });
     }
     getEnvironment() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/environment`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve environment from discovery service`));
-                }
-                resolve(result.body);
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve environment from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/environment`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve environment from discovery service: ${err.message}`);
+            }
         });
     }
     getEventStoreSettings() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/eventstore`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve eventstore settings from discovery service`));
-                }
-                resolve(new EventStoreSettings_1.EventStoreSettings(result.body));
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve eventstore settings from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return new EventStoreSettings_1.EventStoreSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/eventstore`));
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve eventstore settings from discovery service: ${err.message}`);
+            }
         });
     }
     getMongoDbSettings() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/mongodb`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve mongodb settings from discovery service`));
-                }
-                resolve(new MongoDbSettings_1.MongoDbSettings(result.body));
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve mongodb settings from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return new MongoDbSettings_1.MongoDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/mongodb`));
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve mongodb settings from discovery service: ${err.message}`);
+            }
         });
     }
     getRabbitMqSettings() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/rabbitmq`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve rabbitmq settings from discovery service`));
-                }
-                resolve(new RabbitMqSettings_1.RabbitMqSettings(result.body));
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve rabbitmq settings from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return new RabbitMqSettings_1.RabbitMqSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/rabbitmq`));
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve rabbitmq settings from discovery service: ${err.message}`);
+            }
         });
     }
     getHectorDbSettings() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/connection`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve hector db settings from discovery service`));
-                }
-                resolve(new HectorDbSettings_1.HectorDbSettings(result.body));
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve hector db settings from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return new HectorDbSettings_1.HectorDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/connection`));
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve hector db settings from discovery service: ${err.message}`);
+            }
         });
     }
     getBraintreeSettings() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/braintree`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve braintree settings from discovery service`));
-                }
-                resolve(new BraintreeSettings_1.BraintreeSettings(result.body));
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve hector braintree from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return new BraintreeSettings_1.BraintreeSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/braintree`));
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve hector braintree from discovery service: ${err.message}`);
+            }
         });
     }
     getCloudServicesSettings() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/cloudServices`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve cloud services settings from discovery service`));
-                }
-                resolve(result.body);
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve cloud services settings from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/cloudServices`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve cloud services settings from discovery service: ${err.message}`);
+            }
         });
     }
     getClubs() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/clubs`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve clubs from discovery service`));
-                }
-                resolve(result.body);
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve clubs from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/clubs`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve clubs from discovery service: ${err.message}`);
+            }
         });
     }
     getTitles() {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/titles`,
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                if (result.status !== 200) {
-                    reject(new Error(`failed to retrieve titles from discovery service`));
-                }
-                resolve(result.body);
-            })
-                .catch((error) => {
-                reject(new Error(`failed to retrieve titles from discovery service: ${error.message}`));
-            });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/titles`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve titles from discovery service: ${err.message}`);
+            }
         });
     }
     getMailingService() {
-        return new Promise((resolve, reject) => {
-            if (!this.mailingService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/MailingService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.mailingService = new MailingService_1.MailingService(result.body.host, result.body.port);
-                    resolve(this.mailingService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve mailing service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.mailingService) {
+                    return this.mailingService;
+                }
+                const mailingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MailingService`);
+                this.mailingService = new Mailingservice_1.MailingService(mailingService.host, mailingService.body);
+                return this.mailingService;
             }
-            else {
-                resolve(this.mailingService);
+            catch (err) {
+                throw new Error(`failed to retrieve mailing service from discovery service: ${err.message}`);
             }
         });
     }
     getSMSService() {
-        return new Promise((resolve, reject) => {
-            if (!this.smsService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/SMSService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.smsService = new SMSService_1.SMSService(result.body.host, result.body.port);
-                    resolve(this.smsService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve sms service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.smsService) {
+                    return this.smsService;
+                }
+                const smsService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/SMSService`);
+                this.smsService = new SMSservice_1.SMSService(smsService.host, smsService.port);
+                return this.smsService;
             }
-            else {
-                resolve(this.smsService);
+            catch (err) {
+                throw new Error(`failed to retrieve sms service from discovery service: ${err.message}`);
             }
         });
     }
     getCustomerService() {
-        return new Promise((resolve, reject) => {
-            if (!this.customerService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/CustomerService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.customerService = new CustomerService_1.CustomerService(result.body.host, result.body.port);
-                    resolve(this.customerService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve customer service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.customerService) {
+                    return this.customerService;
+                }
+                const customerService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CustomerService`);
+                this.customerService = new Customerservice_1.CustomerService(customerService.host, customerService.port);
+                return this.customerService;
             }
-            else {
-                resolve(this.customerService);
+            catch (err) {
+                throw new Error(`failed to retrieve customer service from discovery service: ${err.message}`);
             }
         });
     }
     getEmployeesService() {
-        return new Promise((resolve, reject) => {
-            if (!this.employeesService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/EmployeesService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.employeesService = new EmployeesService_1.EmployeesService(result.body.host, result.body.port);
-                    resolve(this.employeesService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve employees service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.employeesService) {
+                    return this.employeesService;
+                }
+                const employeesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmployeesService`);
+                this.employeesService = new Employeesservice_1.EmployeesService(employeesService.host, employeesService.port);
+                return this.employeesService;
             }
-            else {
-                resolve(this.employeesService);
+            catch (err) {
+                throw new Error(`failed to retrieve employees service from discovery service: ${err.message}`);
             }
         });
     }
     getMembershipService() {
-        return new Promise((resolve, reject) => {
-            if (!this.membershipService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/MembershipService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.membershipService = new MembershipService_1.MembershipService(result.body.host, result.body.port);
-                    resolve(this.membershipService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve membership service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.membershipService) {
+                    return this.membershipService;
+                }
+                const membershipService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MembershipService`);
+                this.membershipService = new Membershipservice_1.MembershipService(membershipService.host, membershipService.port);
+                return this.membershipService;
             }
-            else {
-                resolve(this.membershipService);
+            catch (err) {
+                throw new Error(`failed to retrieve membership service from discovery service: ${err.message}`);
             }
         });
     }
     getTwoFactorAuthenticationService() {
-        return new Promise((resolve, reject) => {
-            if (!this.twoFactorAuthenticationService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/TwoFactorAuthenticationService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.twoFactorAuthenticationService = new TwoFactorAuthenticationService_1.TwoFactorAuthenticationService(result.body.host, result.body.port);
-                    resolve(this.twoFactorAuthenticationService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve two factor authentication service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.twoFactorAuthenticationService) {
+                    return this.twoFactorAuthenticationService;
+                }
+                const twoFactorAuthenticationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
+                this.twoFactorAuthenticationService = new TwoFactorAuthenticationservice_1.TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port);
+                return this.twoFactorAuthenticationService;
             }
-            else {
-                resolve(this.twoFactorAuthenticationService);
+            catch (err) {
+                throw new Error(`failed to retrieve two factor authentication service from discovery service: ${err.message}`);
             }
         });
     }
     getPushNotificationService() {
-        return new Promise((resolve, reject) => {
-            if (!this.pushNotificationService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/PushNotificationService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.pushNotificationService = new PushNotificationService_1.PushNotificationService(result.body.host, result.body.port);
-                    resolve(this.pushNotificationService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve push notification service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.pushNotificationService) {
+                    return this.pushNotificationService;
+                }
+                const pushNotificationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
+                this.pushNotificationService = new PushNotificationservice_1.PushNotificationService(pushNotificationService.host, pushNotificationService.port);
+                return this.pushNotificationService;
             }
-            else {
-                resolve(this.pushNotificationService);
+            catch (err) {
+                throw new Error(`failed to retrieve push notification service from discovery service: ${err.message}`);
             }
         });
     }
     getRatingService() {
-        return new Promise((resolve, reject) => {
-            if (!this.ratingService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/RatingService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.ratingService = new RatingService_1.RatingService(result.body.host, result.body.port);
-                    resolve(this.ratingService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve rating service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.ratingService) {
+                    return this.ratingService;
+                }
+                const ratingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/RatingService`);
+                this.ratingService = new Ratingservice_1.RatingService(ratingService.host, ratingService.port);
+                return this.ratingService;
             }
-            else {
-                resolve(this.ratingService);
+            catch (err) {
+                throw new Error(`failed to retrieve rating service from discovery service: ${err.message}`);
             }
         });
     }
     getLegacyAppsiteBackend() {
-        return new Promise((resolve, reject) => {
-            if (!this.legacyAppsiteBackend) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/LegacyAppsiteBackend`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.legacyAppsiteBackend = new LegacyAppsiteBackend_1.LegacyAppsiteBackend(result.body.host, result.body.port);
-                    resolve(this.legacyAppsiteBackend);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve legacy appsite backend from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.legacyAppsiteBackend) {
+                    return this.legacyAppsiteBackend;
+                }
+                const legacyAppsiteBackend = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/LegacyAppsiteBackend`);
+                this.legacyAppsiteBackend = new LegacyAppsiteBackend_1.LegacyAppsiteBackend(legacyAppsiteBackend.host, legacyAppsiteBackend.port);
+                return this.legacyAppsiteBackend;
             }
-            else {
-                resolve(this.legacyAppsiteBackend);
+            catch (err) {
+                throw new Error(`failed to retrieve legacy appsite backend from discovery service: ${err.message}`);
             }
         });
     }
     getAccountingService() {
-        return new Promise((resolve, reject) => {
-            if (!this.accountingService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/AccountingService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.accountingService = new AccountingService_1.AccountingService(result.body.host, result.body.port);
-                    resolve(this.accountingService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve accounting service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.accountingService) {
+                    return this.accountingService;
+                }
+                const accountingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/AccountingService`);
+                this.accountingService = new Accountingservice_1.AccountingService(accountingService.host, accountingService.port);
+                return this.accountingService;
             }
-            else {
-                resolve(this.accountingService);
+            catch (err) {
+                throw new Error(`failed to retrieve accounting service from discovery service: ${err.message}`);
             }
         });
     }
     getCheckinOutService() {
-        return new Promise((resolve, reject) => {
-            if (!this.checkinOutService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/CheckinOutService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.checkinOutService = new CheckinOutService_1.CheckinOutService(result.body.host, result.body.port);
-                    resolve(this.checkinOutService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve checkinout service from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.checkinOutService) {
+                    return this.checkinOutService;
+                }
+                const checkinOutService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
+                this.checkinOutService = new CheckinOutservice_1.CheckinOutService(checkinOutService.host, checkinOutService.port);
+                return this.checkinOutService;
             }
-            else {
-                resolve(this.checkinOutService);
+            catch (err) {
+                throw new Error(`failed to retrieve checkinout service from discovery service: ${err.message}`);
             }
         });
     }
     getArticlesService() {
-        return new Promise((resolve, reject) => {
-            if (!this.articlesService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/ArticlesService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.articlesService = new ArticlesService_1.ArticlesService(result.body.host, result.body.port);
-                    resolve(this.articlesService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve articles service from discovery service'));
-                });
-            }
-            else {
-                resolve(this.articlesService);
-            }
-        });
-    }
-    registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType) {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/`,
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                },
-                body: {
-                    serviceName: serviceName,
-                    port: servicePort,
-                    timeToLive: new Date(new Date().getTime() + (5 * 1000)).toJSON(),
-                    serviceVersion: serviceVersion,
-                    public: isPublic,
-                    serviceType: serviceType,
-                    proxyRoute: proxyRoute,
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.articlesService) {
+                    return this.articlesService;
                 }
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                resolve();
-            })
-                .catch((error) => {
-                reject(new Error(`could not reach DiscoveryService: ${error.message}`));
-            });
+                const articlesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/ArticlesService`);
+                this.articlesService = new Articlesservice_1.ArticlesService(articlesService.host, articlesService.port);
+                return this.articlesService;
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve articles service from discovery service: ${err.message}`);
+            }
         });
     }
     getTemplateDesigner() {
-        return new Promise((resolve, reject) => {
-            if (!this.templateDesigner) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/TemplateDesigner`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.templateDesigner = new TemplateDesigner_1.TemplateDesigner(result.body.host, result.body.port);
-                    resolve(this.templateDesigner);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve template designer from discovery service'));
-                });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.templateDesigner) {
+                    return this.templateDesigner;
+                }
+                const templateDesigner = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
+                this.templateDesigner = new TemplateDesigner_1.TemplateDesigner(templateDesigner.host, templateDesigner.port);
+                return this.templateDesigner;
             }
-            else {
-                resolve(this.templateDesigner);
+            catch (err) {
+                throw new Error(`failed to retrieve template designer from discovery service: ${err.message}`);
             }
         });
     }
     getCourseManagementService() {
-        return new Promise((resolve, reject) => {
-            if (!this.courseManagementService) {
-                popsicle.request({
-                    url: `http://${this.host}:${this.port}/CourseManagementService`,
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                })
-                    .use(popsicle.plugins.parse('json'))
-                    .then((result) => {
-                    this.courseManagementService = new CourseManagementService_1.CourseManagementService(result.body.host, result.body.port);
-                    resolve(this.courseManagementService);
-                })
-                    .catch((error) => {
-                    reject(new Error('failed to retrieve template designer from discovery service'));
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.courseManagementService) {
+                    return this.courseManagementService;
+                }
+                const courseManagementService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
+                this.courseManagementService = new CourseManagementservice_1.CourseManagementService(courseManagementService.host, courseManagementService.port);
+                return this.courseManagementService;
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve template designer from discovery service: ${err.message}`);
+            }
+        });
+    }
+    registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/`, {
+                    serviceName,
+                    port: servicePort,
+                    timeToLive: new Date(new Date().getTime() + (5 * 1000)).toJSON(),
+                    serviceVersion,
+                    public: isPublic,
+                    serviceType,
+                    proxyRoute,
                 });
             }
-            else {
-                resolve(this.courseManagementService);
+            catch (err) {
+                throw new Error(`could not reach DiscoveryService: ${err.message}`);
             }
         });
     }

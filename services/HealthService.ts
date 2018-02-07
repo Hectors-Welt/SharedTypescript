@@ -4,7 +4,7 @@ import { HealthInfo } from '../models/HealthService/HealthInfo';
 export class HealthService implements IHealthService {
   healthInfo: HealthInfo;
 
-  constructor(version: string) {
+  constructor(private version: string) {
     this.healthInfo = new HealthInfo(version);
   }
 

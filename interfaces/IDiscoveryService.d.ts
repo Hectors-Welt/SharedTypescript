@@ -20,8 +20,7 @@ import { ITemplateDesigner } from './ITemplateDesigner';
 import { ICourseManagementService } from './ICourseManagamentService';
 import { CloudServicesSettings } from '../models/DiscoveryService/CloudServicesSettings';
 export interface IDiscoveryService {
-    host: string;
-    port: number;
+    baseUrl: string;
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): any;
     getLocationInfo(): Promise<LocationInfo>;
     getEnvironment(): Promise<any>;

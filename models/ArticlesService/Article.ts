@@ -1,5 +1,5 @@
 export class Article {
-  id: number
-  description: string
-  shortDescription: string
+  id: number;
+  description: string;
+  shortDescription: string;
 }

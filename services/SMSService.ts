@@ -1,58 +1,44 @@
-import * as popsicle from 'popsicle';
 import { ISMSService } from '../interfaces/ISMSService';
 import { SMSRequest } from '../models/SmsService/SMSRequest';
 import { SMSResponse } from '../models/SmsService/SMSResponse';
+import { ApiClient } from './ApiClient';
 
 export class SMSService implements ISMSService {
-  headers: any = {
-    'content-type': 'application/json',
-    'accept': 'application/json',
-  };
+  baseUrl: string;
 
   constructor(private host: string, private port: number) {
+    this.baseUrl = `http://${host}:${port}/api`;
   }
 
-  sendSMS(request: SMSRequest): Promise<SMSResponse> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/sendSMS`,
-      method: 'POST',
-      headers: this.headers,
-      body: request,
-    })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
-    .catch(() => new Error('failed to call sendSMS on sms service'));
+  async sendSMS(request: SMSRequest): Promise<SMSResponse> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/sendSMS`, request);
+    } catch (err) {
+      throw new Error('failed to call sendSMS on sms service');
+    }
   }
 
-  getJobs(): Promise<Array<SMSResponse>> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/jobs`,
-      method: 'GET',
-      headers: this.headers,
-    })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
-    .catch(() => new Error('failed to call getJobs on sms service'));
+  async getJobs(): Promise<Array<SMSResponse>> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/jobs`);
+    } catch (err) {
+      throw new Error('failed to call getJobs on sms service');
+    }
   }
 
-  getJob(id: any): Promise<SMSResponse> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/jobs/${id}`,
-      method: 'GET',
-      headers: this.headers,
-    })
-    .use(popsicle.plugins.parse('json'))
-    .then(result => result.body)
-    .catch(() => new Error('failed to call getJob on sms service'));
+  async getJob(id: any): Promise<SMSResponse> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/jobs/${id}`);
+    } catch (err) {
+      throw new Error('failed to call getJob on sms service');
+    }
   }
 
-  deleteJob(id: any): Promise<SMSResponse> {
-    return popsicle.request({
-      url: `http://${this.host}:${this.port}/api/jobs/${id}`,
-      method: 'DELETE',
-      headers: this.headers,
-    })
-    .then(result => result.body)
-    .catch(() => new Error('failed to call deleteJob on sms service'));
+  async deleteJob(id: any): Promise<SMSResponse> {
+    try {
+      return await ApiClient.DELETE(`${this.baseUrl}/jobs/${id}`);
+    } catch (err) {
+      throw new Error('failed to call deleteJob on sms service');
+    }
   }
 }

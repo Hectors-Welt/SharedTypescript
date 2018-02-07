@@ -14,7 +14,7 @@ export class HectorDbSettings {
 
   constructor(settings: any) {
     if (!settings || !settings.server || !settings.username || !settings.password) {
-      throw new Error("invalid data. ensure host and credentials are present.");
+      throw new Error('invalid data. ensure host and credentials are present.');
     }
 
     this.host = settings.server;

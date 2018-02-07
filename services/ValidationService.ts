@@ -14,10 +14,7 @@ export class ValidationService implements IValidationService {
   private sclEntries = {};
 
   constructor() {
-    popsicle.request({
-      url,
-      method: 'GET',
-    })
+    popsicle.get(url)
     .then((result) => {
       if (result.status != 200) {
         return Promise.reject(new Error('file not found'));
@@ -39,7 +36,9 @@ export class ValidationService implements IValidationService {
   }
 
   isBicValid(bic: string): boolean {
-    if(bic.length < 8 || bic.length == 9 || bic.length == 10 || bic.length > 11) return false;
+    if (bic.length < 8 || bic.length == 9 || bic.length == 10 || bic.length > 11) {
+      return false;
+    }
     return !!this.getSclInfo(bic);
   }
 

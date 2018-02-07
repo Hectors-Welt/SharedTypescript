@@ -1,70 +1,37 @@
-import * as popsicle from 'popsicle'
 import { IAccountingService } from '../interfaces/IAccountingService'
 import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation'
 import { SepaBookingSet } from '../models/AccountingService/SepaBookingSet';
 import { SalesInfo } from '../models/AccountingService/SalesInfo';
+import { ApiClient } from './ApiClient';
 
 export class AccountingService implements IAccountingService {
+  baseUrl: string;
+
   constructor(private host: string, private port: number) {
+    this.baseUrl = `http://${host}:${port}`;
   }
 
-  getClubAccountInformation(customerId: number): Promise<ClubAccountInformation> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/getClubAccountInformationByCustomerId/${customerId}`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        resolve(result.body);
-      })
-      .catch((error) => {
-        reject(new Error('failed to retrieve club account information from accounting service'));
-      });
-    })
+  async getClubAccountInformation(customerId: number): Promise<ClubAccountInformation> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getClubAccountInformationByCustomerId/${customerId}`);
+    } catch (err) {
+      throw new Error('failed to retrieve club account information from accounting service');
+    }
   }
 
-  getSepaBookings(customerId: number): Promise<SepaBookingSet[]> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/getSepaBookingsByCustomerId/${customerId}`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        resolve(result.body);
-      })
-      .catch((error) => {
-        reject(new Error('failed to retrieve sepa bookings from accounting service'));
-      });
-    })
+  async getSepaBookings(customerId: number): Promise<SepaBookingSet[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getSepaBookingsByCustomerId/${customerId}`);
+    } catch (err) {
+      new Error('failed to retrieve sepa bookings from accounting service');
+    }
   }
 
-  getSalesInfo(customerId: number, days: number): Promise<SalesInfo[]> {
-    return new Promise((resolve, reject) => {
-      popsicle.request({
-        url: `http://${this.host}:${this.port}/getSalesInfoByCustomerId/${customerId}/ForTheLast/${days}/Days`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-      })
-      .use(popsicle.plugins.parse('json'))
-      .then((result) => {
-        resolve(result.body);
-      })
-      .catch((error) => {
-        reject(new Error('failed to retrieve sepa bookings from accounting service'));
-      });
-    })
+  async getSalesInfo(customerId: number, days: number): Promise<SalesInfo[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getSalesInfoByCustomerId/${customerId}/ForTheLast/${days}/Days`);
+    } catch (err) {
+      throw new Error('failed to retrieve sepa bookings from accounting service');
+    }
   }
 }

@@ -1,5 +1,5 @@
-import { ReservationInformation } from "./ReservationInformation";
-import { ClassAttendee } from "./ClassAttendee";
+import { ReservationInformation } from './ReservationInformation';
+import { ClassAttendee } from './ClassAttendee';
 export declare class Class {
     id: number;
     begin: string;

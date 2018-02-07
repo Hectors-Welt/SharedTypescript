@@ -21,10 +21,9 @@ import { ICourseManagementService } from './ICourseManagamentService';
 import { CloudServicesSettings } from '../models/DiscoveryService/CloudServicesSettings';
 
 export interface IDiscoveryService {
-  host: string
-  port: number
+  baseUrl: string;
 
-  startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType)
+  startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType);
 
   getLocationInfo(): Promise<LocationInfo>;
 
@@ -54,21 +53,21 @@ export interface IDiscoveryService {
 
   getRatingService(): Promise<IRatingService>;
 
-  getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>
+  getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>;
 
-  getAccountingService(): Promise<IAccountingService>
+  getAccountingService(): Promise<IAccountingService>;
 
-  getCheckinOutService(): Promise<ICheckinOutService>
+  getCheckinOutService(): Promise<ICheckinOutService>;
 
-  getArticlesService(): Promise<IArticlesService>
+  getArticlesService(): Promise<IArticlesService>;
 
-  getTemplateDesigner(): Promise<ITemplateDesigner>
+  getTemplateDesigner(): Promise<ITemplateDesigner>;
 
-  getCourseManagementService(): Promise<ICourseManagementService>
+  getCourseManagementService(): Promise<ICourseManagementService>;
 
-  getCloudServicesSettings(): Promise<CloudServicesSettings>
+  getCloudServicesSettings(): Promise<CloudServicesSettings>;
 
-  getClubs(): Promise<any>
+  getClubs(): Promise<any>;
 
-  getTitles(): Promise<any>
+  getTitles(): Promise<any>;
 }
