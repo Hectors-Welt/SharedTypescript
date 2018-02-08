@@ -39,6 +39,8 @@ import { CourseManagementService } from './CourseManagementservice';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
+  public host: string;
+  public port: number;
   public timer: NodeJS.Timer;
   private customerService: ICustomerService;
   private employeesService: IEmployeesService;
@@ -55,7 +57,9 @@ export class DiscoveryService implements IDiscoveryService {
   private templateDesigner: ITemplateDesigner;
   private courseManagementService: ICourseManagementService;
 
-  constructor(private host: string, private port: number) {
+  constructor(host: string, port: number) {
+    this.host = host;
+    this.port = port;
     this.baseUrl = `http://${host}:${port}`;
   }
 

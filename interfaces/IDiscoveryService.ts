@@ -21,6 +21,8 @@ import { ICourseManagementService } from './ICourseManagamentService';
 import { CloudServicesSettings } from '../models/DiscoveryService/CloudServicesSettings';
 
 export interface IDiscoveryService {
+  port: number;
+  host: string;
   baseUrl: string;
 
   startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType);

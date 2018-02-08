@@ -23,9 +23,9 @@ import { IMailingService } from '../interfaces/IMailingservice';
 import { ISMSService } from '../interfaces/ISMSservice';
 import { ICourseManagementService } from '../interfaces/ICourseManagamentservice';
 export declare class DiscoveryService implements IDiscoveryService {
-    private host;
-    private port;
     baseUrl: string;
+    host: string;
+    port: number;
     timer: NodeJS.Timer;
     private customerService;
     private employeesService;
