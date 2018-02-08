@@ -4,9 +4,9 @@ import { Room } from './Room';
 
 export class Appointment {
   id: number;
-  appointmentType: AppointmentType;
-  employees: Instructor[];
-  room: Room;
+  appointmentTypeId: number;
+  employeeIds: number[];
+  roomId: number;
   studioId: number;
   begin: string;
   end: string;
