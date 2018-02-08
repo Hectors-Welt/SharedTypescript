@@ -147,6 +147,14 @@ export class DiscoveryService implements IDiscoveryService {
     }
   }
 
+  async getContactCategories(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/contactCategories`);
+    } catch (err) {
+      throw new Error(`failed to retrieve contact categories from discovery service: ${err.message}`);
+    }
+  }
+
   async getMailingService(): Promise<IMailingService> {
     try {
       if (this.mailingService) {

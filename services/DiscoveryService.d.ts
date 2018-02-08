@@ -53,6 +53,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getCloudServicesSettings(): Promise<CloudServicesSettings>;
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
+    getContactCategories(): Promise<any>;
     getMailingService(): Promise<IMailingService>;
     getSMSService(): Promise<ISMSService>;
     getCustomerService(): Promise<ICustomerService>;

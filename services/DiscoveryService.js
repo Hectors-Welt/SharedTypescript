@@ -140,6 +140,16 @@ class DiscoveryService {
             }
         });
     }
+    getContactCategories() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/contactCategories`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve contact categories from discovery service: ${err.message}`);
+            }
+        });
+    }
     getMailingService() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
