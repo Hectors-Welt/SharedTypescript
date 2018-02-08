@@ -54,6 +54,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
     getContactCategories(): Promise<any>;
+    getEmployeeRoles(): Promise<any>;
     getMailingService(): Promise<IMailingService>;
     getSMSService(): Promise<ISMSService>;
     getCustomerService(): Promise<ICustomerService>;

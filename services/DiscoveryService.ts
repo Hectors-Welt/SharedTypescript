@@ -155,6 +155,14 @@ export class DiscoveryService implements IDiscoveryService {
     }
   }
 
+  async getEmployeeRoles(): Promise<any> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/employeeRoles`);
+    } catch (err) {
+      throw new Error(`failed to retrieve employee roles from discovery service: ${err.message}`);
+    }
+  }
+
   async getMailingService(): Promise<IMailingService> {
     try {
       if (this.mailingService) {

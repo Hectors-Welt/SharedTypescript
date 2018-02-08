@@ -48,4 +48,5 @@ export interface IDiscoveryService {
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
     getContactCategories(): Promise<any>;
+    getEmployeeRoles(): Promise<any>;
 }

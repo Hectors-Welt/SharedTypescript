@@ -74,4 +74,6 @@ export interface IDiscoveryService {
   getTitles(): Promise<any>;
 
   getContactCategories(): Promise<any>;
+
+  getEmployeeRoles(): Promise<any>;
 }
