@@ -42,10 +42,7 @@ class ApiClient {
             }
             const result = yield popsicle.request(request)
                 .use(popsicle.plugins.parse('json'));
-            if (result.status < 300) {
-                return result.body;
-            }
-            throw new Error('not reachable');
+            return result.status === 200 ? result.body : null;
         });
     }
 }

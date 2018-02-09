@@ -167,7 +167,7 @@ class DiscoveryService {
                     return this.mailingService;
                 }
                 const mailingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MailingService`);
-                this.mailingService = new Mailingservice_1.MailingService(mailingService.host, mailingService.body);
+                this.mailingService = new Mailingservice_1.MailingService(mailingService.host, mailingService.port);
                 return this.mailingService;
             }
             catch (err) {

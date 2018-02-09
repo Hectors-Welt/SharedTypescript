@@ -169,7 +169,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.mailingService;
       }
       const mailingService = await ApiClient.GET(`${this.baseUrl}/MailingService`);
-      this.mailingService = new MailingService(mailingService.host, mailingService.body);
+      this.mailingService = new MailingService(mailingService.host, mailingService.port);
       return this.mailingService;
     } catch (err) {
       throw new Error(`failed to retrieve mailing service from discovery service: ${err.message}`);
