@@ -88,5 +88,15 @@ class CustomerService {
             }
         });
     }
+    addCustomerInteraction(customerId, interaction) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customer/${customerId}/interaction`, interaction);
+            }
+            catch (err) {
+                throw new Error('failed to customer interaction at customer service');
+            }
+        });
+    }
 }
 exports.CustomerService = CustomerService;

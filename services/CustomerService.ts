@@ -5,6 +5,7 @@ import { BankAccount } from '../models/CustomerService/BankAccount';
 import { Contact } from '../models/CustomerService/Contact';
 import { File } from '../models/CustomerService/File';
 import { ApiClient } from './ApiClient';
+import { Interaction } from '../models/CustomerService/Interaction';
 
 export class CustomerService implements ICustomerService {
   baseUrl: string;
@@ -69,6 +70,14 @@ export class CustomerService implements ICustomerService {
       return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/contact`, contact)
     } catch (err) {
       throw new Error('failed to update contact data at customer service');
+    }
+  }
+
+  async addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/interaction`, interaction)
+    } catch (err) {
+      throw new Error('failed to customer interaction at customer service');
     }
   }
 }
