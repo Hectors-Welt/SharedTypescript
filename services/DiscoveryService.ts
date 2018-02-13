@@ -9,7 +9,6 @@ import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
 import { ITemplateDesigner } from '../interfaces/ITemplateDesigner'
 import { LegacyAppsiteBackend } from './LegacyAppsiteBackend'
 import { TemplateDesigner } from './TemplateDesigner'
-import { CloudServicesSettings } from '../models/DiscoveryService/CloudServicesSettings';
 import { ApiClient } from './ApiClient';
 import { IDiscoveryService } from '../interfaces/IDiscoveryservice';
 import { ICustomerService } from '../interfaces/ICustomerservice';
@@ -120,14 +119,6 @@ export class DiscoveryService implements IDiscoveryService {
       return new BraintreeSettings(await ApiClient.GET(`${this.baseUrl}/braintree`))
     } catch (err) {
       throw new Error(`failed to retrieve hector braintree from discovery service: ${err.message}`);
-    }
-  }
-
-  async getCloudServicesSettings(): Promise<CloudServicesSettings> {
-    try {
-      return await ApiClient.GET(`${this.baseUrl}/cloudServices`);
-    } catch (err) {
-      throw new Error(`failed to retrieve cloud services settings from discovery service: ${err.message}`);
     }
   }
 

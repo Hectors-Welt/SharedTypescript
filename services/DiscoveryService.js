@@ -110,16 +110,6 @@ class DiscoveryService {
             }
         });
     }
-    getCloudServicesSettings() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/cloudServices`);
-            }
-            catch (err) {
-                throw new Error(`failed to retrieve cloud services settings from discovery service: ${err.message}`);
-            }
-        });
-    }
     getClubs() {
         return __awaiter(this, void 0, void 0, function* () {
             try {

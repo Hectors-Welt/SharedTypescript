@@ -8,7 +8,6 @@ import { BraintreeSettings } from '../models/DiscoveryService/BraintreeSettings'
 import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum';
 import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend';
 import { ITemplateDesigner } from '../interfaces/ITemplateDesigner';
-import { CloudServicesSettings } from '../models/DiscoveryService/CloudServicesSettings';
 import { IDiscoveryService } from '../interfaces/IDiscoveryservice';
 import { ICustomerService } from '../interfaces/ICustomerservice';
 import { IEmployeesService } from '../interfaces/IEmployeesservice';
@@ -50,7 +49,6 @@ export declare class DiscoveryService implements IDiscoveryService {
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
-    getCloudServicesSettings(): Promise<CloudServicesSettings>;
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
     getContactCategories(): Promise<any>;
