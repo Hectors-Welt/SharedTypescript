@@ -3,4 +3,5 @@ export declare class PersonalData {
     surname: string;
     birthday: string;
     gender: string;
+    title: string;
 }
