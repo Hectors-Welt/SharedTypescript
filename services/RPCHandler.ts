@@ -26,8 +26,13 @@ export class RPCHandler {
         if (clazz) {
           result = await clazz[data.fn].call(clazz, ...data.args || []);
         }
+        try {
+          result = JSON.stringify(result);
+        } catch (err) {
+
+        }
         channel.sendToQueue(msg.properties.replyTo,
-          new Buffer(JSON.stringify(result)),
+          new Buffer(result),
           { correlationId: msg.properties.correlationId });
         channel.ack(msg);
       } catch (err) {
@@ -48,7 +53,12 @@ export class RPCHandler {
       channel.consume(queue, (msg) => {
         if (msg.properties.correlationId === uuid) {
           channel.close();
-          resolve(JSON.parse(msg.content.toString()));
+          let result = msg.content.toString();
+          try {
+            result = JSON.parse(result);
+          } catch (err) {
+          }
+          resolve(result);
         }
       }, { noAck: true });
       channel.sendToQueue(sendTo,
