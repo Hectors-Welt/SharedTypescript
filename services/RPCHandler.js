@@ -38,13 +38,11 @@ class RPCHandler {
                     channel.nack(msg);
                 }
             }));
-            console.log('Awaiting remote work...');
         });
     }
     send(sendTo, fn, args = [], replyTo = '') {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-                console.log(`Executing remote work: ${fn}(${args.join(', ')})`);
                 const channel = yield this.connection.createChannel();
                 const uuid = uuidv4();
                 const { queue } = yield channel.assertQueue(replyTo, {
@@ -55,9 +53,7 @@ class RPCHandler {
                 channel.consume(queue, (msg) => {
                     if (msg.properties.correlationId === uuid) {
                         channel.close();
-                        const result = JSON.parse(msg.content.toString());
-                        console.log(`Got remote work: ${JSON.stringify(result)}`);
-                        resolve(result);
+                        resolve(JSON.parse(msg.content.toString()));
                     }
                 }, { noAck: true });
                 channel.sendToQueue(sendTo, new Buffer(JSON.stringify({ fn, args })), {

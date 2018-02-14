@@ -1,7 +1,6 @@
 export declare class RPCHandler {
     private connection;
     private classes;
-    private queue;
     constructor(connection: any);
     addClass(clazz: any): void;
     removeClass(clazz: any): void;

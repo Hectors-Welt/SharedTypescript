@@ -2,7 +2,6 @@ import * as uuidv4 from 'uuid/v4';
 
 export class RPCHandler {
   private classes: Array<any>;
-  private queue: string;
 
   constructor(private connection: any) {
   }
@@ -35,12 +34,10 @@ export class RPCHandler {
         channel.nack(msg);
       }
     });
-    console.log('Awaiting remote work...');
   }
 
   async send(sendTo: string, fn: string, args: Array<any> = [], replyTo: string = '') {
     return new Promise(async (resolve) => {
-      console.log(`Executing remote work: ${fn}(${args.join(', ')})`);
       const channel = await this.connection.createChannel();
       const uuid = uuidv4();
       const { queue } = await channel.assertQueue(replyTo, {
@@ -51,9 +48,7 @@ export class RPCHandler {
       channel.consume(queue, (msg) => {
         if (msg.properties.correlationId === uuid) {
           channel.close();
-          const result = JSON.parse(msg.content.toString());
-          console.log(`Got remote work: ${JSON.stringify(result)}`);
-          resolve(result);
+          resolve(JSON.parse(msg.content.toString()));
         }
       }, { noAck: true });
       channel.sendToQueue(sendTo,
