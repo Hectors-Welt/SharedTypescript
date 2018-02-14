@@ -46,7 +46,7 @@ describe('DiscoveryService', () => {
       try {
         await this.service.getMongoDbSettings();
       } catch (err) {
-        expect(err.message).to.equal('failed to retrieve mongodb settings from discovery service: not reachable');
+        expect(err.message).to.equal('failed to retrieve mongodb settings from discovery service: invalid data. ensure host and port are present.');
       }
     });
   });
@@ -78,7 +78,7 @@ describe('DiscoveryService', () => {
       try {
         await this.service.getEventStoreSettings();
       } catch (err) {
-        expect(err.message).to.equal('failed to retrieve eventstore settings from discovery service: not reachable');
+        expect(err.message).to.equal('failed to retrieve eventstore settings from discovery service: invalid data. ensure host and ports are present.');
       }
     });
   });
