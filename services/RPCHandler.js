@@ -10,11 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuidv4 = require("uuid/v4");
 class RPCHandler {
-    constructor(connection, queue, classes) {
+    constructor(connection) {
         this.connection = connection;
-        this.queue = queue;
-        this.classes = classes;
-        this.initRPC();
     }
     addClass(clazz) {
         this.classes.push(clazz);
@@ -22,14 +19,14 @@ class RPCHandler {
     removeClass(clazz) {
         this.classes = this.classes.filter(c => c.constructor !== clazz.constructor);
     }
-    initRPC() {
+    receive(bindTo, classes) {
         return __awaiter(this, void 0, void 0, function* () {
             const channel = yield this.connection.createChannel();
-            yield channel.assertQueue(this.queue, { durable: true });
-            yield channel.consume(this.queue, (msg) => __awaiter(this, void 0, void 0, function* () {
+            yield channel.assertQueue(bindTo, { durable: true });
+            yield channel.consume(bindTo, (msg) => __awaiter(this, void 0, void 0, function* () {
                 try {
                     const data = JSON.parse(msg.content.toString());
-                    const clazz = this.classes.find(c => typeof c[data.fn] === 'function');
+                    const clazz = classes.find(c => typeof c[data.fn] === 'function');
                     let result = null;
                     if (clazz) {
                         result = yield clazz[data.fn].call(clazz, ...data.args || []);
@@ -41,10 +38,10 @@ class RPCHandler {
                     channel.nack(msg);
                 }
             }));
-            console.log('Awaiting remote work');
+            console.log('Awaiting remote work...');
         });
     }
-    sendRPC(fn, args = [], replyTo = '') {
+    send(sendTo, fn, args = [], replyTo = '') {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
                 console.log(`Executing remote work: ${fn}(${args.join(', ')})`);
@@ -59,11 +56,11 @@ class RPCHandler {
                     if (msg.properties.correlationId === uuid) {
                         channel.close();
                         const result = JSON.parse(msg.content.toString());
-                        console.log(`Get remote work: ${JSON.stringify(result)}`);
+                        console.log(`Got remote work: ${JSON.stringify(result)}`);
                         resolve(result);
                     }
                 }, { noAck: true });
-                channel.sendToQueue(this.queue, new Buffer(JSON.stringify({ fn, args })), {
+                channel.sendToQueue(sendTo, new Buffer(JSON.stringify({ fn, args })), {
                     correlationId: uuid,
                     replyTo: queue,
                 });
