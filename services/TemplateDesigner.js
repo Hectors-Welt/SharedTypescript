@@ -23,7 +23,7 @@ class TemplateDesigner {
                 const result = yield popsicle.request({
                     url: `${this.baseUrl}/render/${templateId}?type=${type}${asUrl ? '&url' : ''}`,
                     method: 'POST',
-                    headers: Object.assign({}, ApiClient_1.ApiClient.headers, { referer: this.baseUrl }),
+                    headers: Object.assign({}, ApiClient_1.ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
                     body: data,
                 })
                     .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next());
@@ -43,7 +43,7 @@ class TemplateDesigner {
                 const result = yield popsicle.request({
                     url: `${this.baseUrl}/renderUrl${asUrl ? '?url' : ''}`,
                     method: 'POST',
-                    headers: Object.assign({}, ApiClient_1.ApiClient.headers, { referer: this.baseUrl }),
+                    headers: Object.assign({}, ApiClient_1.ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
                     body: {
                         url,
                         data,
