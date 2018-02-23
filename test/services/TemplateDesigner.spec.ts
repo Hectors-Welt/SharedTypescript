@@ -30,7 +30,7 @@ describe('TemplateDesigner', () => {
     it('should reject when data not available', async () => {
       this.nock
       .post('/render/123?type=pdf&url', {})
-      .reply(404);
+      .replyWithError(404);
 
       try {
         await this.service.render({}, 123, RenderFileType.PDF, true);
@@ -53,7 +53,7 @@ describe('TemplateDesigner', () => {
     it('should reject when data not available', async () => {
       this.nock
       .post('/render/123?type=png', {})
-      .reply(404);
+      .replyWithError(404);
 
       try {
         await this.service.render({}, 123, RenderFileType.PNG, false);
@@ -78,7 +78,7 @@ describe('TemplateDesigner', () => {
     it('should reject when data not available', async () => {
       this.nock
       .post('/renderUrl?url', { url: 'http://test.de', data: {} })
-      .reply(404);
+      .replyWithError(404);
 
       try {
         await this.service.renderUrl('http://test.de', {}, false);
@@ -101,7 +101,7 @@ describe('TemplateDesigner', () => {
     it('should reject when data not available', async () => {
       this.nock
       .post('/renderUrl', { url: 'http://test.de', data: {} })
-      .reply(404);
+      .replyWithError(404);
 
       try {
         await this.service.renderUrl('http://test.de', {}, false);
@@ -124,7 +124,7 @@ describe('TemplateDesigner', () => {
     it('should reject when data not available', async () => {
       this.nock
       .get('/models')
-      .reply(404);
+      .replyWithError(404);
 
       try {
         await this.service.getModels();
@@ -147,7 +147,7 @@ describe('TemplateDesigner', () => {
     it('should reject when data not available', async () => {
       this.nock
       .get('/model/123')
-      .reply(404);
+      .replyWithError(404);
 
       try {
         await this.service.getModel(123);
@@ -170,7 +170,7 @@ describe('TemplateDesigner', () => {
     it('should reject when data not available', async () => {
       this.nock
       .put('/model/123')
-      .reply(404);
+      .replyWithError(404);
 
       try {
         await this.service.updateModel(123, {});
@@ -193,7 +193,7 @@ describe('TemplateDesigner', () => {
     it('should reject when data not available', async () => {
       this.nock
       .post('/model/123')
-      .reply(404);
+      .replyWithError(404);
 
       try {
         await this.service.createModel(123, {});
