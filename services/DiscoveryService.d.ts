@@ -21,6 +21,7 @@ import { IArticlesService } from '../interfaces/IArticlesservice';
 import { IMailingService } from '../interfaces/IMailingservice';
 import { ISMSService } from '../interfaces/ISMSservice';
 import { ICourseManagementService } from '../interfaces/ICourseManagamentservice';
+import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 export declare class DiscoveryService implements IDiscoveryService {
     baseUrl: string;
     host: string;
@@ -39,6 +40,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private mailingService;
     private smsService;
     private templateDesigner;
+    private markdownEditor;
     private courseManagementService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
@@ -66,6 +68,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getCheckinOutService(): Promise<ICheckinOutService>;
     getArticlesService(): Promise<IArticlesService>;
     getTemplateDesigner(): Promise<ITemplateDesigner>;
+    getMarkdownEditor(): Promise<IMarkdownEditor>;
     getCourseManagementService(): Promise<ICourseManagementService>;
     private registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType);
 }

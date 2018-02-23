@@ -18,6 +18,7 @@ import { IArticlesService } from './IArticlesService'
 import { IMailingService } from './IMailingService'
 import { ITemplateDesigner } from './ITemplateDesigner'
 import { ICourseManagementService } from './ICourseManagamentService';
+import { IMarkdownEditor } from './IMarkdownEditor';
 
 export interface IDiscoveryService {
   port: number;
@@ -63,6 +64,8 @@ export interface IDiscoveryService {
   getArticlesService(): Promise<IArticlesService>;
 
   getTemplateDesigner(): Promise<ITemplateDesigner>;
+
+  getMarkdownEditor(): Promise<IMarkdownEditor>;
 
   getCourseManagementService(): Promise<ICourseManagementService>;
 

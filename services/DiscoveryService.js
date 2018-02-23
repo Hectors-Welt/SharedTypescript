@@ -29,6 +29,7 @@ const Articlesservice_1 = require("./Articlesservice");
 const Mailingservice_1 = require("./Mailingservice");
 const SMSservice_1 = require("./SMSservice");
 const CourseManagementservice_1 = require("./CourseManagementservice");
+const MarkdownEditor_1 = require("./MarkdownEditor");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -342,6 +343,21 @@ class DiscoveryService {
             }
             catch (err) {
                 throw new Error(`failed to retrieve template designer from discovery service: ${err.message}`);
+            }
+        });
+    }
+    getMarkdownEditor() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.markdownEditor) {
+                    return this.markdownEditor;
+                }
+                const templateDesigner = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+                this.markdownEditor = new MarkdownEditor_1.MarkdownEditor(templateDesigner.host, templateDesigner.port);
+                return this.markdownEditor;
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve markdown editor from discovery service: ${err.message}`);
             }
         });
     }

@@ -18,6 +18,7 @@ import { IArticlesService } from './IArticlesService';
 import { IMailingService } from './IMailingService';
 import { ITemplateDesigner } from './ITemplateDesigner';
 import { ICourseManagementService } from './ICourseManagamentService';
+import { IMarkdownEditor } from './IMarkdownEditor';
 export interface IDiscoveryService {
     port: number;
     host: string;
@@ -42,6 +43,7 @@ export interface IDiscoveryService {
     getCheckinOutService(): Promise<ICheckinOutService>;
     getArticlesService(): Promise<IArticlesService>;
     getTemplateDesigner(): Promise<ITemplateDesigner>;
+    getMarkdownEditor(): Promise<IMarkdownEditor>;
     getCourseManagementService(): Promise<ICourseManagementService>;
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;

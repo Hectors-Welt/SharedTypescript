@@ -35,6 +35,8 @@ import { MailingService } from './Mailingservice';
 import { SMSService } from './SMSservice';
 import { ICourseManagementService } from '../interfaces/ICourseManagamentservice';
 import { CourseManagementService } from './CourseManagementservice';
+import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
+import { MarkdownEditor } from './MarkdownEditor';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -54,6 +56,7 @@ export class DiscoveryService implements IDiscoveryService {
   private mailingService: IMailingService;
   private smsService: ISMSService;
   private templateDesigner: ITemplateDesigner;
+  private markdownEditor: IMarkdownEditor;
   private courseManagementService: ICourseManagementService;
 
   constructor(host: string, port: number) {
@@ -320,6 +323,19 @@ export class DiscoveryService implements IDiscoveryService {
       return this.templateDesigner;
     } catch (err) {
       throw new Error(`failed to retrieve template designer from discovery service: ${err.message}`);
+    }
+  }
+
+  async getMarkdownEditor(): Promise<IMarkdownEditor> {
+    try {
+      if (this.markdownEditor) {
+        return this.markdownEditor;
+      }
+      const templateDesigner = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+      this.markdownEditor = new MarkdownEditor(templateDesigner.host, templateDesigner.port);
+      return this.markdownEditor;
+    } catch (err) {
+      throw new Error(`failed to retrieve markdown editor from discovery service: ${err.message}`);
     }
   }
 
