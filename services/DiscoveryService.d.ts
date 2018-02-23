@@ -49,6 +49,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private courseManagementService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
+    invalidateCache(property: string): void;
     getLocationInfo(): Promise<LocationInfo>;
     getEnvironment(): Promise<any>;
     getEventStoreSettings(): Promise<EventStoreSettings>;

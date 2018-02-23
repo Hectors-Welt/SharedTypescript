@@ -26,6 +26,8 @@ export interface IDiscoveryService {
 
   startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType);
 
+  invalidateCache(property: string);
+
   getLocationInfo(): Promise<LocationInfo>;
 
   getEnvironment(): Promise<any>;

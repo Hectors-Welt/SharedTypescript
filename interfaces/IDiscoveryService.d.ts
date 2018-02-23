@@ -23,6 +23,7 @@ export interface IDiscoveryService {
     host: string;
     baseUrl: string;
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): any;
+    invalidateCache(property: string): any;
     getLocationInfo(): Promise<LocationInfo>;
     getEnvironment(): Promise<any>;
     getEventStoreSettings(): Promise<EventStoreSettings>;

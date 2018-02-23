@@ -75,6 +75,10 @@ export class DiscoveryService implements IDiscoveryService {
     this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
   }
 
+  invalidateCache(property: string) {
+    if (this[property]) this[property] = null;
+  }
+
   async getLocationInfo(): Promise<LocationInfo> {
     try {
       if (!this.locationInfo) {

@@ -40,6 +40,10 @@ class DiscoveryService {
             this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
         });
     }
+    invalidateCache(property) {
+        if (this[property])
+            this[property] = null;
+    }
     getLocationInfo() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
