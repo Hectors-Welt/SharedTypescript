@@ -43,13 +43,19 @@ export class DiscoveryService implements IDiscoveryService {
   public host: string;
   public port: number;
   public timer: NodeJS.Timer;
+  private locationInfo: LocationInfo;
+  private environment: any;
+  private eventStoreSettings: EventStoreSettings;
+  private mongoDbSettings: MongoDbSettings;
+  private rabbitMqSettings: RabbitMqSettings;
+  private hectorDbSettings: HectorDbSettings;
+  private braintreeSettings: BraintreeSettings;
   private customerService: ICustomerService;
   private employeesService: IEmployeesService;
   private membershipService: IMembershipService;
   private twoFactorAuthenticationService: ITwoFactorAuthenticationService;
   private pushNotificationService: IPushNotificationService;
   private ratingService: IRatingService;
-  private legacyAppsiteBackend: ILegacyAppsiteBackend;
   private accountingService: IAccountingService;
   private checkinOutService: ICheckinOutService;
   private articlesService: IArticlesService;
@@ -71,57 +77,99 @@ export class DiscoveryService implements IDiscoveryService {
 
   async getLocationInfo(): Promise<LocationInfo> {
     try {
-      return new LocationInfo(await ApiClient.GET(`${this.baseUrl}/clubInfo`));
+      if (!this.locationInfo) {
+        this.locationInfo = await new LocationInfo(await ApiClient.GET(`${this.baseUrl}/clubInfo`));
+      }
+      return this.locationInfo;
     } catch (err) {
-      throw new Error(`failed to retrieve location info from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve location info from discovery service: ${err.message}`
+      };
     }
   }
 
   async getEnvironment(): Promise<any> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/environment`);
+      if (!this.environment) {
+        this.environment = await ApiClient.GET(`${this.baseUrl}/environment`);
+      }
+      return this.environment;
     } catch (err) {
-      throw new Error(`failed to retrieve environment from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve environment from discovery service: ${err.message}`
+      };
     }
   }
 
   async getEventStoreSettings(): Promise<EventStoreSettings> {
     try {
-      return new EventStoreSettings(await ApiClient.GET(`${this.baseUrl}/eventstore`));
+      if (!this.eventStoreSettings) {
+        this.eventStoreSettings = new EventStoreSettings(await ApiClient.GET(`${this.baseUrl}/eventstore`));
+      }
+      return this.eventStoreSettings;
     } catch (err) {
-      throw new Error(`failed to retrieve eventstore settings from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve eventstore settings from discovery service: ${err.message}`
+      };
     }
   }
 
   async getMongoDbSettings(): Promise<MongoDbSettings> {
     try {
-      return new MongoDbSettings(await ApiClient.GET(`${this.baseUrl}/mongodb`));
+      if (!this.mongoDbSettings) {
+        this.mongoDbSettings = new MongoDbSettings(await ApiClient.GET(`${this.baseUrl}/mongodb`));
+      }
+      return this.mongoDbSettings;
     } catch (err) {
-      throw new Error(`failed to retrieve mongodb settings from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve mongodb settings from discovery service: ${err.message}`
+      };
     }
   }
 
   async getRabbitMqSettings(): Promise<RabbitMqSettings> {
     try {
-      return new RabbitMqSettings(await ApiClient.GET(`${this.baseUrl}/rabbitmq`));
+      if (!this.rabbitMqSettings) {
+        this.rabbitMqSettings = new RabbitMqSettings(await ApiClient.GET(`${this.baseUrl}/rabbitmq`));
+      }
+      return this.rabbitMqSettings;
     } catch (err) {
-      throw new Error(`failed to retrieve rabbitmq settings from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`
+      };
     }
   }
 
   async getHectorDbSettings(): Promise<HectorDbSettings> {
     try {
-      return new HectorDbSettings(await ApiClient.GET(`${this.baseUrl}/connection`));
+      if (!this.hectorDbSettings) {
+        this.hectorDbSettings = new HectorDbSettings(await ApiClient.GET(`${this.baseUrl}/connection`));
+      }
+      return this.hectorDbSettings;
     } catch (err) {
-      throw new Error(`failed to retrieve hector db settings from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve hector db settings from discovery service: ${err.message}`
+      };
     }
   }
 
   async getBraintreeSettings(): Promise<BraintreeSettings> {
     try {
-      return new BraintreeSettings(await ApiClient.GET(`${this.baseUrl}/braintree`))
+      if (!this.braintreeSettings) {
+        this.braintreeSettings = new BraintreeSettings(await ApiClient.GET(`${this.baseUrl}/braintree`));
+      }
+      return this.braintreeSettings;
     } catch (err) {
-      throw new Error(`failed to retrieve hector braintree from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve hector braintree from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -166,7 +214,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.mailingService = new MailingService(mailingService.host, mailingService.port);
       return this.mailingService;
     } catch (err) {
-      throw new Error(`failed to retrieve mailing service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve mailing service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -179,7 +230,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.smsService = new SMSService(smsService.host, smsService.port);
       return this.smsService;
     } catch (err) {
-      throw new Error(`failed to retrieve sms service from discovery service: ${err.message}`)
+      throw {
+        status: 503,
+        message: `failed to retrieve sms service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -192,7 +246,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.customerService = new CustomerService(customerService.host, customerService.port);
       return this.customerService;
     } catch (err) {
-      throw new Error(`failed to retrieve customer service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve customer service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -205,7 +262,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.employeesService = new EmployeesService(employeesService.host, employeesService.port);
       return this.employeesService;
     } catch (err) {
-      throw new Error(`failed to retrieve employees service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve employees service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -218,7 +278,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.membershipService = new MembershipService(membershipService.host, membershipService.port);
       return this.membershipService;
     } catch (err) {
-      throw new Error(`failed to retrieve membership service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve membership service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -231,7 +294,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port);
       return this.twoFactorAuthenticationService;
     } catch (err) {
-      throw new Error(`failed to retrieve two factor authentication service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve two factor authentication service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -244,7 +310,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.pushNotificationService = new PushNotificationService(pushNotificationService.host, pushNotificationService.port);
       return this.pushNotificationService;
     } catch (err) {
-      throw new Error(`failed to retrieve push notification service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve push notification service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -257,20 +326,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.ratingService = new RatingService(ratingService.host, ratingService.port);
       return this.ratingService;
     } catch (err) {
-      throw new Error(`failed to retrieve rating service from discovery service: ${err.message}`);
-    }
-  }
-
-  async getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend> {
-    try {
-      if (this.legacyAppsiteBackend) {
-        return this.legacyAppsiteBackend;
-      }
-      const legacyAppsiteBackend = await ApiClient.GET(`${this.baseUrl}/LegacyAppsiteBackend`);
-      this.legacyAppsiteBackend = new LegacyAppsiteBackend(legacyAppsiteBackend.host, legacyAppsiteBackend.port);
-      return this.legacyAppsiteBackend;
-    } catch (err) {
-      throw new Error(`failed to retrieve legacy appsite backend from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve rating service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -283,7 +342,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.accountingService = new AccountingService(accountingService.host, accountingService.port);
       return this.accountingService;
     } catch (err) {
-      throw new Error(`failed to retrieve accounting service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve accounting service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -296,7 +358,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.checkinOutService = new CheckinOutService(checkinOutService.host, checkinOutService.port);
       return this.checkinOutService;
     } catch (err) {
-      throw new Error(`failed to retrieve checkinout service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve checkinout service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -309,7 +374,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.articlesService = new ArticlesService(articlesService.host, articlesService.port);
       return this.articlesService;
     } catch (err) {
-      throw new Error(`failed to retrieve articles service from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve articles service from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -322,7 +390,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.templateDesigner = new TemplateDesigner(templateDesigner.host, templateDesigner.port);
       return this.templateDesigner;
     } catch (err) {
-      throw new Error(`failed to retrieve template designer from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve template designer from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -331,11 +402,14 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.markdownEditor) {
         return this.markdownEditor;
       }
-      const templateDesigner = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
-      this.markdownEditor = new MarkdownEditor(templateDesigner.host, templateDesigner.port);
+      const markdownEditor = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+      this.markdownEditor = new MarkdownEditor(markdownEditor.host, markdownEditor.port);
       return this.markdownEditor;
     } catch (err) {
-      throw new Error(`failed to retrieve markdown editor from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve markdown editor from discovery service: ${err.message}`
+      };
     }
   }
 
@@ -348,7 +422,10 @@ export class DiscoveryService implements IDiscoveryService {
       this.courseManagementService = new CourseManagementService(courseManagementService.host, courseManagementService.port);
       return this.courseManagementService;
     } catch (err) {
-      throw new Error(`failed to retrieve template designer from discovery service: ${err.message}`);
+      throw {
+        status: 503,
+        message: `failed to retrieve course management service from discovery service: ${err.message}`
+      };
     }
   }
 

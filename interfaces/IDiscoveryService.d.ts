@@ -11,7 +11,6 @@ import { IMembershipService } from './IMembershipService';
 import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationService';
 import { IPushNotificationService } from './IPushNotificationService';
 import { IRatingService } from './IRatingService';
-import { ILegacyAppsiteBackend } from './ILegacyAppsiteBackend';
 import { IAccountingService } from './IAccountingService';
 import { ICheckinOutService } from './ICheckinOutService';
 import { IArticlesService } from './IArticlesService';
@@ -38,7 +37,6 @@ export interface IDiscoveryService {
     getTwoFactorAuthenticationService(): Promise<ITwoFactorAuthenticationService>;
     getPushNotificationService(): Promise<IPushNotificationService>;
     getRatingService(): Promise<IRatingService>;
-    getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>;
     getAccountingService(): Promise<IAccountingService>;
     getCheckinOutService(): Promise<ICheckinOutService>;
     getArticlesService(): Promise<IArticlesService>;
