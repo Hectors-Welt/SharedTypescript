@@ -1,8 +1,11 @@
+import { Fee } from "./Fee";
+import { Limit } from "./Limit";
 export declare class Contract {
     id: number;
     name: string;
     type: string;
     pricePerInterval: number;
+    blockUnitsAvailable?: number;
     interval: string;
     duration: string;
     renewal: string;
@@ -14,4 +17,8 @@ export declare class Contract {
     isMainContract: boolean;
     cancelledOn: string;
     cancelledTo: string;
+    entranceFee?: number;
+    partialFee?: number;
+    additionalFees: Fee[];
+    limits: Limit[];
 }
