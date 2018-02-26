@@ -14,7 +14,6 @@ const MongoDbSettings_1 = require("../models/DiscoveryService/MongoDbSettings");
 const RabbitMqSettings_1 = require("../models/DiscoveryService/RabbitMqSettings");
 const HectorDbSettings_1 = require("../models/DiscoveryService/HectorDbSettings");
 const BraintreeSettings_1 = require("../models/DiscoveryService/BraintreeSettings");
-const LegacyAppsiteBackend_1 = require("./LegacyAppsiteBackend");
 const TemplateDesigner_1 = require("./TemplateDesigner");
 const ApiClient_1 = require("./ApiClient");
 const Membershipservice_1 = require("./Membershipservice");
@@ -41,73 +40,119 @@ class DiscoveryService {
             this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
         });
     }
+    invalidateCache(property) {
+        if (this[property])
+            this[property] = null;
+    }
     getLocationInfo() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return new LocationInfo_1.LocationInfo(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/clubInfo`));
+                if (!this.locationInfo) {
+                    this.locationInfo = yield new LocationInfo_1.LocationInfo(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/clubInfo`));
+                }
+                return this.locationInfo;
             }
             catch (err) {
-                throw new Error(`failed to retrieve location info from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve location info from discovery service: ${err.message}`
+                };
             }
         });
     }
     getEnvironment() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/environment`);
+                if (!this.environment) {
+                    this.environment = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/environment`);
+                }
+                return this.environment;
             }
             catch (err) {
-                throw new Error(`failed to retrieve environment from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve environment from discovery service: ${err.message}`
+                };
             }
         });
     }
     getEventStoreSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return new EventStoreSettings_1.EventStoreSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/eventstore`));
+                if (!this.eventStoreSettings) {
+                    this.eventStoreSettings = new EventStoreSettings_1.EventStoreSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/eventstore`));
+                }
+                return this.eventStoreSettings;
             }
             catch (err) {
-                throw new Error(`failed to retrieve eventstore settings from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve eventstore settings from discovery service: ${err.message}`
+                };
             }
         });
     }
     getMongoDbSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return new MongoDbSettings_1.MongoDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/mongodb`));
+                if (!this.mongoDbSettings) {
+                    this.mongoDbSettings = new MongoDbSettings_1.MongoDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/mongodb`));
+                }
+                return this.mongoDbSettings;
             }
             catch (err) {
-                throw new Error(`failed to retrieve mongodb settings from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve mongodb settings from discovery service: ${err.message}`
+                };
             }
         });
     }
     getRabbitMqSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return new RabbitMqSettings_1.RabbitMqSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/rabbitmq`));
+                if (!this.rabbitMqSettings) {
+                    this.rabbitMqSettings = new RabbitMqSettings_1.RabbitMqSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/rabbitmq`));
+                }
+                return this.rabbitMqSettings;
             }
             catch (err) {
-                throw new Error(`failed to retrieve rabbitmq settings from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`
+                };
             }
         });
     }
     getHectorDbSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return new HectorDbSettings_1.HectorDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/connection`));
+                if (!this.hectorDbSettings) {
+                    this.hectorDbSettings = new HectorDbSettings_1.HectorDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/connection`));
+                }
+                return this.hectorDbSettings;
             }
             catch (err) {
-                throw new Error(`failed to retrieve hector db settings from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve hector db settings from discovery service: ${err.message}`
+                };
             }
         });
     }
     getBraintreeSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return new BraintreeSettings_1.BraintreeSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/braintree`));
+                if (!this.braintreeSettings) {
+                    this.braintreeSettings = new BraintreeSettings_1.BraintreeSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/braintree`));
+                }
+                return this.braintreeSettings;
             }
             catch (err) {
-                throw new Error(`failed to retrieve hector braintree from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve hector braintree from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -162,7 +207,10 @@ class DiscoveryService {
                 return this.mailingService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve mailing service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve mailing service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -177,7 +225,10 @@ class DiscoveryService {
                 return this.smsService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve sms service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve sms service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -192,7 +243,10 @@ class DiscoveryService {
                 return this.customerService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve customer service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve customer service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -207,7 +261,10 @@ class DiscoveryService {
                 return this.employeesService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve employees service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve employees service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -222,7 +279,10 @@ class DiscoveryService {
                 return this.membershipService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve membership service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve membership service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -237,7 +297,10 @@ class DiscoveryService {
                 return this.twoFactorAuthenticationService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve two factor authentication service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve two factor authentication service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -252,7 +315,10 @@ class DiscoveryService {
                 return this.pushNotificationService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve push notification service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve push notification service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -267,22 +333,10 @@ class DiscoveryService {
                 return this.ratingService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve rating service from discovery service: ${err.message}`);
-            }
-        });
-    }
-    getLegacyAppsiteBackend() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                if (this.legacyAppsiteBackend) {
-                    return this.legacyAppsiteBackend;
-                }
-                const legacyAppsiteBackend = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/LegacyAppsiteBackend`);
-                this.legacyAppsiteBackend = new LegacyAppsiteBackend_1.LegacyAppsiteBackend(legacyAppsiteBackend.host, legacyAppsiteBackend.port);
-                return this.legacyAppsiteBackend;
-            }
-            catch (err) {
-                throw new Error(`failed to retrieve legacy appsite backend from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve rating service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -297,7 +351,10 @@ class DiscoveryService {
                 return this.accountingService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve accounting service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve accounting service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -312,7 +369,10 @@ class DiscoveryService {
                 return this.checkinOutService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve checkinout service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve checkinout service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -327,7 +387,10 @@ class DiscoveryService {
                 return this.articlesService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve articles service from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve articles service from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -342,7 +405,10 @@ class DiscoveryService {
                 return this.templateDesigner;
             }
             catch (err) {
-                throw new Error(`failed to retrieve template designer from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve template designer from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -352,12 +418,15 @@ class DiscoveryService {
                 if (this.markdownEditor) {
                     return this.markdownEditor;
                 }
-                const templateDesigner = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
-                this.markdownEditor = new MarkdownEditor_1.MarkdownEditor(templateDesigner.host, templateDesigner.port);
+                const markdownEditor = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+                this.markdownEditor = new MarkdownEditor_1.MarkdownEditor(markdownEditor.host, markdownEditor.port);
                 return this.markdownEditor;
             }
             catch (err) {
-                throw new Error(`failed to retrieve markdown editor from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve markdown editor from discovery service: ${err.message}`
+                };
             }
         });
     }
@@ -372,7 +441,10 @@ class DiscoveryService {
                 return this.courseManagementService;
             }
             catch (err) {
-                throw new Error(`failed to retrieve template designer from discovery service: ${err.message}`);
+                throw {
+                    status: 503,
+                    message: `failed to retrieve course management service from discovery service: ${err.message}`
+                };
             }
         });
     }

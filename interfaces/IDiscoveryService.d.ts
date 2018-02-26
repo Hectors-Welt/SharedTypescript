@@ -11,7 +11,6 @@ import { IMembershipService } from './IMembershipService';
 import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationService';
 import { IPushNotificationService } from './IPushNotificationService';
 import { IRatingService } from './IRatingService';
-import { ILegacyAppsiteBackend } from './ILegacyAppsiteBackend';
 import { IAccountingService } from './IAccountingService';
 import { ICheckinOutService } from './ICheckinOutService';
 import { IArticlesService } from './IArticlesService';
@@ -24,6 +23,7 @@ export interface IDiscoveryService {
     host: string;
     baseUrl: string;
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): any;
+    invalidateCache(property: string): any;
     getLocationInfo(): Promise<LocationInfo>;
     getEnvironment(): Promise<any>;
     getEventStoreSettings(): Promise<EventStoreSettings>;
@@ -38,7 +38,6 @@ export interface IDiscoveryService {
     getTwoFactorAuthenticationService(): Promise<ITwoFactorAuthenticationService>;
     getPushNotificationService(): Promise<IPushNotificationService>;
     getRatingService(): Promise<IRatingService>;
-    getLegacyAppsiteBackend(): Promise<ILegacyAppsiteBackend>;
     getAccountingService(): Promise<IAccountingService>;
     getCheckinOutService(): Promise<ICheckinOutService>;
     getArticlesService(): Promise<IArticlesService>;
