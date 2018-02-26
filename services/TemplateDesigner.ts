@@ -30,10 +30,10 @@ export class TemplateDesigner implements ITemplateDesigner {
     }
   }
 
-  async renderUrl(url: string, data: any, asUrl?: boolean): Promise<any> {
+  async renderUrl(url: string, data: any, asUrl?: boolean, persist?: boolean): Promise<any> {
     try {
       const result = await popsicle.request({
-        url: `${this.baseUrl}/renderUrl${asUrl ? '?url' : ''}`,
+        url: `${this.baseUrl}/renderUrl${asUrl ? '?url' : ''}${persist ? '&persist' : ''}`,
         method: 'POST',
         headers: Object.assign({}, ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
         body: {

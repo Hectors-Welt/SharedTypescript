@@ -16,7 +16,7 @@ export class RPCHandler {
 
   async receive(bindTo: string, classes?: Array<any>): Promise<any> {
     const channel = await this.connection.createChannel();
-    
+
     await channel.assertQueue(bindTo, { durable: true });
     await channel.consume(bindTo, async (msg) => {
       try {
