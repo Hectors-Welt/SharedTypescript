@@ -16,21 +16,24 @@ export class RPCHandler {
 
   async receive(bindTo: string, classes?: Array<any>): Promise<any> {
     const channel = await this.connection.createChannel();
-
+    
     await channel.assertQueue(bindTo, { durable: true });
     await channel.consume(bindTo, async (msg) => {
       try {
         const data = JSON.parse(msg.content.toString());
-        const clazz = classes.find(c => typeof c[data.fn] === 'function');
+        let fn;
+        classes.forEach(c => fn = c.rpcMethods.find(f => f.name === data.fn));
+
         let result = null;
-        if (clazz) {
-          result = await clazz[data.fn].call(clazz, ...data.args || []);
+
+        if (fn) {
+          result = await fn.call(fn, ...data.args);
         }
         try {
           result = JSON.stringify(result);
         } catch (err) {
-
         }
+
         channel.sendToQueue(msg.properties.replyTo,
           new Buffer(result),
           { correlationId: msg.properties.correlationId });
