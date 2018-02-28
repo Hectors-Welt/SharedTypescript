@@ -1,7 +1,9 @@
-export interface IMarkdownEditor {
-  getMarkdowns(): Promise<Array<any>>;
+import { MarkdownModel } from '../models/MarkdownEditor/MarkdownModel';
 
-  getMarkdown(id: string): Promise<any>;
+export interface IMarkdownEditor {
+  getMarkdowns(): Promise<Array<MarkdownModel>>;
+
+  getMarkdown(id: string): Promise<MarkdownModel>;
 
   createMarkdown(data: any): Promise<any>;
 

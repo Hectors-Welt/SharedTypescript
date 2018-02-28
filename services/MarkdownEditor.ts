@@ -1,6 +1,7 @@
 import * as popsicle from 'popsicle';
 import { ApiClient } from './ApiClient';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
+import { MarkdownModel } from '../models/MarkdownEditor/MarkdownModel';
 
 export class MarkdownEditor implements IMarkdownEditor {
   baseUrl: string;
@@ -9,7 +10,7 @@ export class MarkdownEditor implements IMarkdownEditor {
     this.baseUrl = `http://${host}:${port}/api`;
   }
 
-  async getMarkdowns(): Promise<Array<any>> {
+  async getMarkdowns(): Promise<Array<MarkdownModel>> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/md`);
     } catch (err) {
@@ -17,7 +18,7 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
-  async getMarkdown(id: string): Promise<any> {
+  async getMarkdown(id: string): Promise<MarkdownModel> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/md/${id}`);
     } catch (err) {
