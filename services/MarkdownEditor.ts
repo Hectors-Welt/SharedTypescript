@@ -50,10 +50,15 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
-  async renderHtml(id: string): Promise<any> {
+  async renderHtml(id: string, asUrl?: boolean): Promise<any> {
+    const url = `${this.baseUrl}/md/${id}/html`;
     try {
+      if (asUrl) {
+        return url;
+      }
+
       const result = await popsicle.request({
-        url: `${this.baseUrl}/md/${id}/html`,
+        url,
         method: 'GET',
       });
 
@@ -63,10 +68,14 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
-  async renderPdf(id: string): Promise<any> {
+  async renderPdf(id: string, asUrl?: boolean): Promise<any> {
+    const url = `${this.baseUrl}/md/${id}/pdf`;
     try {
+      if(asUrl) {
+        return url;
+      }
       const result = await popsicle.request({
-        url: `${this.baseUrl}/md/${id}/pdf`,
+        url,
         method: 'GET',
       });
       return result.body;

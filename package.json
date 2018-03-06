@@ -5,7 +5,7 @@
     "clean": "del-cli 'coverage' '**/*.js' '**/*.d.ts' '!node_modules/**'",
     "build": "tsc -p ./",
     "add": "git add --all",
-    "test": "mocha --require ts-node/register './test/**/*.spec.ts' --recursive --exit",
+    "test": "npm run clean && mocha --require ts-node/register './test/**/*.spec.ts' --recursive --exit",
     "cover": "npm run clean && nyc --all --reporter=html --reporter=text-summary npm test"
   },
   "pre-commit": {

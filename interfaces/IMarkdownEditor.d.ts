@@ -5,6 +5,6 @@ export interface IMarkdownEditor {
     createMarkdown(data: any): Promise<any>;
     updateMarkdown(id: string, data: any): Promise<any>;
     deleteMarkdown(id: string): Promise<any>;
-    renderHtml(id: string): Promise<any>;
-    renderPdf(id: string): Promise<any>;
+    renderHtml(id: string, asUrl?: boolean): Promise<any>;
+    renderPdf(id: string, asUrl?: boolean): Promise<any>;
 }
