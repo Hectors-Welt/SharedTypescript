@@ -15,6 +15,11 @@ describe('MarkdownEditor', () => {
   });
 
   describe('renderPdf', () => {
+    it('should render as url', async () => {
+        const data = await this.service.renderPdf(123, true);
+        expect(data).to.equal('http://localhost:12345/api/md/123/pdf');
+    });
+
     it('should render', async () => {
       this.nock
       .get('/md/123/pdf')
@@ -33,6 +38,34 @@ describe('MarkdownEditor', () => {
         await this.service.renderPdf(321);
       } catch (err) {
         expect(err.message).to.equal('failed to call renderPdf on markdown editor');
+      }
+    });
+  });
+
+  describe('renderHtml', () => {
+    it('should render as url', async () => {
+      const data = await this.service.renderHtml(123, true);
+      expect(data).to.equal('http://localhost:12345/api/md/123/html');
+    });
+
+    it('should render', async () => {
+      this.nock
+      .get('/md/123/html')
+      .reply('');
+
+      const data = await this.service.renderHtml(123);
+      expect(data).to.equal('');
+    });
+
+    it('should not render', async () => {
+      this.nock
+      .get('/md/321/html')
+      .replyWithError(404);
+
+      try {
+        await this.service.renderHtml(321);
+      } catch (err) {
+        expect(err.message).to.equal('failed to call renderHtml on markdown editor');
       }
     });
   });

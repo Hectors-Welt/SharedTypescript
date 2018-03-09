@@ -1,6 +1,7 @@
 import * as popsicle from 'popsicle';
 import { ApiClient } from './ApiClient';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
+import { MarkdownModel } from '../models/MarkdownEditor/MarkdownModel';
 
 export class MarkdownEditor implements IMarkdownEditor {
   baseUrl: string;
@@ -9,7 +10,7 @@ export class MarkdownEditor implements IMarkdownEditor {
     this.baseUrl = `http://${host}:${port}/api`;
   }
 
-  async getMarkdowns(): Promise<Array<any>> {
+  async getMarkdowns(): Promise<Array<MarkdownModel>> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/md`);
     } catch (err) {
@@ -17,7 +18,7 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
-  async getMarkdown(id: string): Promise<any> {
+  async getMarkdown(id: string): Promise<MarkdownModel> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/md/${id}`);
     } catch (err) {
@@ -49,10 +50,15 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
-  async renderHtml(id: string): Promise<any> {
+  async renderHtml(id: string, asUrl?: boolean): Promise<any> {
+    const url = `${this.baseUrl}/md/${id}/html`;
     try {
+      if (asUrl) {
+        return url;
+      }
+
       const result = await popsicle.request({
-        url: `${this.baseUrl}/md/${id}/html`,
+        url,
         method: 'GET',
       });
 
@@ -62,10 +68,14 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
-  async renderPdf(id: string): Promise<any> {
+  async renderPdf(id: string, asUrl?: boolean): Promise<any> {
+    const url = `${this.baseUrl}/md/${id}/pdf`;
     try {
+      if(asUrl) {
+        return url;
+      }
       const result = await popsicle.request({
-        url: `${this.baseUrl}/md/${id}/pdf`,
+        url,
         method: 'GET',
       });
       return result.body;

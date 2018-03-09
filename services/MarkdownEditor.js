@@ -66,11 +66,15 @@ class MarkdownEditor {
             }
         });
     }
-    renderHtml(id) {
+    renderHtml(id, asUrl) {
         return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.baseUrl}/md/${id}/html`;
             try {
+                if (asUrl) {
+                    return url;
+                }
                 const result = yield popsicle.request({
-                    url: `${this.baseUrl}/md/${id}/html`,
+                    url,
                     method: 'GET',
                 });
                 return result.body;
@@ -80,11 +84,15 @@ class MarkdownEditor {
             }
         });
     }
-    renderPdf(id) {
+    renderPdf(id, asUrl) {
         return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.baseUrl}/md/${id}/pdf`;
             try {
+                if (asUrl) {
+                    return url;
+                }
                 const result = yield popsicle.request({
-                    url: `${this.baseUrl}/md/${id}/pdf`,
+                    url,
                     method: 'GET',
                 });
                 return result.body;
