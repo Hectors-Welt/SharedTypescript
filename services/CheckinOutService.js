@@ -35,5 +35,16 @@ class CheckinOutService {
             }
         });
     }
+    isAccessAllowed(customerId, timeSlotRequired) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}`);
+                return result.accessGranted;
+            }
+            catch (err) {
+                throw new Error('failed to get access granted information from checkinout service');
+            }
+        });
+    }
 }
 exports.CheckinOutService = CheckinOutService;

@@ -25,4 +25,13 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to retrieve checkins from checkinout service');
     }
   }
+
+  async isAccessAllowed(customerId: number, timeSlotRequired: boolean): Promise<boolean> {
+    try {
+      const result = await ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}`);
+      return result.accessGranted;
+    } catch (err) {
+      throw new Error('failed to get access granted information from checkinout service');
+    }
+  }
 }
