@@ -16,18 +16,18 @@ const HectorDbSettings_1 = require("../models/DiscoveryService/HectorDbSettings"
 const BraintreeSettings_1 = require("../models/DiscoveryService/BraintreeSettings");
 const TemplateDesigner_1 = require("./TemplateDesigner");
 const ApiClient_1 = require("./ApiClient");
-const Membershipservice_1 = require("./Membershipservice");
-const Employeesservice_1 = require("./Employeesservice");
-const Customerservice_1 = require("./Customerservice");
-const TwoFactorAuthenticationservice_1 = require("./TwoFactorAuthenticationservice");
-const PushNotificationservice_1 = require("./PushNotificationservice");
-const Ratingservice_1 = require("./Ratingservice");
-const Accountingservice_1 = require("./Accountingservice");
-const CheckinOutservice_1 = require("./CheckinOutservice");
-const Articlesservice_1 = require("./Articlesservice");
-const Mailingservice_1 = require("./Mailingservice");
-const SMSservice_1 = require("./SMSservice");
-const CourseManagementservice_1 = require("./CourseManagementservice");
+const MembershipService_1 = require("./MembershipService");
+const EmployeesService_1 = require("./EmployeesService");
+const CustomerService_1 = require("./CustomerService");
+const TwoFactorAuthenticationService_1 = require("./TwoFactorAuthenticationService");
+const PushNotificationService_1 = require("./PushNotificationService");
+const RatingService_1 = require("./RatingService");
+const AccountingService_1 = require("./AccountingService");
+const CheckinOutService_1 = require("./CheckinOutService");
+const ArticlesService_1 = require("./ArticlesService");
+const MailingService_1 = require("./MailingService");
+const SMSService_1 = require("./SMSService");
+const CourseManagementService_1 = require("./CourseManagementService");
 const MarkdownEditor_1 = require("./MarkdownEditor");
 class DiscoveryService {
     constructor(host, port) {
@@ -203,7 +203,7 @@ class DiscoveryService {
                     return this.mailingService;
                 }
                 const mailingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MailingService`);
-                this.mailingService = new Mailingservice_1.MailingService(mailingService.host, mailingService.port);
+                this.mailingService = new MailingService_1.MailingService(mailingService.host, mailingService.port);
                 return this.mailingService;
             }
             catch (err) {
@@ -221,7 +221,7 @@ class DiscoveryService {
                     return this.smsService;
                 }
                 const smsService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/SMSService`);
-                this.smsService = new SMSservice_1.SMSService(smsService.host, smsService.port);
+                this.smsService = new SMSService_1.SMSService(smsService.host, smsService.port);
                 return this.smsService;
             }
             catch (err) {
@@ -239,7 +239,7 @@ class DiscoveryService {
                     return this.customerService;
                 }
                 const customerService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CustomerService`);
-                this.customerService = new Customerservice_1.CustomerService(customerService.host, customerService.port);
+                this.customerService = new CustomerService_1.CustomerService(customerService.host, customerService.port);
                 return this.customerService;
             }
             catch (err) {
@@ -257,7 +257,7 @@ class DiscoveryService {
                     return this.employeesService;
                 }
                 const employeesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmployeesService`);
-                this.employeesService = new Employeesservice_1.EmployeesService(employeesService.host, employeesService.port);
+                this.employeesService = new EmployeesService_1.EmployeesService(employeesService.host, employeesService.port);
                 return this.employeesService;
             }
             catch (err) {
@@ -275,7 +275,7 @@ class DiscoveryService {
                     return this.membershipService;
                 }
                 const membershipService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MembershipService`);
-                this.membershipService = new Membershipservice_1.MembershipService(membershipService.host, membershipService.port);
+                this.membershipService = new MembershipService_1.MembershipService(membershipService.host, membershipService.port);
                 return this.membershipService;
             }
             catch (err) {
@@ -293,7 +293,7 @@ class DiscoveryService {
                     return this.twoFactorAuthenticationService;
                 }
                 const twoFactorAuthenticationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
-                this.twoFactorAuthenticationService = new TwoFactorAuthenticationservice_1.TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port);
+                this.twoFactorAuthenticationService = new TwoFactorAuthenticationService_1.TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port);
                 return this.twoFactorAuthenticationService;
             }
             catch (err) {
@@ -311,7 +311,7 @@ class DiscoveryService {
                     return this.pushNotificationService;
                 }
                 const pushNotificationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
-                this.pushNotificationService = new PushNotificationservice_1.PushNotificationService(pushNotificationService.host, pushNotificationService.port);
+                this.pushNotificationService = new PushNotificationService_1.PushNotificationService(pushNotificationService.host, pushNotificationService.port);
                 return this.pushNotificationService;
             }
             catch (err) {
@@ -329,7 +329,7 @@ class DiscoveryService {
                     return this.ratingService;
                 }
                 const ratingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/RatingService`);
-                this.ratingService = new Ratingservice_1.RatingService(ratingService.host, ratingService.port);
+                this.ratingService = new RatingService_1.RatingService(ratingService.host, ratingService.port);
                 return this.ratingService;
             }
             catch (err) {
@@ -347,7 +347,7 @@ class DiscoveryService {
                     return this.accountingService;
                 }
                 const accountingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/AccountingService`);
-                this.accountingService = new Accountingservice_1.AccountingService(accountingService.host, accountingService.port);
+                this.accountingService = new AccountingService_1.AccountingService(accountingService.host, accountingService.port);
                 return this.accountingService;
             }
             catch (err) {
@@ -365,7 +365,7 @@ class DiscoveryService {
                     return this.checkinOutService;
                 }
                 const checkinOutService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
-                this.checkinOutService = new CheckinOutservice_1.CheckinOutService(checkinOutService.host, checkinOutService.port);
+                this.checkinOutService = new CheckinOutService_1.CheckinOutService(checkinOutService.host, checkinOutService.port);
                 return this.checkinOutService;
             }
             catch (err) {
@@ -383,7 +383,7 @@ class DiscoveryService {
                     return this.articlesService;
                 }
                 const articlesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/ArticlesService`);
-                this.articlesService = new Articlesservice_1.ArticlesService(articlesService.host, articlesService.port);
+                this.articlesService = new ArticlesService_1.ArticlesService(articlesService.host, articlesService.port);
                 return this.articlesService;
             }
             catch (err) {
@@ -437,7 +437,7 @@ class DiscoveryService {
                     return this.courseManagementService;
                 }
                 const courseManagementService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
-                this.courseManagementService = new CourseManagementservice_1.CourseManagementService(courseManagementService.host, courseManagementService.port);
+                this.courseManagementService = new CourseManagementService_1.CourseManagementService(courseManagementService.host, courseManagementService.port);
                 return this.courseManagementService;
             }
             catch (err) {
