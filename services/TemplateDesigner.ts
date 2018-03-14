@@ -11,10 +11,10 @@ export class TemplateDesigner implements ITemplateDesigner {
     this.baseUrl = `http://${host}:${port}/api`;
   }
 
-  async render(data: any, templateId: any, type: RenderFileType = RenderFileType.PDF, asUrl?: boolean): Promise<any> {
+  async render(data: any, templateId: any, type: RenderFileType = RenderFileType.PDF, asUrl?: boolean, persist?: boolean): Promise<any> {
     try {
       const result = await popsicle.request({
-        url: `${this.baseUrl}/render/${templateId}?type=${type}${asUrl ? '&url' : ''}`,
+        url: `${this.baseUrl}/render/${templateId}?type=${type}${asUrl ? '&url' : ''}${persist ? '&persist' : ''}`,
         method: 'POST',
         headers: Object.assign({}, ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
         body: data,
