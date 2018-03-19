@@ -5,4 +5,5 @@ export class PaymentInformation {
   paymentType: string;
   bankAccount: BankAccount;
   sepaMandate: SepaMandate;
+  stopDirectDebit: boolean;
 }
