@@ -28,7 +28,7 @@ export class RPCHandler {
           return fn && clazz;
         });
 
-        let result = null;
+        let result = '';
         try {
           if (fn && clazz) {
             result = await fn.call(clazz, ...data.args);

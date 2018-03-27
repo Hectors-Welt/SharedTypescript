@@ -32,7 +32,7 @@ class RPCHandler {
                         clazz = c;
                         return fn && clazz;
                     });
-                    let result = null;
+                    let result = '';
                     try {
                         if (fn && clazz) {
                             result = yield fn.call(clazz, ...data.args);
