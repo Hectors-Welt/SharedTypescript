@@ -29,8 +29,8 @@ export class RPCHandler {
         });
 
         let result = null;
-        if (fn) {
-          result = await fn.bind(clazz).call( ...data.args);
+        if (fn && clazz) {
+          result = await fn.call(clazz, ...data.args);
         }
         try {
           result = JSON.stringify(result);

@@ -33,8 +33,8 @@ class RPCHandler {
                         return fn && clazz;
                     });
                     let result = null;
-                    if (fn) {
-                        result = yield fn.bind(clazz).call(...data.args);
+                    if (fn && clazz) {
+                        result = yield fn.call(clazz, ...data.args);
                     }
                     try {
                         result = JSON.stringify(result);
