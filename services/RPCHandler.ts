@@ -21,13 +21,16 @@ export class RPCHandler {
     await channel.consume(bindTo, async (msg) => {
       try {
         const data = JSON.parse(msg.content.toString());
-        let fn;
-        classes.forEach(c => fn = c.rpcMethods.find(f => f.name === data.fn));
+        let fn, clazz;
+        classes.find((c) => {
+          fn = c.rpcMethods.find(f => f.name === data.fn);
+          clazz = c;
+          return fn && clazz;
+        });
 
         let result = null;
-
         if (fn) {
-          result = await fn.call(fn, ...data.args);
+          result = await fn.bind(clazz).call( ...data.args);
         }
         try {
           result = JSON.stringify(result);

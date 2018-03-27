@@ -26,11 +26,15 @@ class RPCHandler {
             yield channel.consume(bindTo, (msg) => __awaiter(this, void 0, void 0, function* () {
                 try {
                     const data = JSON.parse(msg.content.toString());
-                    let fn;
-                    classes.forEach(c => fn = c.rpcMethods.find(f => f.name === data.fn));
+                    let fn, clazz;
+                    classes.find((c) => {
+                        fn = c.rpcMethods.find(f => f.name === data.fn);
+                        clazz = c;
+                        return fn && clazz;
+                    });
                     let result = null;
                     if (fn) {
-                        result = yield fn.call(fn, ...data.args);
+                        result = yield fn.bind(clazz).call(...data.args);
                     }
                     try {
                         result = JSON.stringify(result);
