@@ -33,10 +33,10 @@ class RPCHandler {
                         return fn && clazz;
                     });
                     let result = null;
-                    if (fn && clazz) {
-                        result = yield fn.call(clazz, ...data.args);
-                    }
                     try {
+                        if (fn && clazz) {
+                            result = yield fn.call(clazz, ...data.args);
+                        }
                         result = JSON.stringify(result);
                     }
                     catch (err) {

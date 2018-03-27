@@ -29,10 +29,10 @@ export class RPCHandler {
         });
 
         let result = null;
-        if (fn && clazz) {
-          result = await fn.call(clazz, ...data.args);
-        }
         try {
+          if (fn && clazz) {
+            result = await fn.call(clazz, ...data.args);
+          }
           result = JSON.stringify(result);
         } catch (err) {
         }
