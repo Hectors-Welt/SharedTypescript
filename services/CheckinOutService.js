@@ -63,5 +63,20 @@ class CheckinOutService {
             }
         });
     }
+    checkout(customerId, accessPossibility, accessLevel) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/checkout`, {
+                    customerId,
+                    accessPossibility,
+                    accessLevel,
+                });
+                return result.success;
+            }
+            catch (err) {
+                throw new Error('failed to checkout customer at checkinout service');
+            }
+        });
+    }
 }
 exports.CheckinOutService = CheckinOutService;

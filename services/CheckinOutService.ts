@@ -49,4 +49,17 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to checkin customer at checkinout service');
     }
   }
+
+  async checkout(customerId: number, accessPossibility?: number, accessLevel?: number): Promise<boolean> {
+    try {
+      const result = await ApiClient.POST(`${this.baseUrl}/checkout`, {
+        customerId,
+        accessPossibility,
+        accessLevel,
+      });
+      return result.success;
+    } catch (err) {
+      throw new Error('failed to checkout customer at checkinout service');
+    }
+  }
 }

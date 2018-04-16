@@ -10,4 +10,5 @@ export declare class CheckinOutService implements ICheckinOutService {
     getCheckins(customerId: number): Promise<Checkin>;
     isAccessAllowed(customerId: number, timeSlotRequired: boolean): Promise<boolean>;
     checkin(customerId: number, tagId?: number, accessPossibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<boolean>;
+    checkout(customerId: number, accessPossibility?: number, accessLevel?: number): Promise<boolean>;
 }

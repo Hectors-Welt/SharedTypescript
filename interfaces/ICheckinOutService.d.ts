@@ -5,4 +5,5 @@ export interface ICheckinOutService {
     getCheckins(customerId: number): Promise<Checkin>;
     isAccessAllowed(customerId: number, timeSlotRequired: boolean): Promise<boolean>;
     checkin(customerId: number, tagId?: number, accessPosibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<boolean>;
+    checkout(customerId: number, accessPosibility?: number, accessLevel?: number): Promise<boolean>;
 }
