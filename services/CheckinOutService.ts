@@ -34,4 +34,19 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to get access granted information from checkinout service');
     }
   }
+
+  async checkin(customerId: number, tagId?: number, accessPossibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<boolean> {
+    try {
+      const result = await ApiClient.POST(`${this.baseUrl}/checkin`, {
+        customerId,
+        tagId,
+        accessPossibility,
+        accessLevel,
+        checkoutIfAlreadyPresent,
+      });
+      return result.success;
+    } catch (err) {
+      throw new Error('failed to checkin customer at checkinout service');
+    }
+  }
 }
