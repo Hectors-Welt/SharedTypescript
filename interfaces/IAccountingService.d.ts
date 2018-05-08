@@ -5,4 +5,5 @@ export interface IAccountingService {
     getClubAccountInformation(customerId: number): Promise<ClubAccountInformation>;
     getSepaBookings(customerId: number): Promise<SepaBookingSet[]>;
     getSalesInfo(customerId: number, days: number): Promise<SalesInfo[]>;
+    moveSalesToBistroAccount(customerId: number): Promise<any>;
 }

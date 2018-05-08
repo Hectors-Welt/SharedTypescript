@@ -34,4 +34,13 @@ export class AccountingService implements IAccountingService {
       throw new Error('failed to retrieve sepa bookings from accounting service');
     }
   }
+
+  async moveSalesToBistroAccount(customerId: number): Promise<any> {
+    try {
+      const result = await ApiClient.POST(`${this.baseUrl}/moveSalesToBistroAccount/${customerId}`, {});
+      return result.success;
+    } catch (err) {
+      throw new Error('failed to move sales to bistro account at accounting service');
+    }
+  }
 }
