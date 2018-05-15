@@ -48,8 +48,7 @@ class AccountingService {
     moveSalesToBistroAccount(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/moveSalesToBistroAccount/${customerId}`, {});
-                return result.success;
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/moveSalesToBistroAccount/${customerId}`, {});
             }
             catch (err) {
                 throw new Error('failed to move sales to bistro account at accounting service');

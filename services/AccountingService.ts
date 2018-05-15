@@ -37,8 +37,7 @@ export class AccountingService implements IAccountingService {
 
   async moveSalesToBistroAccount(customerId: number): Promise<any> {
     try {
-      const result = await ApiClient.POST(`${this.baseUrl}/moveSalesToBistroAccount/${customerId}`, {});
-      return result.success;
+      return await ApiClient.POST(`${this.baseUrl}/moveSalesToBistroAccount/${customerId}`, {});
     } catch (err) {
       throw new Error('failed to move sales to bistro account at accounting service');
     }
