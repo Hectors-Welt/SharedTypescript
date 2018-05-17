@@ -437,12 +437,12 @@ export class DiscoveryService implements IDiscoveryService {
     try {
       return await ApiClient.POST(`${this.baseUrl}/`, {
         serviceName,
+        proxyRoute,
         port: servicePort,
         timeToLive: new Date(new Date().getTime() + (5 * 1000)).toJSON(),
         serviceVersion,
         public: isPublic,
         serviceType,
-        proxyRoute,
       })
     } catch (err) {
       throw new Error(`could not reach DiscoveryService: ${err.message}`);
