@@ -68,6 +68,24 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
+  async renderText(id: string, asUrl?: boolean): Promise<any> {
+    const url = `${this.baseUrl}/md/${id}/text`;
+    try {
+      if (asUrl) {
+        return url;
+      }
+
+      const result = await popsicle.request({
+        url,
+        method: 'GET',
+      });
+
+      return result.body;
+    } catch (err) {
+      throw new Error('failed to call renderText on markdown editor');
+    }
+  }
+
   async renderPdf(id: string, asUrl?: boolean): Promise<any> {
     const url = `${this.baseUrl}/md/${id}/pdf`;
     try {

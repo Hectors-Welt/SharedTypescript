@@ -11,5 +11,6 @@ export declare class MarkdownEditor implements IMarkdownEditor {
     updateMarkdown(id: string, data: any): Promise<any>;
     deleteMarkdown(id: string): Promise<any>;
     renderHtml(id: string, asUrl?: boolean): Promise<any>;
+    renderText(id: string, asUrl?: boolean): Promise<any>;
     renderPdf(id: string, asUrl?: boolean): Promise<any>;
 }

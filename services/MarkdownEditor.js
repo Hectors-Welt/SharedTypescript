@@ -84,6 +84,24 @@ class MarkdownEditor {
             }
         });
     }
+    renderText(id, asUrl) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.baseUrl}/md/${id}/text`;
+            try {
+                if (asUrl) {
+                    return url;
+                }
+                const result = yield popsicle.request({
+                    url,
+                    method: 'GET',
+                });
+                return result.body;
+            }
+            catch (err) {
+                throw new Error('failed to call renderText on markdown editor');
+            }
+        });
+    }
     renderPdf(id, asUrl) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.baseUrl}/md/${id}/pdf`;
