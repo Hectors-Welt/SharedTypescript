@@ -3,6 +3,7 @@ export class MarkdownModel {
   name: string;
   md: string;
   html?: string;
+  text?: string;
 }
 
 
