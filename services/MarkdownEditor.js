@@ -77,7 +77,7 @@ class MarkdownEditor {
                     url,
                     method: 'GET',
                 });
-                return result.body;
+                return result.status < 400 ? result.body : null;
             }
             catch (err) {
                 throw new Error('failed to call renderHtml on markdown editor');
@@ -95,7 +95,7 @@ class MarkdownEditor {
                     url,
                     method: 'GET',
                 });
-                return result.body;
+                return result.status < 400 ? result.body : null;
             }
             catch (err) {
                 throw new Error('failed to call renderText on markdown editor');
@@ -113,7 +113,7 @@ class MarkdownEditor {
                     url,
                     method: 'GET',
                 });
-                return result.body;
+                return result.status < 400 ? result.body : null;
             }
             catch (err) {
                 throw new Error('failed to call renderPdf on markdown editor');
