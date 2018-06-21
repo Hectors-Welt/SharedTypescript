@@ -75,4 +75,6 @@ export interface IDiscoveryService {
   getContactCategories(): Promise<any>;
 
   getEmployeeRoles(): Promise<any>;
+
+  getDevices(): Promise<any>;
 }

@@ -5,9 +5,7 @@ import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings'
 import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings'
 import { BraintreeSettings } from '../models/DiscoveryService/BraintreeSettings'
 import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum'
-import { ILegacyAppsiteBackend } from '../interfaces/ILegacyAppsiteBackend'
 import { ITemplateDesigner } from '../interfaces/ITemplateDesigner'
-import { LegacyAppsiteBackend } from './LegacyAppsiteBackend'
 import { TemplateDesigner } from './TemplateDesigner'
 import { ApiClient } from './ApiClient';
 import { IDiscoveryService } from '../interfaces/IDiscoveryService';
@@ -37,6 +35,7 @@ import { ICourseManagementService } from '../interfaces/ICourseManagamentService
 import { CourseManagementService } from './CourseManagementService';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { MarkdownEditor } from './MarkdownEditor';
+import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -76,7 +75,9 @@ export class DiscoveryService implements IDiscoveryService {
   }
 
   invalidateCache(property: string) {
-    if (this[property]) this[property] = null;
+    if (this[property]) {
+      this[property] = null;
+    }
   }
 
   async getLocationInfo(): Promise<LocationInfo> {
@@ -88,7 +89,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve location info from discovery service: ${err.message}`
+        message: `failed to retrieve location info from discovery service: ${err.message}`,
       };
     }
   }
@@ -102,7 +103,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve environment from discovery service: ${err.message}`
+        message: `failed to retrieve environment from discovery service: ${err.message}`,
       };
     }
   }
@@ -116,7 +117,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve eventstore settings from discovery service: ${err.message}`
+        message: `failed to retrieve eventstore settings from discovery service: ${err.message}`,
       };
     }
   }
@@ -130,7 +131,18 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve mongodb settings from discovery service: ${err.message}`
+        message: `failed to retrieve mongodb settings from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getDevices(): Promise<Array<DeviceConfig>> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/devices`);
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve device configs from discovery service: ${err.message}`,
       };
     }
   }
@@ -144,7 +156,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`
+        message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`,
       };
     }
   }
@@ -158,7 +170,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve hector db settings from discovery service: ${err.message}`
+        message: `failed to retrieve hector db settings from discovery service: ${err.message}`,
       };
     }
   }
@@ -172,7 +184,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve hector braintree from discovery service: ${err.message}`
+        message: `failed to retrieve hector braintree from discovery service: ${err.message}`,
       };
     }
   }
@@ -220,7 +232,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve mailing service from discovery service: ${err.message}`
+        message: `failed to retrieve mailing service from discovery service: ${err.message}`,
       };
     }
   }
@@ -236,7 +248,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve sms service from discovery service: ${err.message}`
+        message: `failed to retrieve sms service from discovery service: ${err.message}`,
       };
     }
   }
@@ -252,7 +264,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve customer service from discovery service: ${err.message}`
+        message: `failed to retrieve customer service from discovery service: ${err.message}`,
       };
     }
   }
@@ -268,7 +280,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve employees service from discovery service: ${err.message}`
+        message: `failed to retrieve employees service from discovery service: ${err.message}`,
       };
     }
   }
@@ -284,7 +296,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve membership service from discovery service: ${err.message}`
+        message: `failed to retrieve membership service from discovery service: ${err.message}`,
       };
     }
   }
@@ -300,7 +312,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve two factor authentication service from discovery service: ${err.message}`
+        message: `failed to retrieve two factor authentication service from discovery service: ${err.message}`,
       };
     }
   }
@@ -316,7 +328,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve push notification service from discovery service: ${err.message}`
+        message: `failed to retrieve push notification service from discovery service: ${err.message}`,
       };
     }
   }
@@ -332,7 +344,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve rating service from discovery service: ${err.message}`
+        message: `failed to retrieve rating service from discovery service: ${err.message}`,
       };
     }
   }
@@ -348,7 +360,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve accounting service from discovery service: ${err.message}`
+        message: `failed to retrieve accounting service from discovery service: ${err.message}`,
       };
     }
   }
@@ -364,7 +376,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve checkinout service from discovery service: ${err.message}`
+        message: `failed to retrieve checkinout service from discovery service: ${err.message}`,
       };
     }
   }
@@ -380,7 +392,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve articles service from discovery service: ${err.message}`
+        message: `failed to retrieve articles service from discovery service: ${err.message}`,
       };
     }
   }
@@ -396,7 +408,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve template designer from discovery service: ${err.message}`
+        message: `failed to retrieve template designer from discovery service: ${err.message}`,
       };
     }
   }
@@ -412,7 +424,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve markdown editor from discovery service: ${err.message}`
+        message: `failed to retrieve markdown editor from discovery service: ${err.message}`,
       };
     }
   }
@@ -428,7 +440,7 @@ export class DiscoveryService implements IDiscoveryService {
     } catch (err) {
       throw {
         status: 503,
-        message: `failed to retrieve course management service from discovery service: ${err.message}`
+        message: `failed to retrieve course management service from discovery service: ${err.message}`,
       };
     }
   }

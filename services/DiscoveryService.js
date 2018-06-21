@@ -41,8 +41,9 @@ class DiscoveryService {
         });
     }
     invalidateCache(property) {
-        if (this[property])
+        if (this[property]) {
             this[property] = null;
+        }
     }
     getLocationInfo() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -55,7 +56,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve location info from discovery service: ${err.message}`
+                    message: `failed to retrieve location info from discovery service: ${err.message}`,
                 };
             }
         });
@@ -71,7 +72,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve environment from discovery service: ${err.message}`
+                    message: `failed to retrieve environment from discovery service: ${err.message}`,
                 };
             }
         });
@@ -87,7 +88,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve eventstore settings from discovery service: ${err.message}`
+                    message: `failed to retrieve eventstore settings from discovery service: ${err.message}`,
                 };
             }
         });
@@ -103,7 +104,20 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve mongodb settings from discovery service: ${err.message}`
+                    message: `failed to retrieve mongodb settings from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getDevices() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/devices`);
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve device configs from discovery service: ${err.message}`,
                 };
             }
         });
@@ -119,7 +133,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`
+                    message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`,
                 };
             }
         });
@@ -135,7 +149,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve hector db settings from discovery service: ${err.message}`
+                    message: `failed to retrieve hector db settings from discovery service: ${err.message}`,
                 };
             }
         });
@@ -151,7 +165,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve hector braintree from discovery service: ${err.message}`
+                    message: `failed to retrieve hector braintree from discovery service: ${err.message}`,
                 };
             }
         });
@@ -209,7 +223,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve mailing service from discovery service: ${err.message}`
+                    message: `failed to retrieve mailing service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -227,7 +241,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve sms service from discovery service: ${err.message}`
+                    message: `failed to retrieve sms service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -245,7 +259,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve customer service from discovery service: ${err.message}`
+                    message: `failed to retrieve customer service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -263,7 +277,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve employees service from discovery service: ${err.message}`
+                    message: `failed to retrieve employees service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -281,7 +295,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve membership service from discovery service: ${err.message}`
+                    message: `failed to retrieve membership service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -299,7 +313,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve two factor authentication service from discovery service: ${err.message}`
+                    message: `failed to retrieve two factor authentication service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -317,7 +331,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve push notification service from discovery service: ${err.message}`
+                    message: `failed to retrieve push notification service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -335,7 +349,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve rating service from discovery service: ${err.message}`
+                    message: `failed to retrieve rating service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -353,7 +367,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve accounting service from discovery service: ${err.message}`
+                    message: `failed to retrieve accounting service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -371,7 +385,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve checkinout service from discovery service: ${err.message}`
+                    message: `failed to retrieve checkinout service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -389,7 +403,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve articles service from discovery service: ${err.message}`
+                    message: `failed to retrieve articles service from discovery service: ${err.message}`,
                 };
             }
         });
@@ -407,7 +421,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve template designer from discovery service: ${err.message}`
+                    message: `failed to retrieve template designer from discovery service: ${err.message}`,
                 };
             }
         });
@@ -425,7 +439,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve markdown editor from discovery service: ${err.message}`
+                    message: `failed to retrieve markdown editor from discovery service: ${err.message}`,
                 };
             }
         });
@@ -443,7 +457,7 @@ class DiscoveryService {
             catch (err) {
                 throw {
                     status: 503,
-                    message: `failed to retrieve course management service from discovery service: ${err.message}`
+                    message: `failed to retrieve course management service from discovery service: ${err.message}`,
                 };
             }
         });

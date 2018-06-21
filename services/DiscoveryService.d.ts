@@ -21,6 +21,7 @@ import { IMailingService } from '../interfaces/IMailingService';
 import { ISMSService } from '../interfaces/ISMSService';
 import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
+import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
 export declare class DiscoveryService implements IDiscoveryService {
     baseUrl: string;
     host: string;
@@ -54,6 +55,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getEnvironment(): Promise<any>;
     getEventStoreSettings(): Promise<EventStoreSettings>;
     getMongoDbSettings(): Promise<MongoDbSettings>;
+    getDevices(): Promise<Array<DeviceConfig>>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
