@@ -42,7 +42,7 @@ class ApiClient {
             }
             const result = yield popsicle.request(request)
                 .use(popsicle.plugins.parse('json'));
-            return result.status === 200 ? result.body : null;
+            return result.status === 200 ? result.body || {} : null;
         });
     }
 }
