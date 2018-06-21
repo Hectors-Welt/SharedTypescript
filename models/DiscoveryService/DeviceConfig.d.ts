@@ -3,4 +3,5 @@ export interface DeviceConfig {
     name: string;
     ip: string;
     lastSeen: Date;
+    version: string;
 }
