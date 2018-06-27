@@ -35,9 +35,9 @@ export class CheckinOutService implements ICheckinOutService {
     }
   }
 
-  async isAccessAllowed(customerId: number, timeSlotRequired: boolean): Promise<boolean> {
+  async isAccessAllowed(customerId: number, timeSlotRequired: boolean, accessAreas?: string[]): Promise<boolean> {
     try {
-      const result = await ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}`);
+      const result = await ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}?accessAreas=${accessAreas != null ? accessAreas.join(',') : ''}`);
       return result.accessGranted;
     } catch (err) {
       throw new Error('failed to get access granted information from checkinout service');

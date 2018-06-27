@@ -45,10 +45,10 @@ class CheckinOutService {
             }
         });
     }
-    isAccessAllowed(customerId, timeSlotRequired) {
+    isAccessAllowed(customerId, timeSlotRequired, accessAreas) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}`);
+                const result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}?accessAreas=${accessAreas != null ? accessAreas.join(',') : ''}`);
                 return result.accessGranted;
             }
             catch (err) {

@@ -5,7 +5,7 @@ export interface ICheckinOutService {
     getAccessAreasAvailable(): Promise<AccessArea[]>;
     getCheckinStatus(customerId: number): Promise<CheckinStatus>;
     getCheckins(customerId: number): Promise<Checkin>;
-    isAccessAllowed(customerId: number, timeSlotRequired: boolean): Promise<boolean>;
+    isAccessAllowed(customerId: number, timeSlotRequired: boolean, accessAreas?: string[]): Promise<boolean>;
     checkin(customerId: number, tagId?: number, accessPosibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<boolean>;
     checkout(customerId: number, accessPosibility?: number, accessLevel?: number): Promise<boolean>;
 }
