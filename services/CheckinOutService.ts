@@ -2,12 +2,21 @@ import { ICheckinOutService } from '../interfaces/ICheckinOutService'
 import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus'
 import { Checkin } from '../models/CheckinOutService/Checkin';
 import { ApiClient } from './ApiClient';
+import { AccessArea } from '../models/CheckinOutService/AccessArea';
 
 export class CheckinOutService implements ICheckinOutService {
   baseUrl: string;
 
   constructor(private host: string, private port: number) {
     this.baseUrl = `http://${host}:${port}`;
+  }
+
+  async getAccessAreasAvailable(): Promise<AccessArea[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getAccessAreasAvailable`);
+    } catch (err) {
+      throw new Error('failed to retrieve access areas from checkinout service');
+    }
   }
 
   async getCheckinStatus(customerId: number): Promise<CheckinStatus> {

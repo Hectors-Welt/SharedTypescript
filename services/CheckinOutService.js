@@ -15,6 +15,16 @@ class CheckinOutService {
         this.port = port;
         this.baseUrl = `http://${host}:${port}`;
     }
+    getAccessAreasAvailable() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getAccessAreasAvailable`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve access areas from checkinout service');
+            }
+        });
+    }
     getCheckinStatus(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

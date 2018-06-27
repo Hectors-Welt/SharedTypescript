@@ -1,11 +1,13 @@
 import { ICheckinOutService } from '../interfaces/ICheckinOutService';
 import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus';
 import { Checkin } from '../models/CheckinOutService/Checkin';
+import { AccessArea } from '../models/CheckinOutService/AccessArea';
 export declare class CheckinOutService implements ICheckinOutService {
     private host;
     private port;
     baseUrl: string;
     constructor(host: string, port: number);
+    getAccessAreasAvailable(): Promise<AccessArea[]>;
     getCheckinStatus(customerId: number): Promise<CheckinStatus>;
     getCheckins(customerId: number): Promise<Checkin>;
     isAccessAllowed(customerId: number, timeSlotRequired: boolean): Promise<boolean>;
