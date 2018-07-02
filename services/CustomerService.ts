@@ -6,12 +6,21 @@ import { Contact } from '../models/CustomerService/Contact';
 import { File } from '../models/CustomerService/File';
 import { ApiClient } from './ApiClient';
 import { Interaction } from '../models/CustomerService/Interaction';
+import { StatusEntry } from '../models/CustomerService/StatusEntry';
 
 export class CustomerService implements ICustomerService {
   baseUrl: string;
 
   constructor(private host: string, private port: number) {
     this.baseUrl = `http://${host}:${port}`;
+  }
+
+  async getStatusEntriesAvailable(): Promise<StatusEntry[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
+    } catch (err) {
+      throw new Error('failed to status entries from customer service');
+    }
   }
 
   async findDoublets(name: string, birthday: string): Promise<Customer[]> {
