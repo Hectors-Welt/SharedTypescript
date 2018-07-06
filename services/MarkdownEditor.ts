@@ -102,4 +102,21 @@ export class MarkdownEditor implements IMarkdownEditor {
       throw new Error('failed to call renderPdf on markdown editor');
     }
   }
+
+  async renderUrlAsPdf(documentUrl: string, asUrl?: boolean): Promise<any> {
+    const url = `${this.baseUrl}/render?url=${documentUrl}`;
+    try {
+      if(asUrl) {
+        return url;
+      }
+      const result = await popsicle.request({
+        url,
+        method: 'GET',
+      });
+
+      return result.status < 400 ? result.body : null;
+    } catch (err) {
+      throw new Error('failed to call renderPdf on markdown editor');
+    }
+  }
 }

@@ -16,4 +16,6 @@ export interface IMarkdownEditor {
   renderText(id: string, asUrl?: boolean): Promise<any>;
 
   renderPdf(id: string, asUrl?: boolean): Promise<any>;
+
+  renderUrlAsPdf(documentUrl: string, asUrl?: boolean): Promise<any>;
 }

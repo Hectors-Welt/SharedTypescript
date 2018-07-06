@@ -120,5 +120,23 @@ class MarkdownEditor {
             }
         });
     }
+    renderUrlAsPdf(documentUrl, asUrl) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.baseUrl}/render?url=${documentUrl}`;
+            try {
+                if (asUrl) {
+                    return url;
+                }
+                const result = yield popsicle.request({
+                    url,
+                    method: 'GET',
+                });
+                return result.status < 400 ? result.body : null;
+            }
+            catch (err) {
+                throw new Error('failed to call renderPdf on markdown editor');
+            }
+        });
+    }
 }
 exports.MarkdownEditor = MarkdownEditor;
