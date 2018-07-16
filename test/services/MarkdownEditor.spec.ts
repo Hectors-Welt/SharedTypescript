@@ -181,7 +181,7 @@ describe('MarkdownEditor', () => {
       .reply(200);
 
       const data = await this.service.deleteMarkdown(123);
-      expect(data).to.equal(null);
+      expect(data).to.deep.equal({});
     });
 
     it('should not delete markdown', async () => {
