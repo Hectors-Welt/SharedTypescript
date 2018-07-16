@@ -1,13 +1,14 @@
-import HealthInfo from '../models/HealthInfo'
+import { HealthInfo } from '../models/HealthService/HealthInfo';
 
-interface IHealthService{
+export interface IHealthService {
 
-    healthInfo: HealthInfo
+  healthInfo: HealthInfo;
 
-    registerHealthy(check: string, message: string)
-    unregisterHealthy(check: string)
-    registerUnhealthy(check: string, message: string)
-    unregisterUnhealthy(check: string)
+  registerHealthy(check: string, message: string);
+
+  unregisterHealthy(check: string);
+
+  registerUnhealthy(check: string, message: string);
+
+  unregisterUnhealthy(check: string);
 }
-
-export default IHealthService;

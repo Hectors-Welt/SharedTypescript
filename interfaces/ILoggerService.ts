@@ -1,6 +1,5 @@
-interface ILoggerService {
-    info(message: string, payload: object)
-    error(message: string, error: Error)
-}
+export interface ILoggerService {
+  info(message: string, payload: Object);
 
-export default ILoggerService
+  error(message: string, error: Error);
+}

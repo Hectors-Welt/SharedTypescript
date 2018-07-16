@@ -1,7 +1,11 @@
-import Employee from '../models/Employee'
+import { Employee } from '../models/EmployeesService/Employee';
 
-interface IEmployeesService {
-    validateEmployeeByCredentials(firstname: string, lastname: string, password: string) : Promise<Employee>
+export interface IEmployeesService {
+  validateEmployeeByCredentials(firstname: string, lastname: string, password: string): Promise<Employee>;
+
+  getEmployeeByCustomerId(customerId: number): Promise<Employee>;
+
+  getEmployeesPresent(studioId: number): Promise<Employee[]>;
+
+  getAllEmployees(): Promise<Employee[]>;
 }
-
-export default IEmployeesService

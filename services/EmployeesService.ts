@@ -1,43 +1,47 @@
-import * as popsicle from 'popsicle'
-import Employee from '../models/Employee'
-import IEmployeesService from '../interfaces/IEmployeesService'
+import { Employee } from '../models/EmployeesService/Employee';
+import { IEmployeesService } from '../interfaces/IEmployeesService';
+import { ApiClient } from './ApiClient';
 
-class EmployeesService implements IEmployeesService {
+export class EmployeesService implements IEmployeesService {
+  baseUrl: string;
 
-    constructor(private host: string, private port: number) {
+  constructor(private host: string, private port: number) {
+    this.baseUrl = `http://${host}:${port}`;
+  }
 
+  async validateEmployeeByCredentials(name: string, surname: string, password: string): Promise<Employee> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/validateEmployeeByCredentials`, {
+        name,
+        surname,
+        password,
+      });
+    } catch (err) {
+      throw new Error('failed to validate credentials at employees service');
     }
+  }
 
-    validateEmployeeByCredentials(name: string, surname: string, password: string): Promise<Employee> {
-        return new Promise((resolve, reject) => {
-            popsicle.request({
-                url: `http://${this.host}:${this.port}/validateEmployeeByCredentials`,
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json'
-                },
-                body: {
-                    name,
-                    surname,
-                    password
-                }
-            })
-                .use(popsicle.plugins.parse('json'))
-                .then((result) => {
-                    if(result.status !== 200) {
-                        reject(new Error("failed to validate credentials at employees service"));
-                    }
-                    else {
-                        resolve(result.body);
-                    }                    
-                })
-                .catch((error) => {
-                    reject(new Error("failed to validate credentials at employees service"));
-                })
-        })
+  async getEmployeeByCustomerId(customerId: number): Promise<Employee> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getEmployeeByCustomerId/${customerId}`);
+    } catch (err) {
+      throw new Error(`failed to retrieve employee from employees service: ${err.message}`);
     }
+  }
 
+  async getEmployeesPresent(studioId: number): Promise<Employee[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getEmployeesPresentInClub/${studioId}`);
+    } catch (err) {
+      throw new Error(`failed to retrieve employees from employees service: ${err.message}`);
+    }
+  }
+
+  async getAllEmployees(): Promise<Employee[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/employees`);
+    } catch (err) {
+      throw new Error(`failed to retrieve employees from employees service: ${err.message}`);
+    }
+  }
 }
-
-export default EmployeesService

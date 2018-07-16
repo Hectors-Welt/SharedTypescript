@@ -1,2 +1,7 @@
 package-lock.json
-node_modules
+node_modules/
+.nyc_output/
+coverage/
+.idea/
+*.log
+SCL.json

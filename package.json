@@ -1,9 +1,43 @@
 {
   "name": "shared-typescript",
   "version": "1.0.0",
+  "scripts": {
+    "clean": "del-cli 'coverage' '**/*.js' '**/*.d.ts' '!node_modules/**'",
+    "build": "tsc -p ./",
+    "add": "git add --all",
+    "test": "npm run clean && mocha --require ts-node/register './test/**/*.spec.ts' --recursive --exit",
+    "cover": "npm run clean && nyc --all --reporter=html --reporter=text-summary npm test"
+  },
+  "pre-commit": {
+    "run": [
+      "clean",
+      "add",
+      "build",
+      "add"
+    ],
+    "silent": true
+  },
   "dependencies": {
-    "popsicle": "^9.1.0",
-    "winston": "^2.3.1",
-    "winston-mongodb": "^2.0.10"
+    "csvtojson": "^1.1.12",
+    "ibantools": "^1.6.0",
+    "popsicle": "^9.2.0",
+    "uuid": "^3.3.2",
+    "validator": "^9.4.1",
+    "winston": "^2.4.3",
+    "winston-mongodb": "^4.0.0-rc1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^9.6.23",
+    "chai": "^4.1.2",
+    "del-cli": "^1.1.0",
+    "mocha": "^5.2.0",
+    "nock": "^9.4.2",
+    "nyc": "^11.9.0",
+    "pre-commit": "^1.2.2",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.9.2"
   }
 }

@@ -1,9 +1,7 @@
-import * as express from 'express'
+import * as express from 'express';
 
-import Employee from '../models/Employee'
+import { Employee } from '../models/EmployeesService/Employee';
 
-interface IRequest extends express.Request {
-	employee: Employee 
+export interface IRequest extends express.Request {
+  employee: Employee;
 }
-
-export default IRequest
