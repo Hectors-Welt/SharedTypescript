@@ -77,5 +77,5 @@ export declare class DiscoveryService implements IDiscoveryService {
     getTemplateDesigner(): Promise<ITemplateDesigner>;
     getMarkdownEditor(): Promise<IMarkdownEditor>;
     getCourseManagementService(): Promise<ICourseManagementService>;
-    private registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType);
+    private registerService;
 }
