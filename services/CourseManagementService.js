@@ -135,5 +135,15 @@ class CourseManagementService {
             }
         });
     }
+    lookupReplacements(classId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return (yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/classes/${classId}/lookupReplacements`)).employeeIds;
+            }
+            catch (err) {
+                throw new Error('failed to get replacements from course management service');
+            }
+        });
+    }
 }
 exports.CourseManagementService = CourseManagementService;

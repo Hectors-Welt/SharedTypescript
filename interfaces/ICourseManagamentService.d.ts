@@ -21,4 +21,5 @@ export interface ICourseManagementService {
     lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     bookAppointment(bookingRequest: AppointmentBooking): Promise<void>;
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
+    lookupReplacements(classId: number): Promise<number[]>;
 }

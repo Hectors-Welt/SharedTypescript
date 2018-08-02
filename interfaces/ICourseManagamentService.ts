@@ -33,4 +33,6 @@ export interface ICourseManagementService {
   bookAppointment(bookingRequest: AppointmentBooking): Promise<void>;
 
   lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
+  
+  lookupReplacements(classId: number): Promise<number[]> ;
 }

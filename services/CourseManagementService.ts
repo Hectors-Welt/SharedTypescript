@@ -113,4 +113,12 @@ export class CourseManagementService implements ICourseManagementService {
       throw new Error('failed to get time blocks from course management service');
     }
   }
+
+  async lookupReplacements(classId: number): Promise<number[]> {
+    try {
+      return (await ApiClient.GET(`${this.baseUrl}/classes/${classId}/lookupReplacements`)).employeeIds;
+    } catch (err) {
+      throw new Error('failed to get replacements from course management service');
+    }
+  }
 }
