@@ -126,7 +126,23 @@ export class CourseManagementService implements ICourseManagementService {
     try {
       await ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
     } catch (err) {
-      throw new Error('failed to get replacements from course management service');
+      throw new Error('failed to set instructor at course management service');
+    }
+  }
+
+  async closeClass(classId: number): Promise<any> {
+    try {
+      await ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`);
+    } catch (err) {
+      throw new Error('failed to close class at course management service');
+    }
+  }
+
+  async cancelClass(classId: number): Promise<any> {
+    try {
+      await ApiClient.POST(`${this.baseUrl}/classes/${classId}/cancel`);
+    } catch (err) {
+      throw new Error('failed to cancel class at course management service');
     }
   }
 }

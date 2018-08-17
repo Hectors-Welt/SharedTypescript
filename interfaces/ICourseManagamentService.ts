@@ -37,4 +37,8 @@ export interface ICourseManagementService {
   lookupReplacements(classId: number): Promise<number[]>;
 
   setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any>;
+
+  closeClass(classId: number): Promise<any>;
+
+  cancelClass(classId: number): Promise<any>;
 }
