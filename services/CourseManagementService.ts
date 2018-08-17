@@ -121,4 +121,12 @@ export class CourseManagementService implements ICourseManagementService {
       throw new Error('failed to get replacements from course management service');
     }
   }
+
+  async setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any> {
+    try {
+      await ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
+    } catch (err) {
+      throw new Error('failed to get replacements from course management service');
+    }
+  }
 }

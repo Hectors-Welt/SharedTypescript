@@ -145,5 +145,15 @@ class CourseManagementService {
             }
         });
     }
+    setInstructor(classId, oldInstructorId, newInstructorId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
+            }
+            catch (err) {
+                throw new Error('failed to get replacements from course management service');
+            }
+        });
+    }
 }
 exports.CourseManagementService = CourseManagementService;

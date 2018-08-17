@@ -27,4 +27,5 @@ export declare class CourseManagementService implements ICourseManagementService
     bookAppointment(appointmentRequest: AppointmentBooking): Promise<void>;
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupReplacements(classId: number): Promise<number[]>;
+    setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any>;
 }
