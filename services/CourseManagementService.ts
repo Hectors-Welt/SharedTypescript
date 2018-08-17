@@ -124,7 +124,7 @@ export class CourseManagementService implements ICourseManagementService {
 
   async setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any> {
     try {
-      await ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
+      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
     } catch (err) {
       throw new Error('failed to set instructor at course management service');
     }
@@ -132,7 +132,7 @@ export class CourseManagementService implements ICourseManagementService {
 
   async closeClass(classId: number): Promise<any> {
     try {
-      await ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`);
+      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`);
     } catch (err) {
       throw new Error('failed to close class at course management service');
     }
@@ -140,7 +140,7 @@ export class CourseManagementService implements ICourseManagementService {
 
   async cancelClass(classId: number): Promise<any> {
     try {
-      await ApiClient.POST(`${this.baseUrl}/classes/${classId}/cancel`);
+      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/cancel`);
     } catch (err) {
       throw new Error('failed to cancel class at course management service');
     }

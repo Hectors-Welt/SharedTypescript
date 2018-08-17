@@ -148,7 +148,7 @@ class CourseManagementService {
     setInstructor(classId, oldInstructorId, newInstructorId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
             }
             catch (err) {
                 throw new Error('failed to set instructor at course management service');
@@ -158,7 +158,7 @@ class CourseManagementService {
     closeClass(classId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`);
             }
             catch (err) {
                 throw new Error('failed to close class at course management service');
@@ -168,7 +168,7 @@ class CourseManagementService {
     cancelClass(classId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/cancel`);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/cancel`);
             }
             catch (err) {
                 throw new Error('failed to cancel class at course management service');
