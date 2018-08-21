@@ -155,10 +155,10 @@ class CourseManagementService {
             }
         });
     }
-    closeClass(classId) {
+    closeClass(classId, attendees) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`, attendees);
             }
             catch (err) {
                 throw new Error('failed to close class at course management service');

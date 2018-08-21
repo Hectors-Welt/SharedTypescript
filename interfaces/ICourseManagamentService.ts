@@ -8,6 +8,7 @@ import { Appointment } from '../models/CourseManagamentService/Appointment';
 import { AppointmentSearch } from '../models/CourseManagamentService/AppointmentSearch';
 import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
+import { ClassAttendee } from '../models/CourseManagamentService/ClassAttendee';
 
 export interface ICourseManagementService {
   getClasses(filter: ClassFilter): Promise<Class[]>;
@@ -38,7 +39,7 @@ export interface ICourseManagementService {
 
   setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any>;
 
-  closeClass(classId: number): Promise<any>;
+  closeClass(classId: number, attendees: ClassAttendee[]): Promise<any>;
 
   cancelClass(classId: number): Promise<any>;
 }

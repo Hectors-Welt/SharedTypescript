@@ -10,6 +10,7 @@ import { AppointmentSearch } from '../models/CourseManagamentService/Appointment
 import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
 import { ApiClient } from './ApiClient';
+import { ClassAttendee } from "../models/CourseManagamentService/ClassAttendee";
 
 export class CourseManagementService implements ICourseManagementService {
   baseUrl: string;
@@ -130,9 +131,9 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
-  async closeClass(classId: number): Promise<any> {
+  async closeClass(classId: number, attendees: ClassAttendee[]): Promise<any> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`);
+      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/close`, attendees);
     } catch (err) {
       throw new Error('failed to close class at course management service');
     }

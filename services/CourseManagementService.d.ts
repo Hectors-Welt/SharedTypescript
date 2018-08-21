@@ -9,6 +9,7 @@ import { Appointment } from '../models/CourseManagamentService/Appointment';
 import { AppointmentSearch } from '../models/CourseManagamentService/AppointmentSearch';
 import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
+import { ClassAttendee } from "../models/CourseManagamentService/ClassAttendee";
 export declare class CourseManagementService implements ICourseManagementService {
     private host;
     private port;
@@ -28,6 +29,6 @@ export declare class CourseManagementService implements ICourseManagementService
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupReplacements(classId: number): Promise<number[]>;
     setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any>;
-    closeClass(classId: number): Promise<any>;
+    closeClass(classId: number, attendees: ClassAttendee[]): Promise<any>;
     cancelClass(classId: number): Promise<any>;
 }
