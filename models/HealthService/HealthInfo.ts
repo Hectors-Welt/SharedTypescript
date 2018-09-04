@@ -1,5 +1,6 @@
 export class HealthInfo {
   public version: string;
+  public backendId: string;
   public healthy: Object;
   public unhealthy: Object;
 
@@ -20,6 +21,7 @@ export class HealthInfo {
   toJSON() {
     return {
       version: this.version,
+      backendId: this.backendId,
       healthy: this.healthy,
       unhealthy: this.unhealthy,
       timestamp: this.timestamp,

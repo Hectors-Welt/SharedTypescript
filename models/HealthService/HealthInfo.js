@@ -15,6 +15,7 @@ class HealthInfo {
     toJSON() {
         return {
             version: this.version,
+            backendId: this.backendId,
             healthy: this.healthy,
             unhealthy: this.unhealthy,
             timestamp: this.timestamp,
