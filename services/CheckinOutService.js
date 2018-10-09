@@ -66,7 +66,7 @@ class CheckinOutService {
                     accessLevel,
                     checkoutIfAlreadyPresent,
                 });
-                return result.success;
+                return result;
             }
             catch (err) {
                 throw new Error('failed to checkin customer at checkinout service');
@@ -81,7 +81,7 @@ class CheckinOutService {
                     accessPossibility,
                     accessLevel,
                 });
-                return result.success;
+                return result;
             }
             catch (err) {
                 throw new Error('failed to checkout customer at checkinout service');

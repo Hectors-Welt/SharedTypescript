@@ -3,6 +3,7 @@ import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus'
 import { Checkin } from '../models/CheckinOutService/Checkin';
 import { ApiClient } from './ApiClient';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
+import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 
 export class CheckinOutService implements ICheckinOutService {
   baseUrl: string;
@@ -44,7 +45,7 @@ export class CheckinOutService implements ICheckinOutService {
     }
   }
 
-  async checkin(customerId: number, tagId?: number, accessPossibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<boolean> {
+  async checkin(customerId: number, tagId?: number, accessPossibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<CheckinOutResponse> {
     try {
       const result = await ApiClient.POST(`${this.baseUrl}/checkin`, {
         customerId,
@@ -53,20 +54,20 @@ export class CheckinOutService implements ICheckinOutService {
         accessLevel,
         checkoutIfAlreadyPresent,
       });
-      return result.success;
+      return result;
     } catch (err) {
       throw new Error('failed to checkin customer at checkinout service');
     }
   }
 
-  async checkout(customerId: number, accessPossibility?: number, accessLevel?: number): Promise<boolean> {
+  async checkout(customerId: number, accessPossibility?: number, accessLevel?: number): Promise<CheckinOutResponse> {
     try {
       const result = await ApiClient.POST(`${this.baseUrl}/checkout`, {
         customerId,
         accessPossibility,
         accessLevel,
       });
-      return result.success;
+      return result;
     } catch (err) {
       throw new Error('failed to checkout customer at checkinout service');
     }

@@ -1,6 +1,7 @@
 import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus'
 import { Checkin } from '../models/CheckinOutService/Checkin';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
+import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 
 export interface ICheckinOutService {
   getAccessAreasAvailable(): Promise<AccessArea[]>;
@@ -11,7 +12,7 @@ export interface ICheckinOutService {
 
   isAccessAllowed(customerId: number, timeSlotRequired: boolean, accessAreas?: string[]): Promise<boolean>;
 
-  checkin(customerId: number, tagId?: number, accessPosibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<boolean>;
+  checkin(customerId: number, tagId?: number, accessPosibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<CheckinOutResponse>;
 
-  checkout(customerId: number, accessPosibility?: number, accessLevel?: number): Promise<boolean>;
+  checkout(customerId: number, accessPosibility?: number, accessLevel?: number): Promise<CheckinOutResponse>;
 }
