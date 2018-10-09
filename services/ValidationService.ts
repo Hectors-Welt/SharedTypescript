@@ -8,7 +8,7 @@ import * as csvtojson from 'csvtojson'
 import { IValidationService } from '../interfaces/IValidationService';
 import { SclInfo } from '../models/ValidationService/SclInfo';
 
-const url = 'http://www.bundesbank.de/Redaktion/DE/Downloads/Aufgaben/Unbarer_Zahlungsverkehr/SEPA/verzeichnis_der_erreichbaren_zahlungsdienstleister.csv?__blob=publicationFile';
+const url = 'https://www.bundesbank.de/resource/blob/602880/0024289cadc4ec305a1a7b90485b4521/mL/verzeichnis-der-erreichbaren-zahlungsdienstleister-data.csv';
 
 export class ValidationService implements IValidationService {
   private sclEntries = {};

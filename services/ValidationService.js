@@ -7,7 +7,7 @@ const path = require("path");
 const popsicle = require("popsicle");
 const csvtojson = require("csvtojson");
 const SclInfo_1 = require("../models/ValidationService/SclInfo");
-const url = 'http://www.bundesbank.de/Redaktion/DE/Downloads/Aufgaben/Unbarer_Zahlungsverkehr/SEPA/verzeichnis_der_erreichbaren_zahlungsdienstleister.csv?__blob=publicationFile';
+const url = 'https://www.bundesbank.de/resource/blob/602880/0024289cadc4ec305a1a7b90485b4521/mL/verzeichnis-der-erreichbaren-zahlungsdienstleister-data.csv';
 class ValidationService {
     constructor() {
         this.sclEntries = {};
