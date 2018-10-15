@@ -22,4 +22,5 @@ export class Contract {
   partialFee?: number;
   additionalFees: Fee[];
   limits: Limit[];
+  freeTestingPhaseActivated: boolean;
 }
