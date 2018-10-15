@@ -8,4 +8,5 @@ export class ContractTemplate {
   renewal: string;
   termination: string;
   isMainContract: boolean;
+  freeTestingPhase?: number;
 }
