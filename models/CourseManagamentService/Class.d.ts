@@ -17,4 +17,5 @@ export declare class Class {
     status: string;
     inviteAttendeesForRating: boolean;
     attendees: ClassAttendee[];
+    maxAttendeesAllowed: number;
 }
