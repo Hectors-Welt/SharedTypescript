@@ -11,6 +11,7 @@ import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
 import { ApiClient } from './ApiClient';
 import { ClassAttendee } from "../models/CourseManagamentService/ClassAttendee";
+import { PunishmentContainer } from "../models/CourseManagamentService/PunishmentContainer";
 
 export class CourseManagementService implements ICourseManagementService {
   baseUrl: string;
@@ -144,6 +145,30 @@ export class CourseManagementService implements ICourseManagementService {
       return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/cancel`);
     } catch (err) {
       throw new Error('failed to cancel class at course management service');
+    }
+  }
+
+  async getPunishments(): Promise<PunishmentContainer[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/punishments`);
+    } catch (err) {
+      new Error('failed to get punishments from course management service');
+    }
+  }
+
+  async getPunishmentByCustomerId(customerId: number): Promise<PunishmentContainer> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/punishments/${customerId}`);
+    } catch (err) {
+      new Error('failed to get punishment by customerId from course management service');
+    }
+  }
+
+  async resetPunishmentForCustomerId(customerId: number): Promise<PunishmentContainer> {
+    try {
+      return await ApiClient.DELETE(`${this.baseUrl}/punishments/${customerId}`);
+    } catch (err) {
+      new Error('failed to reset punishment for customerId at course management service');
     }
   }
 }

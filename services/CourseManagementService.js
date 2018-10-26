@@ -175,5 +175,35 @@ class CourseManagementService {
             }
         });
     }
+    getPunishments() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/punishments`);
+            }
+            catch (err) {
+                new Error('failed to get punishments from course management service');
+            }
+        });
+    }
+    getPunishmentByCustomerId(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/punishments/${customerId}`);
+            }
+            catch (err) {
+                new Error('failed to get punishment by customerId from course management service');
+            }
+        });
+    }
+    resetPunishmentForCustomerId(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/punishments/${customerId}`);
+            }
+            catch (err) {
+                new Error('failed to reset punishment for customerId at course management service');
+            }
+        });
+    }
 }
 exports.CourseManagementService = CourseManagementService;

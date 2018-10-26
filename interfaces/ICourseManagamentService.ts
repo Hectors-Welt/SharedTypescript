@@ -9,6 +9,7 @@ import { AppointmentSearch } from '../models/CourseManagamentService/Appointment
 import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
 import { ClassAttendee } from '../models/CourseManagamentService/ClassAttendee';
+import { PunishmentContainer } from '../models/CourseManagamentService/PunishmentContainer';
 
 export interface ICourseManagementService {
   getClasses(filter: ClassFilter): Promise<Class[]>;
@@ -42,4 +43,10 @@ export interface ICourseManagementService {
   closeClass(classId: number, attendees: ClassAttendee[]): Promise<any>;
 
   cancelClass(classId: number): Promise<any>;
+
+  getPunishments(): Promise<PunishmentContainer[]>;
+
+  getPunishmentByCustomerId(customerId: number): Promise<PunishmentContainer>;
+
+  resetPunishmentForCustomerId(customerId: number): Promise<PunishmentContainer>;
 }
