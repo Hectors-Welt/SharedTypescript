@@ -1,6 +1,7 @@
 import { SMSResponse } from '../models/SmsService/SMSResponse';
 import { SMSRequest } from '../models/SmsService/SMSRequest';
-export interface ISMSService {
+import { IService } from './IService';
+export interface ISMSService extends IService {
     getJobs(): Promise<Array<SMSResponse>>;
     getJob(id: any): Promise<SMSResponse>;
     deleteJob(id: any): Promise<SMSResponse>;

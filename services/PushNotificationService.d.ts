@@ -3,10 +3,11 @@ import { DeviceRegistration } from '../models/PushNotificationService/DeviceRegi
 import { Notification } from '../models/PushNotificationService/Notification';
 import { NotificationLog } from '../models/PushNotificationService/NotificationLog';
 export declare class PushNotificationService implements IPushNotificationService {
-    private host;
-    private port;
+    host: string;
+    port: number;
+    version: string;
     baseUrl: string;
-    constructor(host: string, port: number);
+    constructor(host: string, port: number, version: string);
     registerDevice(deviceRegistration: DeviceRegistration): Promise<void>;
     unregisterDevice(deviceId: string, appId: string): Promise<void>;
     getSubscriptions(deviceId: string, appId: string): Promise<string[]>;

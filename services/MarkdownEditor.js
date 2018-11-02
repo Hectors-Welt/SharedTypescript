@@ -11,9 +11,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const popsicle = require("popsicle");
 const ApiClient_1 = require("./ApiClient");
 class MarkdownEditor {
-    constructor(host, port) {
+    constructor(host, port, version) {
         this.host = host;
         this.port = port;
+        this.version = version;
         this.baseUrl = `http://${host}:${port}/api`;
     }
     getMarkdowns() {

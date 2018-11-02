@@ -2,8 +2,9 @@ import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus'
 import { Checkin } from '../models/CheckinOutService/Checkin';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
 import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
+import { IService } from './IService';
 
-export interface ICheckinOutService {
+export interface ICheckinOutService extends IService {
   getAccessAreasAvailable(): Promise<AccessArea[]>;
 
   getCheckinStatus(customerId: number): Promise<CheckinStatus>;

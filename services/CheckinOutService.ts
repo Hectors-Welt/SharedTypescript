@@ -6,9 +6,15 @@ import { AccessArea } from '../models/CheckinOutService/AccessArea';
 import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 
 export class CheckinOutService implements ICheckinOutService {
+  host: string;
+  port: number;
+  version: string;
   baseUrl: string;
 
-  constructor(private host: string, private port: number) {
+  constructor(host: string, port: number, version: string) {
+    this.host = host;
+    this.port = port;
+    this.version = version;
     this.baseUrl = `http://${host}:${port}`;
   }
 

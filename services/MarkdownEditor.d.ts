@@ -1,10 +1,11 @@
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { MarkdownModel } from '../models/MarkdownEditor/MarkdownModel';
 export declare class MarkdownEditor implements IMarkdownEditor {
-    private host;
-    private port;
+    host: string;
+    port: number;
+    version: string;
     baseUrl: string;
-    constructor(host: string, port: number);
+    constructor(host: string, port: number, version: string);
     getMarkdowns(): Promise<Array<MarkdownModel>>;
     getMarkdown(id: string): Promise<MarkdownModel>;
     createMarkdown(data: any): Promise<any>;

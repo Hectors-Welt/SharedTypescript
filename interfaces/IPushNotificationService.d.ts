@@ -1,7 +1,8 @@
 import { DeviceRegistration } from '../models/PushNotificationService/DeviceRegistration';
 import { Notification } from '../models/PushNotificationService/Notification';
 import { NotificationLog } from '../models/PushNotificationService/NotificationLog';
-export interface IPushNotificationService {
+import { IService } from './IService';
+export interface IPushNotificationService extends IService {
     registerDevice(deviceRegistration: DeviceRegistration): Promise<void>;
     unregisterDevice(deviceId: string, appId: string): Promise<void>;
     getSubscriptions(deviceId: string, appId: string): Promise<string[]>;

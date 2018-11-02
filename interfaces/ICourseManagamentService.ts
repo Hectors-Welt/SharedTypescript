@@ -10,8 +10,9 @@ import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
 import { ClassAttendee } from '../models/CourseManagamentService/ClassAttendee';
 import { PunishmentContainer } from '../models/CourseManagamentService/PunishmentContainer';
+import { IService } from './IService';
 
-export interface ICourseManagementService {
+export interface ICourseManagementService extends IService {
   getClasses(filter: ClassFilter): Promise<Class[]>;
 
   getPriceInformation(classId: number, customerId: number): Promise<any>;

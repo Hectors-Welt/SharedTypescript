@@ -227,7 +227,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.mailingService;
       }
       const mailingService = await ApiClient.GET(`${this.baseUrl}/MailingService`);
-      this.mailingService = new MailingService(mailingService.host, mailingService.port);
+      this.mailingService = new MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
       return this.mailingService;
     } catch (err) {
       throw {
@@ -243,7 +243,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.smsService;
       }
       const smsService = await ApiClient.GET(`${this.baseUrl}/SMSService`);
-      this.smsService = new SMSService(smsService.host, smsService.port);
+      this.smsService = new SMSService(smsService.host, smsService.port, smsService.serviceVersion);
       return this.smsService;
     } catch (err) {
       throw {
@@ -259,7 +259,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.customerService;
       }
       const customerService = await ApiClient.GET(`${this.baseUrl}/CustomerService`);
-      this.customerService = new CustomerService(customerService.host, customerService.port);
+      this.customerService = new CustomerService(customerService.host, customerService.port, customerService.serviceVersion);
       return this.customerService;
     } catch (err) {
       throw {
@@ -275,7 +275,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.employeesService;
       }
       const employeesService = await ApiClient.GET(`${this.baseUrl}/EmployeesService`);
-      this.employeesService = new EmployeesService(employeesService.host, employeesService.port);
+      this.employeesService = new EmployeesService(employeesService.host, employeesService.port, employeesService.serviceVersion);
       return this.employeesService;
     } catch (err) {
       throw {
@@ -291,7 +291,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.membershipService;
       }
       const membershipService = await ApiClient.GET(`${this.baseUrl}/MembershipService`);
-      this.membershipService = new MembershipService(membershipService.host, membershipService.port);
+      this.membershipService = new MembershipService(membershipService.host, membershipService.port, membershipService.serviceVersion);
       return this.membershipService;
     } catch (err) {
       throw {
@@ -307,7 +307,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.twoFactorAuthenticationService;
       }
       const twoFactorAuthenticationService = await ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
-      this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port);
+      this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port, twoFactorAuthenticationService.serviceVersion);
       return this.twoFactorAuthenticationService;
     } catch (err) {
       throw {
@@ -323,7 +323,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.pushNotificationService;
       }
       const pushNotificationService = await ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
-      this.pushNotificationService = new PushNotificationService(pushNotificationService.host, pushNotificationService.port);
+      this.pushNotificationService = new PushNotificationService(pushNotificationService.host, pushNotificationService.port, pushNotificationService.serviceVersion);
       return this.pushNotificationService;
     } catch (err) {
       throw {
@@ -339,7 +339,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.ratingService;
       }
       const ratingService = await ApiClient.GET(`${this.baseUrl}/RatingService`);
-      this.ratingService = new RatingService(ratingService.host, ratingService.port);
+      this.ratingService = new RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
       return this.ratingService;
     } catch (err) {
       throw {
@@ -355,7 +355,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.accountingService;
       }
       const accountingService = await ApiClient.GET(`${this.baseUrl}/AccountingService`);
-      this.accountingService = new AccountingService(accountingService.host, accountingService.port);
+      this.accountingService = new AccountingService(accountingService.host, accountingService.port, accountingService.serviceVersion);
       return this.accountingService;
     } catch (err) {
       throw {
@@ -371,7 +371,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.checkinOutService;
       }
       const checkinOutService = await ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
-      this.checkinOutService = new CheckinOutService(checkinOutService.host, checkinOutService.port);
+      this.checkinOutService = new CheckinOutService(checkinOutService.host, checkinOutService.port, checkinOutService.serviceVersion);
       return this.checkinOutService;
     } catch (err) {
       throw {
@@ -387,7 +387,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.articlesService;
       }
       const articlesService = await ApiClient.GET(`${this.baseUrl}/ArticlesService`);
-      this.articlesService = new ArticlesService(articlesService.host, articlesService.port);
+      this.articlesService = new ArticlesService(articlesService.host, articlesService.port, articlesService.serviceVersion);
       return this.articlesService;
     } catch (err) {
       throw {
@@ -403,7 +403,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.templateDesigner;
       }
       const templateDesigner = await ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
-      this.templateDesigner = new TemplateDesigner(templateDesigner.host, templateDesigner.port);
+      this.templateDesigner = new TemplateDesigner(templateDesigner.host, templateDesigner.port, templateDesigner.serviceVersion);
       return this.templateDesigner;
     } catch (err) {
       throw {
@@ -419,7 +419,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.markdownEditor;
       }
       const markdownEditor = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
-      this.markdownEditor = new MarkdownEditor(markdownEditor.host, markdownEditor.port);
+      this.markdownEditor = new MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
       return this.markdownEditor;
     } catch (err) {
       throw {
@@ -435,7 +435,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.courseManagementService;
       }
       const courseManagementService = await ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
-      this.courseManagementService = new CourseManagementService(courseManagementService.host, courseManagementService.port);
+      this.courseManagementService = new CourseManagementService(courseManagementService.host, courseManagementService.port, courseManagementService.serviceVersion);
       return this.courseManagementService;
     } catch (err) {
       throw {

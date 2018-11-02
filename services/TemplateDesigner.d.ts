@@ -2,10 +2,11 @@ import { ITemplateDesigner } from '../interfaces/ITemplateDesigner';
 import { RenderFileType } from '../models/TemplateDesigner/RenderFileType';
 import { TemplateModel } from '../models/TemplateDesigner/TemplateModel';
 export declare class TemplateDesigner implements ITemplateDesigner {
-    private host;
-    private port;
+    host: string;
+    port: number;
+    version: string;
     baseUrl: string;
-    constructor(host: string, port: number);
+    constructor(host: string, port: number, version: string);
     render(data: any, templateId: any, type?: RenderFileType, asUrl?: boolean, persist?: boolean): Promise<any>;
     renderUrl(url: string, data: any, asUrl?: boolean, persist?: boolean): Promise<any>;
     getModels(): Promise<Array<TemplateModel>>;

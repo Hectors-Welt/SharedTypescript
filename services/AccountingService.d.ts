@@ -3,10 +3,11 @@ import { ClubAccountInformation } from '../models/AccountingService/ClubAccountI
 import { SepaBookingSet } from '../models/AccountingService/SepaBookingSet';
 import { SalesInfo } from '../models/AccountingService/SalesInfo';
 export declare class AccountingService implements IAccountingService {
-    private host;
-    private port;
+    host: string;
+    port: number;
+    version: string;
     baseUrl: string;
-    constructor(host: string, port: number);
+    constructor(host: string, port: number, version: string);
     getClubAccountInformation(customerId: number): Promise<ClubAccountInformation>;
     getSepaBookings(customerId: number): Promise<SepaBookingSet[]>;
     getSalesInfo(customerId: number, days: number): Promise<SalesInfo[]>;

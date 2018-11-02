@@ -4,9 +4,15 @@ import { RatingItemType } from '../models/RatingService/RatingItemTypeEnum'
 import { ApiClient } from './ApiClient';
 
 export class RatingService implements IRatingService {
+  host: string;
+  port: number;
+  version: string;
   baseUrl: string;
 
-  constructor(private host: string, private port: number) {
+  constructor(host: string, port: number, version: string) {
+    this.host = host;
+    this.port = port;
+    this.version = version;
     this.baseUrl = `http://${host}:${port}`;
   }
 

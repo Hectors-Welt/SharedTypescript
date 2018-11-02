@@ -5,8 +5,9 @@ import { Contact } from '../models/CustomerService/Contact';
 import { File } from '../models/CustomerService/File';
 import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
+import { IService } from './IService';
 
-export interface ICustomerService {
+export interface ICustomerService extends IService {
   getStatusEntriesAvailable(): Promise<StatusEntry[]>;
 
   findDoublets(name: string, birthday: string): Promise<Customer[]>;

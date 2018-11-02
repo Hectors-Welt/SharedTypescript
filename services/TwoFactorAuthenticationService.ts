@@ -2,9 +2,15 @@ import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthent
 import { ApiClient } from './ApiClient';
 
 export class TwoFactorAuthenticationService implements ITwoFactorAuthenticationService {
+  host: string;
+  port: number;
+  version: string;
   baseUrl: string;
 
-  constructor(private host: string, private port: number) {
+  constructor(host: string, port: number, version: string) {
+    this.host = host;
+    this.port = port;
+    this.version = version;
     this.baseUrl = `http://${host}:${port}`;
   }
 

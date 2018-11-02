@@ -10,9 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const ApiClient_1 = require("./ApiClient");
 class AccountingService {
-    constructor(host, port) {
+    constructor(host, port, version) {
         this.host = host;
         this.port = port;
+        this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
     getClubAccountInformation(customerId) {

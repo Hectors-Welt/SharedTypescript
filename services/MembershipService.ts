@@ -4,9 +4,15 @@ import { Contract } from '../models/MembershipService/Contract';
 import { ApiClient } from './ApiClient';
 
 export class MembershipService implements IMembershipService {
+  host: string;
+  port: number;
+  version: string;
   baseUrl: string;
 
-  constructor(private host: string, private port: number) {
+  constructor(host: string, port: number, version: string) {
+    this.host = host;
+    this.port = port;
+    this.version = version;
     this.baseUrl = `http://${host}:${port}`;
   }
 

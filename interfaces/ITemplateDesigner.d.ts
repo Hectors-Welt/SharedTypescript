@@ -1,6 +1,7 @@
 import { RenderFileType } from '../models/TemplateDesigner/RenderFileType';
 import { TemplateModel } from '../models/TemplateDesigner/TemplateModel';
-export interface ITemplateDesigner {
+import { IService } from './IService';
+export interface ITemplateDesigner extends IService {
     render(data: any, templateId: any, type: RenderFileType, asUrl?: boolean, persist?: boolean): Promise<any>;
     renderUrl(url: string, data: any, asUrl?: boolean, persist?: boolean): Promise<any>;
     getModels(): Promise<Array<TemplateModel>>;

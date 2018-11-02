@@ -12,9 +12,10 @@ const popsicle = require("popsicle");
 const RenderFileType_1 = require("../models/TemplateDesigner/RenderFileType");
 const ApiClient_1 = require("./ApiClient");
 class TemplateDesigner {
-    constructor(host, port) {
+    constructor(host, port, version) {
         this.host = host;
         this.port = port;
+        this.version = version;
         this.baseUrl = `http://${host}:${port}/api`;
     }
     render(data, templateId, type = RenderFileType_1.RenderFileType.PDF, asUrl, persist) {

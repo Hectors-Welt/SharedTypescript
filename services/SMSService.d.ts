@@ -2,10 +2,11 @@ import { ISMSService } from '../interfaces/ISMSService';
 import { SMSRequest } from '../models/SmsService/SMSRequest';
 import { SMSResponse } from '../models/SmsService/SMSResponse';
 export declare class SMSService implements ISMSService {
-    private host;
-    private port;
+    host: string;
+    port: number;
+    version: string;
     baseUrl: string;
-    constructor(host: string, port: number);
+    constructor(host: string, port: number, version: string);
     sendSMS(request: SMSRequest): Promise<SMSResponse>;
     getJobs(): Promise<Array<SMSResponse>>;
     getJob(id: any): Promise<SMSResponse>;

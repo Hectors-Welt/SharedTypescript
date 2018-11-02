@@ -5,9 +5,15 @@ import { NotificationLog } from '../models/PushNotificationService/NotificationL
 import { ApiClient } from './ApiClient';
 
 export class PushNotificationService implements IPushNotificationService {
+  host: string;
+  port: number;
+  version: string;
   baseUrl: string;
 
-  constructor(private host: string, private port: number) {
+  constructor(host: string, port: number, version: string) {
+    this.host = host;
+    this.port = port;
+    this.version = version;
     this.baseUrl = `http://${host}:${port}`;
   }
 
