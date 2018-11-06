@@ -15,4 +15,5 @@ export declare class CheckinOutService implements ICheckinOutService {
     isAccessAllowed(customerId: number, timeSlotRequired: boolean, accessAreas?: string[]): Promise<boolean>;
     checkin(customerId: number, tagId?: number, accessPossibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<CheckinOutResponse>;
     checkout(customerId: number, accessPossibility?: number, accessLevel?: number): Promise<CheckinOutResponse>;
+    getCustomersPresent(): Promise<CheckinStatus[]>;
 }

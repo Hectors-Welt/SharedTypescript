@@ -78,4 +78,12 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to checkout customer at checkinout service');
     }
   }
+
+  async getCustomersPresent(): Promise<CheckinStatus[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getCustomersPresent`);
+    } catch (err) {
+      throw new Error('failed to retrieve customers present from checkinout service');
+    }
+  }
 }

@@ -89,5 +89,15 @@ class CheckinOutService {
             }
         });
     }
+    getCustomersPresent() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCustomersPresent`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve customers present from checkinout service');
+            }
+        });
+    }
 }
 exports.CheckinOutService = CheckinOutService;
