@@ -29,6 +29,7 @@ const MailingService_1 = require("./MailingService");
 const SMSService_1 = require("./SMSService");
 const CourseManagementService_1 = require("./CourseManagementService");
 const MarkdownEditor_1 = require("./MarkdownEditor");
+const BackendSettings_1 = require("../models/DiscoveryService/BackendSettings");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -134,6 +135,22 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getBackendSettings() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (!this.backendSettings) {
+                    this.backendSettings = new BackendSettings_1.BackendSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/backend`));
+                }
+                return this.backendSettings;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve backend settings from discovery service: ${err.message}`,
                 };
             }
         });

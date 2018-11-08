@@ -36,6 +36,7 @@ import { CourseManagementService } from './CourseManagementService';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { MarkdownEditor } from './MarkdownEditor';
 import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
+import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -47,6 +48,7 @@ export class DiscoveryService implements IDiscoveryService {
   private eventStoreSettings: EventStoreSettings;
   private mongoDbSettings: MongoDbSettings;
   private rabbitMqSettings: RabbitMqSettings;
+  private backendSettings: BackendSettings;
   private hectorDbSettings: HectorDbSettings;
   private braintreeSettings: BraintreeSettings;
   private customerService: ICustomerService;
@@ -157,6 +159,20 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getBackendSettings(): Promise<BackendSettings> {
+    try {
+      if (!this.backendSettings) {
+        this.backendSettings = new BackendSettings(await ApiClient.GET(`${this.baseUrl}/backend`));
+      }
+      return this.backendSettings;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve backend settings from discovery service: ${err.message}`,
       };
     }
   }

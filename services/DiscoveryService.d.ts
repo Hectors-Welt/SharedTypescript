@@ -22,6 +22,7 @@ import { ISMSService } from '../interfaces/ISMSService';
 import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
+import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 export declare class DiscoveryService implements IDiscoveryService {
     baseUrl: string;
     host: string;
@@ -32,6 +33,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private eventStoreSettings;
     private mongoDbSettings;
     private rabbitMqSettings;
+    private backendSettings;
     private hectorDbSettings;
     private braintreeSettings;
     private customerService;
@@ -57,6 +59,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getMongoDbSettings(): Promise<MongoDbSettings>;
     getDevices(): Promise<Array<DeviceConfig>>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
+    getBackendSettings(): Promise<BackendSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
     getClubs(): Promise<any>;

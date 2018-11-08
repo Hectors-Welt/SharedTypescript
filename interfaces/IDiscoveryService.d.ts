@@ -18,6 +18,7 @@ import { IMailingService } from './IMailingService';
 import { ITemplateDesigner } from './ITemplateDesigner';
 import { ICourseManagementService } from './ICourseManagamentService';
 import { IMarkdownEditor } from './IMarkdownEditor';
+import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 export interface IDiscoveryService {
     port: number;
     host: string;
@@ -29,6 +30,7 @@ export interface IDiscoveryService {
     getEventStoreSettings(): Promise<EventStoreSettings>;
     getMongoDbSettings(): Promise<MongoDbSettings>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
+    getBackendSettings(): Promise<BackendSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
     getMailingService(): Promise<IMailingService>;
