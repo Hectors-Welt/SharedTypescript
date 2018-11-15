@@ -6,4 +6,5 @@ export declare class Interaction {
     subject: string;
     note: string;
     attachment: File;
+    rawData: string;
 }
