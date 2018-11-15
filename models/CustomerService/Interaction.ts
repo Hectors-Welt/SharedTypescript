@@ -6,5 +6,6 @@ export class Interaction {
     employeeId: number;
     subject: string;
     note: string;
-    attachment: File
+    attachment: File;
+    rawData: string;
 }
