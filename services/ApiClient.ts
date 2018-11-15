@@ -35,6 +35,6 @@ export class ApiClient {
     const result = await popsicle.request(request)
     .use(popsicle.plugins.parse('json'));
 
-    return result.status === 200 ? result.body || {} : null;
+    return result.status === 200 || result.status === 204 ? result.body || {} : null;
   }
 }
