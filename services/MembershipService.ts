@@ -39,4 +39,12 @@ export class MembershipService implements IMembershipService {
       throw new Error('failed to retrieve terminated contracts from membership service');
     }
   }
+
+  async rejectPendingMembership(processId: number): Promise<void> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/rejectPendingMembership/${processId}`);
+    } catch (err) {
+      throw new Error('failed to reject pending mebership from membership service');
+    }
+  }
 }

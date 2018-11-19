@@ -5,4 +5,5 @@ export interface IMembershipService extends IService {
     getContractTemplatesAvailable(): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
+    rejectPendingMembership(processId: number): Promise<void>;
 }

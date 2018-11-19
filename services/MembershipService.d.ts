@@ -10,4 +10,5 @@ export declare class MembershipService implements IMembershipService {
     getContractTemplatesAvailable(): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
+    rejectPendingMembership(processId: number): Promise<void>;
 }
