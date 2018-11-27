@@ -16,13 +16,23 @@ class CustomerService {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
+    getDefaultStatusValues() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getDefaultStatusValues`);
+            }
+            catch (err) {
+                throw new Error('failed to get default status values from customer service');
+            }
+        });
+    }
     getStatusEntriesAvailable() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
             }
             catch (err) {
-                throw new Error('failed to status entries from customer service');
+                throw new Error('failed to get status entries from customer service');
             }
         });
     }

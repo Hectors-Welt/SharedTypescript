@@ -7,6 +7,7 @@ import { File } from '../models/CustomerService/File';
 import { ApiClient } from './ApiClient';
 import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
+import { StatusValues } from '../models/CustomerService/StatusValues';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -21,11 +22,19 @@ export class CustomerService implements ICustomerService {
     this.baseUrl = `http://${host}:${port}`;
   }
 
+  async getDefaultStatusValues(): Promise<StatusValues> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getDefaultStatusValues`);
+    } catch (err) {
+      throw new Error('failed to get default status values from customer service');
+    }
+  }
+
   async getStatusEntriesAvailable(): Promise<StatusEntry[]> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
     } catch (err) {
-      throw new Error('failed to status entries from customer service');
+      throw new Error('failed to get status entries from customer service');
     }
   }
 
