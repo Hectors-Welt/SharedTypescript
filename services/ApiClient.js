@@ -10,24 +10,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const popsicle = require("popsicle");
 class ApiClient {
-    static GET(url, headers) {
+    static GET(url, headers, throwErrorOnFail) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.makeRequest('GET', url, headers);
+            return throwErrorOnFail ? this.makeRequestThrowingErrorOnFail('GET', url, headers) : this.makeRequest('GET', url, headers);
         });
     }
-    static POST(url, body, headers) {
+    static POST(url, body, headers, throwErrorOnFail) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.makeRequest('POST', url, body, headers);
+            return throwErrorOnFail ? this.makeRequestThrowingErrorOnFail('POST', url, body, headers) : this.makeRequest('POST', url, body, headers);
         });
     }
-    static PUT(url, body, headers) {
+    static PUT(url, body, headers, throwErrorOnFail) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.makeRequest('PUT', url, body, headers);
+            return throwErrorOnFail ? this.makeRequestThrowingErrorOnFail('PUT', url, body, headers) : this.makeRequest('PUT', url, body, headers);
         });
     }
-    static DELETE(url, headers) {
+    static DELETE(url, headers, throwErrorOnFail) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.makeRequest('DELETE', url, headers);
+            return throwErrorOnFail ? this.makeRequestThrowingErrorOnFail('DELETE', url, headers) : this.makeRequest('DELETE', url, headers);
         });
     }
     static makeRequest(method, url, body, headers) {
@@ -43,6 +43,24 @@ class ApiClient {
             const result = yield popsicle.request(request)
                 .use(popsicle.plugins.parse('json'));
             return result.status === 200 || result.status === 204 ? result.body || {} : null;
+        });
+    }
+    static makeRequestThrowingErrorOnFail(method, url, body, headers) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const request = {
+                url,
+                method,
+                headers: Object.assign({}, this.headers, headers),
+            };
+            if (body) {
+                request.body = body;
+            }
+            const result = yield popsicle.request(request)
+                .use(popsicle.plugins.parse('json'));
+            if (result.status !== 200 && result.status != 204) {
+                throw result.body;
+            }
+            return result.body || {};
         });
     }
 }

@@ -18,9 +18,9 @@ export class MailingService implements IMailingService {
 
   async sendEmail(request: SendEmailRequest): Promise<SmtpResponse> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/api/sendEmail`, request);
+      return await ApiClient.POST(`${this.baseUrl}/api/sendEmail`, request, true);
     } catch (err) {
-      throw new Error('failed to call sendEmail on mailing service');
+      throw err;
     }
   }
 }
