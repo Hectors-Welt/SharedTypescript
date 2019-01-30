@@ -14,21 +14,8 @@ export class ValidationService implements IValidationService {
   private sclEntries = {};
 
   constructor() {
-    popsicle.get(url)
-    .then((result) => {
-      if (result.status != 200) {
-        return Promise.reject(new Error('file not found'));
-      }
-      csvtojson({
-        delimiter: ';',
-        noheader: true,
-        headers: ['bic', 'name', 'sct', 'sdd', 'cor1', 'b2b', 'scc'],
-      })
-      .fromString(result.body.split('\n').slice(2).join('\n'))
-      .on('json', data => this.sclEntries[data.bic] = new SclInfo(data))
-      .on('end', () => fs.writeFileSync(path.resolve(process.cwd(), 'SCL.json'), JSON.stringify(this.sclEntries)));
-    })
-    .catch(() => this.sclEntries = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'SCL.json'), 'utf8').toString()));
+    this.updateScl();
+    setInterval(this.updateScl, 1000 * 60 * 60 * 24);
   }
 
   isIbanValid(iban: string): boolean {
@@ -48,5 +35,22 @@ export class ValidationService implements IValidationService {
 
   isEmailValid(email: string): boolean {
     return validator.isEmail(email);
+  }
+
+  private async updateScl() {
+    const result = await popsicle.get(url);
+
+    if (result.status != 200) {
+      this.sclEntries = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'SCL.json'), 'utf8').toString());
+    }
+
+    csvtojson({
+      delimiter: ';',
+      noheader: true,
+      headers: ['bic', 'name', 'sct', 'sdd', 'cor1', 'b2b', 'scc'],
+    })
+      .fromString(result.body.split('\n').slice(2).join('\n'))
+      .on('json', data => this.sclEntries[data.bic] = new SclInfo(data))
+      .on('end', () => fs.writeFileSync(path.resolve(process.cwd(), 'SCL.json'), JSON.stringify(this.sclEntries)));
   }
 }

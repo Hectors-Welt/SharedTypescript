@@ -7,4 +7,5 @@ export declare class ValidationService implements IValidationService {
     isBicValid(bic: string): boolean;
     getSclInfo(bic: string): SclInfo;
     isEmailValid(email: string): boolean;
+    private updateScl;
 }
