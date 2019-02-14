@@ -6,6 +6,7 @@ class BackendSettings {
             throw new Error('invalid data. ensure baseUrl is present.');
         }
         this.baseUrl = settings.baseUrl;
+        this.backendId = settings.backendId;
     }
 }
 exports.BackendSettings = BackendSettings;

@@ -1,5 +1,6 @@
 export class BackendSettings {
   baseUrl: string;
+  backendId: string;
 
   constructor(settings: any) {
     if (!settings || !settings.baseUrl) {
@@ -7,5 +8,6 @@ export class BackendSettings {
     }
 
     this.baseUrl = settings.baseUrl;
+    this.backendId = settings.backendId;
   }
 }
