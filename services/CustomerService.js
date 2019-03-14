@@ -79,6 +79,16 @@ class CustomerService {
             }
         });
     }
+    getTagIds(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customer/${customerId}/getTagIds`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve tag ids from customer service');
+            }
+        });
+    }
     updateAddress(customerId, address) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

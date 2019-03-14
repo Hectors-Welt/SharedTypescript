@@ -73,6 +73,14 @@ export class CustomerService implements ICustomerService {
     }
   }
 
+  async getTagIds(customerId: number): Promise<string[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/getTagIds`);
+    } catch (err) {
+      throw new Error('failed to retrieve tag ids from customer service');
+    }
+  }
+
   async updateAddress(customerId: number, address: Address): Promise<void> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/address`, address);
