@@ -19,7 +19,7 @@ export declare class CustomerService implements ICustomerService {
     getCustomerByCustomerId(customerId: number): Promise<Customer>;
     getCustomerByTagId(tagId: number): Promise<Customer>;
     getProfilePicture(customerId: number): Promise<File>;
-    getTagIds(customerId: number): Promise<string[]>;
+    getTagIds(customerId: number, format?: number): Promise<string[]>;
     updateAddress(customerId: number, address: Address): Promise<void>;
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<void>;
     updateContactData(customerId: number, contact: Contact): Promise<void>;

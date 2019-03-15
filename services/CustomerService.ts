@@ -73,9 +73,9 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async getTagIds(customerId: number): Promise<string[]> {
+  async getTagIds(customerId: number, format: number = 0): Promise<string[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/getTagIds`);
+      return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/getTagIds?format=${format}`);
     } catch (err) {
       throw new Error('failed to retrieve tag ids from customer service');
     }
