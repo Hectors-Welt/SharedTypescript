@@ -21,6 +21,8 @@ export interface ICustomerService extends IService {
 
   getProfilePicture(customerId: number): Promise<File>;
 
+  setProfilePicture(customerId: number, file: File): Promise<any>;
+
   getTagIds(customerId: number, format: number): Promise<string[]>;
 
   updateAddress(customerId: number, address: Address): Promise<void>;
