@@ -75,9 +75,7 @@ export class CustomerService implements ICustomerService {
 
   async setProfilePicture(customerId: number, file: File): Promise<any> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/profilePicture`, {
-        file,
-      });
+      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/profilePicture`, file);
     } catch (err) {
       throw new Error('failed to set profile picture at customer service');
     }

@@ -82,9 +82,7 @@ class CustomerService {
     setProfilePicture(customerId, file) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customer/${customerId}/profilePicture`, {
-                    file,
-                });
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customer/${customerId}/profilePicture`, file);
             }
             catch (err) {
                 throw new Error('failed to set profile picture at customer service');
