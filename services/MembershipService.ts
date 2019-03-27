@@ -2,6 +2,7 @@ import { ContractTemplate } from '../models/MembershipService/ContractTemplate';
 import { IMembershipService } from '../interfaces/IMembershipService';
 import { Contract } from '../models/MembershipService/Contract';
 import { ApiClient } from './ApiClient';
+import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -43,6 +44,14 @@ export class MembershipService implements IMembershipService {
   async rejectPendingMembership(processId: number): Promise<void> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/rejectPendingMembership/${processId}`);
+    } catch (err) {
+      throw new Error('failed to reject pending mebership from membership service');
+    }
+  }
+
+  async createContracts(command: CreateContractsCommand): Promise<void> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/createContracts}`, command);
     } catch (err) {
       throw new Error('failed to reject pending mebership from membership service');
     }

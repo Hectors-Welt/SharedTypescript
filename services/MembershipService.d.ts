@@ -1,6 +1,7 @@
 import { ContractTemplate } from '../models/MembershipService/ContractTemplate';
 import { IMembershipService } from '../interfaces/IMembershipService';
 import { Contract } from '../models/MembershipService/Contract';
+import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 export declare class MembershipService implements IMembershipService {
     host: string;
     port: number;
@@ -11,4 +12,5 @@ export declare class MembershipService implements IMembershipService {
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
     rejectPendingMembership(processId: number): Promise<void>;
+    createContracts(command: CreateContractsCommand): Promise<void>;
 }
