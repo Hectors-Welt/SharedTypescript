@@ -51,7 +51,7 @@ export class MembershipService implements IMembershipService {
 
   async createContracts(command: CreateContractsCommand): Promise<void> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/createContracts}`, command);
+      return await ApiClient.POST(`${this.baseUrl}/createContracts`, command);
     } catch (err) {
       throw new Error('failed to reject pending mebership from membership service');
     }

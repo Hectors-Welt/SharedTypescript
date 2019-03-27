@@ -59,7 +59,7 @@ class MembershipService {
     createContracts(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/createContracts}`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/createContracts`, command);
             }
             catch (err) {
                 throw new Error('failed to reject pending mebership from membership service');
