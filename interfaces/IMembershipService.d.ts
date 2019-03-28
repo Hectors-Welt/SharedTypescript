@@ -9,5 +9,5 @@ export interface IMembershipService extends IService {
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
     rejectPendingMembership(processId: number): Promise<void>;
     createContracts(command: CreateContractsCommand): Promise<void>;
-    terminateContracts(command: TerminateContractCommand): Promise<void>;
+    terminateContract(command: TerminateContractCommand): Promise<void>;
 }

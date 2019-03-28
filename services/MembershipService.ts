@@ -58,7 +58,7 @@ export class MembershipService implements IMembershipService {
     }
   }
 
-  async terminateContracts(command: TerminateContractCommand): Promise<void> {
+  async terminateContract(command: TerminateContractCommand): Promise<void> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/terminateContract`, command);
     } catch (err) {

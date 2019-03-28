@@ -66,7 +66,7 @@ class MembershipService {
             }
         });
     }
-    terminateContracts(command) {
+    terminateContract(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/terminateContract`, command);
