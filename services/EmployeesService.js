@@ -80,10 +80,10 @@ class EmployeesService {
             }
         });
     }
-    getWorktimesRegistered(employeeId) {
+    getWorktimesRegistered(employeeId, from, till) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/employees/${employeeId}/worktimes`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/employees/${employeeId}/worktimes?from=${from}&till=${till}`);
             }
             catch (err) {
                 throw new Error(`failed to retrieve registered worktimes from employees service: ${err.message}`);

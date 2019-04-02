@@ -14,5 +14,5 @@ export declare class EmployeesService implements IEmployeesService {
     getAllEmployees(): Promise<Employee[]>;
     getWorktimeTypes(employeeId: number): Promise<WorktimeType[]>;
     registerWorktime(employeeId: number, worktime: Worktime): Promise<any>;
-    getWorktimesRegistered(employeeId: number): Promise<Worktime[]>;
+    getWorktimesRegistered(employeeId: number, from: string, till: string): Promise<Worktime[]>;
 }

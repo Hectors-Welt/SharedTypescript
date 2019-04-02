@@ -68,10 +68,10 @@ export class EmployeesService implements IEmployeesService {
       throw new Error(`failed to register worktime at employees service: ${err.message}`);
     }
   }
-  
-  async getWorktimesRegistered(employeeId: number): Promise<Worktime[]> {
+
+  async getWorktimesRegistered(employeeId: number, from: string, till: string): Promise<Worktime[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/employees/${employeeId}/worktimes`);
+      return await ApiClient.GET(`${this.baseUrl}/employees/${employeeId}/worktimes?from=${from}&till=${till}`);
     } catch (err) {
       throw new Error(`failed to retrieve registered worktimes from employees service: ${err.message}`);
     }

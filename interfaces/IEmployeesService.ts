@@ -16,5 +16,5 @@ export interface IEmployeesService extends IService {
 
   registerWorktime(employeeId: number, worktime: Worktime): Promise<any>;
 
-  getWorktimesRegistered(employeeId: number): Promise<Worktime[]>;
+  getWorktimesRegistered(employeeId: number, from: string, till: string): Promise<Worktime[]>;
 }
