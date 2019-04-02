@@ -12,6 +12,9 @@ export class Contract {
   renewal: string;
   termination: string;
   begin: string;
+  paymentBegin: string;
+  accessGranted: string;
+  created: string;
   terminationBefore: string;
   possibleDateOfEnd: string;
   templateId: number;
