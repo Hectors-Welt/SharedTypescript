@@ -1,5 +1,7 @@
 import { Employee } from '../models/EmployeesService/Employee';
 import { IEmployeesService } from '../interfaces/IEmployeesService';
+import { WorktimeType } from '../models/EmployeesService/WorktimeType';
+import { Worktime } from '../models/EmployeesService/Worktime';
 export declare class EmployeesService implements IEmployeesService {
     host: string;
     port: number;
@@ -10,4 +12,7 @@ export declare class EmployeesService implements IEmployeesService {
     getEmployeeByCustomerId(customerId: number): Promise<Employee>;
     getEmployeesPresent(studioId: number): Promise<Employee[]>;
     getAllEmployees(): Promise<Employee[]>;
+    getWorktimeTypes(employeeId: number): Promise<WorktimeType[]>;
+    registerWorktime(employeeId: number, worktime: Worktime): Promise<any>;
+    getWorktimesRegistered(employeeId: number): Promise<Worktime[]>;
 }

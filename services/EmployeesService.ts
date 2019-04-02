@@ -1,6 +1,8 @@
 import { Employee } from '../models/EmployeesService/Employee';
 import { IEmployeesService } from '../interfaces/IEmployeesService';
 import { ApiClient } from './ApiClient';
+import { WorktimeType } from '../models/EmployeesService/WorktimeType';
+import { Worktime } from '../models/EmployeesService/Worktime';
 
 export class EmployeesService implements IEmployeesService {
   host: string;
@@ -48,6 +50,30 @@ export class EmployeesService implements IEmployeesService {
       return await ApiClient.GET(`${this.baseUrl}/employees`);
     } catch (err) {
       throw new Error(`failed to retrieve employees from employees service: ${err.message}`);
+    }
+  }
+
+  async getWorktimeTypes(employeeId: number): Promise<WorktimeType[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/employees/${employeeId}/worktimetypes`);
+    } catch (err) {
+      throw new Error(`failed to retrieve worktime types from employees service: ${err.message}`);
+    }
+  }
+
+  async registerWorktime(employeeId: number, worktime: Worktime): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/employees/${employeeId}/worktimes`, worktime);
+    } catch (err) {
+      throw new Error(`failed to register worktime at employees service: ${err.message}`);
+    }
+  }
+  
+  async getWorktimesRegistered(employeeId: number): Promise<Worktime[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/employees/${employeeId}/worktimes`);
+    } catch (err) {
+      throw new Error(`failed to retrieve registered worktimes from employees service: ${err.message}`);
     }
   }
 }

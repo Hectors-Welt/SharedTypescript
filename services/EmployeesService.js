@@ -60,5 +60,35 @@ class EmployeesService {
             }
         });
     }
+    getWorktimeTypes(employeeId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/employees/${employeeId}/worktimetypes`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve worktime types from employees service: ${err.message}`);
+            }
+        });
+    }
+    registerWorktime(employeeId, worktime) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/employees/${employeeId}/worktimes`, worktime);
+            }
+            catch (err) {
+                throw new Error(`failed to register worktime at employees service: ${err.message}`);
+            }
+        });
+    }
+    getWorktimesRegistered(employeeId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/employees/${employeeId}/worktimes`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve registered worktimes from employees service: ${err.message}`);
+            }
+        });
+    }
 }
 exports.EmployeesService = EmployeesService;
