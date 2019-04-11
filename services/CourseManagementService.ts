@@ -130,9 +130,9 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
-  async setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any> {
+  async setInstructor(classId: number, oldInstructorId: number, newInstructorId: number, markAsReplacement: boolean = true): Promise<any> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
+      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}?markAsReplacement=${markAsReplacement}`);
     } catch (err) {
       throw new Error('failed to set instructor at course management service');
     }

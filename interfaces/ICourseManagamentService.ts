@@ -39,7 +39,7 @@ export interface ICourseManagementService extends IService {
 
   lookupReplacements(classId: number): Promise<number[]>;
 
-  setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any>;
+  setInstructor(classId: number, oldInstructorId: number, newInstructorId: number, markAsReplacement?: boolean): Promise<any>;
 
   closeClass(classId: number, attendees: ClassAttendee[]): Promise<any>;
 

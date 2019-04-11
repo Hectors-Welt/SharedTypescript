@@ -25,7 +25,7 @@ export interface ICourseManagementService extends IService {
     bookAppointment(bookingRequest: AppointmentBooking): Promise<void>;
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupReplacements(classId: number): Promise<number[]>;
-    setInstructor(classId: number, oldInstructorId: number, newInstructorId: number): Promise<any>;
+    setInstructor(classId: number, oldInstructorId: number, newInstructorId: number, markAsReplacement?: boolean): Promise<any>;
     closeClass(classId: number, attendees: ClassAttendee[]): Promise<any>;
     cancelClass(classId: number): Promise<any>;
     getPunishments(): Promise<PunishmentContainer[]>;

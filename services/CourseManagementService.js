@@ -146,10 +146,10 @@ class CourseManagementService {
             }
         });
     }
-    setInstructor(classId, oldInstructorId, newInstructorId) {
+    setInstructor(classId, oldInstructorId, newInstructorId, markAsReplacement = true) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}`);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}?markAsReplacement=${markAsReplacement}`);
             }
             catch (err) {
                 throw new Error('failed to set instructor at course management service');
