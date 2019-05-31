@@ -29,6 +29,14 @@ export class EmployeesService implements IEmployeesService {
     }
   }
 
+  async getEmployeeById(employeeId: number): Promise<Employee> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/employees/${employeeId}`);
+    } catch (err) {
+      throw new Error(`failed to retrieve employee from employees service: ${err.message}`);
+    }
+  }
+
   async getEmployeeByCustomerId(customerId: number): Promise<Employee> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/getEmployeeByCustomerId/${customerId}`);

@@ -30,6 +30,16 @@ class EmployeesService {
             }
         });
     }
+    getEmployeeById(employeeId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/employees/${employeeId}`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve employee from employees service: ${err.message}`);
+            }
+        });
+    }
     getEmployeeByCustomerId(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
