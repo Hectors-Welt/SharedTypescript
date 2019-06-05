@@ -19,6 +19,7 @@ import { ITemplateDesigner } from './ITemplateDesigner';
 import { ICourseManagementService } from './ICourseManagamentService';
 import { IMarkdownEditor } from './IMarkdownEditor';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
+import { IEmailTemplateService } from './IEmailTemplateService';
 export interface IDiscoveryService {
     port: number;
     host: string;
@@ -46,6 +47,7 @@ export interface IDiscoveryService {
     getTemplateDesigner(): Promise<ITemplateDesigner>;
     getMarkdownEditor(): Promise<IMarkdownEditor>;
     getCourseManagementService(): Promise<ICourseManagementService>;
+    getEmailTemplateService(): Promise<IEmailTemplateService>;
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
     getContactCategories(): Promise<any>;

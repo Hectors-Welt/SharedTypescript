@@ -23,6 +23,7 @@ import { ICourseManagementService } from '../interfaces/ICourseManagamentService
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
+import { IEmailTemplateService } from '../interfaces/IEmailTemplateService';
 export declare class DiscoveryService implements IDiscoveryService {
     baseUrl: string;
     host: string;
@@ -50,6 +51,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private templateDesigner;
     private markdownEditor;
     private courseManagementService;
+    private emailTemplateService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
     invalidateCache(property: string): void;
@@ -80,5 +82,6 @@ export declare class DiscoveryService implements IDiscoveryService {
     getTemplateDesigner(): Promise<ITemplateDesigner>;
     getMarkdownEditor(): Promise<IMarkdownEditor>;
     getCourseManagementService(): Promise<ICourseManagementService>;
+    getEmailTemplateService(): Promise<IEmailTemplateService>;
     private registerService;
 }

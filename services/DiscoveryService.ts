@@ -37,6 +37,8 @@ import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { MarkdownEditor } from './MarkdownEditor';
 import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
+import { IEmailTemplateService } from '../interfaces/IEmailTemplateService';
+import { EmailTemplateService } from './EmailTemplateService';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -65,6 +67,7 @@ export class DiscoveryService implements IDiscoveryService {
   private templateDesigner: ITemplateDesigner;
   private markdownEditor: IMarkdownEditor;
   private courseManagementService: ICourseManagementService;
+  private emailTemplateService: IEmailTemplateService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -457,6 +460,22 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve course management service from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getEmailTemplateService(): Promise<IEmailTemplateService> {
+    try {
+      if (this.emailTemplateService) {
+        return this.emailTemplateService;
+      }
+      const emailTemplateService = await ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
+      this.emailTemplateService = new EmailTemplateService(emailTemplateService.host, emailTemplateService.port, emailTemplateService.serviceVersion);
+      return this.emailTemplateService;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve email template service from discovery service: ${err.message}`,
       };
     }
   }

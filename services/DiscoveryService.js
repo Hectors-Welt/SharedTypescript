@@ -30,6 +30,7 @@ const SMSService_1 = require("./SMSService");
 const CourseManagementService_1 = require("./CourseManagementService");
 const MarkdownEditor_1 = require("./MarkdownEditor");
 const BackendSettings_1 = require("../models/DiscoveryService/BackendSettings");
+const EmailTemplateService_1 = require("./EmailTemplateService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -475,6 +476,24 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve course management service from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getEmailTemplateService() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.emailTemplateService) {
+                    return this.emailTemplateService;
+                }
+                const emailTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
+                this.emailTemplateService = new EmailTemplateService_1.EmailTemplateService(emailTemplateService.host, emailTemplateService.port, emailTemplateService.serviceVersion);
+                return this.emailTemplateService;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve email template service from discovery service: ${err.message}`,
                 };
             }
         });
