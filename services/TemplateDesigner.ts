@@ -49,6 +49,10 @@ export class TemplateDesigner implements ITemplateDesigner {
       })
       .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next());
 
+      if (result.status !== 200) {
+        return null;
+      }
+
       if (asUrl) {
         return result.body.url;
       }
