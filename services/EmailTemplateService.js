@@ -20,7 +20,7 @@ class EmailTemplateService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const request = {
-                    url: `${this.baseUrl}/rendering/email/${name}`,
+                    url: `${this.baseUrl}/api/rendering/email/${name}`,
                     method: 'POST',
                     body: data,
                 };
@@ -36,7 +36,7 @@ class EmailTemplateService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const request = {
-                    url: `${this.baseUrl}/rendering/email/${name}/pdf`,
+                    url: `${this.baseUrl}/api/rendering/email/${name}/pdf`,
                     method: 'POST',
                     body: data,
                 };

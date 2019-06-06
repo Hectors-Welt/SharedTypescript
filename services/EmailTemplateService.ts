@@ -18,7 +18,7 @@ export class EmailTemplateService implements IEmailTemplateService {
     async getHtml(name: string, data: object): Promise<string> {
         try {
             const request: any = {
-                url: `${this.baseUrl}/rendering/email/${name}`,
+                url: `${this.baseUrl}/api/rendering/email/${name}`,
                 method: 'POST',
                 body: data,
             };
@@ -34,7 +34,7 @@ export class EmailTemplateService implements IEmailTemplateService {
     async getPdf(name: string, data: object): Promise<Buffer> {
         try {
             const request: any = {
-                url: `${this.baseUrl}/rendering/email/${name}/pdf`,
+                url: `${this.baseUrl}/api/rendering/email/${name}/pdf`,
                 method: 'POST',
                 body: data,
             };
