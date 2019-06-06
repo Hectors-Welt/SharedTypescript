@@ -19,7 +19,7 @@ export class EmailTemplateService implements IEmailTemplateService {
         try {
             const request: any = {
                 url: `${this.baseUrl}/rendering/email/${name}`,
-                method: 'GET',
+                method: 'POST',
                 body: data,
             };
 
@@ -35,7 +35,7 @@ export class EmailTemplateService implements IEmailTemplateService {
         try {
             const request: any = {
                 url: `${this.baseUrl}/rendering/email/${name}/pdf`,
-                method: 'GET',
+                method: 'POST',
                 body: data,
             };
 

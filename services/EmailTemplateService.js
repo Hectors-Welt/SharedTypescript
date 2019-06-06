@@ -21,7 +21,7 @@ class EmailTemplateService {
             try {
                 const request = {
                     url: `${this.baseUrl}/rendering/email/${name}`,
-                    method: 'GET',
+                    method: 'POST',
                     body: data,
                 };
                 const result = yield popsicle.request(request);
@@ -37,7 +37,7 @@ class EmailTemplateService {
             try {
                 const request = {
                     url: `${this.baseUrl}/rendering/email/${name}/pdf`,
-                    method: 'GET',
+                    method: 'POST',
                     body: data,
                 };
                 const result = yield popsicle.request(request);
