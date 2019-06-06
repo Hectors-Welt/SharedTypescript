@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { IEmailTemplateService } from "../interfaces/IEmailTemplateService";
 export declare class EmailTemplateService implements IEmailTemplateService {
     host: string;

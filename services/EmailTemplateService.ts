@@ -1,3 +1,4 @@
+import * as popsicle from 'popsicle';
 import { IEmailTemplateService } from "../interfaces/IEmailTemplateService";
 import { ApiClient } from "./ApiClient";
 
@@ -16,7 +17,15 @@ export class EmailTemplateService implements IEmailTemplateService {
 
     async getHtml(name: string, data: object): Promise<string> {
         try {
-            return await ApiClient.POST(`${this.baseUrl}/rendering/email/${name}`, data);
+            const request: any = {
+                url: `${this.baseUrl}/rendering/email/${name}`,
+                method: 'GET',
+                body: data,
+            };
+
+            const result = await popsicle.request(request);
+
+            return result.status === 200 ? result.body : null;
         } catch (err) {
             throw new Error(`failed to retrieve html from email template service: ${err.message}`);
         }
@@ -24,7 +33,15 @@ export class EmailTemplateService implements IEmailTemplateService {
 
     async getPdf(name: string, data: object): Promise<Buffer> {
         try {
-            return await ApiClient.POST(`${this.baseUrl}/rendering/email/${name}/pdf`, data);
+            const request: any = {
+                url: `${this.baseUrl}/rendering/email/${name}/pdf`,
+                method: 'GET',
+                body: data,
+            };
+
+            const result = await popsicle.request(request);
+
+            return result.status === 200 ? result.body : null;
         } catch (err) {
             throw new Error(`failed to retrieve html from email template service: ${err.message}`);
         }

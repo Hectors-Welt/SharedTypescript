@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { LocationInfo } from '../models/DiscoveryService/LocationInfo';
 import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSettings';
 import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
