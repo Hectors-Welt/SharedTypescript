@@ -1,5 +1,5 @@
 export declare class TerminateContractCommand {
     contractId: number;
-    dueDate: string;
+    dueDate?: string;
     employeeId?: number;
 }
