@@ -1,6 +1,7 @@
 import * as popsicle from 'popsicle';
 import { IEmailTemplateService } from "../interfaces/IEmailTemplateService";
 import { ApiClient } from "./ApiClient";
+import { EmailRenderResult } from '../models/EmailTemplateService/EmailRenderResult';
 
 export class EmailTemplateService implements IEmailTemplateService {
     host: string;
@@ -15,7 +16,7 @@ export class EmailTemplateService implements IEmailTemplateService {
         this.baseUrl = `http://${host}:${port}`;
     }
 
-    async getHtml(name: string, data: object): Promise<string> {
+    async getHtml(name: string, data: object): Promise<EmailRenderResult> {
         try {
             const request: any = {
                 url: `${this.baseUrl}/api/rendering/email/${name}`,
