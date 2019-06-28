@@ -107,13 +107,13 @@ class MarkdownEditor {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.baseUrl}/md/${id}/pdf`;
             try {
-                if (asUrl) {
-                    return url;
-                }
                 const result = yield popsicle.request({
                     url,
                     method: 'GET',
                 });
+                if (asUrl && result.status === 200) {
+                    return url;
+                }
                 return result.status < 400 ? result.body : null;
             }
             catch (err) {

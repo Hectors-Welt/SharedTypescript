@@ -95,13 +95,14 @@ export class MarkdownEditor implements IMarkdownEditor {
   async renderPdf(id: string, asUrl?: boolean): Promise<any> {
     const url = `${this.baseUrl}/md/${id}/pdf`;
     try {
-      if(asUrl) {
-        return url;
-      }
       const result = await popsicle.request({
         url,
         method: 'GET',
       });
+
+      if(asUrl && result.status === 200) {
+        return url;
+      }
 
       return result.status < 400 ? result.body : null;
     } catch (err) {
