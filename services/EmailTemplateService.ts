@@ -18,15 +18,7 @@ export class EmailTemplateService implements IEmailTemplateService {
 
     async getHtml(name: string, data: object): Promise<EmailRenderResult> {
         try {
-            const request: any = {
-                url: `${this.baseUrl}/api/rendering/email/${name}`,
-                method: 'POST',
-                body: data,
-            };
-
-            const result = await popsicle.request(request);
-
-            return result.status === 200 ? result.body : null;
+            return ApiClient.POST(`${this.baseUrl}/api/rendering/email/${name}`, data);
         } catch (err) {
             throw new Error(`failed to retrieve html from email template service: ${err.message}`);
         }

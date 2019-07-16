@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const popsicle = require("popsicle");
+const ApiClient_1 = require("./ApiClient");
 class EmailTemplateService {
     constructor(host, port, version) {
         this.host = host;
@@ -19,13 +20,7 @@ class EmailTemplateService {
     getHtml(name, data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const request = {
-                    url: `${this.baseUrl}/api/rendering/email/${name}`,
-                    method: 'POST',
-                    body: data,
-                };
-                const result = yield popsicle.request(request);
-                return result.status === 200 ? result.body : null;
+                return ApiClient_1.ApiClient.POST(`${this.baseUrl}/api/rendering/email/${name}`, data);
             }
             catch (err) {
                 throw new Error(`failed to retrieve html from email template service: ${err.message}`);
