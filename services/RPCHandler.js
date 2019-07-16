@@ -17,7 +17,7 @@ class RPCHandler {
         this.classes.push(clazz);
     }
     removeClass(clazz) {
-        this.classes = this.classes.filter(c => c.constructor !== clazz.constructor);
+        this.classes = this.classes.filter((c) => c.constructor !== clazz.constructor);
     }
     receive(bindTo, classes) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -28,7 +28,7 @@ class RPCHandler {
                     const data = JSON.parse(msg.content.toString());
                     let fn, clazz;
                     classes.find((c) => {
-                        fn = c.rpcMethods.find(f => f.name === data.fn);
+                        fn = c.rpcMethods.find((f) => f.name === data.fn);
                         clazz = c;
                         return fn && clazz;
                     });
@@ -39,9 +39,10 @@ class RPCHandler {
                         }
                         result = JSON.stringify(result);
                     }
-                    catch (err) {
-                    }
-                    channel.sendToQueue(msg.properties.replyTo, new Buffer(result), { correlationId: msg.properties.correlationId });
+                    catch (err) { }
+                    channel.sendToQueue(msg.properties.replyTo, new Buffer(result), {
+                        correlationId: msg.properties.correlationId,
+                    });
                     channel.ack(msg);
                 }
                 catch (err) {
@@ -67,8 +68,7 @@ class RPCHandler {
                         try {
                             result = JSON.parse(result);
                         }
-                        catch (err) {
-                        }
+                        catch (err) { }
                         resolve(result);
                     }
                 }, { noAck: true });

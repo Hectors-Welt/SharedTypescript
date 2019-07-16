@@ -10,7 +10,7 @@ import { StatusValues } from '../models/CustomerService/StatusValues';
 
 export interface ICustomerService extends IService {
   getDefaultStatusValues(): Promise<StatusValues>;
-  
+
   getStatusEntriesAvailable(): Promise<StatusEntry[]>;
 
   findDoublets(name: string, birthday: string): Promise<Customer[]>;

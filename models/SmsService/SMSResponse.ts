@@ -14,4 +14,3 @@ export class SMSResponse {
   failedAt: Date;
   lastFinishedAt: Date;
 }
-

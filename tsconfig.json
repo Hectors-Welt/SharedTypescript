@@ -4,12 +4,7 @@
     "module": "commonjs",
     "sourceMap": false,
     "declaration": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
-  "exclude": [
-    "test",
-    "node_modules"
-  ]
+  "exclude": ["test", "node_modules"]
 }

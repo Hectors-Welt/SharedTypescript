@@ -1,6 +1,6 @@
-import { DeviceRegistration } from '../models/PushNotificationService/DeviceRegistration'
-import { Notification } from '../models/PushNotificationService/Notification'
-import { NotificationLog } from '../models/PushNotificationService/NotificationLog'
+import { DeviceRegistration } from '../models/PushNotificationService/DeviceRegistration';
+import { Notification } from '../models/PushNotificationService/Notification';
+import { NotificationLog } from '../models/PushNotificationService/NotificationLog';
 import { IService } from './IService';
 
 export interface IPushNotificationService extends IService {

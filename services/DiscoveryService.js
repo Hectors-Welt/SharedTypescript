@@ -505,7 +505,7 @@ class DiscoveryService {
                     serviceName,
                     proxyRoute,
                     port: servicePort,
-                    timeToLive: new Date(new Date().getTime() + (5 * 1000)).toJSON(),
+                    timeToLive: new Date(new Date().getTime() + 5 * 1000).toJSON(),
                     serviceVersion,
                     public: isPublic,
                     serviceType,

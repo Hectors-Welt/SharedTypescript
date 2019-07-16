@@ -1,4 +1,4 @@
-import { NotificationPayload } from './NotificationPayload'
+import { NotificationPayload } from './NotificationPayload';
 
 export class Notification {
   recipients: number[];

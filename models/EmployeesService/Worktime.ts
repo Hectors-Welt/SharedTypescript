@@ -1,9 +1,9 @@
 export class Worktime {
-    name: string;
-    date: string;
-    start: string;
-    end: string;
-    note: string;
-    studioId: number;
-    worktimeTypeId: number;
+  name: string;
+  date: string;
+  start: string;
+  end: string;
+  note: string;
+  studioId: number;
+  worktimeTypeId: number;
 }

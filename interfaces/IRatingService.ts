@@ -1,5 +1,5 @@
-import { RatingResult } from '../models/RatingService/RatingResult'
-import { RatingItemType } from '../models/RatingService/RatingItemTypeEnum'
+import { RatingResult } from '../models/RatingService/RatingResult';
+import { RatingItemType } from '../models/RatingService/RatingItemTypeEnum';
 import { IService } from './IService';
 
 export interface IRatingService extends IService {

@@ -16,8 +16,8 @@ export class MongoDbSettings {
   }
 
   getConnectionUri(database: string): string {
-    return this.username ?
-      `mongodb://${this.username}:${this.password}@${this.host}:${this.port}/${database}?authSource=admin` :
-      `mongodb://${this.host}:${this.port}/${database}`;
+    return this.username
+      ? `mongodb://${this.username}:${this.password}@${this.host}:${this.port}/${database}?authSource=admin`
+      : `mongodb://${this.host}:${this.port}/${database}`;
   }
 }

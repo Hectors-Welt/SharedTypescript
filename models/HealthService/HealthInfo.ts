@@ -26,6 +26,6 @@ export class HealthInfo {
       unhealthy: this.unhealthy,
       timestamp: this.timestamp,
       isHealthy: this.isHealthy,
-    }
+    };
   }
 }

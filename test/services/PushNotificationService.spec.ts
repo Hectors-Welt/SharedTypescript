@@ -3,31 +3,25 @@ import * as nock from 'nock';
 import { PushNotificationService } from '../../services/PushNotificationService';
 
 describe('PushNotificationService', () => {
-
   before(() => {
     this.host = 'localhost';
     this.port = 12345;
     this.service = new PushNotificationService(this.host, this.port);
-    this.nock = nock(this.service.baseUrl)
-    .defaultReplyHeaders({
+    this.nock = nock(this.service.baseUrl).defaultReplyHeaders({
       'Content-Type': 'application/json',
     });
   });
 
   describe('registerDevice', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/devices', {})
-      .reply(200, {});
+      this.nock.post('/devices', {}).reply(200, {});
 
       const data = await this.service.registerDevice({});
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/devices', {})
-      .reply(404);
+      this.nock.post('/devices', {}).reply(404);
 
       try {
         await this.service.registerDevice({});
@@ -39,18 +33,14 @@ describe('PushNotificationService', () => {
 
   describe('unregisterDevice', () => {
     it('should get data', async () => {
-      this.nock
-      .delete('/devices/test/cool')
-      .reply(200, {});
+      this.nock.delete('/devices/test/cool').reply(200, {});
 
       const data = await this.service.unregisterDevice('test', 'cool');
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .delete('/devices/test/cool')
-      .reply(404);
+      this.nock.delete('/devices/test/cool').reply(404);
 
       try {
         await this.service.unregisterDevice('test', 'cool');
@@ -62,18 +52,14 @@ describe('PushNotificationService', () => {
 
   describe('getSubscriptions', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/devices/test/cool/subscriptions')
-      .reply(200, {});
+      this.nock.get('/devices/test/cool/subscriptions').reply(200, {});
 
       const data = await this.service.getSubscriptions('test', 'cool');
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/devices/test/cool/subscriptions')
-      .reply(404);
+      this.nock.get('/devices/test/cool/subscriptions').reply(404);
 
       try {
         await this.service.getSubscriptions('test', 'cool');
@@ -85,18 +71,14 @@ describe('PushNotificationService', () => {
 
   describe('addSubscription', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/devices/test/cool/subscriptions/my')
-      .reply(200, {});
+      this.nock.post('/devices/test/cool/subscriptions/my').reply(200, {});
 
       const data = await this.service.addSubscription('test', 'cool', 'my');
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/devices/test/cool/subscriptions/my')
-      .reply(404);
+      this.nock.post('/devices/test/cool/subscriptions/my').reply(404);
 
       try {
         await this.service.addSubscription('test', 'cool', 'my');
@@ -108,18 +90,14 @@ describe('PushNotificationService', () => {
 
   describe('deleteSubscription', () => {
     it('should get data', async () => {
-      this.nock
-      .delete('/devices/test/cool/subscriptions/my')
-      .reply(200, {});
+      this.nock.delete('/devices/test/cool/subscriptions/my').reply(200, {});
 
       const data = await this.service.deleteSubscription('test', 'cool', 'my');
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .delete('/devices/test/cool/subscriptions/my')
-      .reply(404);
+      this.nock.delete('/devices/test/cool/subscriptions/my').reply(404);
 
       try {
         await this.service.deleteSubscription('test', 'cool', 'my');
@@ -131,18 +109,14 @@ describe('PushNotificationService', () => {
 
   describe('sendNotification', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/sendNotification', {})
-      .reply(200, {});
+      this.nock.post('/sendNotification', {}).reply(200, {});
 
       const data = await this.service.sendNotification({});
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/sendNotification', {})
-      .reply(404);
+      this.nock.post('/sendNotification', {}).reply(404);
 
       try {
         await this.service.sendNotification({});
@@ -151,5 +125,4 @@ describe('PushNotificationService', () => {
       }
     });
   });
-
 });

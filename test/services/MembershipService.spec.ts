@@ -3,31 +3,25 @@ import * as nock from 'nock';
 import { MembershipService } from '../../services/MembershipService';
 
 describe('MembershipService', () => {
-
   before(() => {
     this.host = 'localhost';
     this.port = 12345;
     this.service = new MembershipService(this.host, this.port);
-    this.nock = nock(this.service.baseUrl)
-    .defaultReplyHeaders({
+    this.nock = nock(this.service.baseUrl).defaultReplyHeaders({
       'Content-Type': 'application/json',
     });
   });
 
   describe('getContractTemplatesAvailable', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/getContractTemplatesAvailable')
-      .reply(200, {});
+      this.nock.get('/getContractTemplatesAvailable').reply(200, {});
 
       const data = await this.service.getContractTemplatesAvailable();
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/getContractTemplatesAvailable')
-      .reply(404);
+      this.nock.get('/getContractTemplatesAvailable').reply(404);
 
       try {
         await this.service.getContractTemplatesAvailable();
@@ -39,18 +33,14 @@ describe('MembershipService', () => {
 
   describe('getCurrentContractsByCustomerId', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/getCurrentContractsByCustomerId/123')
-      .reply(200, {});
+      this.nock.get('/getCurrentContractsByCustomerId/123').reply(200, {});
 
       const data = await this.service.getCurrentContractsByCustomerId(123);
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/getCurrentContractsByCustomerId/123')
-      .reply(404);
+      this.nock.get('/getCurrentContractsByCustomerId/123').reply(404);
 
       try {
         await this.service.getCurrentContractsByCustomerId(123);
@@ -62,18 +52,14 @@ describe('MembershipService', () => {
 
   describe('getContractsTerminatedByCustomerId', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/getContractsTerminatedByCustomerId/123')
-      .reply(200, {});
+      this.nock.get('/getContractsTerminatedByCustomerId/123').reply(200, {});
 
       const data = await this.service.getContractsTerminatedByCustomerId(123);
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/getContractsTerminatedByCustomerId/123')
-      .reply(404);
+      this.nock.get('/getContractsTerminatedByCustomerId/123').reply(404);
 
       try {
         await this.service.getContractsTerminatedByCustomerId(123);
@@ -82,5 +68,4 @@ describe('MembershipService', () => {
       }
     });
   });
-
 });

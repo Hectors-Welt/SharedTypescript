@@ -1,6 +1,6 @@
-import { IArticlesService } from '../interfaces/IArticlesService'
-import { BookingInformation } from '../models/ArticlesService/BookingInformation'
-import { Article } from '../models/ArticlesService/Article'
+import { IArticlesService } from '../interfaces/IArticlesService';
+import { BookingInformation } from '../models/ArticlesService/BookingInformation';
+import { Article } from '../models/ArticlesService/Article';
 import { ApiClient } from './ApiClient';
 
 export class ArticlesService implements IArticlesService {
@@ -26,7 +26,9 @@ export class ArticlesService implements IArticlesService {
 
   async lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getBookingInformationForArticleId/${articleId}/AndCustomerId/${customerId}`);
+      return await ApiClient.GET(
+        `${this.baseUrl}/getBookingInformationForArticleId/${articleId}/AndCustomerId/${customerId}`,
+      );
     } catch (err) {
       throw new Error('failed to retrieve booking information from articles service');
     }

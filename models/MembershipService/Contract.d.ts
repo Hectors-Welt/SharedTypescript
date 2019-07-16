@@ -1,5 +1,5 @@
-import { Fee } from "./Fee";
-import { Limit } from "./Limit";
+import { Fee } from './Fee';
+import { Limit } from './Limit';
 export declare class Contract {
     id: number;
     name: string;

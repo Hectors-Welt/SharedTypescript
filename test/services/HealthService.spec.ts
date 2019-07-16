@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import { HealthService } from '../../services/HealthService';
 
 describe('HealthService', () => {
-
   before(() => {
     this.service = new HealthService('1.0.0');
   });
@@ -26,5 +25,4 @@ describe('HealthService', () => {
     this.service.unregisterUnhealthy('check');
     expect(this.service.healthInfo.unhealthy).to.not.have.keys;
   });
-
 });

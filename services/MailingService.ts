@@ -1,6 +1,6 @@
-import { IMailingService } from '../interfaces/IMailingService'
-import { SendEmailRequest } from '../models/MailingService/SendEmailRequest'
-import { SmtpResponse } from '../models/MailingService/SmtpResponse'
+import { IMailingService } from '../interfaces/IMailingService';
+import { SendEmailRequest } from '../models/MailingService/SendEmailRequest';
+import { SmtpResponse } from '../models/MailingService/SmtpResponse';
 import { ApiClient } from './ApiClient';
 
 export class MailingService implements IMailingService {

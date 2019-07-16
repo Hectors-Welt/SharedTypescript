@@ -1,5 +1,5 @@
-import { ICheckinOutService } from '../interfaces/ICheckinOutService'
-import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus'
+import { ICheckinOutService } from '../interfaces/ICheckinOutService';
+import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus';
 import { Checkin } from '../models/CheckinOutService/Checkin';
 import { ApiClient } from './ApiClient';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
@@ -44,14 +44,24 @@ export class CheckinOutService implements ICheckinOutService {
 
   async isAccessAllowed(customerId: number, timeSlotRequired: boolean, accessAreas?: string[]): Promise<boolean> {
     try {
-      const result = await ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}?accessAreas=${accessAreas != null ? accessAreas.join(',') : ''}`);
+      const result = await ApiClient.GET(
+        `${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}?accessAreas=${
+          accessAreas != null ? accessAreas.join(',') : ''
+        }`,
+      );
       return result.accessGranted;
     } catch (err) {
       throw new Error('failed to get access granted information from checkinout service');
     }
   }
 
-  async checkin(customerId: number, tagId?: number, accessPossibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<CheckinOutResponse> {
+  async checkin(
+    customerId: number,
+    tagId?: number,
+    accessPossibility?: number,
+    accessLevel?: number,
+    checkoutIfAlreadyPresent?: boolean,
+  ): Promise<CheckinOutResponse> {
     try {
       const result = await ApiClient.POST(`${this.baseUrl}/checkin`, {
         customerId,

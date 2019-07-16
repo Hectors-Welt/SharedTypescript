@@ -1,12 +1,12 @@
-import { LocationInfo } from '../models/DiscoveryService/LocationInfo'
-import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSettings'
-import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings'
-import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings'
-import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings'
-import { BraintreeSettings } from '../models/DiscoveryService/BraintreeSettings'
-import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum'
-import { ITemplateDesigner } from '../interfaces/ITemplateDesigner'
-import { TemplateDesigner } from './TemplateDesigner'
+import { LocationInfo } from '../models/DiscoveryService/LocationInfo';
+import { EventStoreSettings } from '../models/DiscoveryService/EventStoreSettings';
+import { MongoDbSettings } from '../models/DiscoveryService/MongoDbSettings';
+import { RabbitMqSettings } from '../models/DiscoveryService/RabbitMqSettings';
+import { HectorDbSettings } from '../models/DiscoveryService/HectorDbSettings';
+import { BraintreeSettings } from '../models/DiscoveryService/BraintreeSettings';
+import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum';
+import { ITemplateDesigner } from '../interfaces/ITemplateDesigner';
+import { TemplateDesigner } from './TemplateDesigner';
 import { ApiClient } from './ApiClient';
 import { IDiscoveryService } from '../interfaces/IDiscoveryService';
 import { ICustomerService } from '../interfaces/ICustomerService';
@@ -75,8 +75,21 @@ export class DiscoveryService implements IDiscoveryService {
     this.baseUrl = `http://${host}:${port}`;
   }
 
-  async startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType) {
-    this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
+  async startSelfRegistration(
+    serviceName: string,
+    serviceVersion: string,
+    servicePort: number | string,
+    proxyRoute: string,
+    isPublic: boolean,
+    serviceType: ServiceType,
+  ) {
+    this.timer = setInterval(
+      () =>
+        this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(
+          () => null,
+        ),
+      5 * 1000,
+    );
   }
 
   invalidateCache(property: string) {
@@ -278,7 +291,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.customerService;
       }
       const customerService = await ApiClient.GET(`${this.baseUrl}/CustomerService`);
-      this.customerService = new CustomerService(customerService.host, customerService.port, customerService.serviceVersion);
+      this.customerService = new CustomerService(
+        customerService.host,
+        customerService.port,
+        customerService.serviceVersion,
+      );
       return this.customerService;
     } catch (err) {
       throw {
@@ -294,7 +311,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.employeesService;
       }
       const employeesService = await ApiClient.GET(`${this.baseUrl}/EmployeesService`);
-      this.employeesService = new EmployeesService(employeesService.host, employeesService.port, employeesService.serviceVersion);
+      this.employeesService = new EmployeesService(
+        employeesService.host,
+        employeesService.port,
+        employeesService.serviceVersion,
+      );
       return this.employeesService;
     } catch (err) {
       throw {
@@ -310,7 +331,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.membershipService;
       }
       const membershipService = await ApiClient.GET(`${this.baseUrl}/MembershipService`);
-      this.membershipService = new MembershipService(membershipService.host, membershipService.port, membershipService.serviceVersion);
+      this.membershipService = new MembershipService(
+        membershipService.host,
+        membershipService.port,
+        membershipService.serviceVersion,
+      );
       return this.membershipService;
     } catch (err) {
       throw {
@@ -326,7 +351,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.twoFactorAuthenticationService;
       }
       const twoFactorAuthenticationService = await ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
-      this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port, twoFactorAuthenticationService.serviceVersion);
+      this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(
+        twoFactorAuthenticationService.host,
+        twoFactorAuthenticationService.port,
+        twoFactorAuthenticationService.serviceVersion,
+      );
       return this.twoFactorAuthenticationService;
     } catch (err) {
       throw {
@@ -342,7 +371,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.pushNotificationService;
       }
       const pushNotificationService = await ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
-      this.pushNotificationService = new PushNotificationService(pushNotificationService.host, pushNotificationService.port, pushNotificationService.serviceVersion);
+      this.pushNotificationService = new PushNotificationService(
+        pushNotificationService.host,
+        pushNotificationService.port,
+        pushNotificationService.serviceVersion,
+      );
       return this.pushNotificationService;
     } catch (err) {
       throw {
@@ -374,7 +407,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.accountingService;
       }
       const accountingService = await ApiClient.GET(`${this.baseUrl}/AccountingService`);
-      this.accountingService = new AccountingService(accountingService.host, accountingService.port, accountingService.serviceVersion);
+      this.accountingService = new AccountingService(
+        accountingService.host,
+        accountingService.port,
+        accountingService.serviceVersion,
+      );
       return this.accountingService;
     } catch (err) {
       throw {
@@ -390,7 +427,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.checkinOutService;
       }
       const checkinOutService = await ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
-      this.checkinOutService = new CheckinOutService(checkinOutService.host, checkinOutService.port, checkinOutService.serviceVersion);
+      this.checkinOutService = new CheckinOutService(
+        checkinOutService.host,
+        checkinOutService.port,
+        checkinOutService.serviceVersion,
+      );
       return this.checkinOutService;
     } catch (err) {
       throw {
@@ -406,7 +447,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.articlesService;
       }
       const articlesService = await ApiClient.GET(`${this.baseUrl}/ArticlesService`);
-      this.articlesService = new ArticlesService(articlesService.host, articlesService.port, articlesService.serviceVersion);
+      this.articlesService = new ArticlesService(
+        articlesService.host,
+        articlesService.port,
+        articlesService.serviceVersion,
+      );
       return this.articlesService;
     } catch (err) {
       throw {
@@ -422,7 +467,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.templateDesigner;
       }
       const templateDesigner = await ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
-      this.templateDesigner = new TemplateDesigner(templateDesigner.host, templateDesigner.port, templateDesigner.serviceVersion);
+      this.templateDesigner = new TemplateDesigner(
+        templateDesigner.host,
+        templateDesigner.port,
+        templateDesigner.serviceVersion,
+      );
       return this.templateDesigner;
     } catch (err) {
       throw {
@@ -454,7 +503,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.courseManagementService;
       }
       const courseManagementService = await ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
-      this.courseManagementService = new CourseManagementService(courseManagementService.host, courseManagementService.port, courseManagementService.serviceVersion);
+      this.courseManagementService = new CourseManagementService(
+        courseManagementService.host,
+        courseManagementService.port,
+        courseManagementService.serviceVersion,
+      );
       return this.courseManagementService;
     } catch (err) {
       throw {
@@ -470,7 +523,11 @@ export class DiscoveryService implements IDiscoveryService {
         return this.emailTemplateService;
       }
       const emailTemplateService = await ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
-      this.emailTemplateService = new EmailTemplateService(emailTemplateService.host, emailTemplateService.port, emailTemplateService.serviceVersion);
+      this.emailTemplateService = new EmailTemplateService(
+        emailTemplateService.host,
+        emailTemplateService.port,
+        emailTemplateService.serviceVersion,
+      );
       return this.emailTemplateService;
     } catch (err) {
       throw {
@@ -480,17 +537,24 @@ export class DiscoveryService implements IDiscoveryService {
     }
   }
 
-  private async registerService(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType) {
+  private async registerService(
+    serviceName: string,
+    serviceVersion: string,
+    servicePort: number | string,
+    proxyRoute: string,
+    isPublic: boolean,
+    serviceType: ServiceType,
+  ) {
     try {
       return await ApiClient.POST(`${this.baseUrl}/`, {
         serviceName,
         proxyRoute,
         port: servicePort,
-        timeToLive: new Date(new Date().getTime() + (5 * 1000)).toJSON(),
+        timeToLive: new Date(new Date().getTime() + 5 * 1000).toJSON(),
         serviceVersion,
         public: isPublic,
         serviceType,
-      })
+      });
     } catch (err) {
       throw new Error(`could not reach DiscoveryService: ${err.message}`);
     }

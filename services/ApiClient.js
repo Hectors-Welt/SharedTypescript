@@ -12,22 +12,30 @@ const popsicle = require("popsicle");
 class ApiClient {
     static GET(url, headers, throwErrorOnFail) {
         return __awaiter(this, void 0, void 0, function* () {
-            return throwErrorOnFail ? this.makeRequestThrowingErrorOnFail('GET', url, headers) : this.makeRequest('GET', url, headers);
+            return throwErrorOnFail
+                ? this.makeRequestThrowingErrorOnFail('GET', url, headers)
+                : this.makeRequest('GET', url, headers);
         });
     }
     static POST(url, body, headers, throwErrorOnFail) {
         return __awaiter(this, void 0, void 0, function* () {
-            return throwErrorOnFail ? this.makeRequestThrowingErrorOnFail('POST', url, body, headers) : this.makeRequest('POST', url, body, headers);
+            return throwErrorOnFail
+                ? this.makeRequestThrowingErrorOnFail('POST', url, body, headers)
+                : this.makeRequest('POST', url, body, headers);
         });
     }
     static PUT(url, body, headers, throwErrorOnFail) {
         return __awaiter(this, void 0, void 0, function* () {
-            return throwErrorOnFail ? this.makeRequestThrowingErrorOnFail('PUT', url, body, headers) : this.makeRequest('PUT', url, body, headers);
+            return throwErrorOnFail
+                ? this.makeRequestThrowingErrorOnFail('PUT', url, body, headers)
+                : this.makeRequest('PUT', url, body, headers);
         });
     }
     static DELETE(url, headers, throwErrorOnFail) {
         return __awaiter(this, void 0, void 0, function* () {
-            return throwErrorOnFail ? this.makeRequestThrowingErrorOnFail('DELETE', url, headers) : this.makeRequest('DELETE', url, headers);
+            return throwErrorOnFail
+                ? this.makeRequestThrowingErrorOnFail('DELETE', url, headers)
+                : this.makeRequest('DELETE', url, headers);
         });
     }
     static makeRequest(method, url, body, headers) {
@@ -40,8 +48,7 @@ class ApiClient {
             if (body) {
                 request.body = body;
             }
-            const result = yield popsicle.request(request)
-                .use(popsicle.plugins.parse('json'));
+            const result = yield popsicle.request(request).use(popsicle.plugins.parse('json'));
             return result.status === 200 || result.status === 204 ? result.body || {} : null;
         });
     }
@@ -55,8 +62,7 @@ class ApiClient {
             if (body) {
                 request.body = body;
             }
-            const result = yield popsicle.request(request)
-                .use(popsicle.plugins.parse('json'));
+            const result = yield popsicle.request(request).use(popsicle.plugins.parse('json'));
             if (result.status !== 200 && result.status !== 204) {
                 throw result.body;
             }
@@ -66,6 +72,6 @@ class ApiClient {
 }
 ApiClient.headers = {
     'content-type': 'application/json',
-    'accept': 'application/json',
+    accept: 'application/json',
 };
 exports.ApiClient = ApiClient;

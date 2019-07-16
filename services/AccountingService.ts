@@ -1,5 +1,5 @@
-import { IAccountingService } from '../interfaces/IAccountingService'
-import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation'
+import { IAccountingService } from '../interfaces/IAccountingService';
+import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation';
 import { SepaBookingSet } from '../models/AccountingService/SepaBookingSet';
 import { SalesInfo } from '../models/AccountingService/SalesInfo';
 import { ApiClient } from './ApiClient';

@@ -1,7 +1,7 @@
-import { IPushNotificationService } from '../interfaces/IPushNotificationService'
-import { DeviceRegistration } from '../models/PushNotificationService/DeviceRegistration'
-import { Notification } from '../models/PushNotificationService/Notification'
-import { NotificationLog } from '../models/PushNotificationService/NotificationLog'
+import { IPushNotificationService } from '../interfaces/IPushNotificationService';
+import { DeviceRegistration } from '../models/PushNotificationService/DeviceRegistration';
+import { Notification } from '../models/PushNotificationService/Notification';
+import { NotificationLog } from '../models/PushNotificationService/NotificationLog';
 import { ApiClient } from './ApiClient';
 
 export class PushNotificationService implements IPushNotificationService {

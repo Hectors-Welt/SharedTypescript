@@ -1,7 +1,6 @@
 import { HealthInfo } from '../models/HealthService/HealthInfo';
 
 export interface IHealthService {
-
   healthInfo: HealthInfo;
 
   registerHealthy(check: string, message: string);

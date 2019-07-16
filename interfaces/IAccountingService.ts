@@ -1,4 +1,4 @@
-import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation'
+import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation';
 import { SepaBookingSet } from '../models/AccountingService/SepaBookingSet';
 import { SalesInfo } from '../models/AccountingService/SalesInfo';
 import { IService } from './IService';

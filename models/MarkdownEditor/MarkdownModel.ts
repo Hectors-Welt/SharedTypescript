@@ -5,5 +5,3 @@ export class MarkdownModel {
   html?: string;
   text?: string;
 }
-
-

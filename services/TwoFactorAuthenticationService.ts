@@ -1,4 +1,4 @@
-import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthenticationService'
+import { ITwoFactorAuthenticationService } from '../interfaces/ITwoFactorAuthenticationService';
 import { ApiClient } from './ApiClient';
 
 export class TwoFactorAuthenticationService implements ITwoFactorAuthenticationService {
@@ -29,5 +29,4 @@ export class TwoFactorAuthenticationService implements ITwoFactorAuthenticationS
       throw new Error('failed to validate token by two factor authentication service');
     }
   }
-
 }

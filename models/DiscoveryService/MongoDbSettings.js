@@ -11,9 +11,9 @@ class MongoDbSettings {
         this.password = settings.password;
     }
     getConnectionUri(database) {
-        return this.username ?
-            `mongodb://${this.username}:${this.password}@${this.host}:${this.port}/${database}?authSource=admin` :
-            `mongodb://${this.host}:${this.port}/${database}`;
+        return this.username
+            ? `mongodb://${this.username}:${this.password}@${this.host}:${this.port}/${database}?authSource=admin`
+            : `mongodb://${this.host}:${this.port}/${database}`;
     }
 }
 exports.MongoDbSettings = MongoDbSettings;

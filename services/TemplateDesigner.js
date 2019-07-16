@@ -21,7 +21,8 @@ class TemplateDesigner {
     render(data, templateId, type = RenderFileType_1.RenderFileType.PDF, asUrl, persist) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield popsicle.request({
+                const result = yield popsicle
+                    .request({
                     url: `${this.baseUrl}/render/${templateId}?type=${type}${asUrl ? '&url' : ''}${persist ? '&persist' : ''}`,
                     method: 'POST',
                     headers: Object.assign({}, ApiClient_1.ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
@@ -41,7 +42,8 @@ class TemplateDesigner {
     renderUrl(url, data, asUrl, persist) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield popsicle.request({
+                const result = yield popsicle
+                    .request({
                     url: `${this.baseUrl}/renderUrl${asUrl ? '?url' : ''}${persist ? '&persist' : ''}`,
                     method: 'POST',
                     headers: Object.assign({}, ApiClient_1.ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),

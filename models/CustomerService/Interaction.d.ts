@@ -1,4 +1,4 @@
-import { File } from "./File";
+import { File } from './File';
 export declare class Interaction {
     contactCategory: number;
     contactType: number;

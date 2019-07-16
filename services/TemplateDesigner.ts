@@ -17,15 +17,22 @@ export class TemplateDesigner implements ITemplateDesigner {
     this.baseUrl = `http://${host}:${port}/api`;
   }
 
-  async render(data: any, templateId: any, type: RenderFileType = RenderFileType.PDF, asUrl?: boolean, persist?: boolean): Promise<any> {
+  async render(
+    data: any,
+    templateId: any,
+    type: RenderFileType = RenderFileType.PDF,
+    asUrl?: boolean,
+    persist?: boolean,
+  ): Promise<any> {
     try {
-      const result = await popsicle.request({
-        url: `${this.baseUrl}/render/${templateId}?type=${type}${asUrl ? '&url' : ''}${persist ? '&persist' : ''}`,
-        method: 'POST',
-        headers: Object.assign({}, ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
-        body: data,
-      })
-      .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next());
+      const result = await popsicle
+        .request({
+          url: `${this.baseUrl}/render/${templateId}?type=${type}${asUrl ? '&url' : ''}${persist ? '&persist' : ''}`,
+          method: 'POST',
+          headers: Object.assign({}, ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
+          body: data,
+        })
+        .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next());
 
       if (asUrl) {
         return result.body.url;
@@ -38,16 +45,17 @@ export class TemplateDesigner implements ITemplateDesigner {
 
   async renderUrl(url: string, data: any, asUrl?: boolean, persist?: boolean): Promise<any> {
     try {
-      const result = await popsicle.request({
-        url: `${this.baseUrl}/renderUrl${asUrl ? '?url' : ''}${persist ? '&persist' : ''}`,
-        method: 'POST',
-        headers: Object.assign({}, ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
-        body: {
-          url,
-          data,
-        },
-      })
-      .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next());
+      const result = await popsicle
+        .request({
+          url: `${this.baseUrl}/renderUrl${asUrl ? '?url' : ''}${persist ? '&persist' : ''}`,
+          method: 'POST',
+          headers: Object.assign({}, ApiClient.headers, { referer: `http://${this.host}:${this.port}/` }),
+          body: {
+            url,
+            data,
+          },
+        })
+        .use(asUrl ? popsicle.plugins.parse('json') : (self, next) => next());
 
       if (result.status !== 200) {
         return null;
@@ -101,5 +109,4 @@ export class TemplateDesigner implements ITemplateDesigner {
       throw new Error('failed to call deleteModel on template service');
     }
   }
-
 }

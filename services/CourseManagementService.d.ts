@@ -1,6 +1,6 @@
-import { ICourseManagementService } from "../interfaces/ICourseManagamentService";
-import { ClassFilter } from "../models/CourseManagamentService/ClassFilter";
-import { Class } from "../models/CourseManagamentService/Class";
+import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
+import { ClassFilter } from '../models/CourseManagamentService/ClassFilter';
+import { Class } from '../models/CourseManagamentService/Class';
 import { Course } from '../models/CourseManagamentService/Course';
 import { CourseType } from '../models/CourseManagamentService/CourseType';
 import { CourseLevel } from '../models/CourseManagamentService/CourseLevel';
@@ -9,8 +9,8 @@ import { Appointment } from '../models/CourseManagamentService/Appointment';
 import { AppointmentSearch } from '../models/CourseManagamentService/AppointmentSearch';
 import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
-import { ClassAttendee } from "../models/CourseManagamentService/ClassAttendee";
-import { PunishmentContainer } from "../models/CourseManagamentService/PunishmentContainer";
+import { ClassAttendee } from '../models/CourseManagamentService/ClassAttendee';
+import { PunishmentContainer } from '../models/CourseManagamentService/PunishmentContainer';
 export declare class CourseManagementService implements ICourseManagementService {
     host: string;
     port: number;

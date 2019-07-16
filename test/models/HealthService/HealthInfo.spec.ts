@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import { HealthInfo } from '../../../models/HealthService/HealthInfo';
 
 describe('HealthInfo', () => {
-
   before(() => {
     this.healthInfo = new HealthInfo('');
   });

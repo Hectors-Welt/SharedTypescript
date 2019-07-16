@@ -1,5 +1,5 @@
-import { Notification } from './Notification'
-import { NotificationResponse } from './NotificationResponse'
+import { Notification } from './Notification';
+import { NotificationResponse } from './NotificationResponse';
 
 export class NotificationLog {
   sent: Date = new Date();

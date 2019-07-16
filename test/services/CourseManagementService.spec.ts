@@ -3,31 +3,25 @@ import * as nock from 'nock';
 import { CourseManagementService } from '../../services/CourseManagementService';
 
 describe('CourseManagementService', () => {
-
   before(() => {
     this.host = 'localhost';
     this.port = 12345;
     this.service = new CourseManagementService(this.host, this.port);
-    this.nock = nock(this.service.baseUrl)
-    .defaultReplyHeaders({
+    this.nock = nock(this.service.baseUrl).defaultReplyHeaders({
       'Content-Type': 'application/json',
     });
   });
 
   describe('getClasses', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/classes/filter', {})
-      .reply(200, {});
+      this.nock.post('/classes/filter', {}).reply(200, {});
 
       const data = await this.service.getClasses({});
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/classes/filter', {})
-      .reply(404);
+      this.nock.post('/classes/filter', {}).reply(404);
 
       try {
         await this.service.getClasses({});
@@ -39,18 +33,14 @@ describe('CourseManagementService', () => {
 
   describe('getPriceInformation', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/classes/123/priceInformationForCustomerId/112')
-      .reply(200, {});
+      this.nock.get('/classes/123/priceInformationForCustomerId/112').reply(200, {});
 
       const data = await this.service.getPriceInformation(123, 112);
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/classes/123/priceInformationForCustomerId/112')
-      .reply(404);
+      this.nock.get('/classes/123/priceInformationForCustomerId/112').reply(404);
 
       try {
         await this.service.getPriceInformation(123, 112);
@@ -62,18 +52,14 @@ describe('CourseManagementService', () => {
 
   describe('doReservation', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/classes/123/doReservationForCustomerId/112')
-      .reply(200, {});
+      this.nock.post('/classes/123/doReservationForCustomerId/112').reply(200, {});
 
       const data = await this.service.doReservation(123, 112);
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/classes/123/doReservationForCustomerId/112')
-      .reply(404);
+      this.nock.post('/classes/123/doReservationForCustomerId/112').reply(404);
 
       try {
         await this.service.doReservation(123, 112);
@@ -85,18 +71,14 @@ describe('CourseManagementService', () => {
 
   describe('doCancellation', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/classes/123/doCancellationForCustomerId/112')
-      .reply(200, {});
+      this.nock.post('/classes/123/doCancellationForCustomerId/112').reply(200, {});
 
       const data = await this.service.doCancellation(123, 112);
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/classes/123/doCancellationForCustomerId/112')
-      .reply(404);
+      this.nock.post('/classes/123/doCancellationForCustomerId/112').reply(404);
 
       try {
         await this.service.doCancellation(123, 112);
@@ -108,18 +90,14 @@ describe('CourseManagementService', () => {
 
   describe('getCourses', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/courses')
-      .reply(200, {});
+      this.nock.get('/courses').reply(200, {});
 
       const data = await this.service.getCourses();
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/courses')
-      .reply(404);
+      this.nock.get('/courses').reply(404);
 
       try {
         await this.service.getCourses();
@@ -131,18 +109,14 @@ describe('CourseManagementService', () => {
 
   describe('getCourseTypes', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/courseTypes')
-      .reply(200, {});
+      this.nock.get('/courseTypes').reply(200, {});
 
       const data = await this.service.getCourseTypes();
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/courseTypes')
-      .reply(404);
+      this.nock.get('/courseTypes').reply(404);
 
       try {
         await this.service.getCourseTypes();
@@ -154,18 +128,14 @@ describe('CourseManagementService', () => {
 
   describe('getCourseLevels', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/courseLevels')
-      .reply(200, {});
+      this.nock.get('/courseLevels').reply(200, {});
 
       const data = await this.service.getCourseLevels();
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/courseLevels')
-      .reply(404);
+      this.nock.get('/courseLevels').reply(404);
 
       try {
         await this.service.getCourseLevels();
@@ -177,18 +147,14 @@ describe('CourseManagementService', () => {
 
   describe('getRooms', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/rooms')
-      .reply(200, {});
+      this.nock.get('/rooms').reply(200, {});
 
       const data = await this.service.getRooms();
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/rooms')
-      .reply(404);
+      this.nock.get('/rooms').reply(404);
 
       try {
         await this.service.getRooms();
@@ -200,18 +166,14 @@ describe('CourseManagementService', () => {
 
   describe('getAppointments', () => {
     it('should get data', async () => {
-      this.nock
-      .get('/appointments/byCustomerId/123')
-      .reply(200, {});
+      this.nock.get('/appointments/byCustomerId/123').reply(200, {});
 
       const data = await this.service.getAppointments(123);
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .get('/appointments/byCustomerId/123')
-      .reply(404);
+      this.nock.get('/appointments/byCustomerId/123').reply(404);
 
       try {
         await this.service.getAppointments(123);
@@ -223,18 +185,14 @@ describe('CourseManagementService', () => {
 
   describe('lookupFreeTimeBlocks', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/appointments/lookupFreeTimeBlocks', {})
-      .reply(200, {});
+      this.nock.post('/appointments/lookupFreeTimeBlocks', {}).reply(200, {});
 
       const data = await this.service.lookupFreeTimeBlocks({});
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/appointments/lookupFreeTimeBlocks', {})
-      .reply(404);
+      this.nock.post('/appointments/lookupFreeTimeBlocks', {}).reply(404);
 
       try {
         await this.service.lookupFreeTimeBlocks({});
@@ -246,18 +204,14 @@ describe('CourseManagementService', () => {
 
   describe('bookAppointment', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/appointments/bookAppointment', {})
-      .reply(200, {});
+      this.nock.post('/appointments/bookAppointment', {}).reply(200, {});
 
       const data = await this.service.bookAppointment({});
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/appointments/bookAppointment', {})
-      .reply(404);
+      this.nock.post('/appointments/bookAppointment', {}).reply(404);
 
       try {
         await this.service.bookAppointment({});
@@ -269,18 +223,14 @@ describe('CourseManagementService', () => {
 
   describe('lookupCounselingTimeBlocks', () => {
     it('should get data', async () => {
-      this.nock
-      .post('/appointments/lookupCounselingTimeBlocks', {})
-      .reply(200, {});
+      this.nock.post('/appointments/lookupCounselingTimeBlocks', {}).reply(200, {});
 
       const data = await this.service.lookupCounselingTimeBlocks({});
       expect(data).to.deep.equal({});
     });
 
     it('should reject when data not available', async () => {
-      this.nock
-      .post('/appointments/lookupCounselingTimeBlocks', {})
-      .reply(404);
+      this.nock.post('/appointments/lookupCounselingTimeBlocks', {}).reply(404);
 
       try {
         await this.service.lookupCounselingTimeBlocks({});
@@ -289,5 +239,4 @@ describe('CourseManagementService', () => {
       }
     });
   });
-
 });

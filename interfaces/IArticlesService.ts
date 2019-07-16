@@ -1,5 +1,5 @@
-import { BookingInformation } from '../models/ArticlesService/BookingInformation'
-import { Article } from '../models/ArticlesService/Article'
+import { BookingInformation } from '../models/ArticlesService/BookingInformation';
+import { Article } from '../models/ArticlesService/Article';
 import { IService } from './IService';
 
 export interface IArticlesService extends IService {

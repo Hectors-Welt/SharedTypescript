@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import { ValidationService } from '../../services/ValidationService';
 
 describe('ValidationService', () => {
-
   before(() => {
     this.service = new ValidationService();
   });
@@ -20,5 +19,4 @@ describe('ValidationService', () => {
     expect(this.service.isEmailValid('cool@s')).to.be.false;
     expect(this.service.isEmailValid('me@mail.com')).to.be.true;
   });
-
 });

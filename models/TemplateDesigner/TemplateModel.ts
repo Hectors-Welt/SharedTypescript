@@ -9,5 +9,3 @@ export class TemplateModel {
   variables: Variable[];
   name: string;
 }
-
-

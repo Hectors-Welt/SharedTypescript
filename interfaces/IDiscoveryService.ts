@@ -8,14 +8,14 @@ import { ServiceType } from '../models/DiscoveryService/ServiceTypeEnum';
 import { ICustomerService } from './ICustomerService';
 import { IEmployeesService } from './IEmployeesService';
 import { IMembershipService } from './IMembershipService';
-import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationService'
-import { IPushNotificationService } from './IPushNotificationService'
-import { IRatingService } from './IRatingService'
-import { IAccountingService } from './IAccountingService'
-import { ICheckinOutService } from './ICheckinOutService'
-import { IArticlesService } from './IArticlesService'
-import { IMailingService } from './IMailingService'
-import { ITemplateDesigner } from './ITemplateDesigner'
+import { ITwoFactorAuthenticationService } from './ITwoFactorAuthenticationService';
+import { IPushNotificationService } from './IPushNotificationService';
+import { IRatingService } from './IRatingService';
+import { IAccountingService } from './IAccountingService';
+import { ICheckinOutService } from './ICheckinOutService';
+import { IArticlesService } from './IArticlesService';
+import { IMailingService } from './IMailingService';
+import { ITemplateDesigner } from './ITemplateDesigner';
 import { ICourseManagementService } from './ICourseManagamentService';
 import { IMarkdownEditor } from './IMarkdownEditor';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
@@ -26,7 +26,14 @@ export interface IDiscoveryService {
   host: string;
   baseUrl: string;
 
-  startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType);
+  startSelfRegistration(
+    serviceName: string,
+    serviceVersion: string,
+    servicePort: number | string,
+    proxyRoute: string,
+    isPublic: boolean,
+    serviceType: ServiceType,
+  );
 
   invalidateCache(property: string);
 

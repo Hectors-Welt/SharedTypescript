@@ -107,7 +107,7 @@ export class CustomerService implements ICustomerService {
 
   async updateContactData(customerId: number, contact: Contact): Promise<void> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/contact`, contact)
+      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/contact`, contact);
     } catch (err) {
       throw new Error('failed to update contact data at customer service');
     }
@@ -115,7 +115,7 @@ export class CustomerService implements ICustomerService {
 
   async addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/interaction`, interaction)
+      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/interaction`, interaction);
     } catch (err) {
       throw new Error('failed to customer interaction at customer service');
     }

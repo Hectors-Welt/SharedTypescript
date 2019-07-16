@@ -1,4 +1,4 @@
-import { IService } from "./IService";
+import { IService } from './IService';
 
 export interface ITwoFactorAuthenticationService extends IService {
   generateToken(key: string): Promise<string>;

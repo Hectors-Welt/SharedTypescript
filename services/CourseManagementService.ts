@@ -1,6 +1,6 @@
-import { ICourseManagementService } from "../interfaces/ICourseManagamentService";
-import { ClassFilter } from "../models/CourseManagamentService/ClassFilter";
-import { Class } from "../models/CourseManagamentService/Class";
+import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
+import { ClassFilter } from '../models/CourseManagamentService/ClassFilter';
+import { Class } from '../models/CourseManagamentService/Class';
 import { Course } from '../models/CourseManagamentService/Course';
 import { CourseType } from '../models/CourseManagamentService/CourseType';
 import { CourseLevel } from '../models/CourseManagamentService/CourseLevel';
@@ -10,8 +10,8 @@ import { AppointmentSearch } from '../models/CourseManagamentService/Appointment
 import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
 import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
 import { ApiClient } from './ApiClient';
-import { ClassAttendee } from "../models/CourseManagamentService/ClassAttendee";
-import { PunishmentContainer } from "../models/CourseManagamentService/PunishmentContainer";
+import { ClassAttendee } from '../models/CourseManagamentService/ClassAttendee';
+import { PunishmentContainer } from '../models/CourseManagamentService/PunishmentContainer';
 
 export class CourseManagementService implements ICourseManagementService {
   host: string;
@@ -130,9 +130,16 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
-  async setInstructor(classId: number, oldInstructorId: number, newInstructorId: number, markAsReplacement: boolean = true): Promise<any> {
+  async setInstructor(
+    classId: number,
+    oldInstructorId: number,
+    newInstructorId: number,
+    markAsReplacement: boolean = true,
+  ): Promise<any> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}?markAsReplacement=${markAsReplacement}`);
+      return await ApiClient.POST(
+        `${this.baseUrl}/classes/${classId}/replace/${oldInstructorId}/with/${newInstructorId}?markAsReplacement=${markAsReplacement}`,
+      );
     } catch (err) {
       throw new Error('failed to set instructor at course management service');
     }

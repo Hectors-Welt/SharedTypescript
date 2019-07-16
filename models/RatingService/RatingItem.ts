@@ -1,4 +1,4 @@
-import { RatingItemType } from './RatingItemTypeEnum'
+import { RatingItemType } from './RatingItemTypeEnum';
 
 export class RatingItem {
   description: string;

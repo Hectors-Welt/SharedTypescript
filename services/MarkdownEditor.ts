@@ -100,7 +100,7 @@ export class MarkdownEditor implements IMarkdownEditor {
         method: 'GET',
       });
 
-      if(asUrl && result.status === 200) {
+      if (asUrl && result.status === 200) {
         return url;
       }
 
@@ -113,7 +113,7 @@ export class MarkdownEditor implements IMarkdownEditor {
   async renderUrlAsPdf(documentUrl: string, asUrl?: boolean): Promise<any> {
     const url = `${this.baseUrl}/render?url=${documentUrl}`;
     try {
-      if(asUrl) {
+      if (asUrl) {
         return url;
       }
       const result = await popsicle.request({

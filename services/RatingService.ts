@@ -1,6 +1,6 @@
-import { IRatingService } from '../interfaces/IRatingService'
-import { RatingResult } from '../models/RatingService/RatingResult'
-import { RatingItemType } from '../models/RatingService/RatingItemTypeEnum'
+import { IRatingService } from '../interfaces/IRatingService';
+import { RatingResult } from '../models/RatingService/RatingResult';
+import { RatingItemType } from '../models/RatingService/RatingItemTypeEnum';
 import { ApiClient } from './ApiClient';
 
 export class RatingService implements IRatingService {

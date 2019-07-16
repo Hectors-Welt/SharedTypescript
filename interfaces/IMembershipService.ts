@@ -16,5 +16,4 @@ export interface IMembershipService extends IService {
   createContracts(command: CreateContractsCommand): Promise<void>;
 
   terminateContract(command: TerminateContractCommand): Promise<void>;
-
 }

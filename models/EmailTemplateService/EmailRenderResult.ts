@@ -1,5 +1,5 @@
 export class EmailRenderResult {
-    subject: string;
-    from: string;
-    html: string;
+  subject: string;
+  from: string;
+  html: string;
 }
