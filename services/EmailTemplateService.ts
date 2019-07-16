@@ -34,7 +34,7 @@ export class EmailTemplateService implements IEmailTemplateService {
 
             const result = await popsicle.request(request);
 
-            return result.status === 200 ? result.body : null;
+            return result.status === 200 ? Buffer.from(result.body, 'binary') : null;
         } catch (err) {
             throw new Error(`failed to retrieve html from email template service: ${err.message}`);
         }
