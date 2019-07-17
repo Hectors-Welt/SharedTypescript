@@ -35,6 +35,11 @@ class EmailTemplateService {
                     url,
                     method: 'POST',
                     body: data,
+                    transport: popsicle.createTransport({
+                        type: 'buffer',
+                        buffer: true,
+                        maxBufferSize: 200000000,
+                    }),
                 });
                 return result.status === 200 ? result.body : null;
             }

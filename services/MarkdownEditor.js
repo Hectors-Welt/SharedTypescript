@@ -110,6 +110,11 @@ class MarkdownEditor {
                 const result = yield popsicle.request({
                     url,
                     method: 'GET',
+                    transport: popsicle.createTransport({
+                        type: 'buffer',
+                        buffer: true,
+                        maxBufferSize: 200000000,
+                    }),
                 });
                 if (asUrl && result.status === 200) {
                     return url;
@@ -131,6 +136,11 @@ class MarkdownEditor {
                 const result = yield popsicle.request({
                     url,
                     method: 'GET',
+                    transport: popsicle.createTransport({
+                        type: 'buffer',
+                        buffer: true,
+                        maxBufferSize: 200000000,
+                    }),
                 });
                 return result.status < 400 ? result.body : null;
             }

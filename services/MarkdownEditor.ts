@@ -98,6 +98,11 @@ export class MarkdownEditor implements IMarkdownEditor {
       const result = await popsicle.request({
         url,
         method: 'GET',
+        transport: popsicle.createTransport({
+          type: 'buffer',
+          buffer: true,
+          maxBufferSize: 200000000,
+        } as any),
       });
 
       if (asUrl && result.status === 200) {
@@ -110,7 +115,7 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
-  async renderUrlAsPdf(documentUrl: string, asUrl?: boolean): Promise<any> {
+  async renderUrlAsPdf(documentUrl: string, asUrl?: boolean): Promise<string | Buffer> {
     const url = `${this.baseUrl}/render?url=${documentUrl}`;
     try {
       if (asUrl) {
@@ -119,6 +124,11 @@ export class MarkdownEditor implements IMarkdownEditor {
       const result = await popsicle.request({
         url,
         method: 'GET',
+        transport: popsicle.createTransport({
+          type: 'buffer',
+          buffer: true,
+          maxBufferSize: 200000000,
+        } as any),
       });
 
       return result.status < 400 ? result.body : null;

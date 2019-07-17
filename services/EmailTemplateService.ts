@@ -31,6 +31,11 @@ export class EmailTemplateService implements IEmailTemplateService {
         url,
         method: 'POST',
         body: data,
+        transport: popsicle.createTransport({
+          type: 'buffer',
+          buffer: true,
+          maxBufferSize: 200000000,
+        } as any),
       });
 
       return result.status === 200 ? result.body : null;
