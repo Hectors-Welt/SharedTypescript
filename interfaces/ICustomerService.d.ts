@@ -7,6 +7,7 @@ import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { IService } from './IService';
 import { StatusValues } from '../models/CustomerService/StatusValues';
+import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 export interface ICustomerService extends IService {
     getDefaultStatusValues(): Promise<StatusValues>;
     getStatusEntriesAvailable(): Promise<StatusEntry[]>;
@@ -16,6 +17,7 @@ export interface ICustomerService extends IService {
     getProfilePicture(customerId: number): Promise<File>;
     setProfilePicture(customerId: number, file: File): Promise<any>;
     getTagIds(customerId: number, format: number): Promise<string[]>;
+    registerTagId(customerId: number, command: AddTagIdCommand): Promise<void>;
     updateAddress(customerId: number, address: Address): Promise<void>;
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<void>;
     updateContactData(customerId: number, contact: Contact): Promise<void>;

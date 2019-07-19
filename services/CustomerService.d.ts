@@ -7,6 +7,7 @@ import { File } from '../models/CustomerService/File';
 import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
+import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
@@ -21,6 +22,7 @@ export declare class CustomerService implements ICustomerService {
     getProfilePicture(customerId: number): Promise<File>;
     setProfilePicture(customerId: number, file: File): Promise<any>;
     getTagIds(customerId: number, format?: number): Promise<string[]>;
+    registerTagId(customerId: number, command: AddTagIdCommand): Promise<void>;
     updateAddress(customerId: number, address: Address): Promise<void>;
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<void>;
     updateContactData(customerId: number, contact: Contact): Promise<void>;

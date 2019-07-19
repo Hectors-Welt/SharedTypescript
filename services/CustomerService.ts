@@ -8,6 +8,7 @@ import { ApiClient } from './ApiClient';
 import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
+import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -86,6 +87,14 @@ export class CustomerService implements ICustomerService {
       return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/getTagIds?format=${format}`);
     } catch (err) {
       throw new Error('failed to retrieve tag ids from customer service');
+    }
+  }
+
+  async registerTagId(customerId: number, command: AddTagIdCommand): Promise<void> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/registerTagId`, command);
+    } catch (err) {
+      throw new Error('failed to register tag id at customer service');
     }
   }
 

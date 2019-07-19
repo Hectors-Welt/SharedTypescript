@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { IEmailTemplateService } from '../interfaces/IEmailTemplateService';
 import { EmailRenderResult } from '../models/EmailTemplateService/EmailRenderResult';
 export declare class EmailTemplateService implements IEmailTemplateService {

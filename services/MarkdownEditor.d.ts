@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { MarkdownModel } from '../models/MarkdownEditor/MarkdownModel';
 export declare class MarkdownEditor implements IMarkdownEditor {

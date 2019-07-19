@@ -99,6 +99,16 @@ class CustomerService {
             }
         });
     }
+    registerTagId(customerId, command) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customer/${customerId}/registerTagId`, command);
+            }
+            catch (err) {
+                throw new Error('failed to register tag id at customer service');
+            }
+        });
+    }
     updateAddress(customerId, address) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
