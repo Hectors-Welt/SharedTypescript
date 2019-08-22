@@ -6,6 +6,7 @@ export class PunishmentContainer {
 
 export class Punishment {
   classId: number;
+  instructorId: number;
   created: string;
   hoursToDelayFutureReservations: number;
   validTill: string;

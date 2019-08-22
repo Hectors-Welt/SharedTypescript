@@ -5,6 +5,7 @@ export declare class PunishmentContainer {
 }
 export declare class Punishment {
     classId: number;
+    instructorId: number;
     created: string;
     hoursToDelayFutureReservations: number;
     validTill: string;
