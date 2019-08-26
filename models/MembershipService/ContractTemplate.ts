@@ -9,4 +9,5 @@ export class ContractTemplate {
   termination: string;
   isMainContract: boolean;
   freeTestingPhase?: number;
+  isAddon?: boolean;
 }

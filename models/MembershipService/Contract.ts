@@ -26,4 +26,5 @@ export class Contract {
   additionalFees: Fee[];
   limits: Limit[];
   freeTestingPhaseActivated: boolean;
+  isAddon?: boolean;
 }
