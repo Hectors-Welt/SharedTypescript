@@ -39,6 +39,8 @@ import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 import { IEmailTemplateService } from '../interfaces/IEmailTemplateService';
 import { EmailTemplateService } from './EmailTemplateService';
+import { IPushTemplateService } from '../interfaces/IPushTemplateService';
+import { PushTemplateService } from '../services/PushTemplateService';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -68,6 +70,7 @@ export class DiscoveryService implements IDiscoveryService {
   private markdownEditor: IMarkdownEditor;
   private courseManagementService: ICourseManagementService;
   private emailTemplateService: IEmailTemplateService;
+  private pushTemplateService: IPushTemplateService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -533,6 +536,26 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve email template service from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getPushTemplateService(): Promise<IPushTemplateService> {
+    try {
+      if (this.pushTemplateService) {
+        return this.pushTemplateService;
+      }
+      const pushTemplateService = await ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
+      this.pushTemplateService = new PushTemplateService(
+        pushTemplateService.host,
+        pushTemplateService.port,
+        pushTemplateService.serviceVersion,
+      );
+      return this.pushTemplateService;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve push template service from discovery service: ${err.message}`,
       };
     }
   }

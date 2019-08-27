@@ -31,6 +31,7 @@ const CourseManagementService_1 = require("./CourseManagementService");
 const MarkdownEditor_1 = require("./MarkdownEditor");
 const BackendSettings_1 = require("../models/DiscoveryService/BackendSettings");
 const EmailTemplateService_1 = require("./EmailTemplateService");
+const PushTemplateService_1 = require("../services/PushTemplateService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -494,6 +495,24 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve email template service from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getPushTemplateService() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.pushTemplateService) {
+                    return this.pushTemplateService;
+                }
+                const pushTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
+                this.pushTemplateService = new PushTemplateService_1.PushTemplateService(pushTemplateService.host, pushTemplateService.port, pushTemplateService.serviceVersion);
+                return this.pushTemplateService;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve push template service from discovery service: ${err.message}`,
                 };
             }
         });

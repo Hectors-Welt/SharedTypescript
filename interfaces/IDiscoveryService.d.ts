@@ -20,6 +20,7 @@ import { ICourseManagementService } from './ICourseManagamentService';
 import { IMarkdownEditor } from './IMarkdownEditor';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 import { IEmailTemplateService } from './IEmailTemplateService';
+import { IPushTemplateService } from './IPushTemplateService';
 export interface IDiscoveryService {
     port: number;
     host: string;
@@ -48,6 +49,7 @@ export interface IDiscoveryService {
     getMarkdownEditor(): Promise<IMarkdownEditor>;
     getCourseManagementService(): Promise<ICourseManagementService>;
     getEmailTemplateService(): Promise<IEmailTemplateService>;
+    getPushTemplateService(): Promise<IPushTemplateService>;
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
     getContactCategories(): Promise<any>;
