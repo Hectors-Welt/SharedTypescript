@@ -6,5 +6,5 @@ export declare class PushTemplateService implements IPushTemplateService {
     version: string;
     baseUrl: string;
     constructor(host: string, port: number, version: string);
-    getTemplate(name: string): Promise<Template>;
+    getTemplate(name: string, data: any): Promise<Template>;
 }

@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const handlebars = require("handlebars");
 const ApiClient_1 = require("./ApiClient");
 class PushTemplateService {
     constructor(host, port, version) {
@@ -16,10 +17,15 @@ class PushTemplateService {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
-    getTemplate(name) {
+    getTemplate(name, data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/api/templates/${name}`);
+                const template = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/api/templates/${name}`);
+                if (data) {
+                    template.short = (handlebars.compile(template.short))(data);
+                    template.long = (handlebars.compile(template.long))(data);
+                }
+                return template;
             }
             catch (err) {
                 throw new Error('failed to retrieve template from push template service');
