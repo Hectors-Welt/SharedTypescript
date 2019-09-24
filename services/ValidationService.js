@@ -43,17 +43,19 @@ class ValidationService {
             if (result.status != 200) {
                 this.sclEntries = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'SCL.json'), 'utf8').toString());
             }
-            csvtojson({
-                delimiter: ';',
-                noheader: true,
-                headers: ['bic', 'name', 'sct', 'sdd', 'cor1', 'b2b', 'scc'],
-            })
-                .fromString(result.body
-                .split('\n')
-                .slice(2)
-                .join('\n'))
-                .on('json', (data) => (this.sclEntries[data.bic] = new SclInfo_1.SclInfo(data)))
-                .on('end', () => fs.writeFileSync(path.resolve(process.cwd(), 'SCL.json'), JSON.stringify(this.sclEntries)));
+            else {
+                csvtojson({
+                    delimiter: ';',
+                    noheader: true,
+                    headers: ['bic', 'name', 'sct', 'sdd', 'cor1', 'b2b', 'scc'],
+                })
+                    .fromString(result.body
+                    .split('\n')
+                    .slice(2)
+                    .join('\n'))
+                    .on('json', (data) => (this.sclEntries[data.bic] = new SclInfo_1.SclInfo(data)))
+                    .on('end', () => fs.writeFileSync(path.resolve(process.cwd(), 'SCL.json'), JSON.stringify(this.sclEntries)));
+            }
         });
     }
 }
