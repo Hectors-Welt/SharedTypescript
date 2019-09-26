@@ -19,7 +19,7 @@ class MailingService {
     sendEmail(request) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/api/sendEmail`, request, true);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/api/sendEmail`, request, null, true);
             }
             catch (err) {
                 throw err;
