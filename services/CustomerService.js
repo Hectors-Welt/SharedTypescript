@@ -149,5 +149,25 @@ class CustomerService {
             }
         });
     }
+    getCustomerInteractions(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customer/${customerId}/interactions`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve customer interactions from customer service');
+            }
+        });
+    }
+    getInteractionAttachment(interactionId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/interactions/${interactionId}/file`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve file from customer service');
+            }
+        });
+    }
 }
 exports.CustomerService = CustomerService;

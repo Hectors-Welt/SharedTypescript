@@ -9,6 +9,7 @@ import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
+import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -127,6 +128,22 @@ export class CustomerService implements ICustomerService {
       return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/interaction`, interaction);
     } catch (err) {
       throw new Error('failed to customer interaction at customer service');
+    }
+  }
+
+  async getCustomerInteractions(customerId: number): Promise<InteractionDTO[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/interactions`);
+    } catch (err) {
+      throw new Error('failed to retrieve customer interactions from customer service');
+    }
+  }
+
+  async getInteractionAttachment(interactionId: number): Promise<File> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/interactions/${interactionId}/file`);
+    } catch (err) {
+      throw new Error('failed to retrieve file from customer service');
     }
   }
 }

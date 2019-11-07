@@ -8,6 +8,7 @@ import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { IService } from './IService';
 import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand} from '../models/CustomerService/AddTagIdCommand';
+import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 
 export interface ICustomerService extends IService {
   getDefaultStatusValues(): Promise<StatusValues>;
@@ -35,4 +36,8 @@ export interface ICustomerService extends IService {
   updateContactData(customerId: number, contact: Contact): Promise<void>;
 
   addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void>;
+
+  getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
+
+  getInteractionAttachment(interactionId: number): Promise<File>;
 }

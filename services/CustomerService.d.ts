@@ -8,6 +8,7 @@ import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
+import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
@@ -27,4 +28,6 @@ export declare class CustomerService implements ICustomerService {
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<void>;
     updateContactData(customerId: number, contact: Contact): Promise<void>;
     addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void>;
+    getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
+    getInteractionAttachment(interactionId: number): Promise<File>;
 }
