@@ -22,7 +22,9 @@ export interface ICourseManagementService extends IService {
     getRooms(): Promise<Room[]>;
     getAppointments(customerId: number): Promise<Appointment[]>;
     lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
+    lookupNextFreeTimeBlocks(appointmentId: number, searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     bookAppointment(bookingRequest: AppointmentBooking): Promise<void>;
+    moveAppointment(appointmentId: number, bookingRequest: AppointmentBooking): Promise<void>;
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupReplacements(classId: number): Promise<number[]>;
     setInstructor(classId: number, oldInstructorId: number, newInstructorId: number, markAsReplacement?: boolean): Promise<any>;

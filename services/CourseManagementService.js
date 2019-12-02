@@ -116,6 +116,16 @@ class CourseManagementService {
             }
         });
     }
+    lookupNextFreeTimeBlocks(appointmentId, searchRequest) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/appointments/${appointmentId}/lookupNextFreeTimeBlocks`, searchRequest);
+            }
+            catch (err) {
+                throw new Error('failed to get time blocks from course management service');
+            }
+        });
+    }
     bookAppointment(appointmentRequest) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -123,6 +133,16 @@ class CourseManagementService {
             }
             catch (err) {
                 throw new Error('failed to book appointment at course management service');
+            }
+        });
+    }
+    moveAppointment(appointmentId, appointmentRequest) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/appointments/${appointmentId}/move`, appointmentRequest);
+            }
+            catch (err) {
+                throw new Error('failed to move appointment at course management service');
             }
         });
     }

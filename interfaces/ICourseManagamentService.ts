@@ -33,7 +33,11 @@ export interface ICourseManagementService extends IService {
 
   lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
 
+  lookupNextFreeTimeBlocks(appointmentId: number, searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
+
   bookAppointment(bookingRequest: AppointmentBooking): Promise<void>;
+
+  moveAppointment(appointmentId: number, bookingRequest: AppointmentBooking): Promise<void>;
 
   lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
 

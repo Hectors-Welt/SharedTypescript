@@ -106,11 +106,27 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
+  async lookupNextFreeTimeBlocks(appointmentId: number, searchRequest: AppointmentSearch): Promise<TimeBlock[]> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/appointments/${appointmentId}/lookupNextFreeTimeBlocks`, searchRequest);
+    } catch (err) {
+      throw new Error('failed to get time blocks from course management service');
+    }
+  }
+
   async bookAppointment(appointmentRequest: AppointmentBooking): Promise<void> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/appointments/bookAppointment`, appointmentRequest);
     } catch (err) {
       throw new Error('failed to book appointment at course management service');
+    }
+  }
+
+  async moveAppointment(appointmentId: number, appointmentRequest: AppointmentBooking): Promise<void> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/appointments/${appointmentId}/move`, appointmentRequest);
+    } catch (err) {
+      throw new Error('failed to move appointment at course management service');
     }
   }
 
