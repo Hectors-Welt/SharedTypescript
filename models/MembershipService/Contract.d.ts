@@ -26,4 +26,5 @@ export declare class Contract {
     limits: Limit[];
     freeTestingPhaseActivated: boolean;
     isAddon?: boolean;
+    followUpContractId?: number;
 }
