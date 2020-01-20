@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -85,6 +86,22 @@ class MarkdownEditor {
             }
         });
     }
+    renderHtmlWithData(id, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.baseUrl}/md/${id}/html`;
+            try {
+                const result = yield popsicle.request({
+                    url,
+                    method: 'POST',
+                    body,
+                });
+                return result.status < 400 ? result.body : null;
+            }
+            catch (err) {
+                throw new Error('failed to call renderHtmlWithData on markdown editor');
+            }
+        });
+    }
     renderText(id, asUrl) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.baseUrl}/md/${id}/text`;
@@ -100,6 +117,22 @@ class MarkdownEditor {
             }
             catch (err) {
                 throw new Error('failed to call renderText on markdown editor');
+            }
+        });
+    }
+    renderTextWithData(id, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.baseUrl}/md/${id}/text`;
+            try {
+                const result = yield popsicle.request({
+                    url,
+                    method: 'POST',
+                    body,
+                });
+                return result.status < 400 ? result.body : null;
+            }
+            catch (err) {
+                throw new Error('failed to call renderTextWithData on markdown editor');
             }
         });
     }
@@ -123,6 +156,27 @@ class MarkdownEditor {
             }
             catch (err) {
                 throw new Error('failed to call renderPdf on markdown editor');
+            }
+        });
+    }
+    renderPdfWithData(id, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.baseUrl}/md/${id}/pdf`;
+            try {
+                const result = yield popsicle.request({
+                    url,
+                    method: 'POST',
+                    transport: popsicle.createTransport({
+                        type: 'buffer',
+                        buffer: true,
+                        maxBufferSize: 200000000,
+                    }),
+                    body,
+                });
+                return result.status < 400 ? result.body : null;
+            }
+            catch (err) {
+                throw new Error('failed to call renderPdfWithData on markdown editor');
             }
         });
     }

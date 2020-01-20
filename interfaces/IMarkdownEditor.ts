@@ -14,9 +14,15 @@ export interface IMarkdownEditor extends IService {
 
   renderHtml(id: string, asUrl?: boolean): Promise<any>;
 
+  renderHtmlWithData(id: string, body: any): Promise<string>;
+
   renderText(id: string, asUrl?: boolean): Promise<any>;
 
+  renderTextWithData(id: string, body: any): Promise<string>;
+
   renderPdf(id: string, asUrl?: boolean): Promise<any>;
+
+  renderPdfWithData(id: string, body: any): Promise<Buffer>;
 
   renderUrlAsPdf(documentUrl: string, asUrl?: boolean): Promise<any>;
 }

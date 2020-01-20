@@ -74,6 +74,21 @@ export class MarkdownEditor implements IMarkdownEditor {
     }
   }
 
+  async renderHtmlWithData(id: string, body: any): Promise<string> {
+    const url = `${this.baseUrl}/md/${id}/html`;
+    try {
+      const result = await popsicle.request({
+        url,
+        method: 'POST',
+        body,
+      });
+
+      return result.status < 400 ? result.body : null;
+    } catch (err) {
+      throw new Error('failed to call renderHtmlWithData on markdown editor');
+    }
+  }
+
   async renderText(id: string, asUrl?: boolean): Promise<any> {
     const url = `${this.baseUrl}/md/${id}/text`;
     try {
@@ -89,6 +104,21 @@ export class MarkdownEditor implements IMarkdownEditor {
       return result.status < 400 ? result.body : null;
     } catch (err) {
       throw new Error('failed to call renderText on markdown editor');
+    }
+  }
+
+  async renderTextWithData(id: string, body: any): Promise<string> {
+    const url = `${this.baseUrl}/md/${id}/text`;
+    try {
+      const result = await popsicle.request({
+        url,
+        method: 'POST',
+        body,
+      });
+
+      return result.status < 400 ? result.body : null;
+    } catch (err) {
+      throw new Error('failed to call renderTextWithData on markdown editor');
     }
   }
 
@@ -112,6 +142,26 @@ export class MarkdownEditor implements IMarkdownEditor {
       return result.status < 400 ? result.body : null;
     } catch (err) {
       throw new Error('failed to call renderPdf on markdown editor');
+    }
+  }
+
+  async renderPdfWithData(id: string, body: any): Promise<Buffer> {
+    const url = `${this.baseUrl}/md/${id}/pdf`;
+    try {
+      const result = await popsicle.request({
+        url,
+        method: 'POST',
+        transport: popsicle.createTransport({
+          type: 'buffer',
+          buffer: true,
+          maxBufferSize: 200000000,
+        } as any),
+        body,
+      });
+
+      return result.status < 400 ? result.body : null;
+    } catch (err) {
+      throw new Error('failed to call renderPdfWithData on markdown editor');
     }
   }
 

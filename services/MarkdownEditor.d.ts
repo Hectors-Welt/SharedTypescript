@@ -13,7 +13,10 @@ export declare class MarkdownEditor implements IMarkdownEditor {
     updateMarkdown(id: string, data: any): Promise<any>;
     deleteMarkdown(id: string): Promise<any>;
     renderHtml(id: string, asUrl?: boolean): Promise<any>;
+    renderHtmlWithData(id: string, body: any): Promise<string>;
     renderText(id: string, asUrl?: boolean): Promise<any>;
+    renderTextWithData(id: string, body: any): Promise<string>;
     renderPdf(id: string, asUrl?: boolean): Promise<any>;
+    renderPdfWithData(id: string, body: any): Promise<Buffer>;
     renderUrlAsPdf(documentUrl: string, asUrl?: boolean): Promise<string | Buffer>;
 }
