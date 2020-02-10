@@ -39,6 +39,8 @@ export interface ICourseManagementService extends IService {
 
   moveAppointment(appointmentId: number, bookingRequest: AppointmentBooking): Promise<void>;
 
+  cancelAppointment(appointmentId: number): Promise<void>;
+
   lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
 
   lookupReplacements(classId: number): Promise<number[]>;

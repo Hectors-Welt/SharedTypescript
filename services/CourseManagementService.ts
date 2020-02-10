@@ -130,6 +130,14 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
+  async cancelAppointment(appointmentId: number): Promise<void> {
+    try {
+      return await ApiClient.DELETE(`${this.baseUrl}/appointments/${appointmentId}`);
+    } catch (err) {
+      throw new Error('failed to cancel appointment at course management service');
+    }
+  }
+
   async lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/appointments/lookupCounselingTimeBlocks`, searchRequest);
