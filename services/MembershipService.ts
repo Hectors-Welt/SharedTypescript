@@ -18,6 +18,14 @@ export class MembershipService implements IMembershipService {
     this.baseUrl = `http://${host}:${port}`;
   }
 
+  async getActiveContractNames(): Promise<string[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getActiveContractNames`);
+    } catch (err) {
+      throw new Error('failed to retrieve active contract names from membership service');
+    }
+  }
+
   async getContractTemplatesAvailable(): Promise<ContractTemplate[]> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/getContractTemplatesAvailable`);

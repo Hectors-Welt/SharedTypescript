@@ -4,6 +4,7 @@ import { IService } from './IService';
 import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 import { TerminateContractCommand } from '../models/MembershipService/TerminateContractCommand';
 export interface IMembershipService extends IService {
+    getActiveContractNames(): Promise<string[]>;
     getContractTemplatesAvailable(): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
