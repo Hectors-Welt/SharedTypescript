@@ -1,5 +1,5 @@
 export declare class CurrentCheckins {
-    studioId: number;
+    studioNumber: number;
     currentCheckins: number;
     lastUpdated: string;
 }
