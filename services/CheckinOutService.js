@@ -100,5 +100,15 @@ class CheckinOutService {
             }
         });
     }
+    getCurrentCheckinCount(studioNumber) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCurrentCheckinCount/${studioNumber}`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve current checkin count from checkinout service');
+            }
+        });
+    }
 }
 exports.CheckinOutService = CheckinOutService;

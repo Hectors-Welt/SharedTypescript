@@ -4,6 +4,7 @@ import { Checkin } from '../models/CheckinOutService/Checkin';
 import { ApiClient } from './ApiClient';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
 import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
+import { CurrentCheckins } from '../models/CheckinOutService/CurrentCheckins';
 
 export class CheckinOutService implements ICheckinOutService {
   host: string;
@@ -94,6 +95,14 @@ export class CheckinOutService implements ICheckinOutService {
       return await ApiClient.GET(`${this.baseUrl}/getCustomersPresent`);
     } catch (err) {
       throw new Error('failed to retrieve customers present from checkinout service');
+    }
+  }
+
+  async getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getCurrentCheckinCount/${studioNumber}`);
+    } catch (err) {
+      throw new Error('failed to retrieve current checkin count from checkinout service');
     }
   }
 }

@@ -3,6 +3,7 @@ import { Checkin } from '../models/CheckinOutService/Checkin';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
 import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 import { IService } from './IService';
+import { CurrentCheckins } from '../models/CheckinOutService/CurrentCheckins';
 
 export interface ICheckinOutService extends IService {
   getAccessAreasAvailable(): Promise<AccessArea[]>;
@@ -24,4 +25,6 @@ export interface ICheckinOutService extends IService {
   checkout(customerId: number, accessPosibility?: number, accessLevel?: number): Promise<CheckinOutResponse>;
 
   getCustomersPresent(): Promise<CheckinStatus[]>;
+
+  getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins>;
 }

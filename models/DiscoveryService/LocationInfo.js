@@ -7,6 +7,7 @@ class LocationInfo {
         this.studioId = data.studioId;
         this.clubId = data.clubId;
         this.contact = data.contact;
+        this.maxCheckinsAllowed = data.maxCheckinsAllowed;
     }
 }
 exports.LocationInfo = LocationInfo;

@@ -4,6 +4,7 @@ export class LocationInfo {
   studioId: number;
   clubId: string;
   contact: any;
+  maxCheckinsAllowed: boolean;
 
   constructor(data: any) {
     this.studioName = data.studioName;
@@ -11,5 +12,6 @@ export class LocationInfo {
     this.studioId = data.studioId;
     this.clubId = data.clubId;
     this.contact = data.contact;
+    this.maxCheckinsAllowed = data.maxCheckinsAllowed;
   }
 }

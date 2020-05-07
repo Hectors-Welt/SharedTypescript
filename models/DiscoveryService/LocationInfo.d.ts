@@ -4,5 +4,6 @@ export declare class LocationInfo {
     studioId: number;
     clubId: string;
     contact: any;
+    maxCheckinsAllowed: boolean;
     constructor(data: any);
 }
