@@ -105,4 +105,12 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to retrieve current checkin count from checkinout service');
     }
   }
+
+  async getCurrentCheckinCounts(): Promise<CurrentCheckins[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getCurrentCheckinCounts`);
+    } catch (err) {
+      throw new Error('failed to retrieve current checkin counts from checkinout service');
+    }
+  }
 }

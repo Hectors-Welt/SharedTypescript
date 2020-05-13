@@ -13,4 +13,5 @@ export interface ICheckinOutService extends IService {
     checkout(customerId: number, accessPosibility?: number, accessLevel?: number): Promise<CheckinOutResponse>;
     getCustomersPresent(): Promise<CheckinStatus[]>;
     getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins>;
+    getCurrentCheckinCounts(): Promise<CurrentCheckins[]>;
 }

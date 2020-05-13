@@ -18,4 +18,5 @@ export declare class CheckinOutService implements ICheckinOutService {
     checkout(customerId: number, accessPossibility?: number, accessLevel?: number): Promise<CheckinOutResponse>;
     getCustomersPresent(): Promise<CheckinStatus[]>;
     getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins>;
+    getCurrentCheckinCounts(): Promise<CurrentCheckins[]>;
 }
