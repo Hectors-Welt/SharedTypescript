@@ -43,12 +43,12 @@ export class CheckinOutService implements ICheckinOutService {
     }
   }
 
-  async isAccessAllowed(customerId: number, timeSlotRequired: boolean, accessAreas?: string[]): Promise<boolean> {
+  async isAccessAllowed(customerId: number, timeSlotRequired: boolean, checkOpeningHours: boolean, accessAreas?: string[]): Promise<boolean> {
     try {
       const result = await ApiClient.GET(
         `${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}?accessAreas=${
           accessAreas != null ? accessAreas.join(',') : ''
-        }`,
+        }&checkOpeningHours=${checkOpeningHours}`,
       );
       return result.accessGranted;
     } catch (err) {

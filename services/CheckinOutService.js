@@ -47,10 +47,10 @@ class CheckinOutService {
             }
         });
     }
-    isAccessAllowed(customerId, timeSlotRequired, accessAreas) {
+    isAccessAllowed(customerId, timeSlotRequired, checkOpeningHours, accessAreas) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}?accessAreas=${accessAreas != null ? accessAreas.join(',') : ''}`);
+                const result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}?accessAreas=${accessAreas != null ? accessAreas.join(',') : ''}&checkOpeningHours=${checkOpeningHours}`);
                 return result.accessGranted;
             }
             catch (err) {
