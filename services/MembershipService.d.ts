@@ -3,6 +3,7 @@ import { IMembershipService } from '../interfaces/IMembershipService';
 import { Contract } from '../models/MembershipService/Contract';
 import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 import { TerminateContractCommand } from '../models/MembershipService/TerminateContractCommand';
+import { Recommendation } from '../models/MembershipService/Recommendation';
 export declare class MembershipService implements IMembershipService {
     host: string;
     port: number;
@@ -12,6 +13,7 @@ export declare class MembershipService implements IMembershipService {
     getActiveContractNames(): Promise<string[]>;
     getContractTemplatesAvailable(): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
+    getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]>;
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
     rejectPendingMembership(processId: number): Promise<void>;
     createContracts(command: CreateContractsCommand): Promise<void>;

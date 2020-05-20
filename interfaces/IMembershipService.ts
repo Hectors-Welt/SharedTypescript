@@ -3,6 +3,7 @@ import { Contract } from '../models/MembershipService/Contract';
 import { IService } from './IService';
 import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 import { TerminateContractCommand } from '../models/MembershipService/TerminateContractCommand';
+import { Recommendation } from '../models/MembershipService/Recommendation';
 
 export interface IMembershipService extends IService {
   getActiveContractNames(): Promise<string[]>;
@@ -10,6 +11,8 @@ export interface IMembershipService extends IService {
   getContractTemplatesAvailable(): Promise<ContractTemplate[]>;
 
   getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
+
+  getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]>;
 
   getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
 

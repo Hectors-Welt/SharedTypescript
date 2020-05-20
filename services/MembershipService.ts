@@ -4,6 +4,7 @@ import { Contract } from '../models/MembershipService/Contract';
 import { ApiClient } from './ApiClient';
 import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 import { TerminateContractCommand } from '../models/MembershipService/TerminateContractCommand';
+import { Recommendation } from '../models/MembershipService/Recommendation';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -39,6 +40,14 @@ export class MembershipService implements IMembershipService {
       return await ApiClient.GET(`${this.baseUrl}/getCurrentContractsByCustomerId/${customerId}`);
     } catch (err) {
       throw new Error('failed to retrieve contracts from membership service');
+    }
+  }
+
+  async getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getRecommendationsByCustomerId/${customerId}`);
+    } catch (err) {
+      throw new Error('failed to retrieve recommendations from membership service');
     }
   }
 
