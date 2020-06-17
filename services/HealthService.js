@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.HealthService = void 0;
 const HealthInfo_1 = require("../models/HealthService/HealthInfo");
 class HealthService {
     constructor(version) {

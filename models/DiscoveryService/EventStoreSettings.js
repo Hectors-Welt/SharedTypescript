@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.EventStoreSettings = void 0;
 class EventStoreSettings {
     constructor(settings) {
         if (!settings || !settings.host || !settings.tcpPort || !settings.httpPort) {

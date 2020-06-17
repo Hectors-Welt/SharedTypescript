@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SMSService = void 0;
 const ApiClient_1 = require("./ApiClient");
 class SMSService {
     constructor(host, port, version) {

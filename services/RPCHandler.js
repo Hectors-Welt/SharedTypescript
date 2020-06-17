@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RPCHandler = void 0;
 const uuidv4 = require("uuid/v4");
 class RPCHandler {
     constructor(connection) {

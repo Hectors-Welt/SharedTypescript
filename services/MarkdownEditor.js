@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MarkdownEditor = void 0;
 const popsicle = require("popsicle");
 const ApiClient_1 = require("./ApiClient");
 class MarkdownEditor {

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RatingItemType = void 0;
 var RatingItemType;
 (function (RatingItemType) {
     RatingItemType[RatingItemType["Stars"] = 0] = "Stars";

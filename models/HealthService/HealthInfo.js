@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.HealthInfo = void 0;
 class HealthInfo {
     constructor(version) {
         this.version = version;

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BraintreeSettings = void 0;
 class BraintreeSettings {
     constructor(settings) {
         if (!settings || !settings.merchantId || !settings.privateKey || !settings.publicKey) {

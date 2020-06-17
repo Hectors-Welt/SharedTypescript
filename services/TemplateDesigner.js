@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TemplateDesigner = void 0;
 const popsicle = require("popsicle");
 const RenderFileType_1 = require("../models/TemplateDesigner/RenderFileType");
 const ApiClient_1 = require("./ApiClient");

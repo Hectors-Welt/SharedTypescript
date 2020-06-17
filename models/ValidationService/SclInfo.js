@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SclInfo = void 0;
 class SclInfo {
     constructor(data) {
         this.bic = data.bic;

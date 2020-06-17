@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DiscoveryService = void 0;
 const LocationInfo_1 = require("../models/DiscoveryService/LocationInfo");
 const EventStoreSettings_1 = require("../models/DiscoveryService/EventStoreSettings");
 const MongoDbSettings_1 = require("../models/DiscoveryService/MongoDbSettings");

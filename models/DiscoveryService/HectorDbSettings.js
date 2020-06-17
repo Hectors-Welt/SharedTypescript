@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.HectorDbSettings = void 0;
 class HectorDbSettings {
     constructor(settings) {
         if (!settings || !settings.server || !settings.username || !settings.password) {

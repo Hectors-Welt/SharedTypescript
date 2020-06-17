@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BackendSettings = void 0;
 class BackendSettings {
     constructor(settings) {
         if (!settings || !settings.baseUrl) {
