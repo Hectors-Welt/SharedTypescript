@@ -41,6 +41,8 @@ import { IEmailTemplateService } from '../interfaces/IEmailTemplateService';
 import { EmailTemplateService } from './EmailTemplateService';
 import { IPushTemplateService } from '../interfaces/IPushTemplateService';
 import { PushTemplateService } from '../services/PushTemplateService';
+import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationService';
+import { PaypalIntegrationService } from './PaypalIntegrationService';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -71,6 +73,7 @@ export class DiscoveryService implements IDiscoveryService {
   private courseManagementService: ICourseManagementService;
   private emailTemplateService: IEmailTemplateService;
   private pushTemplateService: IPushTemplateService;
+  private paypalIntegrationService: IPaypalIntegrationService;
 
   constructor(host: string, port: number) {
     this.host = host;
@@ -552,6 +555,26 @@ export class DiscoveryService implements IDiscoveryService {
         pushTemplateService.serviceVersion,
       );
       return this.pushTemplateService;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve push template service from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getPaypalIntegrationService(): Promise<IPaypalIntegrationService> {
+    try {
+      if (this.paypalIntegrationService) {
+        return this.paypalIntegrationService;
+      }
+      const paypalIntegrationService = await ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
+      this.paypalIntegrationService = new PaypalIntegrationService(
+        paypalIntegrationService.host,
+        paypalIntegrationService.port,
+        paypalIntegrationService.serviceVersion,
+      );
+      return this.paypalIntegrationService;
     } catch (err) {
       throw {
         status: 503,

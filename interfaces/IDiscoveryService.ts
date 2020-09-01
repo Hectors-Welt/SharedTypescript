@@ -21,6 +21,7 @@ import { IMarkdownEditor } from './IMarkdownEditor';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 import { IEmailTemplateService } from './IEmailTemplateService';
 import { IPushTemplateService } from './IPushTemplateService';
+import { IPaypalIntegrationService } from './IPaypalIntegrationService';
 
 export interface IDiscoveryService {
   port: number;
@@ -83,6 +84,8 @@ export interface IDiscoveryService {
   getEmailTemplateService(): Promise<IEmailTemplateService>;
 
   getPushTemplateService(): Promise<IPushTemplateService>;
+
+  getPaypalIntegrationService(): Promise<IPaypalIntegrationService>;
 
   getClubs(): Promise<any>;
 

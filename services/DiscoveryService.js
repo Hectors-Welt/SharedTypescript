@@ -34,6 +34,7 @@ const MarkdownEditor_1 = require("./MarkdownEditor");
 const BackendSettings_1 = require("../models/DiscoveryService/BackendSettings");
 const EmailTemplateService_1 = require("./EmailTemplateService");
 const PushTemplateService_1 = require("../services/PushTemplateService");
+const PaypalIntegrationService_1 = require("./PaypalIntegrationService");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -510,6 +511,24 @@ class DiscoveryService {
                 const pushTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
                 this.pushTemplateService = new PushTemplateService_1.PushTemplateService(pushTemplateService.host, pushTemplateService.port, pushTemplateService.serviceVersion);
                 return this.pushTemplateService;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve push template service from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getPaypalIntegrationService() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.paypalIntegrationService) {
+                    return this.paypalIntegrationService;
+                }
+                const paypalIntegrationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
+                this.paypalIntegrationService = new PaypalIntegrationService_1.PaypalIntegrationService(paypalIntegrationService.host, paypalIntegrationService.port, paypalIntegrationService.serviceVersion);
+                return this.paypalIntegrationService;
             }
             catch (err) {
                 throw {

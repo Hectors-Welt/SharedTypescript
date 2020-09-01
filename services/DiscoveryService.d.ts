@@ -25,6 +25,7 @@ import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 import { IEmailTemplateService } from '../interfaces/IEmailTemplateService';
 import { IPushTemplateService } from '../interfaces/IPushTemplateService';
+import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationService';
 export declare class DiscoveryService implements IDiscoveryService {
     baseUrl: string;
     host: string;
@@ -54,6 +55,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private courseManagementService;
     private emailTemplateService;
     private pushTemplateService;
+    private paypalIntegrationService;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
     invalidateCache(property: string): void;
@@ -86,5 +88,6 @@ export declare class DiscoveryService implements IDiscoveryService {
     getCourseManagementService(): Promise<ICourseManagementService>;
     getEmailTemplateService(): Promise<IEmailTemplateService>;
     getPushTemplateService(): Promise<IPushTemplateService>;
+    getPaypalIntegrationService(): Promise<IPaypalIntegrationService>;
     private registerService;
 }
