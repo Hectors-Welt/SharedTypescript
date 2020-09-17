@@ -3,6 +3,4 @@ export class CreateSimpleOrderRequest {
     note: string;
     brandName: string;
     currencyCode: string;
-    baseUrl: string;
-    webUrl: string;
 }
