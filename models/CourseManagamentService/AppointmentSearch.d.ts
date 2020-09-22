@@ -6,4 +6,5 @@ export declare class AppointmentSearch {
     studioId: number;
     appointmentTypeId: number;
     employee?: number;
+    customerId?: number;
 }
