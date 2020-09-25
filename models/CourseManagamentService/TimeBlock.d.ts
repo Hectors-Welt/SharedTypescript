@@ -5,4 +5,5 @@ export declare class TimeBlock {
     employeeId: number;
     roomId: number;
     studioId: number;
+    bookingType: any;
 }
