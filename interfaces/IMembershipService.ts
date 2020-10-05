@@ -8,7 +8,7 @@ import { Recommendation } from '../models/MembershipService/Recommendation';
 export interface IMembershipService extends IService {
   getActiveContractNames(): Promise<string[]>;
 
-  getContractTemplatesAvailable(): Promise<ContractTemplate[]>;
+  getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
 
   getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
 

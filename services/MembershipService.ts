@@ -27,9 +27,14 @@ export class MembershipService implements IMembershipService {
     }
   }
 
-  async getContractTemplatesAvailable(): Promise<ContractTemplate[]> {
+  async getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getContractTemplatesAvailable`);
+      let route = 'getContractTemplatesAvailable';
+      if (customerId) {
+        route += `?customerId=${customerId}`;
+      }
+
+      return await ApiClient.GET(`${this.baseUrl}/${route}`);
     } catch (err) {
       throw new Error('failed to retrieve contract templates from membership service');
     }

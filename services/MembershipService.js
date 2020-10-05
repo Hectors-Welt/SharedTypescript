@@ -28,10 +28,14 @@ class MembershipService {
             }
         });
     }
-    getContractTemplatesAvailable() {
+    getContractTemplatesAvailable(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getContractTemplatesAvailable`);
+                let route = 'getContractTemplatesAvailable';
+                if (customerId) {
+                    route += `?customerId=${customerId}`;
+                }
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/${route}`);
             }
             catch (err) {
                 throw new Error('failed to retrieve contract templates from membership service');

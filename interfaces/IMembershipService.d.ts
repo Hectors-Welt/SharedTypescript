@@ -6,7 +6,7 @@ import { TerminateContractCommand } from '../models/MembershipService/TerminateC
 import { Recommendation } from '../models/MembershipService/Recommendation';
 export interface IMembershipService extends IService {
     getActiveContractNames(): Promise<string[]>;
-    getContractTemplatesAvailable(): Promise<ContractTemplate[]>;
+    getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]>;
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;

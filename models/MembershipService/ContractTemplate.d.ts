@@ -10,4 +10,6 @@ export declare class ContractTemplate {
     isMainContract: boolean;
     freeTestingPhase?: number;
     isAddon?: boolean;
+    customerId?: number;
+    customerHadFreeTestingPhaseBefore?: boolean;
 }

@@ -11,7 +11,7 @@ export declare class MembershipService implements IMembershipService {
     baseUrl: string;
     constructor(host: string, port: number, version: string);
     getActiveContractNames(): Promise<string[]>;
-    getContractTemplatesAvailable(): Promise<ContractTemplate[]>;
+    getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]>;
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
