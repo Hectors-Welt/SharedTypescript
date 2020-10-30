@@ -31,7 +31,7 @@ import { CheckinOutService } from './CheckinOutService';
 import { ArticlesService } from './ArticlesService';
 import { MailingService } from './MailingService';
 import { SMSService } from './SMSService';
-import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
+import { ICourseManagementService } from '../interfaces/ICourseManagementService';
 import { CourseManagementService } from './CourseManagementService';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { MarkdownEditor } from './MarkdownEditor';

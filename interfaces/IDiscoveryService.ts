@@ -16,7 +16,7 @@ import { ICheckinOutService } from './ICheckinOutService';
 import { IArticlesService } from './IArticlesService';
 import { IMailingService } from './IMailingService';
 import { ITemplateDesigner } from './ITemplateDesigner';
-import { ICourseManagementService } from './ICourseManagamentService';
+import { ICourseManagementService } from './ICourseManagementService';
 import { IMarkdownEditor } from './IMarkdownEditor';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 import { IEmailTemplateService } from './IEmailTemplateService';

@@ -1,16 +1,17 @@
-import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
-import { ClassFilter } from '../models/CourseManagamentService/ClassFilter';
-import { Class } from '../models/CourseManagamentService/Class';
-import { Course } from '../models/CourseManagamentService/Course';
-import { CourseType } from '../models/CourseManagamentService/CourseType';
-import { CourseLevel } from '../models/CourseManagamentService/CourseLevel';
-import { Room } from '../models/CourseManagamentService/Room';
-import { Appointment } from '../models/CourseManagamentService/Appointment';
-import { AppointmentSearch } from '../models/CourseManagamentService/AppointmentSearch';
-import { TimeBlock } from '../models/CourseManagamentService/TimeBlock';
-import { AppointmentBooking } from '../models/CourseManagamentService/AppointmentBooking';
-import { ClassAttendee } from '../models/CourseManagamentService/ClassAttendee';
-import { PunishmentContainer } from '../models/CourseManagamentService/PunishmentContainer';
+import { ICourseManagementService } from '../interfaces/ICourseManagementService';
+import { ClassFilter } from '../models/CourseManagementService/ClassFilter';
+import { Class } from '../models/CourseManagementService/Class';
+import { Course } from '../models/CourseManagementService/Course';
+import { CourseType } from '../models/CourseManagementService/CourseType';
+import { CourseLevel } from '../models/CourseManagementService/CourseLevel';
+import { Room } from '../models/CourseManagementService/Room';
+import { Appointment } from '../models/CourseManagementService/Appointment';
+import { AppointmentSearch } from '../models/CourseManagementService/AppointmentSearch';
+import { TimeBlock } from '../models/CourseManagementService/TimeBlock';
+import { AppointmentBooking } from '../models/CourseManagementService/AppointmentBooking';
+import { ClassAttendee } from '../models/CourseManagementService/ClassAttendee';
+import { PunishmentContainer } from '../models/CourseManagementService/PunishmentContainer';
+import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
 export declare class CourseManagementService implements ICourseManagementService {
     host: string;
     port: number;
@@ -19,7 +20,7 @@ export declare class CourseManagementService implements ICourseManagementService
     constructor(host: string, port: number, version: string);
     getClasses(filter: ClassFilter): Promise<Class[]>;
     getPriceInformation(classId: number, customerId: number): Promise<any>;
-    doReservation(classId: number, customerId: number): Promise<any>;
+    doReservation(classId: number, customerId: number): Promise<ReservationResult>;
     doCancellation(classId: number, customerId: number): Promise<any>;
     getCourses(): Promise<Course[]>;
     getCourseTypes(): Promise<CourseType[]>;
@@ -28,7 +29,7 @@ export declare class CourseManagementService implements ICourseManagementService
     getAppointments(customerId?: number): Promise<Appointment[]>;
     lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupNextFreeTimeBlocks(appointmentId: number, searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
-    bookAppointment(appointmentRequest: AppointmentBooking): Promise<void>;
+    bookAppointment(appointmentRequest: AppointmentBooking): Promise<ReservationResult>;
     moveAppointment(appointmentId: number, appointmentRequest: AppointmentBooking): Promise<void>;
     cancelAppointment(appointmentId: number): Promise<void>;
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;

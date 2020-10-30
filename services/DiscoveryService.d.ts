@@ -19,7 +19,7 @@ import { ICheckinOutService } from '../interfaces/ICheckinOutService';
 import { IArticlesService } from '../interfaces/IArticlesService';
 import { IMailingService } from '../interfaces/IMailingService';
 import { ISMSService } from '../interfaces/ISMSService';
-import { ICourseManagementService } from '../interfaces/ICourseManagamentService';
+import { ICourseManagementService } from '../interfaces/ICourseManagementService';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
 import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
