@@ -43,6 +43,7 @@ import { IPushTemplateService } from '../interfaces/IPushTemplateService';
 import { PushTemplateService } from '../services/PushTemplateService';
 import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationService';
 import { PaypalIntegrationService } from './PaypalIntegrationService';
+import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -57,6 +58,7 @@ export class DiscoveryService implements IDiscoveryService {
   private backendSettings: BackendSettings;
   private hectorDbSettings: HectorDbSettings;
   private braintreeSettings: BraintreeSettings;
+  private mollieSettings: MollieSettings;
   private customerService: ICustomerService;
   private employeesService: IEmployeesService;
   private membershipService: IMembershipService;
@@ -223,6 +225,20 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve hector braintree from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getMollieSettings(): Promise<MollieSettings> {
+    try {
+      if (!this.mollieSettings) {
+        this.mollieSettings = new MollieSettings(await ApiClient.GET(`${this.baseUrl}/mollie`));
+      }
+      return this.mollieSettings;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve mollie settings from discovery service: ${err.message}`,
       };
     }
   }

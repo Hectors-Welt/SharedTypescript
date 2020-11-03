@@ -35,6 +35,7 @@ const BackendSettings_1 = require("../models/DiscoveryService/BackendSettings");
 const EmailTemplateService_1 = require("./EmailTemplateService");
 const PushTemplateService_1 = require("../services/PushTemplateService");
 const PaypalIntegrationService_1 = require("./PaypalIntegrationService");
+const MollieSettings_1 = require("../models/DiscoveryService/MollieSettings");
 class DiscoveryService {
     constructor(host, port) {
         this.host = host;
@@ -188,6 +189,22 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve hector braintree from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getMollieSettings() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (!this.mollieSettings) {
+                    this.mollieSettings = new MollieSettings_1.MollieSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/mollie`));
+                }
+                return this.mollieSettings;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve mollie settings from discovery service: ${err.message}`,
                 };
             }
         });

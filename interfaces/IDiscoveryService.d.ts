@@ -22,6 +22,7 @@ import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 import { IEmailTemplateService } from './IEmailTemplateService';
 import { IPushTemplateService } from './IPushTemplateService';
 import { IPaypalIntegrationService } from './IPaypalIntegrationService';
+import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 export interface IDiscoveryService {
     port: number;
     host: string;
@@ -36,6 +37,7 @@ export interface IDiscoveryService {
     getBackendSettings(): Promise<BackendSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
+    getMollieSettings(): Promise<MollieSettings>;
     getMailingService(): Promise<IMailingService>;
     getCustomerService(): Promise<ICustomerService>;
     getEmployeesService(): Promise<IEmployeesService>;

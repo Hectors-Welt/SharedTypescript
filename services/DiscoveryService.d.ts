@@ -26,6 +26,7 @@ import { BackendSettings } from '../models/DiscoveryService/BackendSettings';
 import { IEmailTemplateService } from '../interfaces/IEmailTemplateService';
 import { IPushTemplateService } from '../interfaces/IPushTemplateService';
 import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationService';
+import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 export declare class DiscoveryService implements IDiscoveryService {
     baseUrl: string;
     host: string;
@@ -39,6 +40,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private backendSettings;
     private hectorDbSettings;
     private braintreeSettings;
+    private mollieSettings;
     private customerService;
     private employeesService;
     private membershipService;
@@ -68,6 +70,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getBackendSettings(): Promise<BackendSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
+    getMollieSettings(): Promise<MollieSettings>;
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
     getContactCategories(): Promise<any>;
