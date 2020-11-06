@@ -40,4 +40,6 @@ export interface ICustomerService extends IService {
   getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
 
   getInteractionAttachment(interactionId: number): Promise<File>;
+
+  deleteCustomerRelatedData(customerId: number): Promise<any>;
 }

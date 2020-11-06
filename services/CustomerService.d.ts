@@ -30,4 +30,5 @@ export declare class CustomerService implements ICustomerService {
     addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void>;
     getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
     getInteractionAttachment(interactionId: number): Promise<File>;
+    deleteCustomerRelatedData(customerId: number): Promise<any[]>;
 }

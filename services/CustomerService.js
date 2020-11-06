@@ -171,5 +171,15 @@ class CustomerService {
             }
         });
     }
+    deleteCustomerRelatedData(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customer/${customerId}`);
+            }
+            catch (err) {
+                throw new Error('failed to delete customer related data at customer service');
+            }
+        });
+    }
 }
 exports.CustomerService = CustomerService;
