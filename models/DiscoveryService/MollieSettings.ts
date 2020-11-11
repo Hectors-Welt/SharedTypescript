@@ -1,11 +1,11 @@
 export class MollieSettings {
-  apiKeys: Map<string, string>;
+  apiKey: string;
 
   constructor(settings: any) {
-    if (!settings || !settings.apiKeys) {
-      throw new Error('invalid data. ensure apiKeys are present.');
+    if (!settings || !settings.apiKey) {
+      throw new Error('invalid data. ensure apiKey is present.');
     }
 
-    this.apiKeys = settings.apiKeys;
+    this.apiKey = settings.apiKey;
   }
 }

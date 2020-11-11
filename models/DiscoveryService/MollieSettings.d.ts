@@ -1,4 +1,4 @@
 export declare class MollieSettings {
-    apiKeys: Map<string, string>;
+    apiKey: string;
     constructor(settings: any);
 }
