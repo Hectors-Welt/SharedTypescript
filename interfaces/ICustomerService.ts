@@ -35,6 +35,8 @@ export interface ICustomerService extends IService {
 
   updateContactData(customerId: number, contact: Contact): Promise<void>;
 
+  updateCompany(customerId: number, company: string): Promise<void>;
+
   addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void>;
 
   getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;

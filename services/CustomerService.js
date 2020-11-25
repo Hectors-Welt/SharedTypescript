@@ -141,6 +141,16 @@ class CustomerService {
             }
         });
     }
+    updateCompany(customerId, company) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/company/${company}`, {});
+            }
+            catch (err) {
+                throw new Error('failed to update company at customer service');
+            }
+        });
+    }
     addCustomerInteraction(customerId, interaction) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
