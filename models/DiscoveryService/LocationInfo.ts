@@ -1,3 +1,5 @@
+import { Address } from "../CustomerService/Address";
+
 export class LocationInfo {
   studioName: string;
   studioNumber: number;
@@ -5,6 +7,7 @@ export class LocationInfo {
   clubId: string;
   contact: any;
   maxCheckinsAllowed: number;
+  address: Address;
 
   constructor(data: any) {
     this.studioName = data.studioName;
@@ -13,5 +16,6 @@ export class LocationInfo {
     this.clubId = data.clubId;
     this.contact = data.contact;
     this.maxCheckinsAllowed = data.maxCheckinsAllowed;
+
   }
 }
