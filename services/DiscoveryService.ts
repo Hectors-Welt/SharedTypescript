@@ -45,6 +45,8 @@ import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationServi
 import { PaypalIntegrationService } from './PaypalIntegrationService';
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 
+import isDocker = require('is-docker');
+
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
   public host: string;
@@ -78,22 +80,27 @@ export class DiscoveryService implements IDiscoveryService {
   private paypalIntegrationService: IPaypalIntegrationService;
 
   constructor(host: string, port: number) {
-    this.host = host;
-    this.port = port;
+    this.host = isDocker ? 'discoveryservice' : host;
+    this.port = isDocker ? 80 : port;
     this.baseUrl = `http://${host}:${port}`;
   }
 
   async startSelfRegistration(
     serviceName: string,
     serviceVersion: string,
+    host: string,
     servicePort: number | string,
     proxyRoute: string,
     isPublic: boolean,
     serviceType: ServiceType,
   ) {
+    if (!isDocker) {
+      host = 'localhost';
+    }
+
     this.timer = setInterval(
       () =>
-        this.registerService(serviceName, serviceVersion, servicePort, proxyRoute, isPublic, serviceType).catch(
+        this.registerService(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType).catch(
           () => null,
         ),
       5 * 1000,
@@ -280,8 +287,15 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.mailingService) {
         return this.mailingService;
       }
-      const mailingService = await ApiClient.GET(`${this.baseUrl}/MailingService`);
-      this.mailingService = new MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
+
+      if (isDocker) {
+        this.mailingService = new MailingService('mailingservice', 80, null);
+      }
+      else {
+        const mailingService = await ApiClient.GET(`${this.baseUrl}/MailingService`);
+        this.mailingService = new MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
+      }
+
       return this.mailingService;
     } catch (err) {
       throw {
@@ -296,8 +310,15 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.smsService) {
         return this.smsService;
       }
-      const smsService = await ApiClient.GET(`${this.baseUrl}/SMSService`);
-      this.smsService = new SMSService(smsService.host, smsService.port, smsService.serviceVersion);
+
+      if (isDocker) {
+        this.smsService = new SMSService('smsservice', 80, null);
+      }
+      else {
+        const smsService = await ApiClient.GET(`${this.baseUrl}/SMSService`);
+        this.smsService = new SMSService(smsService.host, smsService.port, smsService.serviceVersion);
+      }
+
       return this.smsService;
     } catch (err) {
       throw {
@@ -312,12 +333,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.customerService) {
         return this.customerService;
       }
-      const customerService = await ApiClient.GET(`${this.baseUrl}/CustomerService`);
-      this.customerService = new CustomerService(
-        customerService.host,
-        customerService.port,
-        customerService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.customerService = new CustomerService('customerservice', 80, null);
+      }
+      else {
+        const customerService = await ApiClient.GET(`${this.baseUrl}/CustomerService`);
+        this.customerService = new CustomerService(
+          customerService.host,
+          customerService.port,
+          customerService.serviceVersion,
+        );
+      }
+
       return this.customerService;
     } catch (err) {
       throw {
@@ -332,12 +360,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.employeesService) {
         return this.employeesService;
       }
-      const employeesService = await ApiClient.GET(`${this.baseUrl}/EmployeesService`);
-      this.employeesService = new EmployeesService(
-        employeesService.host,
-        employeesService.port,
-        employeesService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.employeesService = new EmployeesService('employeesservice', 80, null);
+      }
+      else {
+        const employeesService = await ApiClient.GET(`${this.baseUrl}/EmployeesService`);
+        this.employeesService = new EmployeesService(
+          employeesService.host,
+          employeesService.port,
+          employeesService.serviceVersion,
+        );
+      }
+
       return this.employeesService;
     } catch (err) {
       throw {
@@ -352,12 +387,18 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.membershipService) {
         return this.membershipService;
       }
-      const membershipService = await ApiClient.GET(`${this.baseUrl}/MembershipService`);
-      this.membershipService = new MembershipService(
-        membershipService.host,
-        membershipService.port,
-        membershipService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.membershipService = new MembershipService('membershipservice', 80, null);
+      }
+      else {
+        const membershipService = await ApiClient.GET(`${this.baseUrl}/MembershipService`);
+        this.membershipService = new MembershipService(
+          membershipService.host,
+          membershipService.port,
+          membershipService.serviceVersion,
+        );
+      }
       return this.membershipService;
     } catch (err) {
       throw {
@@ -372,12 +413,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.twoFactorAuthenticationService) {
         return this.twoFactorAuthenticationService;
       }
-      const twoFactorAuthenticationService = await ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
-      this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(
-        twoFactorAuthenticationService.host,
-        twoFactorAuthenticationService.port,
-        twoFactorAuthenticationService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.twoFactorAuthenticationService = new TwoFactorAuthenticationService('twofactorauthenticationservice', 80, null);
+      }
+      else {
+        const twoFactorAuthenticationService = await ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
+        this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(
+          twoFactorAuthenticationService.host,
+          twoFactorAuthenticationService.port,
+          twoFactorAuthenticationService.serviceVersion,
+        );
+      }
+
       return this.twoFactorAuthenticationService;
     } catch (err) {
       throw {
@@ -392,12 +440,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.pushNotificationService) {
         return this.pushNotificationService;
       }
-      const pushNotificationService = await ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
-      this.pushNotificationService = new PushNotificationService(
-        pushNotificationService.host,
-        pushNotificationService.port,
-        pushNotificationService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.pushNotificationService = new PushNotificationService('pushnotificationservice', 80, null);
+      }
+      else {
+        const pushNotificationService = await ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
+        this.pushNotificationService = new PushNotificationService(
+          pushNotificationService.host,
+          pushNotificationService.port,
+          pushNotificationService.serviceVersion,
+        );
+      }
+
       return this.pushNotificationService;
     } catch (err) {
       throw {
@@ -412,8 +467,15 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.ratingService) {
         return this.ratingService;
       }
-      const ratingService = await ApiClient.GET(`${this.baseUrl}/RatingService`);
-      this.ratingService = new RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
+
+      if (isDocker) {
+        this.ratingService = new RatingService('ratingservice', 80, null);
+      }
+      else {
+        const ratingService = await ApiClient.GET(`${this.baseUrl}/RatingService`);
+        this.ratingService = new RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
+      }
+
       return this.ratingService;
     } catch (err) {
       throw {
@@ -428,12 +490,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.accountingService) {
         return this.accountingService;
       }
-      const accountingService = await ApiClient.GET(`${this.baseUrl}/AccountingService`);
-      this.accountingService = new AccountingService(
-        accountingService.host,
-        accountingService.port,
-        accountingService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.accountingService = new AccountingService('accountingservice', 80, null);
+      }
+      else {
+        const accountingService = await ApiClient.GET(`${this.baseUrl}/AccountingService`);
+        this.accountingService = new AccountingService(
+          accountingService.host,
+          accountingService.port,
+          accountingService.serviceVersion,
+        );
+      }
+
       return this.accountingService;
     } catch (err) {
       throw {
@@ -448,12 +517,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.checkinOutService) {
         return this.checkinOutService;
       }
-      const checkinOutService = await ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
-      this.checkinOutService = new CheckinOutService(
-        checkinOutService.host,
-        checkinOutService.port,
-        checkinOutService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.checkinOutService = new CheckinOutService('checkinoutservice', 80, null);
+      }
+      else {
+        const checkinOutService = await ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
+        this.checkinOutService = new CheckinOutService(
+          checkinOutService.host,
+          checkinOutService.port,
+          checkinOutService.serviceVersion,
+        );
+      }
+
       return this.checkinOutService;
     } catch (err) {
       throw {
@@ -468,12 +544,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.articlesService) {
         return this.articlesService;
       }
-      const articlesService = await ApiClient.GET(`${this.baseUrl}/ArticlesService`);
-      this.articlesService = new ArticlesService(
-        articlesService.host,
-        articlesService.port,
-        articlesService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.articlesService = new ArticlesService('articlesservice', 80, null);
+      }
+      else {
+        const articlesService = await ApiClient.GET(`${this.baseUrl}/ArticlesService`);
+        this.articlesService = new ArticlesService(
+          articlesService.host,
+          articlesService.port,
+          articlesService.serviceVersion,
+        );
+      }
+
       return this.articlesService;
     } catch (err) {
       throw {
@@ -488,12 +571,18 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.templateDesigner) {
         return this.templateDesigner;
       }
-      const templateDesigner = await ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
-      this.templateDesigner = new TemplateDesigner(
-        templateDesigner.host,
-        templateDesigner.port,
-        templateDesigner.serviceVersion,
-      );
+      if (isDocker) {
+        this.templateDesigner = new TemplateDesigner('templatedesigner', 80, null);
+      }
+      else {
+        const templateDesigner = await ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
+        this.templateDesigner = new TemplateDesigner(
+          templateDesigner.host,
+          templateDesigner.port,
+          templateDesigner.serviceVersion,
+        );
+      }
+
       return this.templateDesigner;
     } catch (err) {
       throw {
@@ -508,8 +597,15 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.markdownEditor) {
         return this.markdownEditor;
       }
-      const markdownEditor = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
-      this.markdownEditor = new MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
+
+      if (isDocker) {
+        this.markdownEditor = new MarkdownEditor('markdowneditor', 80, null);
+      }
+      else {
+        const markdownEditor = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+        this.markdownEditor = new MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
+      }
+
       return this.markdownEditor;
     } catch (err) {
       throw {
@@ -524,12 +620,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.courseManagementService) {
         return this.courseManagementService;
       }
-      const courseManagementService = await ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
-      this.courseManagementService = new CourseManagementService(
-        courseManagementService.host,
-        courseManagementService.port,
-        courseManagementService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.courseManagementService = new CourseManagementService('coursemanagementservice', 80, null);
+      }
+      else {
+        const courseManagementService = await ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
+        this.courseManagementService = new CourseManagementService(
+          courseManagementService.host,
+          courseManagementService.port,
+          courseManagementService.serviceVersion,
+        );
+      }
+
       return this.courseManagementService;
     } catch (err) {
       throw {
@@ -544,12 +647,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.emailTemplateService) {
         return this.emailTemplateService;
       }
-      const emailTemplateService = await ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
-      this.emailTemplateService = new EmailTemplateService(
-        emailTemplateService.host,
-        emailTemplateService.port,
-        emailTemplateService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.emailTemplateService = new EmailTemplateService('emailtemplateservice', 80, null);
+      }
+      else {
+        const emailTemplateService = await ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
+        this.emailTemplateService = new EmailTemplateService(
+          emailTemplateService.host,
+          emailTemplateService.port,
+          emailTemplateService.serviceVersion,
+        );
+      }
+
       return this.emailTemplateService;
     } catch (err) {
       throw {
@@ -564,12 +674,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.pushTemplateService) {
         return this.pushTemplateService;
       }
-      const pushTemplateService = await ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
-      this.pushTemplateService = new PushTemplateService(
-        pushTemplateService.host,
-        pushTemplateService.port,
-        pushTemplateService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.pushTemplateService = new PushTemplateService('pushtemplateservice', 80, null);
+      }
+      else {
+        const pushTemplateService = await ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
+        this.pushTemplateService = new PushTemplateService(
+          pushTemplateService.host,
+          pushTemplateService.port,
+          pushTemplateService.serviceVersion,
+        );
+      }
+
       return this.pushTemplateService;
     } catch (err) {
       throw {
@@ -584,12 +701,19 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.paypalIntegrationService) {
         return this.paypalIntegrationService;
       }
-      const paypalIntegrationService = await ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
-      this.paypalIntegrationService = new PaypalIntegrationService(
-        paypalIntegrationService.host,
-        paypalIntegrationService.port,
-        paypalIntegrationService.serviceVersion,
-      );
+
+      if (isDocker) {
+        this.paypalIntegrationService = new PaypalIntegrationService('paypalintegrationservice', 80, null);
+      }
+      else {
+        const paypalIntegrationService = await ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
+        this.paypalIntegrationService = new PaypalIntegrationService(
+          paypalIntegrationService.host,
+          paypalIntegrationService.port,
+          paypalIntegrationService.serviceVersion,
+        );
+      }
+
       return this.paypalIntegrationService;
     } catch (err) {
       throw {
@@ -602,6 +726,7 @@ export class DiscoveryService implements IDiscoveryService {
   private async registerService(
     serviceName: string,
     serviceVersion: string,
+    host: string,
     servicePort: number | string,
     proxyRoute: string,
     isPublic: boolean,
@@ -611,6 +736,7 @@ export class DiscoveryService implements IDiscoveryService {
       return await ApiClient.POST(`${this.baseUrl}/`, {
         serviceName,
         proxyRoute,
+        host,
         port: servicePort,
         timeToLive: new Date(new Date().getTime() + 5 * 1000).toJSON(),
         serviceVersion,

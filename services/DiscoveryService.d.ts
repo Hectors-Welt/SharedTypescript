@@ -59,7 +59,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private pushTemplateService;
     private paypalIntegrationService;
     constructor(host: string, port: number);
-    startSelfRegistration(serviceName: string, serviceVersion: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
+    startSelfRegistration(serviceName: string, serviceVersion: string, host: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
     invalidateCache(property: string): void;
     getLocationInfo(): Promise<LocationInfo>;
     getEnvironment(): Promise<any>;

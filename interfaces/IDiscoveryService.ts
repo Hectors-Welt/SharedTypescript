@@ -32,6 +32,7 @@ export interface IDiscoveryService {
   startSelfRegistration(
     serviceName: string,
     serviceVersion: string,
+    host: string,
     servicePort: number | string,
     proxyRoute: string,
     isPublic: boolean,
