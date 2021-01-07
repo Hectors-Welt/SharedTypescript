@@ -82,7 +82,7 @@ export class DiscoveryService implements IDiscoveryService {
   constructor(host: string, port: number) {
     this.host = isDocker ? 'discoveryservice' : host;
     this.port = isDocker ? 80 : port;
-    this.baseUrl = `http://${host}:${port}`;
+    this.baseUrl = `http://${this.host}:${this.port}`;
   }
 
   async startSelfRegistration(

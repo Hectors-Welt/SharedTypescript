@@ -41,7 +41,7 @@ class DiscoveryService {
     constructor(host, port) {
         this.host = isDocker ? 'discoveryservice' : host;
         this.port = isDocker ? 80 : port;
-        this.baseUrl = `http://${host}:${port}`;
+        this.baseUrl = `http://${this.host}:${this.port}`;
     }
     startSelfRegistration(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType) {
         return __awaiter(this, void 0, void 0, function* () {
