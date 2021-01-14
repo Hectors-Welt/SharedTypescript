@@ -11,69 +11,72 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiClient = void 0;
 const popsicle = require("popsicle");
-class ApiClient {
-    static GET(url, headers, throwErrorOnFail) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return throwErrorOnFail
-                ? this.makeRequestThrowingErrorOnFail('GET', url, headers)
-                : this.makeRequest('GET', url, headers);
-        });
+let ApiClient = /** @class */ (() => {
+    class ApiClient {
+        static GET(url, headers, throwErrorOnFail) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return throwErrorOnFail
+                    ? this.makeRequestThrowingErrorOnFail('GET', url, headers)
+                    : this.makeRequest('GET', url, headers);
+            });
+        }
+        static POST(url, body, headers, throwErrorOnFail) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return throwErrorOnFail
+                    ? this.makeRequestThrowingErrorOnFail('POST', url, body, headers)
+                    : this.makeRequest('POST', url, body, headers);
+            });
+        }
+        static PUT(url, body, headers, throwErrorOnFail) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return throwErrorOnFail
+                    ? this.makeRequestThrowingErrorOnFail('PUT', url, body, headers)
+                    : this.makeRequest('PUT', url, body, headers);
+            });
+        }
+        static DELETE(url, headers, throwErrorOnFail) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return throwErrorOnFail
+                    ? this.makeRequestThrowingErrorOnFail('DELETE', url, headers)
+                    : this.makeRequest('DELETE', url, headers);
+            });
+        }
+        static makeRequest(method, url, body, headers) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const request = {
+                    url,
+                    method,
+                    headers: Object.assign({}, this.headers, headers),
+                };
+                if (body) {
+                    request.body = body;
+                }
+                const result = yield popsicle.request(request).use(popsicle.plugins.parse('json'));
+                return result.status === 200 || result.status === 204 ? result.body || {} : null;
+            });
+        }
+        static makeRequestThrowingErrorOnFail(method, url, body, headers) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const request = {
+                    url,
+                    method,
+                    headers: Object.assign({}, this.headers, headers),
+                };
+                if (body) {
+                    request.body = body;
+                }
+                const result = yield popsicle.request(request).use(popsicle.plugins.parse('json'));
+                if (result.status !== 200 && result.status !== 204) {
+                    throw result.body;
+                }
+                return result.body || {};
+            });
+        }
     }
-    static POST(url, body, headers, throwErrorOnFail) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return throwErrorOnFail
-                ? this.makeRequestThrowingErrorOnFail('POST', url, body, headers)
-                : this.makeRequest('POST', url, body, headers);
-        });
-    }
-    static PUT(url, body, headers, throwErrorOnFail) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return throwErrorOnFail
-                ? this.makeRequestThrowingErrorOnFail('PUT', url, body, headers)
-                : this.makeRequest('PUT', url, body, headers);
-        });
-    }
-    static DELETE(url, headers, throwErrorOnFail) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return throwErrorOnFail
-                ? this.makeRequestThrowingErrorOnFail('DELETE', url, headers)
-                : this.makeRequest('DELETE', url, headers);
-        });
-    }
-    static makeRequest(method, url, body, headers) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const request = {
-                url,
-                method,
-                headers: Object.assign({}, this.headers, headers),
-            };
-            if (body) {
-                request.body = body;
-            }
-            const result = yield popsicle.request(request).use(popsicle.plugins.parse('json'));
-            return result.status === 200 || result.status === 204 ? result.body || {} : null;
-        });
-    }
-    static makeRequestThrowingErrorOnFail(method, url, body, headers) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const request = {
-                url,
-                method,
-                headers: Object.assign({}, this.headers, headers),
-            };
-            if (body) {
-                request.body = body;
-            }
-            const result = yield popsicle.request(request).use(popsicle.plugins.parse('json'));
-            if (result.status !== 200 && result.status !== 204) {
-                throw result.body;
-            }
-            return result.body || {};
-        });
-    }
-}
+    ApiClient.headers = {
+        'content-type': 'application/json',
+        accept: 'application/json',
+    };
+    return ApiClient;
+})();
 exports.ApiClient = ApiClient;
-ApiClient.headers = {
-    'content-type': 'application/json',
-    accept: 'application/json',
-};

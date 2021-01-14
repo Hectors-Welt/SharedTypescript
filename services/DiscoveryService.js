@@ -107,7 +107,18 @@ class DiscoveryService {
     getMongoDbSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (!this.mongoDbSettings) {
+                if (this.mongoDbSettings) {
+                    return this.mongoDbSettings;
+                }
+                if (isDocker) {
+                    this.mongoDbSettings = new MongoDbSettings_1.MongoDbSettings({
+                        host: process.env.MONGODB_HOST,
+                        port: process.env.MONGODB_PORT,
+                        username: process.env.MONGODB_USERNAME,
+                        password: process.env.MONGODB_PASSWORD,
+                    });
+                }
+                else {
                     this.mongoDbSettings = new MongoDbSettings_1.MongoDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/mongodb`));
                 }
                 return this.mongoDbSettings;
@@ -136,7 +147,19 @@ class DiscoveryService {
     getRabbitMqSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (!this.rabbitMqSettings) {
+                if (this.rabbitMqSettings) {
+                    return this.rabbitMqSettings;
+                }
+                if (isDocker) {
+                    this.rabbitMqSettings = new RabbitMqSettings_1.RabbitMqSettings({
+                        host: process.env.RABBITMQ_HOST,
+                        port: process.env.RABBITMQ_PORT,
+                        vhost: process.env.RABBITMQ_VHOST,
+                        username: process.env.RABBITMQ_USERNAME,
+                        password: process.env.RABBITMQ_PASSWORD,
+                    });
+                }
+                else {
                     this.rabbitMqSettings = new RabbitMqSettings_1.RabbitMqSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/rabbitmq`));
                 }
                 return this.rabbitMqSettings;

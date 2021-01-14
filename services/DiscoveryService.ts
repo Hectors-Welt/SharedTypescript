@@ -157,9 +157,22 @@ export class DiscoveryService implements IDiscoveryService {
 
   async getMongoDbSettings(): Promise<MongoDbSettings> {
     try {
-      if (!this.mongoDbSettings) {
+      if (this.mongoDbSettings) {
+        return this.mongoDbSettings;
+      }
+
+      if (isDocker) {
+        this.mongoDbSettings = new MongoDbSettings({
+          host: process.env.MONGODB_HOST,
+          port: process.env.MONGODB_PORT,
+          username: process.env.MONGODB_USERNAME,
+          password: process.env.MONGODB_PASSWORD,
+        });
+      }
+      else {
         this.mongoDbSettings = new MongoDbSettings(await ApiClient.GET(`${this.baseUrl}/mongodb`));
       }
+
       return this.mongoDbSettings;
     } catch (err) {
       throw {
@@ -182,9 +195,23 @@ export class DiscoveryService implements IDiscoveryService {
 
   async getRabbitMqSettings(): Promise<RabbitMqSettings> {
     try {
-      if (!this.rabbitMqSettings) {
+      if (this.rabbitMqSettings) {
+        return this.rabbitMqSettings;
+      }
+
+      if (isDocker) {
+        this.rabbitMqSettings = new RabbitMqSettings({
+          host: process.env.RABBITMQ_HOST,
+          port: process.env.RABBITMQ_PORT,
+          vhost: process.env.RABBITMQ_VHOST,
+          username: process.env.RABBITMQ_USERNAME,
+          password: process.env.RABBITMQ_PASSWORD,
+        });
+      }
+      else {
         this.rabbitMqSettings = new RabbitMqSettings(await ApiClient.GET(`${this.baseUrl}/rabbitmq`));
       }
+
       return this.rabbitMqSettings;
     } catch (err) {
       throw {
