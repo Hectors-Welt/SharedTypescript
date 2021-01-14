@@ -5,12 +5,12 @@ export class MongoDbSettings {
   password: string;
 
   constructor(settings: any) {
-    if (!settings || !settings.host || !settings.port) {
-      throw new Error('invalid data. ensure host and port are present.');
+    if (!settings || !settings.host) {
+      throw new Error('invalid data. ensure host is present.');
     }
 
     this.host = settings.host;
-    this.port = settings.port;
+    this.port = settings.port || 27107;
     this.username = settings.username;
     this.password = settings.password;
   }

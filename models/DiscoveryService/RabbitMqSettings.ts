@@ -6,12 +6,12 @@ export class RabbitMqSettings {
   password: string;
 
   constructor(settings: any) {
-    if (!settings || !settings.host || !settings.port || !settings.vhost) {
-      throw new Error('invalid data. ensure host, port and vhost are present.');
+    if (!settings || !settings.host) {
+      throw new Error('invalid data. ensure host is present.');
     }
 
     this.host = settings.host;
-    this.port = settings.port;
+    this.port = settings.port || 5672;
     this.vhost = settings.vhost;
     this.username = settings.username;
     this.password = settings.password;
