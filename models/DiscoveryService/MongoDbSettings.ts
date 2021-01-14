@@ -10,7 +10,7 @@ export class MongoDbSettings {
     }
 
     this.host = settings.host;
-    this.port = settings.port || 27107;
+    this.port = settings.port || 27017;
     this.username = settings.username;
     this.password = settings.password;
   }
