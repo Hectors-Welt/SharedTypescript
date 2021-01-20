@@ -45,7 +45,7 @@ class DiscoveryService {
     }
     startSelfRegistration(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!isDocker) {
+            if (!isDocker()) {
                 host = 'localhost';
             }
             this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);

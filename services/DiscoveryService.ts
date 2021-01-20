@@ -94,7 +94,7 @@ export class DiscoveryService implements IDiscoveryService {
     isPublic: boolean,
     serviceType: ServiceType,
   ) {
-    if (!isDocker) {
+    if (!isDocker()) {
       host = 'localhost';
     }
 
