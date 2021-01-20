@@ -80,8 +80,8 @@ export class DiscoveryService implements IDiscoveryService {
   private paypalIntegrationService: IPaypalIntegrationService;
 
   constructor(host: string, port: number) {
-    this.host = isDocker ? 'discoveryservice' : host;
-    this.port = isDocker ? 80 : port;
+    this.host = isDocker() ? 'discoveryservice' : host;
+    this.port = isDocker() ? 80 : port;
     this.baseUrl = `http://${this.host}:${this.port}`;
   }
 
@@ -161,7 +161,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.mongoDbSettings;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.mongoDbSettings = new MongoDbSettings({
           host: process.env.MONGODB_HOST,
           port: process.env.MONGODB_PORT,
@@ -199,7 +199,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.rabbitMqSettings;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.rabbitMqSettings = new RabbitMqSettings({
           host: process.env.RABBITMQ_HOST,
           port: process.env.RABBITMQ_PORT,
@@ -315,7 +315,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.mailingService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.mailingService = new MailingService('mailingservice', 80, null);
       }
       else {
@@ -338,7 +338,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.smsService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.smsService = new SMSService('smsservice', 80, null);
       }
       else {
@@ -361,7 +361,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.customerService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.customerService = new CustomerService('customerservice', 80, null);
       }
       else {
@@ -388,7 +388,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.employeesService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.employeesService = new EmployeesService('employeesservice', 80, null);
       }
       else {
@@ -415,7 +415,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.membershipService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.membershipService = new MembershipService('membershipservice', 80, null);
       }
       else {
@@ -441,7 +441,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.twoFactorAuthenticationService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.twoFactorAuthenticationService = new TwoFactorAuthenticationService('twofactorauthenticationservice', 80, null);
       }
       else {
@@ -468,7 +468,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.pushNotificationService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.pushNotificationService = new PushNotificationService('pushnotificationservice', 80, null);
       }
       else {
@@ -495,7 +495,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.ratingService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.ratingService = new RatingService('ratingservice', 80, null);
       }
       else {
@@ -518,7 +518,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.accountingService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.accountingService = new AccountingService('accountingservice', 80, null);
       }
       else {
@@ -545,7 +545,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.checkinOutService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.checkinOutService = new CheckinOutService('checkinoutservice', 80, null);
       }
       else {
@@ -572,7 +572,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.articlesService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.articlesService = new ArticlesService('articlesservice', 80, null);
       }
       else {
@@ -598,7 +598,7 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.templateDesigner) {
         return this.templateDesigner;
       }
-      if (isDocker) {
+      if (isDocker()) {
         this.templateDesigner = new TemplateDesigner('templatedesigner', 80, null);
       }
       else {
@@ -625,7 +625,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.markdownEditor;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.markdownEditor = new MarkdownEditor('markdowneditor', 80, null);
       }
       else {
@@ -648,7 +648,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.courseManagementService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.courseManagementService = new CourseManagementService('coursemanagementservice', 80, null);
       }
       else {
@@ -675,7 +675,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.emailTemplateService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.emailTemplateService = new EmailTemplateService('emailtemplateservice', 80, null);
       }
       else {
@@ -702,7 +702,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.pushTemplateService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.pushTemplateService = new PushTemplateService('pushtemplateservice', 80, null);
       }
       else {
@@ -729,7 +729,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.paypalIntegrationService;
       }
 
-      if (isDocker) {
+      if (isDocker()) {
         this.paypalIntegrationService = new PaypalIntegrationService('paypalintegrationservice', 80, null);
       }
       else {

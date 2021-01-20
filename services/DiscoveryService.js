@@ -39,8 +39,8 @@ const MollieSettings_1 = require("../models/DiscoveryService/MollieSettings");
 const isDocker = require("is-docker");
 class DiscoveryService {
     constructor(host, port) {
-        this.host = isDocker ? 'discoveryservice' : host;
-        this.port = isDocker ? 80 : port;
+        this.host = isDocker() ? 'discoveryservice' : host;
+        this.port = isDocker() ? 80 : port;
         this.baseUrl = `http://${this.host}:${this.port}`;
     }
     startSelfRegistration(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType) {
@@ -110,7 +110,7 @@ class DiscoveryService {
                 if (this.mongoDbSettings) {
                     return this.mongoDbSettings;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.mongoDbSettings = new MongoDbSettings_1.MongoDbSettings({
                         host: process.env.MONGODB_HOST,
                         port: process.env.MONGODB_PORT,
@@ -150,7 +150,7 @@ class DiscoveryService {
                 if (this.rabbitMqSettings) {
                     return this.rabbitMqSettings;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.rabbitMqSettings = new RabbitMqSettings_1.RabbitMqSettings({
                         host: process.env.RABBITMQ_HOST,
                         port: process.env.RABBITMQ_PORT,
@@ -282,7 +282,7 @@ class DiscoveryService {
                 if (this.mailingService) {
                     return this.mailingService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.mailingService = new MailingService_1.MailingService('mailingservice', 80, null);
                 }
                 else {
@@ -305,7 +305,7 @@ class DiscoveryService {
                 if (this.smsService) {
                     return this.smsService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.smsService = new SMSService_1.SMSService('smsservice', 80, null);
                 }
                 else {
@@ -328,7 +328,7 @@ class DiscoveryService {
                 if (this.customerService) {
                     return this.customerService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.customerService = new CustomerService_1.CustomerService('customerservice', 80, null);
                 }
                 else {
@@ -351,7 +351,7 @@ class DiscoveryService {
                 if (this.employeesService) {
                     return this.employeesService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.employeesService = new EmployeesService_1.EmployeesService('employeesservice', 80, null);
                 }
                 else {
@@ -374,7 +374,7 @@ class DiscoveryService {
                 if (this.membershipService) {
                     return this.membershipService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.membershipService = new MembershipService_1.MembershipService('membershipservice', 80, null);
                 }
                 else {
@@ -397,7 +397,7 @@ class DiscoveryService {
                 if (this.twoFactorAuthenticationService) {
                     return this.twoFactorAuthenticationService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.twoFactorAuthenticationService = new TwoFactorAuthenticationService_1.TwoFactorAuthenticationService('twofactorauthenticationservice', 80, null);
                 }
                 else {
@@ -420,7 +420,7 @@ class DiscoveryService {
                 if (this.pushNotificationService) {
                     return this.pushNotificationService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.pushNotificationService = new PushNotificationService_1.PushNotificationService('pushnotificationservice', 80, null);
                 }
                 else {
@@ -443,7 +443,7 @@ class DiscoveryService {
                 if (this.ratingService) {
                     return this.ratingService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.ratingService = new RatingService_1.RatingService('ratingservice', 80, null);
                 }
                 else {
@@ -466,7 +466,7 @@ class DiscoveryService {
                 if (this.accountingService) {
                     return this.accountingService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.accountingService = new AccountingService_1.AccountingService('accountingservice', 80, null);
                 }
                 else {
@@ -489,7 +489,7 @@ class DiscoveryService {
                 if (this.checkinOutService) {
                     return this.checkinOutService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.checkinOutService = new CheckinOutService_1.CheckinOutService('checkinoutservice', 80, null);
                 }
                 else {
@@ -512,7 +512,7 @@ class DiscoveryService {
                 if (this.articlesService) {
                     return this.articlesService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.articlesService = new ArticlesService_1.ArticlesService('articlesservice', 80, null);
                 }
                 else {
@@ -535,7 +535,7 @@ class DiscoveryService {
                 if (this.templateDesigner) {
                     return this.templateDesigner;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.templateDesigner = new TemplateDesigner_1.TemplateDesigner('templatedesigner', 80, null);
                 }
                 else {
@@ -558,7 +558,7 @@ class DiscoveryService {
                 if (this.markdownEditor) {
                     return this.markdownEditor;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.markdownEditor = new MarkdownEditor_1.MarkdownEditor('markdowneditor', 80, null);
                 }
                 else {
@@ -581,7 +581,7 @@ class DiscoveryService {
                 if (this.courseManagementService) {
                     return this.courseManagementService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.courseManagementService = new CourseManagementService_1.CourseManagementService('coursemanagementservice', 80, null);
                 }
                 else {
@@ -604,7 +604,7 @@ class DiscoveryService {
                 if (this.emailTemplateService) {
                     return this.emailTemplateService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.emailTemplateService = new EmailTemplateService_1.EmailTemplateService('emailtemplateservice', 80, null);
                 }
                 else {
@@ -627,7 +627,7 @@ class DiscoveryService {
                 if (this.pushTemplateService) {
                     return this.pushTemplateService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.pushTemplateService = new PushTemplateService_1.PushTemplateService('pushtemplateservice', 80, null);
                 }
                 else {
@@ -650,7 +650,7 @@ class DiscoveryService {
                 if (this.paypalIntegrationService) {
                     return this.paypalIntegrationService;
                 }
-                if (isDocker) {
+                if (isDocker()) {
                     this.paypalIntegrationService = new PaypalIntegrationService_1.PaypalIntegrationService('paypalintegrationservice', 80, null);
                 }
                 else {
