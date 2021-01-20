@@ -42,6 +42,7 @@ class DiscoveryService {
         this.host = isDocker() ? 'discoveryservice' : host;
         this.port = isDocker() ? 80 : port;
         this.baseUrl = `http://${this.host}:${this.port}`;
+        console.log("DiscoveryService running at:", this.baseUrl);
     }
     startSelfRegistration(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -670,7 +671,7 @@ class DiscoveryService {
     registerService(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/`, {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}`, {
                     serviceName,
                     proxyRoute,
                     host,

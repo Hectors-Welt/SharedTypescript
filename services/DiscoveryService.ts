@@ -83,6 +83,7 @@ export class DiscoveryService implements IDiscoveryService {
     this.host = isDocker() ? 'discoveryservice' : host;
     this.port = isDocker() ? 80 : port;
     this.baseUrl = `http://${this.host}:${this.port}`;
+    console.log("DiscoveryService running at:", this.baseUrl);
   }
 
   async startSelfRegistration(
@@ -760,7 +761,7 @@ export class DiscoveryService implements IDiscoveryService {
     serviceType: ServiceType,
   ) {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/`, {
+      return await ApiClient.POST(`${this.baseUrl}`, {
         serviceName,
         proxyRoute,
         host,
