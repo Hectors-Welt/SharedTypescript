@@ -71,6 +71,16 @@ class CustomerService {
             }
         });
     }
+    getCustomerByHexTagId(tagId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCustomerByHexTagId/${tagId}`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve customer from customer service');
+            }
+        });
+    }
     getProfilePicture(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

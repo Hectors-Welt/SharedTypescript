@@ -20,6 +20,7 @@ export declare class CustomerService implements ICustomerService {
     findDoublets(name: string, birthday: string): Promise<Customer[]>;
     getCustomerByCustomerId(customerId: number): Promise<Customer>;
     getCustomerByTagId(tagId: number): Promise<Customer>;
+    getCustomerByHexTagId(tagId: string): Promise<Customer>;
     getProfilePicture(customerId: number): Promise<File>;
     setProfilePicture(customerId: number, file: File): Promise<any>;
     getTagIds(customerId: number, format?: number): Promise<string[]>;

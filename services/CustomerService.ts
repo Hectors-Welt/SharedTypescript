@@ -67,6 +67,14 @@ export class CustomerService implements ICustomerService {
     }
   }
 
+  async getCustomerByHexTagId(tagId: string): Promise<Customer> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getCustomerByHexTagId/${tagId}`);
+    } catch (err) {
+      throw new Error('failed to retrieve customer from customer service');
+    }
+  }
+
   async getProfilePicture(customerId: number): Promise<File> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/profilePicture`);
