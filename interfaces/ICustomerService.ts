@@ -19,9 +19,7 @@ export interface ICustomerService extends IService {
 
   getCustomerByCustomerId(customerId: number): Promise<Customer>;
 
-  getCustomerByTagId(tagId: number): Promise<Customer>;
-
-  getCustomerByHexTagId(tagId: string): Promise<Customer>;
+  getCustomerByTagId(tagId: string): Promise<Customer>;
 
   getProfilePicture(customerId: number): Promise<File>;
 

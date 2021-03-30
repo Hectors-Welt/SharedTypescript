@@ -59,17 +59,9 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async getCustomerByTagId(tagId: number): Promise<Customer> {
+  async getCustomerByTagId(tagId: string): Promise<Customer> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/getCustomerByTagId/${tagId}`);
-    } catch (err) {
-      throw new Error('failed to retrieve customer from customer service');
-    }
-  }
-
-  async getCustomerByHexTagId(tagId: string): Promise<Customer> {
-    try {
-      return await ApiClient.GET(`${this.baseUrl}/getCustomerByHexTagId/${tagId}`);
     } catch (err) {
       throw new Error('failed to retrieve customer from customer service');
     }

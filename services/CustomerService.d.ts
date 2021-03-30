@@ -19,8 +19,7 @@ export declare class CustomerService implements ICustomerService {
     getStatusEntriesAvailable(): Promise<StatusEntry[]>;
     findDoublets(name: string, birthday: string): Promise<Customer[]>;
     getCustomerByCustomerId(customerId: number): Promise<Customer>;
-    getCustomerByTagId(tagId: number): Promise<Customer>;
-    getCustomerByHexTagId(tagId: string): Promise<Customer>;
+    getCustomerByTagId(tagId: string): Promise<Customer>;
     getProfilePicture(customerId: number): Promise<File>;
     setProfilePicture(customerId: number, file: File): Promise<any>;
     getTagIds(customerId: number, format?: number): Promise<string[]>;
