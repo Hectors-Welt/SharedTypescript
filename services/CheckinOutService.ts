@@ -113,4 +113,16 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to retrieve current checkin counts from checkinout service');
     }
   }
+
+  async setAccessGrantedTill(customerId: number, accessGrantedTill: string): Promise<any> {
+    try {
+      const result = await ApiClient.POST(`${this.baseUrl}/accessGrantedTill`, {
+        customerId,
+        accessGrantedTill,
+      });
+      return result;
+    } catch (err) {
+      throw new Error('failed to set accessGrantedTill at checkinout service');
+    }
+  }
 }

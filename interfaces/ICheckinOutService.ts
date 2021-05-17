@@ -29,4 +29,6 @@ export interface ICheckinOutService extends IService {
   getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins>;
 
   getCurrentCheckinCounts(): Promise<CurrentCheckins[]>;
+
+  setAccessGrantedTill(customerId: number, accessGrantedTill: string): Promise<any>;
 }

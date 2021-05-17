@@ -121,5 +121,19 @@ class CheckinOutService {
             }
         });
     }
+    setAccessGrantedTill(customerId, accessGrantedTill) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/accessGrantedTill`, {
+                    customerId,
+                    accessGrantedTill,
+                });
+                return result;
+            }
+            catch (err) {
+                throw new Error('failed to set accessGrantedTill at checkinout service');
+            }
+        });
+    }
 }
 exports.CheckinOutService = CheckinOutService;
