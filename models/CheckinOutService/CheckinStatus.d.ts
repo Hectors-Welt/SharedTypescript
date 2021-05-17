@@ -7,4 +7,5 @@ export declare class CheckinStatus {
     lastCheckOut: string;
     checkinRemark: string;
     stopCheckin: boolean;
+    accessGrantedTill: string;
 }
