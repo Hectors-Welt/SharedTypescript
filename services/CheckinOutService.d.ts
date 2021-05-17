@@ -20,4 +20,5 @@ export declare class CheckinOutService implements ICheckinOutService {
     getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins>;
     getCurrentCheckinCounts(): Promise<CurrentCheckins[]>;
     setAccessGrantedTill(customerId: number, accessGrantedTill: string): Promise<any>;
+    removeAccessGrantedTill(customerId: number): Promise<any>;
 }

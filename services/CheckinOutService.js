@@ -135,5 +135,16 @@ class CheckinOutService {
             }
         });
     }
+    removeAccessGrantedTill(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/accessGrantedTill/${customerId}`);
+                return result;
+            }
+            catch (err) {
+                throw new Error('failed to remove accessGrantedTill at checkinout service');
+            }
+        });
+    }
 }
 exports.CheckinOutService = CheckinOutService;

@@ -125,4 +125,13 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to set accessGrantedTill at checkinout service');
     }
   }
+
+  async removeAccessGrantedTill(customerId: number): Promise<any> {
+    try {
+      const result = await ApiClient.DELETE(`${this.baseUrl}/accessGrantedTill/${customerId}`);
+      return result;
+    } catch (err) {
+      throw new Error('failed to remove accessGrantedTill at checkinout service');
+    }
+  }
 }
