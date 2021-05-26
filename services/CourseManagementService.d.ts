@@ -12,12 +12,14 @@ import { AppointmentBooking } from '../models/CourseManagementService/Appointmen
 import { ClassAttendee } from '../models/CourseManagementService/ClassAttendee';
 import { PunishmentContainer } from '../models/CourseManagementService/PunishmentContainer';
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
+import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
 export declare class CourseManagementService implements ICourseManagementService {
     host: string;
     port: number;
     version: string;
     baseUrl: string;
     constructor(host: string, port: number, version: string);
+    getClickAndMeetSettings(): Promise<ClickAndMeetSettings>;
     getClasses(filter: ClassFilter): Promise<Class[]>;
     getPriceInformation(classId: number, customerId: number): Promise<any>;
     doReservation(classId: number, customerId: number): Promise<ReservationResult>;

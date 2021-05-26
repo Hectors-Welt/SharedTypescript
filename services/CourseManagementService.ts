@@ -13,6 +13,7 @@ import { ApiClient } from './ApiClient';
 import { ClassAttendee } from '../models/CourseManagementService/ClassAttendee';
 import { PunishmentContainer } from '../models/CourseManagementService/PunishmentContainer';
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
+import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
 
 export class CourseManagementService implements ICourseManagementService {
   host: string;
@@ -25,6 +26,14 @@ export class CourseManagementService implements ICourseManagementService {
     this.port = port;
     this.version = version;
     this.baseUrl = `http://${host}:${port}`;
+  }
+
+  async getClickAndMeetSettings(): Promise<ClickAndMeetSettings> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/clickAndMeet`);
+    } catch (err) {
+      throw new Error('failed to get click and meet settings from course management service');
+    }
   }
 
   async getClasses(filter: ClassFilter): Promise<Class[]> {

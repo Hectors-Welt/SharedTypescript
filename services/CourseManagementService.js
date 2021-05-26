@@ -18,6 +18,16 @@ class CourseManagementService {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
+    getClickAndMeetSettings() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/clickAndMeet`);
+            }
+            catch (err) {
+                throw new Error('failed to get click and meet settings from course management service');
+            }
+        });
+    }
     getClasses(filter) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

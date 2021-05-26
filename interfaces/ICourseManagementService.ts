@@ -12,6 +12,7 @@ import { ClassAttendee } from '../models/CourseManagementService/ClassAttendee';
 import { PunishmentContainer } from '../models/CourseManagementService/PunishmentContainer';
 import { IService } from './IService';
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
+import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
 
 export interface ICourseManagementService extends IService {
   getClasses(filter: ClassFilter): Promise<Class[]>;
@@ -62,4 +63,6 @@ export interface ICourseManagementService extends IService {
   getPunishmentByCustomerId(customerId: number): Promise<PunishmentContainer>;
 
   resetPunishmentForCustomerId(customerId: number): Promise<PunishmentContainer>;
+
+  getClickAndMeetSettings(): Promise<ClickAndMeetSettings>;
 }
