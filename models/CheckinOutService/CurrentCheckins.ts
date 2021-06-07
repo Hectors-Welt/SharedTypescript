@@ -3,4 +3,6 @@ export class CurrentCheckins {
     currentCheckins: number;
     maxCheckinsAllowed: number;
     lastUpdated: string;
+    employeesCheckedIn?: number;
+    notRelevantForMaxCheckinsAllowed?: number;
 }
