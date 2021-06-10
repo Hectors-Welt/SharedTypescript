@@ -288,6 +288,11 @@ class DiscoveryService {
                 }
                 else {
                     const mailingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MailingService`);
+                    if (mailingService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.mailingService = new MailingService_1.MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
                 }
                 return this.mailingService;
@@ -311,6 +316,11 @@ class DiscoveryService {
                 }
                 else {
                     const smsService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/SMSService`);
+                    if (smsService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.smsService = new SMSService_1.SMSService(smsService.host, smsService.port, smsService.serviceVersion);
                 }
                 return this.smsService;
@@ -334,6 +344,11 @@ class DiscoveryService {
                 }
                 else {
                     const customerService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CustomerService`);
+                    if (customerService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.customerService = new CustomerService_1.CustomerService(customerService.host, customerService.port, customerService.serviceVersion);
                 }
                 return this.customerService;
@@ -357,6 +372,11 @@ class DiscoveryService {
                 }
                 else {
                     const employeesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmployeesService`);
+                    if (employeesService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.employeesService = new EmployeesService_1.EmployeesService(employeesService.host, employeesService.port, employeesService.serviceVersion);
                 }
                 return this.employeesService;
@@ -380,6 +400,11 @@ class DiscoveryService {
                 }
                 else {
                     const membershipService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MembershipService`);
+                    if (membershipService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.membershipService = new MembershipService_1.MembershipService(membershipService.host, membershipService.port, membershipService.serviceVersion);
                 }
                 return this.membershipService;
@@ -403,6 +428,11 @@ class DiscoveryService {
                 }
                 else {
                     const twoFactorAuthenticationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
+                    if (twoFactorAuthenticationService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.twoFactorAuthenticationService = new TwoFactorAuthenticationService_1.TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port, twoFactorAuthenticationService.serviceVersion);
                 }
                 return this.twoFactorAuthenticationService;
@@ -426,6 +456,11 @@ class DiscoveryService {
                 }
                 else {
                     const pushNotificationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
+                    if (pushNotificationService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.pushNotificationService = new PushNotificationService_1.PushNotificationService(pushNotificationService.host, pushNotificationService.port, pushNotificationService.serviceVersion);
                 }
                 return this.pushNotificationService;
@@ -449,6 +484,11 @@ class DiscoveryService {
                 }
                 else {
                     const ratingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/RatingService`);
+                    if (ratingService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.ratingService = new RatingService_1.RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
                 }
                 return this.ratingService;
@@ -472,6 +512,11 @@ class DiscoveryService {
                 }
                 else {
                     const accountingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/AccountingService`);
+                    if (accountingService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.accountingService = new AccountingService_1.AccountingService(accountingService.host, accountingService.port, accountingService.serviceVersion);
                 }
                 return this.accountingService;
@@ -495,6 +540,11 @@ class DiscoveryService {
                 }
                 else {
                     const checkinOutService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
+                    if (checkinOutService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.checkinOutService = new CheckinOutService_1.CheckinOutService(checkinOutService.host, checkinOutService.port, checkinOutService.serviceVersion);
                 }
                 return this.checkinOutService;
@@ -518,6 +568,11 @@ class DiscoveryService {
                 }
                 else {
                     const articlesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/ArticlesService`);
+                    if (articlesService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.articlesService = new ArticlesService_1.ArticlesService(articlesService.host, articlesService.port, articlesService.serviceVersion);
                 }
                 return this.articlesService;
@@ -541,6 +596,11 @@ class DiscoveryService {
                 }
                 else {
                     const templateDesigner = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
+                    if (templateDesigner.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.templateDesigner = new TemplateDesigner_1.TemplateDesigner(templateDesigner.host, templateDesigner.port, templateDesigner.serviceVersion);
                 }
                 return this.templateDesigner;
@@ -564,6 +624,11 @@ class DiscoveryService {
                 }
                 else {
                     const markdownEditor = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+                    if (markdownEditor.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.markdownEditor = new MarkdownEditor_1.MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
                 }
                 return this.markdownEditor;
@@ -587,6 +652,11 @@ class DiscoveryService {
                 }
                 else {
                     const courseManagementService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
+                    if (courseManagementService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.courseManagementService = new CourseManagementService_1.CourseManagementService(courseManagementService.host, courseManagementService.port, courseManagementService.serviceVersion);
                 }
                 return this.courseManagementService;
@@ -610,6 +680,11 @@ class DiscoveryService {
                 }
                 else {
                     const emailTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
+                    if (emailTemplateService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.emailTemplateService = new EmailTemplateService_1.EmailTemplateService(emailTemplateService.host, emailTemplateService.port, emailTemplateService.serviceVersion);
                 }
                 return this.emailTemplateService;
@@ -633,6 +708,11 @@ class DiscoveryService {
                 }
                 else {
                     const pushTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
+                    if (pushTemplateService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.pushTemplateService = new PushTemplateService_1.PushTemplateService(pushTemplateService.host, pushTemplateService.port, pushTemplateService.serviceVersion);
                 }
                 return this.pushTemplateService;
@@ -656,6 +736,11 @@ class DiscoveryService {
                 }
                 else {
                     const paypalIntegrationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
+                    if (paypalIntegrationService.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
                     this.paypalIntegrationService = new PaypalIntegrationService_1.PaypalIntegrationService(paypalIntegrationService.host, paypalIntegrationService.port, paypalIntegrationService.serviceVersion);
                 }
                 return this.paypalIntegrationService;

@@ -321,6 +321,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const mailingService = await ApiClient.GET(`${this.baseUrl}/MailingService`);
+        if (mailingService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.mailingService = new MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
       }
 
@@ -344,6 +349,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const smsService = await ApiClient.GET(`${this.baseUrl}/SMSService`);
+        if (smsService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.smsService = new SMSService(smsService.host, smsService.port, smsService.serviceVersion);
       }
 
@@ -367,6 +377,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const customerService = await ApiClient.GET(`${this.baseUrl}/CustomerService`);
+        if (customerService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.customerService = new CustomerService(
           customerService.host,
           customerService.port,
@@ -394,6 +409,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const employeesService = await ApiClient.GET(`${this.baseUrl}/EmployeesService`);
+        if (employeesService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.employeesService = new EmployeesService(
           employeesService.host,
           employeesService.port,
@@ -421,6 +441,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const membershipService = await ApiClient.GET(`${this.baseUrl}/MembershipService`);
+        if (membershipService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.membershipService = new MembershipService(
           membershipService.host,
           membershipService.port,
@@ -447,6 +472,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const twoFactorAuthenticationService = await ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
+        if (twoFactorAuthenticationService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(
           twoFactorAuthenticationService.host,
           twoFactorAuthenticationService.port,
@@ -474,6 +504,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const pushNotificationService = await ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
+        if (pushNotificationService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.pushNotificationService = new PushNotificationService(
           pushNotificationService.host,
           pushNotificationService.port,
@@ -501,6 +536,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const ratingService = await ApiClient.GET(`${this.baseUrl}/RatingService`);
+        if (ratingService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.ratingService = new RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
       }
 
@@ -524,6 +564,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const accountingService = await ApiClient.GET(`${this.baseUrl}/AccountingService`);
+        if (accountingService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.accountingService = new AccountingService(
           accountingService.host,
           accountingService.port,
@@ -551,6 +596,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const checkinOutService = await ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
+        if (checkinOutService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.checkinOutService = new CheckinOutService(
           checkinOutService.host,
           checkinOutService.port,
@@ -578,6 +628,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const articlesService = await ApiClient.GET(`${this.baseUrl}/ArticlesService`);
+        if (articlesService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.articlesService = new ArticlesService(
           articlesService.host,
           articlesService.port,
@@ -604,6 +659,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const templateDesigner = await ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
+        if (templateDesigner.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.templateDesigner = new TemplateDesigner(
           templateDesigner.host,
           templateDesigner.port,
@@ -631,6 +691,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const markdownEditor = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+        if (markdownEditor.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.markdownEditor = new MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
       }
 
@@ -654,6 +719,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const courseManagementService = await ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
+        if (courseManagementService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.courseManagementService = new CourseManagementService(
           courseManagementService.host,
           courseManagementService.port,
@@ -681,6 +751,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const emailTemplateService = await ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
+        if (emailTemplateService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.emailTemplateService = new EmailTemplateService(
           emailTemplateService.host,
           emailTemplateService.port,
@@ -708,6 +783,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const pushTemplateService = await ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
+        if (pushTemplateService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.pushTemplateService = new PushTemplateService(
           pushTemplateService.host,
           pushTemplateService.port,
@@ -735,6 +815,11 @@ export class DiscoveryService implements IDiscoveryService {
       }
       else {
         const paypalIntegrationService = await ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
+        if (paypalIntegrationService.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
         this.paypalIntegrationService = new PaypalIntegrationService(
           paypalIntegrationService.host,
           paypalIntegrationService.port,
