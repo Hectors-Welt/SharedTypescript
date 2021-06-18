@@ -23,6 +23,7 @@ import { IEmailTemplateService } from './IEmailTemplateService';
 import { IPushTemplateService } from './IPushTemplateService';
 import { IPaypalIntegrationService } from './IPaypalIntegrationService';
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
+import { ISecaConnector } from './ISecaConnector';
 
 export interface IDiscoveryService {
   port: number;
@@ -90,6 +91,8 @@ export interface IDiscoveryService {
   getPushTemplateService(): Promise<IPushTemplateService>;
 
   getPaypalIntegrationService(): Promise<IPaypalIntegrationService>;
+
+  getSecaConnector(): Promise<ISecaConnector>;
 
   getClubs(): Promise<any>;
 

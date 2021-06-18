@@ -46,6 +46,8 @@ import { PaypalIntegrationService } from './PaypalIntegrationService';
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 
 import isDocker = require('is-docker');
+import { ISecaConnector } from '../interfaces/ISecaConnector';
+import { SecaConnector } from './SecaConnector';
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -78,6 +80,7 @@ export class DiscoveryService implements IDiscoveryService {
   private emailTemplateService: IEmailTemplateService;
   private pushTemplateService: IPushTemplateService;
   private paypalIntegrationService: IPaypalIntegrationService;
+  private secaConnector: ISecaConnector;
 
   constructor(host: string, port: number) {
     this.host = isDocker() ? 'discoveryservice' : host;
@@ -832,6 +835,38 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve push template service from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getSecaConnector(): Promise<ISecaConnector> {
+    try {
+      if (this.secaConnector) {
+        return this.secaConnector;
+      }
+
+      if (isDocker()) {
+        this.secaConnector = new SecaConnector('secaconnector', 80, null);
+      }
+      else {
+        const secaConnector = await ApiClient.GET(`${this.baseUrl}/SecaConnector`);
+        if (secaConnector.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
+        this.secaConnector = new SecaConnector(
+          secaConnector.host,
+          secaConnector.port,
+          secaConnector.serviceVersion,
+        );
+      }
+
+      return this.secaConnector;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve seca connector from discovery service: ${err.message}`,
       };
     }
   }

@@ -37,6 +37,7 @@ const PushTemplateService_1 = require("../services/PushTemplateService");
 const PaypalIntegrationService_1 = require("./PaypalIntegrationService");
 const MollieSettings_1 = require("../models/DiscoveryService/MollieSettings");
 const isDocker = require("is-docker");
+const SecaConnector_1 = require("./SecaConnector");
 class DiscoveryService {
     constructor(host, port) {
         this.host = isDocker() ? 'discoveryservice' : host;
@@ -749,6 +750,34 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve push template service from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getSecaConnector() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.secaConnector) {
+                    return this.secaConnector;
+                }
+                if (isDocker()) {
+                    this.secaConnector = new SecaConnector_1.SecaConnector('secaconnector', 80, null);
+                }
+                else {
+                    const secaConnector = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/SecaConnector`);
+                    if (secaConnector.port == 0) {
+                        throw {
+                            message: 'not running'
+                        };
+                    }
+                    this.secaConnector = new SecaConnector_1.SecaConnector(secaConnector.host, secaConnector.port, secaConnector.serviceVersion);
+                }
+                return this.secaConnector;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve seca connector from discovery service: ${err.message}`,
                 };
             }
         });

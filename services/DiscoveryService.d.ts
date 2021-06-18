@@ -27,6 +27,7 @@ import { IEmailTemplateService } from '../interfaces/IEmailTemplateService';
 import { IPushTemplateService } from '../interfaces/IPushTemplateService';
 import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationService';
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
+import { ISecaConnector } from '../interfaces/ISecaConnector';
 export declare class DiscoveryService implements IDiscoveryService {
     baseUrl: string;
     host: string;
@@ -58,6 +59,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private emailTemplateService;
     private pushTemplateService;
     private paypalIntegrationService;
+    private secaConnector;
     constructor(host: string, port: number);
     startSelfRegistration(serviceName: string, serviceVersion: string, host: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
     invalidateCache(property: string): void;
@@ -92,5 +94,6 @@ export declare class DiscoveryService implements IDiscoveryService {
     getEmailTemplateService(): Promise<IEmailTemplateService>;
     getPushTemplateService(): Promise<IPushTemplateService>;
     getPaypalIntegrationService(): Promise<IPaypalIntegrationService>;
+    getSecaConnector(): Promise<ISecaConnector>;
     private registerService;
 }
