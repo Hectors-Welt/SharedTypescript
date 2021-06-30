@@ -16,7 +16,7 @@ export class SecaConnector implements ISecaConnector {
 
     async getMeasurements(customerId: number): Promise<any> {
         try {
-            return await ApiClient.GET(`${this.baseUrl}/v2/user/${customerId}`);
+            return await ApiClient.GET(`${this.baseUrl}/user/byCustomerId/${customerId}`);
         } catch (err) {
             throw new Error(`failed to retrieve measurements from seca connector: ${err.message}`);
         }
@@ -24,7 +24,7 @@ export class SecaConnector implements ISecaConnector {
 
     async getMeasurementDetails(customerId: number, measurementId: string) {
         try {
-            return await ApiClient.GET(`${this.baseUrl}/v2/user/${customerId}/measurements/${measurementId}`);
+            return await ApiClient.GET(`${this.baseUrl}/user/byCustomerId/${customerId}/measurements/${measurementId}`);
         } catch (err) {
             throw new Error(`failed to retrieve measurement from seca connector: ${err.message}`);
         }

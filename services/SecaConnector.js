@@ -21,7 +21,7 @@ class SecaConnector {
     getMeasurements(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/v2/user/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/user/byCustomerId/${customerId}`);
             }
             catch (err) {
                 throw new Error(`failed to retrieve measurements from seca connector: ${err.message}`);
@@ -31,7 +31,7 @@ class SecaConnector {
     getMeasurementDetails(customerId, measurementId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/v2/user/${customerId}/measurements/${measurementId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/user/byCustomerId/${customerId}/measurements/${measurementId}`);
             }
             catch (err) {
                 throw new Error(`failed to retrieve measurement from seca connector: ${err.message}`);
