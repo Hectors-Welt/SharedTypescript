@@ -36,7 +36,7 @@ export class AccountingService implements IAccountingService {
 
   async sepaBookingInformation(customerId: number): Promise<SepaDirectDebit[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/sepaBookingInformation/${customerId}`);
+      return await ApiClient.GET(`${this.baseUrl}/sepaBookingInformation/${customerId}?type=PositionsByAccountFrame`);
     } catch (err) {
       new Error('failed to retrieve sepa bookings from accounting service');
     }

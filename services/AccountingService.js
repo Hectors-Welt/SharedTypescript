@@ -41,7 +41,7 @@ class AccountingService {
     sepaBookingInformation(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/sepaBookingInformation/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/sepaBookingInformation/${customerId}?type=PositionsByAccountFrame`);
             }
             catch (err) {
                 new Error('failed to retrieve sepa bookings from accounting service');
