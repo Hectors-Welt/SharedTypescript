@@ -2,6 +2,7 @@ export declare class CreateContractsCommand {
     customerId: number;
     mainTemplate: number;
     additionalTemplates: CreateContractsTemplateDefinition[];
+    additionalTemplatesToBookAfterFreeTestingPhase: CreateContractsTemplateDefinition[];
     additionalTemplatesToBookAtTheEnd: CreateContractsTemplateDefinition[];
     note: string;
     employeeId?: number;
