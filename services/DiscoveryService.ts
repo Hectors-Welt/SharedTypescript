@@ -54,6 +54,8 @@ export class DiscoveryService implements IDiscoveryService {
   public host: string;
   public port: number;
   public timer: NodeJS.Timer;
+  private requestingServiceName: string;
+  private requestingServiceVersion: string;
   private locationInfo: LocationInfo;
   private environment: any;
   private eventStoreSettings: EventStoreSettings;
@@ -82,10 +84,12 @@ export class DiscoveryService implements IDiscoveryService {
   private paypalIntegrationService: IPaypalIntegrationService;
   private secaConnector: ISecaConnector;
 
-  constructor(host: string, port: number) {
+  constructor(host: string, port: number, requestingServiceName: string, requestingServiceVersion: string) {
     this.host = isDocker() ? 'discoveryservice' : host;
     this.port = isDocker() ? 80 : port;
     this.baseUrl = `http://${this.host}:${this.port}`;
+    this.requestingServiceName = requestingServiceName;
+    this.requestingServiceVersion = requestingServiceVersion;
     console.log("DiscoveryService running at:", this.baseUrl);
   }
 

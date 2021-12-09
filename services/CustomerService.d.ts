@@ -9,6 +9,7 @@ import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
+import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
@@ -17,6 +18,7 @@ export declare class CustomerService implements ICustomerService {
     constructor(host: string, port: number, version: string);
     getDefaultStatusValues(): Promise<StatusValues>;
     getStatusEntriesAvailable(): Promise<StatusEntry[]>;
+    lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]>;
     findDoublets(name: string, birthday: string): Promise<Customer[]>;
     getCustomerByCustomerId(customerId: number): Promise<Customer>;
     getCustomerByTagId(tagId: string): Promise<Customer>;

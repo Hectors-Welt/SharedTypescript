@@ -10,6 +10,7 @@ import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
+import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -37,6 +38,14 @@ export class CustomerService implements ICustomerService {
       return await ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
     } catch (err) {
       throw new Error('failed to get status entries from customer service');
+    }
+  }
+
+  async lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/lookup`, lookupCriteria);
+    } catch (err) {
+      throw new Error('failed to get customers from customer service');
     }
   }
 

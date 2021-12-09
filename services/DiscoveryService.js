@@ -39,10 +39,12 @@ const MollieSettings_1 = require("../models/DiscoveryService/MollieSettings");
 const isDocker = require("is-docker");
 const SecaConnector_1 = require("./SecaConnector");
 class DiscoveryService {
-    constructor(host, port) {
+    constructor(host, port, requestingServiceName, requestingServiceVersion) {
         this.host = isDocker() ? 'discoveryservice' : host;
         this.port = isDocker() ? 80 : port;
         this.baseUrl = `http://${this.host}:${this.port}`;
+        this.requestingServiceName = requestingServiceName;
+        this.requestingServiceVersion = requestingServiceVersion;
         console.log("DiscoveryService running at:", this.baseUrl);
     }
     startSelfRegistration(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType) {

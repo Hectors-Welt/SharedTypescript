@@ -33,6 +33,8 @@ export declare class DiscoveryService implements IDiscoveryService {
     host: string;
     port: number;
     timer: NodeJS.Timer;
+    private requestingServiceName;
+    private requestingServiceVersion;
     private locationInfo;
     private environment;
     private eventStoreSettings;
@@ -60,7 +62,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private pushTemplateService;
     private paypalIntegrationService;
     private secaConnector;
-    constructor(host: string, port: number);
+    constructor(host: string, port: number, requestingServiceName: string, requestingServiceVersion: string);
     startSelfRegistration(serviceName: string, serviceVersion: string, host: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
     invalidateCache(property: string): void;
     getLocationInfo(): Promise<LocationInfo>;

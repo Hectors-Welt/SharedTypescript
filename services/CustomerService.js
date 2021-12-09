@@ -38,6 +38,16 @@ class CustomerService {
             }
         });
     }
+    lookupCustomers(lookupCriteria) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/lookup`, lookupCriteria);
+            }
+            catch (err) {
+                throw new Error('failed to get customers from customer service');
+            }
+        });
+    }
     findDoublets(name, birthday) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
