@@ -156,6 +156,18 @@ export class CustomerService implements ICustomerService {
     }
   }
 
+  async lookupInteractions(customerId: number, contactType: number, selectTop: number = 1): Promise<InteractionDTO[]> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/interactions/search`, {
+        customerId,
+        contactTypeIds: [contactType],
+        selectTop
+      });
+    } catch (err) {
+      throw new Error('failed to get customer interactions from customer service');
+    }
+  }
+
   async getInteractionAttachment(interactionId: number): Promise<File> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/interactions/${interactionId}/file`);
