@@ -8,4 +8,5 @@ export declare class CheckinStatus {
     checkinRemark: string;
     stopCheckin: boolean;
     accessGrantedTill: string;
+    currentLocation: string;
 }
