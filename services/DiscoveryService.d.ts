@@ -28,6 +28,7 @@ import { IPushTemplateService } from '../interfaces/IPushTemplateService';
 import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationService';
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 import { ISecaConnector } from '../interfaces/ISecaConnector';
+import { IEgymCloudConnector } from "../interfaces/IEgymCloudConnector";
 export declare class DiscoveryService implements IDiscoveryService {
     baseUrl: string;
     host: string;
@@ -62,6 +63,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private pushTemplateService;
     private paypalIntegrationService;
     private secaConnector;
+    private egymCloudConnector;
     constructor(host: string, port: number, requestingServiceName: string, requestingServiceVersion: string);
     startSelfRegistration(serviceName: string, serviceVersion: string, host: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
     invalidateCache(property: string): void;
@@ -97,5 +99,6 @@ export declare class DiscoveryService implements IDiscoveryService {
     getPushTemplateService(): Promise<IPushTemplateService>;
     getPaypalIntegrationService(): Promise<IPaypalIntegrationService>;
     getSecaConnector(): Promise<ISecaConnector>;
+    getEgymCloudConnector(): Promise<IEgymCloudConnector>;
     private registerService;
 }

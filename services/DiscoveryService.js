@@ -38,6 +38,7 @@ const PaypalIntegrationService_1 = require("./PaypalIntegrationService");
 const MollieSettings_1 = require("../models/DiscoveryService/MollieSettings");
 const isDocker = require("is-docker");
 const SecaConnector_1 = require("./SecaConnector");
+const EgymCloudConnector_1 = require("./EgymCloudConnector");
 class DiscoveryService {
     constructor(host, port, requestingServiceName, requestingServiceVersion) {
         this.host = isDocker() ? 'discoveryservice' : host;
@@ -780,6 +781,29 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve seca connector from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getEgymCloudConnector() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.egymCloudConnector) {
+                    return this.egymCloudConnector;
+                }
+                const egymConnector = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EgymCloudConnector`);
+                if (egymConnector.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
+                }
+                this.egymCloudConnector = new EgymCloudConnector_1.EgymCloudConnector(egymConnector.host, egymConnector.port, egymConnector.serviceVersion);
+                return this.egymCloudConnector;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve egym cloud connector from discovery service: ${err.message}`,
                 };
             }
         });

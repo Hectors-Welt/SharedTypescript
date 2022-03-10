@@ -24,6 +24,7 @@ import { IPushTemplateService } from './IPushTemplateService';
 import { IPaypalIntegrationService } from './IPaypalIntegrationService';
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 import { ISecaConnector } from './ISecaConnector';
+import { IEgymCloudConnector } from "./IEgymCloudConnector";
 export interface IDiscoveryService {
     port: number;
     host: string;
@@ -56,6 +57,7 @@ export interface IDiscoveryService {
     getPushTemplateService(): Promise<IPushTemplateService>;
     getPaypalIntegrationService(): Promise<IPaypalIntegrationService>;
     getSecaConnector(): Promise<ISecaConnector>;
+    getEgymCloudConnector(): Promise<IEgymCloudConnector>;
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
     getContactCategories(): Promise<any>;

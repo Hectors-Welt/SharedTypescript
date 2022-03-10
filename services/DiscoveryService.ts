@@ -48,6 +48,8 @@ import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 import isDocker = require('is-docker');
 import { ISecaConnector } from '../interfaces/ISecaConnector';
 import { SecaConnector } from './SecaConnector';
+import {IEgymCloudConnector} from "../interfaces/IEgymCloudConnector";
+import {EgymCloudConnector} from "./EgymCloudConnector";
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -83,6 +85,7 @@ export class DiscoveryService implements IDiscoveryService {
   private pushTemplateService: IPushTemplateService;
   private paypalIntegrationService: IPaypalIntegrationService;
   private secaConnector: ISecaConnector;
+  private egymCloudConnector: IEgymCloudConnector;
 
   constructor(host: string, port: number, requestingServiceName: string, requestingServiceVersion: string) {
     this.host = isDocker() ? 'discoveryservice' : host;
@@ -871,6 +874,33 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve seca connector from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getEgymCloudConnector(): Promise<IEgymCloudConnector> {
+    try {
+      if (this.egymCloudConnector) {
+        return this.egymCloudConnector;
+      }
+
+        const egymConnector = await ApiClient.GET(`${this.baseUrl}/EgymCloudConnector`);
+        if (egymConnector.port == 0){
+          throw {
+            message: 'not running'
+          };
+        }
+        this.egymCloudConnector = new EgymCloudConnector(
+            egymConnector.host,
+            egymConnector.port,
+            egymConnector.serviceVersion,
+        );
+
+      return this.egymCloudConnector;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve egym cloud connector from discovery service: ${err.message}`,
       };
     }
   }
