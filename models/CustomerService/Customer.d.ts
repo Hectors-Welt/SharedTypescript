@@ -14,4 +14,5 @@ export declare class Customer {
     recruiterId?: number;
     supervisorId?: number;
     company: string;
+    company2: string;
 }
