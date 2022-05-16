@@ -5,6 +5,7 @@ export declare class SecaConnector implements ISecaConnector {
     version: string;
     baseUrl: string;
     constructor(host: string, port: number, version: string);
-    getMeasurements(customerId: number): Promise<any>;
+    getMeasurementsCompact(customerId: number): Promise<any>;
+    getMeasurementsPaginated(customerId: number, pageNumber?: number, pageSize?: number): Promise<any>;
     getMeasurementDetails(customerId: number, measurementId: string): Promise<any>;
 }

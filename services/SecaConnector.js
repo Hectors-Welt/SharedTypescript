@@ -18,10 +18,20 @@ class SecaConnector {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
-    getMeasurements(customerId) {
+    getMeasurementsCompact(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/user/byCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/internal/customers/${customerId}/measurementsCompact`);
+            }
+            catch (err) {
+                throw new Error(`failed to retrieve measurements from seca connector: ${err.message}`);
+            }
+        });
+    }
+    getMeasurementsPaginated(customerId, pageNumber = 1, pageSize = 10) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/internal/customers/${customerId}/measurementsPaginated?pageNumber=${pageNumber}&pageSize=${pageSize}`);
             }
             catch (err) {
                 throw new Error(`failed to retrieve measurements from seca connector: ${err.message}`);
@@ -31,7 +41,7 @@ class SecaConnector {
     getMeasurementDetails(customerId, measurementId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/user/byCustomerId/${customerId}/measurements/${measurementId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/internal/customers/${customerId}/measurements/${measurementId}`);
             }
             catch (err) {
                 throw new Error(`failed to retrieve measurement from seca connector: ${err.message}`);

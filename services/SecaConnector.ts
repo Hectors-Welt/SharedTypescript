@@ -14,9 +14,17 @@ export class SecaConnector implements ISecaConnector {
         this.baseUrl = `http://${host}:${port}`;
     }
 
-    async getMeasurements(customerId: number): Promise<any> {
+    async getMeasurementsCompact(customerId: number): Promise<any> {
         try {
-            return await ApiClient.GET(`${this.baseUrl}/user/byCustomerId/${customerId}`);
+            return await ApiClient.GET(`${this.baseUrl}/internal/customers/${customerId}/measurementsCompact`);
+        } catch (err) {
+            throw new Error(`failed to retrieve measurements from seca connector: ${err.message}`);
+        }
+    }
+
+    async getMeasurementsPaginated(customerId: number, pageNumber: number = 1, pageSize: number = 10): Promise<any> {
+        try {
+            return await ApiClient.GET(`${this.baseUrl}/internal/customers/${customerId}/measurementsPaginated?pageNumber=${pageNumber}&pageSize=${pageSize}`);
         } catch (err) {
             throw new Error(`failed to retrieve measurements from seca connector: ${err.message}`);
         }
@@ -24,7 +32,7 @@ export class SecaConnector implements ISecaConnector {
 
     async getMeasurementDetails(customerId: number, measurementId: string) {
         try {
-            return await ApiClient.GET(`${this.baseUrl}/user/byCustomerId/${customerId}/measurements/${measurementId}`);
+            return await ApiClient.GET(`${this.baseUrl}/internal/customers/${customerId}/measurements/${measurementId}`);
         } catch (err) {
             throw new Error(`failed to retrieve measurement from seca connector: ${err.message}`);
         }

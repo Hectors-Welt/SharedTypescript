@@ -1,5 +1,6 @@
 import { IService } from "./IService";
 export interface ISecaConnector extends IService {
-    getMeasurements(customerId: number): Promise<any>;
+    getMeasurementsCompact(customerId: number): Promise<any>;
+    getMeasurementsPaginated(customerId: number, pageNumber: number, pageSize: number): Promise<any>;
     getMeasurementDetails(customerId: number, measurementId: string): any;
 }
