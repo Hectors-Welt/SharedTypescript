@@ -33,4 +33,6 @@ export interface ICheckinOutService extends IService {
   setAccessGrantedTill(customerId: number, accessGrantedTill: string): Promise<any>;
 
   removeAccessGrantedTill(customerId: number): Promise<any>;
+  
+  getAccessAreasCurrentlyAllowed(customerId: number): Promise<AccessArea[]>;
 }

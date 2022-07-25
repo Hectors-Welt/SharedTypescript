@@ -21,4 +21,5 @@ export declare class CheckinOutService implements ICheckinOutService {
     getCurrentCheckinCounts(): Promise<CurrentCheckins[]>;
     setAccessGrantedTill(customerId: number, accessGrantedTill: string): Promise<any>;
     removeAccessGrantedTill(customerId: number): Promise<any>;
+    getAccessAreasCurrentlyAllowed(customerId: number): Promise<AccessArea[]>;
 }

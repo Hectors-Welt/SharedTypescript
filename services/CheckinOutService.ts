@@ -134,4 +134,12 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to remove accessGrantedTill at checkinout service');
     }
   }
+
+  async getAccessAreasCurrentlyAllowed(customerId: number): Promise<AccessArea[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/accessAreas`);
+    } catch (err) {
+      throw new Error('failed to retrieve access areas from checkinout service');
+    }
+  }
 }

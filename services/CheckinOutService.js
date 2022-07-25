@@ -146,5 +146,15 @@ class CheckinOutService {
             }
         });
     }
+    getAccessAreasCurrentlyAllowed(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/accessAreas`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve access areas from checkinout service');
+            }
+        });
+    }
 }
 exports.CheckinOutService = CheckinOutService;
