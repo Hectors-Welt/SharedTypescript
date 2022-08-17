@@ -11,6 +11,7 @@ import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
+import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -44,6 +45,14 @@ export class CustomerService implements ICustomerService {
   async lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/lookup`, lookupCriteria);
+    } catch (err) {
+      throw new Error('failed to get customers from customer service');
+    }
+  }
+
+  async search(searchCriteria: SearchCriteria): Promise<Customer[]> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/search`, searchCriteria);
     } catch (err) {
       throw new Error('failed to get customers from customer service');
     }

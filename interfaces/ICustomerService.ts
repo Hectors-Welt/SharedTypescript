@@ -10,6 +10,7 @@ import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand} from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
+import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 
 export interface ICustomerService extends IService {
   getDefaultStatusValues(): Promise<StatusValues>;
@@ -17,6 +18,8 @@ export interface ICustomerService extends IService {
   getStatusEntriesAvailable(): Promise<StatusEntry[]>;
 
   lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]>;
+
+  search(searchCriteria: SearchCriteria): Promise<Customer[]>;
 
   findDoublets(name: string, birthday: string): Promise<Customer[]>;
 
