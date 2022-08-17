@@ -51,7 +51,7 @@ class CustomerService {
     search(searchCriteria) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/search`, searchCriteria);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/search`, searchCriteria);
             }
             catch (err) {
                 throw new Error('failed to get customers from customer service');

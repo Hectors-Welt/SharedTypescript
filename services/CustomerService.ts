@@ -52,7 +52,7 @@ export class CustomerService implements ICustomerService {
 
   async search(searchCriteria: SearchCriteria): Promise<Customer[]> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/search`, searchCriteria);
+      return await ApiClient.POST(`${this.baseUrl}/customers/search`, searchCriteria);
     } catch (err) {
       throw new Error('failed to get customers from customer service');
     }
