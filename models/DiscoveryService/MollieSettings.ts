@@ -1,5 +1,6 @@
 export class MollieSettings {
   apiKey: string;
+  apiKeys: Map<number, string>;
 
   constructor(settings: any) {
     if (!settings || !settings.apiKey) {
@@ -7,5 +8,6 @@ export class MollieSettings {
     }
 
     this.apiKey = settings.apiKey;
+    this.apiKeys = settings.apiKeys;
   }
 }

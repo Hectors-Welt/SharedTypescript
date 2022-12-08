@@ -7,6 +7,7 @@ class MollieSettings {
             throw new Error('invalid data. ensure apiKey is present.');
         }
         this.apiKey = settings.apiKey;
+        this.apiKeys = settings.apiKeys;
     }
 }
 exports.MollieSettings = MollieSettings;
