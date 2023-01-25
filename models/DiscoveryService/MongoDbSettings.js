@@ -14,7 +14,7 @@ class MongoDbSettings {
     }
     getConnectionUri(database) {
         if (this.useAtlas) {
-            return `mongodb+srv://${this.username}:${this.password}@${this.host}/?retryWrites=true&w=majority`;
+            return `mongodb+srv://${this.username}:${this.password}@${this.host}/${database}?retryWrites=true&w=majority`;
         }
         return this.username
             ? `mongodb://${this.username}:${this.password}@${this.host}:${this.port}/${database}?authSource=admin`
