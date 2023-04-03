@@ -1,4 +1,5 @@
 export declare class TerminateAllContractsCommandResult {
-    returnCode: number;
+    success: boolean;
     possibleEndDate?: string;
+    message: string;
 }
