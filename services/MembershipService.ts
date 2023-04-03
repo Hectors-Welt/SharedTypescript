@@ -5,6 +5,8 @@ import { ApiClient } from './ApiClient';
 import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 import { TerminateContractCommand } from '../models/MembershipService/TerminateContractCommand';
 import { Recommendation } from '../models/MembershipService/Recommendation';
+import { TerminateAllContractsCommand } from '../models/MembershipService/TerminateAllContractsCommand';
+import { TerminateAllContractsCommandResult } from '../models/MembershipService/TerminateAllContractsCommandResult';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -82,9 +84,17 @@ export class MembershipService implements IMembershipService {
 
   async terminateContract(command: TerminateContractCommand): Promise<void> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/terminateContract`, command);
+      return await ApiClient.POST(`${this.baseUrl}/commands/terminateContract`, command);
     } catch (err) {
-      throw new Error('failed to reject pending mebership from membership service');
+      throw new Error('failed to terminate contract at membership service');
+    }
+  }
+
+  async terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateAllContractsCommandResult> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/commands/terminateAllContracts`, command);
+    } catch (err) {
+      throw new Error('failed to terminate contracts at membership service');
     }
   }
 }

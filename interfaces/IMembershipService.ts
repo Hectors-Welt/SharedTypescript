@@ -3,6 +3,8 @@ import { Contract } from '../models/MembershipService/Contract';
 import { IService } from './IService';
 import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 import { TerminateContractCommand } from '../models/MembershipService/TerminateContractCommand';
+import { TerminateAllContractsCommand } from '../models/MembershipService/TerminateAllContractsCommand';
+import { TerminateAllContractsCommandResult } from '../models/MembershipService/TerminateAllContractsCommandResult';
 import { Recommendation } from '../models/MembershipService/Recommendation';
 
 export interface IMembershipService extends IService {
@@ -21,4 +23,6 @@ export interface IMembershipService extends IService {
   createContracts(command: CreateContractsCommand): Promise<void>;
 
   terminateContract(command: TerminateContractCommand): Promise<void>;
+
+  terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateAllContractsCommandResult>;
 }

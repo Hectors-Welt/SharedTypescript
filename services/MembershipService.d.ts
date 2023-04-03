@@ -4,6 +4,8 @@ import { Contract } from '../models/MembershipService/Contract';
 import { CreateContractsCommand } from '../models/MembershipService/CreateContractsCommand';
 import { TerminateContractCommand } from '../models/MembershipService/TerminateContractCommand';
 import { Recommendation } from '../models/MembershipService/Recommendation';
+import { TerminateAllContractsCommand } from '../models/MembershipService/TerminateAllContractsCommand';
+import { TerminateAllContractsCommandResult } from '../models/MembershipService/TerminateAllContractsCommandResult';
 export declare class MembershipService implements IMembershipService {
     host: string;
     port: number;
@@ -18,4 +20,5 @@ export declare class MembershipService implements IMembershipService {
     rejectPendingMembership(processId: number): Promise<void>;
     createContracts(command: CreateContractsCommand): Promise<void>;
     terminateContract(command: TerminateContractCommand): Promise<void>;
+    terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateAllContractsCommandResult>;
 }

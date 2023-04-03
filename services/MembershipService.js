@@ -95,10 +95,20 @@ class MembershipService {
     terminateContract(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/terminateContract`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/terminateContract`, command);
             }
             catch (err) {
-                throw new Error('failed to reject pending mebership from membership service');
+                throw new Error('failed to terminate contract at membership service');
+            }
+        });
+    }
+    terminateAllContracts(command) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/terminateAllContracts`, command);
+            }
+            catch (err) {
+                throw new Error('failed to terminate contracts at membership service');
             }
         });
     }
