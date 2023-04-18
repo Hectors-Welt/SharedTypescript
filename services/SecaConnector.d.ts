@@ -8,4 +8,5 @@ export declare class SecaConnector implements ISecaConnector {
     getMeasurementsCompact(customerId: number): Promise<any>;
     getMeasurementsPaginated(customerId: number, pageNumber?: number, pageSize?: number): Promise<any>;
     getMeasurementDetails(customerId: number, measurementId: string): Promise<any>;
+    deleteMeasurement(customerId: number, measurementId: string): Promise<any>;
 }

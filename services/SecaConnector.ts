@@ -37,4 +37,12 @@ export class SecaConnector implements ISecaConnector {
             throw new Error(`failed to retrieve measurement from seca connector: ${err.message}`);
         }
     }
+
+    async deleteMeasurement(customerId: number, measurementId: string) {
+        try {
+            return await ApiClient.DELETE(`${this.baseUrl}/internal/customers/${customerId}/measurements/${measurementId}`);
+        } catch (err) {
+            throw new Error(`failed to delete measurement from seca connector: ${err.message}`);
+        }
+    }
 }

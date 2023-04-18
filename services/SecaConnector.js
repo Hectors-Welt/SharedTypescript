@@ -48,5 +48,15 @@ class SecaConnector {
             }
         });
     }
+    deleteMeasurement(customerId, measurementId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/internal/customers/${customerId}/measurements/${measurementId}`);
+            }
+            catch (err) {
+                throw new Error(`failed to delete measurement from seca connector: ${err.message}`);
+            }
+        });
+    }
 }
 exports.SecaConnector = SecaConnector;
