@@ -6,7 +6,7 @@ import { CreateContractsCommand } from '../models/MembershipService/CreateContra
 import { TerminateContractCommand } from '../models/MembershipService/TerminateContractCommand';
 import { Recommendation } from '../models/MembershipService/Recommendation';
 import { TerminateAllContractsCommand } from '../models/MembershipService/TerminateAllContractsCommand';
-import { TerminateAllContractsCommandResult } from '../models/MembershipService/TerminateAllContractsCommandResult';
+import { TerminateContractsCommandResult } from '../models/MembershipService/TerminateContractsCommandResult';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -82,7 +82,7 @@ export class MembershipService implements IMembershipService {
     }
   }
 
-  async terminateContract(command: TerminateContractCommand): Promise<void> {
+  async terminateContract(command: TerminateContractCommand): Promise<TerminateContractsCommandResult> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/commands/terminateContract`, command);
     } catch (err) {
@@ -90,7 +90,7 @@ export class MembershipService implements IMembershipService {
     }
   }
 
-  async terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateAllContractsCommandResult> {
+  async terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateContractsCommandResult> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/commands/terminateAllContracts`, command);
     } catch (err) {

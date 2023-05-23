@@ -1,4 +1,4 @@
-export declare class TerminateAllContractsCommandResult {
+export declare class TerminateContractsCommandResult {
     success: boolean;
     possibleEndDate?: string;
     message: string;
