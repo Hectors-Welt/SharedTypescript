@@ -21,7 +21,6 @@
     "csvtojson": "^1.1.12",
     "handlebars": "^4.1.2",
     "ibantools": "^1.6.0",
-    "is-docker": "^2.1.1",
     "popsicle": "^9.2.0",
     "uuid": "^3.3.2",
     "validator": "^9.4.1"

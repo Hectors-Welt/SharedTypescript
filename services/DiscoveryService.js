@@ -36,23 +36,19 @@ const EmailTemplateService_1 = require("./EmailTemplateService");
 const PushTemplateService_1 = require("../services/PushTemplateService");
 const PaypalIntegrationService_1 = require("./PaypalIntegrationService");
 const MollieSettings_1 = require("../models/DiscoveryService/MollieSettings");
-const isDocker = require("is-docker");
 const SecaConnector_1 = require("./SecaConnector");
 const EgymCloudConnector_1 = require("./EgymCloudConnector");
 class DiscoveryService {
     constructor(host, port, requestingServiceName, requestingServiceVersion) {
-        this.host = isDocker() ? 'discoveryservice' : host;
-        this.port = isDocker() ? 80 : port;
-        this.baseUrl = `http://${this.host}:${this.port}`;
+        this.host = host;
+        this.port = port;
         this.requestingServiceName = requestingServiceName;
         this.requestingServiceVersion = requestingServiceVersion;
+        this.baseUrl = `http://${this.host}:${this.port}`;
         console.log("DiscoveryService running at:", this.baseUrl);
     }
     startSelfRegistration(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!isDocker()) {
-                host = 'localhost';
-            }
             this.timer = setInterval(() => this.registerService(serviceName, serviceVersion, host, servicePort, proxyRoute, isPublic, serviceType).catch(() => null), 5 * 1000);
         });
     }
@@ -115,17 +111,7 @@ class DiscoveryService {
                 if (this.mongoDbSettings) {
                     return this.mongoDbSettings;
                 }
-                if (isDocker()) {
-                    this.mongoDbSettings = new MongoDbSettings_1.MongoDbSettings({
-                        host: process.env.MONGODB_HOST,
-                        port: process.env.MONGODB_PORT,
-                        username: process.env.MONGODB_USERNAME,
-                        password: process.env.MONGODB_PASSWORD,
-                    });
-                }
-                else {
-                    this.mongoDbSettings = new MongoDbSettings_1.MongoDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/mongodb`));
-                }
+                this.mongoDbSettings = new MongoDbSettings_1.MongoDbSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/mongodb`));
                 return this.mongoDbSettings;
             }
             catch (err) {
@@ -155,18 +141,7 @@ class DiscoveryService {
                 if (this.rabbitMqSettings) {
                     return this.rabbitMqSettings;
                 }
-                if (isDocker()) {
-                    this.rabbitMqSettings = new RabbitMqSettings_1.RabbitMqSettings({
-                        host: process.env.RABBITMQ_HOST,
-                        port: process.env.RABBITMQ_PORT,
-                        vhost: process.env.RABBITMQ_VHOST,
-                        username: process.env.RABBITMQ_USERNAME,
-                        password: process.env.RABBITMQ_PASSWORD,
-                    });
-                }
-                else {
-                    this.rabbitMqSettings = new RabbitMqSettings_1.RabbitMqSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/rabbitmq`));
-                }
+                this.rabbitMqSettings = new RabbitMqSettings_1.RabbitMqSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/rabbitmq`));
                 return this.rabbitMqSettings;
             }
             catch (err) {
@@ -287,18 +262,13 @@ class DiscoveryService {
                 if (this.mailingService) {
                     return this.mailingService;
                 }
-                if (isDocker()) {
-                    this.mailingService = new MailingService_1.MailingService('mailingservice', 80, null);
+                const mailingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MailingService`);
+                if (mailingService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const mailingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MailingService`);
-                    if (mailingService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.mailingService = new MailingService_1.MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
-                }
+                this.mailingService = new MailingService_1.MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
                 return this.mailingService;
             }
             catch (err) {
@@ -315,18 +285,13 @@ class DiscoveryService {
                 if (this.smsService) {
                     return this.smsService;
                 }
-                if (isDocker()) {
-                    this.smsService = new SMSService_1.SMSService('smsservice', 80, null);
+                const smsService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/SMSService`);
+                if (smsService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const smsService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/SMSService`);
-                    if (smsService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.smsService = new SMSService_1.SMSService(smsService.host, smsService.port, smsService.serviceVersion);
-                }
+                this.smsService = new SMSService_1.SMSService(smsService.host, smsService.port, smsService.serviceVersion);
                 return this.smsService;
             }
             catch (err) {
@@ -343,18 +308,13 @@ class DiscoveryService {
                 if (this.customerService) {
                     return this.customerService;
                 }
-                if (isDocker()) {
-                    this.customerService = new CustomerService_1.CustomerService('customerservice', 80, null);
+                const customerService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CustomerService`);
+                if (customerService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const customerService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CustomerService`);
-                    if (customerService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.customerService = new CustomerService_1.CustomerService(customerService.host, customerService.port, customerService.serviceVersion);
-                }
+                this.customerService = new CustomerService_1.CustomerService(customerService.host, customerService.port, customerService.serviceVersion);
                 return this.customerService;
             }
             catch (err) {
@@ -371,18 +331,13 @@ class DiscoveryService {
                 if (this.employeesService) {
                     return this.employeesService;
                 }
-                if (isDocker()) {
-                    this.employeesService = new EmployeesService_1.EmployeesService('employeesservice', 80, null);
+                const employeesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmployeesService`);
+                if (employeesService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const employeesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmployeesService`);
-                    if (employeesService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.employeesService = new EmployeesService_1.EmployeesService(employeesService.host, employeesService.port, employeesService.serviceVersion);
-                }
+                this.employeesService = new EmployeesService_1.EmployeesService(employeesService.host, employeesService.port, employeesService.serviceVersion);
                 return this.employeesService;
             }
             catch (err) {
@@ -399,18 +354,13 @@ class DiscoveryService {
                 if (this.membershipService) {
                     return this.membershipService;
                 }
-                if (isDocker()) {
-                    this.membershipService = new MembershipService_1.MembershipService('membershipservice', 80, null);
+                const membershipService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MembershipService`);
+                if (membershipService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const membershipService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MembershipService`);
-                    if (membershipService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.membershipService = new MembershipService_1.MembershipService(membershipService.host, membershipService.port, membershipService.serviceVersion);
-                }
+                this.membershipService = new MembershipService_1.MembershipService(membershipService.host, membershipService.port, membershipService.serviceVersion);
                 return this.membershipService;
             }
             catch (err) {
@@ -427,18 +377,13 @@ class DiscoveryService {
                 if (this.twoFactorAuthenticationService) {
                     return this.twoFactorAuthenticationService;
                 }
-                if (isDocker()) {
-                    this.twoFactorAuthenticationService = new TwoFactorAuthenticationService_1.TwoFactorAuthenticationService('twofactorauthenticationservice', 80, null);
+                const twoFactorAuthenticationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
+                if (twoFactorAuthenticationService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const twoFactorAuthenticationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
-                    if (twoFactorAuthenticationService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.twoFactorAuthenticationService = new TwoFactorAuthenticationService_1.TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port, twoFactorAuthenticationService.serviceVersion);
-                }
+                this.twoFactorAuthenticationService = new TwoFactorAuthenticationService_1.TwoFactorAuthenticationService(twoFactorAuthenticationService.host, twoFactorAuthenticationService.port, twoFactorAuthenticationService.serviceVersion);
                 return this.twoFactorAuthenticationService;
             }
             catch (err) {
@@ -455,18 +400,13 @@ class DiscoveryService {
                 if (this.pushNotificationService) {
                     return this.pushNotificationService;
                 }
-                if (isDocker()) {
-                    this.pushNotificationService = new PushNotificationService_1.PushNotificationService('pushnotificationservice', 80, null);
+                const pushNotificationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
+                if (pushNotificationService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const pushNotificationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
-                    if (pushNotificationService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.pushNotificationService = new PushNotificationService_1.PushNotificationService(pushNotificationService.host, pushNotificationService.port, pushNotificationService.serviceVersion);
-                }
+                this.pushNotificationService = new PushNotificationService_1.PushNotificationService(pushNotificationService.host, pushNotificationService.port, pushNotificationService.serviceVersion);
                 return this.pushNotificationService;
             }
             catch (err) {
@@ -483,18 +423,13 @@ class DiscoveryService {
                 if (this.ratingService) {
                     return this.ratingService;
                 }
-                if (isDocker()) {
-                    this.ratingService = new RatingService_1.RatingService('ratingservice', 80, null);
+                const ratingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/RatingService`);
+                if (ratingService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const ratingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/RatingService`);
-                    if (ratingService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.ratingService = new RatingService_1.RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
-                }
+                this.ratingService = new RatingService_1.RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
                 return this.ratingService;
             }
             catch (err) {
@@ -511,18 +446,13 @@ class DiscoveryService {
                 if (this.accountingService) {
                     return this.accountingService;
                 }
-                if (isDocker()) {
-                    this.accountingService = new AccountingService_1.AccountingService('accountingservice', 80, null);
+                const accountingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/AccountingService`);
+                if (accountingService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const accountingService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/AccountingService`);
-                    if (accountingService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.accountingService = new AccountingService_1.AccountingService(accountingService.host, accountingService.port, accountingService.serviceVersion);
-                }
+                this.accountingService = new AccountingService_1.AccountingService(accountingService.host, accountingService.port, accountingService.serviceVersion);
                 return this.accountingService;
             }
             catch (err) {
@@ -539,18 +469,13 @@ class DiscoveryService {
                 if (this.checkinOutService) {
                     return this.checkinOutService;
                 }
-                if (isDocker()) {
-                    this.checkinOutService = new CheckinOutService_1.CheckinOutService('checkinoutservice', 80, null);
+                const checkinOutService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
+                if (checkinOutService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const checkinOutService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
-                    if (checkinOutService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.checkinOutService = new CheckinOutService_1.CheckinOutService(checkinOutService.host, checkinOutService.port, checkinOutService.serviceVersion);
-                }
+                this.checkinOutService = new CheckinOutService_1.CheckinOutService(checkinOutService.host, checkinOutService.port, checkinOutService.serviceVersion);
                 return this.checkinOutService;
             }
             catch (err) {
@@ -567,18 +492,13 @@ class DiscoveryService {
                 if (this.articlesService) {
                     return this.articlesService;
                 }
-                if (isDocker()) {
-                    this.articlesService = new ArticlesService_1.ArticlesService('articlesservice', 80, null);
+                const articlesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/ArticlesService`);
+                if (articlesService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const articlesService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/ArticlesService`);
-                    if (articlesService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.articlesService = new ArticlesService_1.ArticlesService(articlesService.host, articlesService.port, articlesService.serviceVersion);
-                }
+                this.articlesService = new ArticlesService_1.ArticlesService(articlesService.host, articlesService.port, articlesService.serviceVersion);
                 return this.articlesService;
             }
             catch (err) {
@@ -595,18 +515,13 @@ class DiscoveryService {
                 if (this.templateDesigner) {
                     return this.templateDesigner;
                 }
-                if (isDocker()) {
-                    this.templateDesigner = new TemplateDesigner_1.TemplateDesigner('templatedesigner', 80, null);
+                const templateDesigner = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
+                if (templateDesigner.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const templateDesigner = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
-                    if (templateDesigner.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.templateDesigner = new TemplateDesigner_1.TemplateDesigner(templateDesigner.host, templateDesigner.port, templateDesigner.serviceVersion);
-                }
+                this.templateDesigner = new TemplateDesigner_1.TemplateDesigner(templateDesigner.host, templateDesigner.port, templateDesigner.serviceVersion);
                 return this.templateDesigner;
             }
             catch (err) {
@@ -623,18 +538,13 @@ class DiscoveryService {
                 if (this.markdownEditor) {
                     return this.markdownEditor;
                 }
-                if (isDocker()) {
-                    this.markdownEditor = new MarkdownEditor_1.MarkdownEditor('markdowneditor', 80, null);
+                const markdownEditor = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+                if (markdownEditor.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const markdownEditor = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
-                    if (markdownEditor.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.markdownEditor = new MarkdownEditor_1.MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
-                }
+                this.markdownEditor = new MarkdownEditor_1.MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
                 return this.markdownEditor;
             }
             catch (err) {
@@ -651,18 +561,13 @@ class DiscoveryService {
                 if (this.courseManagementService) {
                     return this.courseManagementService;
                 }
-                if (isDocker()) {
-                    this.courseManagementService = new CourseManagementService_1.CourseManagementService('coursemanagementservice', 80, null);
+                const courseManagementService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
+                if (courseManagementService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const courseManagementService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
-                    if (courseManagementService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.courseManagementService = new CourseManagementService_1.CourseManagementService(courseManagementService.host, courseManagementService.port, courseManagementService.serviceVersion);
-                }
+                this.courseManagementService = new CourseManagementService_1.CourseManagementService(courseManagementService.host, courseManagementService.port, courseManagementService.serviceVersion);
                 return this.courseManagementService;
             }
             catch (err) {
@@ -679,18 +584,13 @@ class DiscoveryService {
                 if (this.emailTemplateService) {
                     return this.emailTemplateService;
                 }
-                if (isDocker()) {
-                    this.emailTemplateService = new EmailTemplateService_1.EmailTemplateService('emailtemplateservice', 80, null);
+                const emailTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
+                if (emailTemplateService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const emailTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
-                    if (emailTemplateService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.emailTemplateService = new EmailTemplateService_1.EmailTemplateService(emailTemplateService.host, emailTemplateService.port, emailTemplateService.serviceVersion);
-                }
+                this.emailTemplateService = new EmailTemplateService_1.EmailTemplateService(emailTemplateService.host, emailTemplateService.port, emailTemplateService.serviceVersion);
                 return this.emailTemplateService;
             }
             catch (err) {
@@ -707,18 +607,13 @@ class DiscoveryService {
                 if (this.pushTemplateService) {
                     return this.pushTemplateService;
                 }
-                if (isDocker()) {
-                    this.pushTemplateService = new PushTemplateService_1.PushTemplateService('pushtemplateservice', 80, null);
+                const pushTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
+                if (pushTemplateService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const pushTemplateService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
-                    if (pushTemplateService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.pushTemplateService = new PushTemplateService_1.PushTemplateService(pushTemplateService.host, pushTemplateService.port, pushTemplateService.serviceVersion);
-                }
+                this.pushTemplateService = new PushTemplateService_1.PushTemplateService(pushTemplateService.host, pushTemplateService.port, pushTemplateService.serviceVersion);
                 return this.pushTemplateService;
             }
             catch (err) {
@@ -735,18 +630,13 @@ class DiscoveryService {
                 if (this.paypalIntegrationService) {
                     return this.paypalIntegrationService;
                 }
-                if (isDocker()) {
-                    this.paypalIntegrationService = new PaypalIntegrationService_1.PaypalIntegrationService('paypalintegrationservice', 80, null);
+                const paypalIntegrationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
+                if (paypalIntegrationService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const paypalIntegrationService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
-                    if (paypalIntegrationService.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.paypalIntegrationService = new PaypalIntegrationService_1.PaypalIntegrationService(paypalIntegrationService.host, paypalIntegrationService.port, paypalIntegrationService.serviceVersion);
-                }
+                this.paypalIntegrationService = new PaypalIntegrationService_1.PaypalIntegrationService(paypalIntegrationService.host, paypalIntegrationService.port, paypalIntegrationService.serviceVersion);
                 return this.paypalIntegrationService;
             }
             catch (err) {
@@ -763,18 +653,13 @@ class DiscoveryService {
                 if (this.secaConnector) {
                     return this.secaConnector;
                 }
-                if (isDocker()) {
-                    this.secaConnector = new SecaConnector_1.SecaConnector('secaconnector', 80, null);
+                const secaConnector = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/SecaConnector`);
+                if (secaConnector.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
                 }
-                else {
-                    const secaConnector = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/SecaConnector`);
-                    if (secaConnector.port == 0) {
-                        throw {
-                            message: 'not running'
-                        };
-                    }
-                    this.secaConnector = new SecaConnector_1.SecaConnector(secaConnector.host, secaConnector.port, secaConnector.serviceVersion);
-                }
+                this.secaConnector = new SecaConnector_1.SecaConnector(secaConnector.host, secaConnector.port, secaConnector.serviceVersion);
                 return this.secaConnector;
             }
             catch (err) {

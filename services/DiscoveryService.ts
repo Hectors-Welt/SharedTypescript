@@ -45,7 +45,6 @@ import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationServi
 import { PaypalIntegrationService } from './PaypalIntegrationService';
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 
-import isDocker = require('is-docker');
 import { ISecaConnector } from '../interfaces/ISecaConnector';
 import { SecaConnector } from './SecaConnector';
 import {IEgymCloudConnector} from "../interfaces/IEgymCloudConnector";
@@ -53,11 +52,7 @@ import {EgymCloudConnector} from "./EgymCloudConnector";
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
-  public host: string;
-  public port: number;
   public timer: NodeJS.Timer;
-  private requestingServiceName: string;
-  private requestingServiceVersion: string;
   private locationInfo: LocationInfo;
   private environment: any;
   private eventStoreSettings: EventStoreSettings;
@@ -87,12 +82,8 @@ export class DiscoveryService implements IDiscoveryService {
   private secaConnector: ISecaConnector;
   private egymCloudConnector: IEgymCloudConnector;
 
-  constructor(host: string, port: number, requestingServiceName: string, requestingServiceVersion: string) {
-    this.host = isDocker() ? 'discoveryservice' : host;
-    this.port = isDocker() ? 80 : port;
+  constructor(private readonly host: string, private readonly port: number, private readonly requestingServiceName: string, private readonly requestingServiceVersion: string) {
     this.baseUrl = `http://${this.host}:${this.port}`;
-    this.requestingServiceName = requestingServiceName;
-    this.requestingServiceVersion = requestingServiceVersion;
     console.log("DiscoveryService running at:", this.baseUrl);
   }
 
@@ -105,9 +96,6 @@ export class DiscoveryService implements IDiscoveryService {
     isPublic: boolean,
     serviceType: ServiceType,
   ) {
-    if (!isDocker()) {
-      host = 'localhost';
-    }
 
     this.timer = setInterval(
       () =>
@@ -172,17 +160,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.mongoDbSettings;
       }
 
-      if (isDocker()) {
-        this.mongoDbSettings = new MongoDbSettings({
-          host: process.env.MONGODB_HOST,
-          port: process.env.MONGODB_PORT,
-          username: process.env.MONGODB_USERNAME,
-          password: process.env.MONGODB_PASSWORD,
-        });
-      }
-      else {
-        this.mongoDbSettings = new MongoDbSettings(await ApiClient.GET(`${this.baseUrl}/mongodb`));
-      }
+      this.mongoDbSettings = new MongoDbSettings(await ApiClient.GET(`${this.baseUrl}/mongodb`));
 
       return this.mongoDbSettings;
     } catch (err) {
@@ -210,18 +188,7 @@ export class DiscoveryService implements IDiscoveryService {
         return this.rabbitMqSettings;
       }
 
-      if (isDocker()) {
-        this.rabbitMqSettings = new RabbitMqSettings({
-          host: process.env.RABBITMQ_HOST,
-          port: process.env.RABBITMQ_PORT,
-          vhost: process.env.RABBITMQ_VHOST,
-          username: process.env.RABBITMQ_USERNAME,
-          password: process.env.RABBITMQ_PASSWORD,
-        });
-      }
-      else {
-        this.rabbitMqSettings = new RabbitMqSettings(await ApiClient.GET(`${this.baseUrl}/rabbitmq`));
-      }
+      this.rabbitMqSettings = new RabbitMqSettings(await ApiClient.GET(`${this.baseUrl}/rabbitmq`));
 
       return this.rabbitMqSettings;
     } catch (err) {
@@ -326,18 +293,13 @@ export class DiscoveryService implements IDiscoveryService {
         return this.mailingService;
       }
 
-      if (isDocker()) {
-        this.mailingService = new MailingService('mailingservice', 80, null);
+      const mailingService = await ApiClient.GET(`${this.baseUrl}/MailingService`);
+      if (mailingService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const mailingService = await ApiClient.GET(`${this.baseUrl}/MailingService`);
-        if (mailingService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.mailingService = new MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
-      }
+      this.mailingService = new MailingService(mailingService.host, mailingService.port, mailingService.serviceVersion);
 
       return this.mailingService;
     } catch (err) {
@@ -354,18 +316,13 @@ export class DiscoveryService implements IDiscoveryService {
         return this.smsService;
       }
 
-      if (isDocker()) {
-        this.smsService = new SMSService('smsservice', 80, null);
+      const smsService = await ApiClient.GET(`${this.baseUrl}/SMSService`);
+      if (smsService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const smsService = await ApiClient.GET(`${this.baseUrl}/SMSService`);
-        if (smsService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.smsService = new SMSService(smsService.host, smsService.port, smsService.serviceVersion);
-      }
+      this.smsService = new SMSService(smsService.host, smsService.port, smsService.serviceVersion);
 
       return this.smsService;
     } catch (err) {
@@ -382,22 +339,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.customerService;
       }
 
-      if (isDocker()) {
-        this.customerService = new CustomerService('customerservice', 80, null);
+      const customerService = await ApiClient.GET(`${this.baseUrl}/CustomerService`);
+      if (customerService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const customerService = await ApiClient.GET(`${this.baseUrl}/CustomerService`);
-        if (customerService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.customerService = new CustomerService(
-          customerService.host,
-          customerService.port,
-          customerService.serviceVersion,
-        );
-      }
+      this.customerService = new CustomerService(
+        customerService.host,
+        customerService.port,
+        customerService.serviceVersion,
+      );
 
       return this.customerService;
     } catch (err) {
@@ -414,22 +366,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.employeesService;
       }
 
-      if (isDocker()) {
-        this.employeesService = new EmployeesService('employeesservice', 80, null);
+      const employeesService = await ApiClient.GET(`${this.baseUrl}/EmployeesService`);
+      if (employeesService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const employeesService = await ApiClient.GET(`${this.baseUrl}/EmployeesService`);
-        if (employeesService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.employeesService = new EmployeesService(
-          employeesService.host,
-          employeesService.port,
-          employeesService.serviceVersion,
-        );
-      }
+      this.employeesService = new EmployeesService(
+        employeesService.host,
+        employeesService.port,
+        employeesService.serviceVersion,
+      );
 
       return this.employeesService;
     } catch (err) {
@@ -446,22 +393,18 @@ export class DiscoveryService implements IDiscoveryService {
         return this.membershipService;
       }
 
-      if (isDocker()) {
-        this.membershipService = new MembershipService('membershipservice', 80, null);
+      const membershipService = await ApiClient.GET(`${this.baseUrl}/MembershipService`);
+      if (membershipService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const membershipService = await ApiClient.GET(`${this.baseUrl}/MembershipService`);
-        if (membershipService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.membershipService = new MembershipService(
-          membershipService.host,
-          membershipService.port,
-          membershipService.serviceVersion,
-        );
-      }
+      this.membershipService = new MembershipService(
+        membershipService.host,
+        membershipService.port,
+        membershipService.serviceVersion,
+      );
+      
       return this.membershipService;
     } catch (err) {
       throw {
@@ -477,22 +420,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.twoFactorAuthenticationService;
       }
 
-      if (isDocker()) {
-        this.twoFactorAuthenticationService = new TwoFactorAuthenticationService('twofactorauthenticationservice', 80, null);
+      const twoFactorAuthenticationService = await ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
+      if (twoFactorAuthenticationService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const twoFactorAuthenticationService = await ApiClient.GET(`${this.baseUrl}/TwoFactorAuthenticationService`);
-        if (twoFactorAuthenticationService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(
-          twoFactorAuthenticationService.host,
-          twoFactorAuthenticationService.port,
-          twoFactorAuthenticationService.serviceVersion,
-        );
-      }
+      this.twoFactorAuthenticationService = new TwoFactorAuthenticationService(
+        twoFactorAuthenticationService.host,
+        twoFactorAuthenticationService.port,
+        twoFactorAuthenticationService.serviceVersion,
+      );
 
       return this.twoFactorAuthenticationService;
     } catch (err) {
@@ -509,22 +447,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.pushNotificationService;
       }
 
-      if (isDocker()) {
-        this.pushNotificationService = new PushNotificationService('pushnotificationservice', 80, null);
+      const pushNotificationService = await ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
+      if (pushNotificationService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const pushNotificationService = await ApiClient.GET(`${this.baseUrl}/PushNotificationService`);
-        if (pushNotificationService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.pushNotificationService = new PushNotificationService(
-          pushNotificationService.host,
-          pushNotificationService.port,
-          pushNotificationService.serviceVersion,
-        );
-      }
+      this.pushNotificationService = new PushNotificationService(
+        pushNotificationService.host,
+        pushNotificationService.port,
+        pushNotificationService.serviceVersion,
+      );
 
       return this.pushNotificationService;
     } catch (err) {
@@ -541,18 +474,13 @@ export class DiscoveryService implements IDiscoveryService {
         return this.ratingService;
       }
 
-      if (isDocker()) {
-        this.ratingService = new RatingService('ratingservice', 80, null);
+      const ratingService = await ApiClient.GET(`${this.baseUrl}/RatingService`);
+      if (ratingService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const ratingService = await ApiClient.GET(`${this.baseUrl}/RatingService`);
-        if (ratingService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.ratingService = new RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
-      }
+      this.ratingService = new RatingService(ratingService.host, ratingService.port, ratingService.serviceVersion);
 
       return this.ratingService;
     } catch (err) {
@@ -569,22 +497,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.accountingService;
       }
 
-      if (isDocker()) {
-        this.accountingService = new AccountingService('accountingservice', 80, null);
+      const accountingService = await ApiClient.GET(`${this.baseUrl}/AccountingService`);
+      if (accountingService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const accountingService = await ApiClient.GET(`${this.baseUrl}/AccountingService`);
-        if (accountingService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.accountingService = new AccountingService(
-          accountingService.host,
-          accountingService.port,
-          accountingService.serviceVersion,
-        );
-      }
+      this.accountingService = new AccountingService(
+        accountingService.host,
+        accountingService.port,
+        accountingService.serviceVersion,
+      );
 
       return this.accountingService;
     } catch (err) {
@@ -601,22 +524,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.checkinOutService;
       }
 
-      if (isDocker()) {
-        this.checkinOutService = new CheckinOutService('checkinoutservice', 80, null);
+      const checkinOutService = await ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
+      if (checkinOutService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const checkinOutService = await ApiClient.GET(`${this.baseUrl}/CheckinOutService`);
-        if (checkinOutService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.checkinOutService = new CheckinOutService(
-          checkinOutService.host,
-          checkinOutService.port,
-          checkinOutService.serviceVersion,
-        );
-      }
+      this.checkinOutService = new CheckinOutService(
+        checkinOutService.host,
+        checkinOutService.port,
+        checkinOutService.serviceVersion,
+      );
 
       return this.checkinOutService;
     } catch (err) {
@@ -633,22 +551,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.articlesService;
       }
 
-      if (isDocker()) {
-        this.articlesService = new ArticlesService('articlesservice', 80, null);
+      const articlesService = await ApiClient.GET(`${this.baseUrl}/ArticlesService`);
+      if (articlesService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const articlesService = await ApiClient.GET(`${this.baseUrl}/ArticlesService`);
-        if (articlesService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.articlesService = new ArticlesService(
-          articlesService.host,
-          articlesService.port,
-          articlesService.serviceVersion,
-        );
-      }
+      this.articlesService = new ArticlesService(
+        articlesService.host,
+        articlesService.port,
+        articlesService.serviceVersion,
+      );
 
       return this.articlesService;
     } catch (err) {
@@ -664,22 +577,18 @@ export class DiscoveryService implements IDiscoveryService {
       if (this.templateDesigner) {
         return this.templateDesigner;
       }
-      if (isDocker()) {
-        this.templateDesigner = new TemplateDesigner('templatedesigner', 80, null);
+      
+      const templateDesigner = await ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
+      if (templateDesigner.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const templateDesigner = await ApiClient.GET(`${this.baseUrl}/TemplateDesigner`);
-        if (templateDesigner.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.templateDesigner = new TemplateDesigner(
-          templateDesigner.host,
-          templateDesigner.port,
-          templateDesigner.serviceVersion,
-        );
-      }
+      this.templateDesigner = new TemplateDesigner(
+        templateDesigner.host,
+        templateDesigner.port,
+        templateDesigner.serviceVersion,
+      );
 
       return this.templateDesigner;
     } catch (err) {
@@ -696,18 +605,13 @@ export class DiscoveryService implements IDiscoveryService {
         return this.markdownEditor;
       }
 
-      if (isDocker()) {
-        this.markdownEditor = new MarkdownEditor('markdowneditor', 80, null);
+      const markdownEditor = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
+      if (markdownEditor.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const markdownEditor = await ApiClient.GET(`${this.baseUrl}/MarkdownEditor`);
-        if (markdownEditor.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.markdownEditor = new MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
-      }
+      this.markdownEditor = new MarkdownEditor(markdownEditor.host, markdownEditor.port, markdownEditor.serviceVersion);
 
       return this.markdownEditor;
     } catch (err) {
@@ -724,22 +628,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.courseManagementService;
       }
 
-      if (isDocker()) {
-        this.courseManagementService = new CourseManagementService('coursemanagementservice', 80, null);
+      const courseManagementService = await ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
+      if (courseManagementService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const courseManagementService = await ApiClient.GET(`${this.baseUrl}/CourseManagementService`);
-        if (courseManagementService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.courseManagementService = new CourseManagementService(
-          courseManagementService.host,
-          courseManagementService.port,
-          courseManagementService.serviceVersion,
-        );
-      }
+      this.courseManagementService = new CourseManagementService(
+        courseManagementService.host,
+        courseManagementService.port,
+        courseManagementService.serviceVersion,
+      );
 
       return this.courseManagementService;
     } catch (err) {
@@ -756,22 +655,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.emailTemplateService;
       }
 
-      if (isDocker()) {
-        this.emailTemplateService = new EmailTemplateService('emailtemplateservice', 80, null);
+      const emailTemplateService = await ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
+      if (emailTemplateService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const emailTemplateService = await ApiClient.GET(`${this.baseUrl}/EmailTemplateService`);
-        if (emailTemplateService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.emailTemplateService = new EmailTemplateService(
-          emailTemplateService.host,
-          emailTemplateService.port,
-          emailTemplateService.serviceVersion,
-        );
-      }
+      this.emailTemplateService = new EmailTemplateService(
+        emailTemplateService.host,
+        emailTemplateService.port,
+        emailTemplateService.serviceVersion,
+      );
 
       return this.emailTemplateService;
     } catch (err) {
@@ -788,22 +682,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.pushTemplateService;
       }
 
-      if (isDocker()) {
-        this.pushTemplateService = new PushTemplateService('pushtemplateservice', 80, null);
+      const pushTemplateService = await ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
+      if (pushTemplateService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const pushTemplateService = await ApiClient.GET(`${this.baseUrl}/PushTemplateService`);
-        if (pushTemplateService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.pushTemplateService = new PushTemplateService(
-          pushTemplateService.host,
-          pushTemplateService.port,
-          pushTemplateService.serviceVersion,
-        );
-      }
+      this.pushTemplateService = new PushTemplateService(
+        pushTemplateService.host,
+        pushTemplateService.port,
+        pushTemplateService.serviceVersion,
+      );
 
       return this.pushTemplateService;
     } catch (err) {
@@ -820,22 +709,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.paypalIntegrationService;
       }
 
-      if (isDocker()) {
-        this.paypalIntegrationService = new PaypalIntegrationService('paypalintegrationservice', 80, null);
+      const paypalIntegrationService = await ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
+      if (paypalIntegrationService.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const paypalIntegrationService = await ApiClient.GET(`${this.baseUrl}/PaypalIntegrationService`);
-        if (paypalIntegrationService.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.paypalIntegrationService = new PaypalIntegrationService(
-          paypalIntegrationService.host,
-          paypalIntegrationService.port,
-          paypalIntegrationService.serviceVersion,
-        );
-      }
+      this.paypalIntegrationService = new PaypalIntegrationService(
+        paypalIntegrationService.host,
+        paypalIntegrationService.port,
+        paypalIntegrationService.serviceVersion,
+      );
 
       return this.paypalIntegrationService;
     } catch (err) {
@@ -852,22 +736,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.secaConnector;
       }
 
-      if (isDocker()) {
-        this.secaConnector = new SecaConnector('secaconnector', 80, null);
+      const secaConnector = await ApiClient.GET(`${this.baseUrl}/SecaConnector`);
+      if (secaConnector.port == 0){
+        throw {
+          message: 'not running'
+        };
       }
-      else {
-        const secaConnector = await ApiClient.GET(`${this.baseUrl}/SecaConnector`);
-        if (secaConnector.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.secaConnector = new SecaConnector(
-          secaConnector.host,
-          secaConnector.port,
-          secaConnector.serviceVersion,
-        );
-      }
+      this.secaConnector = new SecaConnector(
+        secaConnector.host,
+        secaConnector.port,
+        secaConnector.serviceVersion,
+      );
 
       return this.secaConnector;
     } catch (err) {
@@ -884,17 +763,17 @@ export class DiscoveryService implements IDiscoveryService {
         return this.egymCloudConnector;
       }
 
-        const egymConnector = await ApiClient.GET(`${this.baseUrl}/EgymCloudConnector`);
-        if (egymConnector.port == 0){
-          throw {
-            message: 'not running'
-          };
-        }
-        this.egymCloudConnector = new EgymCloudConnector(
-            egymConnector.host,
-            egymConnector.port,
-            egymConnector.serviceVersion,
-        );
+      const egymConnector = await ApiClient.GET(`${this.baseUrl}/EgymCloudConnector`);
+      if (egymConnector.port == 0){
+        throw {
+          message: 'not running'
+        };
+      }
+      this.egymCloudConnector = new EgymCloudConnector(
+          egymConnector.host,
+          egymConnector.port,
+          egymConnector.serviceVersion,
+      );
 
       return this.egymCloudConnector;
     } catch (err) {

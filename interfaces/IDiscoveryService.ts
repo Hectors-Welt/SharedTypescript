@@ -27,8 +27,6 @@ import { ISecaConnector } from './ISecaConnector';
 import {IEgymCloudConnector} from "./IEgymCloudConnector";
 
 export interface IDiscoveryService {
-  port: number;
-  host: string;
   baseUrl: string;
 
   startSelfRegistration(
