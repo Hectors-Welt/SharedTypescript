@@ -12,6 +12,7 @@ import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
+import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -24,6 +25,14 @@ export class CustomerService implements ICustomerService {
     this.port = port;
     this.version = version;
     this.baseUrl = `http://${host}:${port}`;
+  }
+  
+  async addCustomer(command: AddCustomerCommand): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/customers`, command);
+    } catch (err) {
+      throw new Error('failed to add customer on customer service');
+    }
   }
 
   async getDefaultStatusValues(): Promise<StatusValues> {

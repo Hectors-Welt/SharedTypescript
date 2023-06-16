@@ -18,6 +18,16 @@ class CustomerService {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
+    addCustomer(command) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers`, command);
+            }
+            catch (err) {
+                throw new Error('failed to add customer on customer service');
+            }
+        });
+    }
     getDefaultStatusValues() {
         return __awaiter(this, void 0, void 0, function* () {
             try {

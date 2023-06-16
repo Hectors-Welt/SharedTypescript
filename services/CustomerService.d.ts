@@ -11,12 +11,14 @@ import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
+import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
     version: string;
     baseUrl: string;
     constructor(host: string, port: number, version: string);
+    addCustomer(command: AddCustomerCommand): Promise<any>;
     getDefaultStatusValues(): Promise<StatusValues>;
     getStatusEntriesAvailable(): Promise<StatusEntry[]>;
     lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]>;
