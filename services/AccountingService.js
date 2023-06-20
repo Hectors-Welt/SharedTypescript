@@ -68,5 +68,37 @@ class AccountingService {
             }
         });
     }
+    bookToBistroAccount(customerId, amount, note, paymentType, transactionType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/bookToBistroAccount`, {
+                    customerId,
+                    amount,
+                    note,
+                    paymentType,
+                    transactionType,
+                });
+            }
+            catch (err) {
+                throw new Error('failed to book to bistro account at accounting service');
+            }
+        });
+    }
+    bookToMembershipAccount(customerId, amount, note, paymentType, transactionType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/bookToMembershipAccount`, {
+                    customerId,
+                    amount,
+                    note,
+                    paymentType,
+                    transactionType,
+                });
+            }
+            catch (err) {
+                throw new Error('failed to book to membership account at accounting service');
+            }
+        });
+    }
 }
 exports.AccountingService = AccountingService;

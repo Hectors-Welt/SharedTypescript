@@ -4,6 +4,8 @@ import { SepaBookingSet } from '../models/AccountingService/SepaBookingSet';
 import { SalesInfo } from '../models/AccountingService/SalesInfo';
 import { ApiClient } from './ApiClient';
 import { SepaDirectDebit } from '../models/AccountingService/SepaDirectDebit';
+import { PaymentType } from '../models/AccountingService/PaymentType';
+import { TransactionType } from '../models/AccountingService/TransactionType';
 
 export class AccountingService implements IAccountingService {
   host: string;
@@ -55,6 +57,34 @@ export class AccountingService implements IAccountingService {
       return await ApiClient.POST(`${this.baseUrl}/moveSalesToBistroAccount/${customerId}`, {});
     } catch (err) {
       throw new Error('failed to move sales to bistro account at accounting service');
+    }
+  }
+
+  async bookToBistroAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/commands/bookToBistroAccount`, {
+        customerId,
+        amount,
+        note,
+        paymentType,
+        transactionType,
+      });
+    } catch (err) {
+      throw new Error('failed to book to bistro account at accounting service');
+    }
+  }
+
+  async bookToMembershipAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/commands/bookToMembershipAccount`, {
+        customerId,
+        amount,
+        note,
+        paymentType,
+        transactionType,
+      });
+    } catch (err) {
+      throw new Error('failed to book to membership account at accounting service');
     }
   }
 }
