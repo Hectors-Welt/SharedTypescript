@@ -7,5 +7,5 @@ export interface IArticlesService extends IService {
 
   lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation>;
 
-  bookArticle(customerId: number, articleId: number, note: string, employeeId: number): Promise<void>;
+  bookArticle(customerId: number, articleId: number, note: string, employeeId: number, recruiter?: number, createSystem?: number): Promise<void>;
 }

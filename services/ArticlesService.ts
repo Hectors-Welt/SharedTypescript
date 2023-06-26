@@ -34,13 +34,15 @@ export class ArticlesService implements IArticlesService {
     }
   }
 
-  async bookArticle(customerId: number, articleId: number, note: string, employeeId: number): Promise<void> {
+  async bookArticle(customerId: number, articleId: number, note: string, employeeId: number, recruiter?: number, createSystem?: number): Promise<void> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/bookArticle`, {
         customerId,
         articleId,
         note,
         employeeId,
+        recruiter,
+        createSystem,
       });
     } catch (err) {
       throw new Error('failed to book article at articles service');

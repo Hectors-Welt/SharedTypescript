@@ -38,7 +38,7 @@ class ArticlesService {
             }
         });
     }
-    bookArticle(customerId, articleId, note, employeeId) {
+    bookArticle(customerId, articleId, note, employeeId, recruiter, createSystem) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/bookArticle`, {
@@ -46,6 +46,8 @@ class ArticlesService {
                     articleId,
                     note,
                     employeeId,
+                    recruiter,
+                    createSystem,
                 });
             }
             catch (err) {
