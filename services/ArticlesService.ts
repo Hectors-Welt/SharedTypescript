@@ -2,6 +2,7 @@ import { IArticlesService } from '../interfaces/IArticlesService';
 import { BookingInformation } from '../models/ArticlesService/BookingInformation';
 import { Article } from '../models/ArticlesService/Article';
 import { ApiClient } from './ApiClient';
+import { BookArticleCommandResult } from '../models/ArticlesService/BookArticleCommandResult';
 
 export class ArticlesService implements IArticlesService {
   host: string;
@@ -34,7 +35,7 @@ export class ArticlesService implements IArticlesService {
     }
   }
 
-  async bookArticle(customerId: number, articleId: number, note: string, employeeId: number, recruiter?: number, createSystem?: number): Promise<void> {
+  async bookArticle(customerId: number, articleId: number, note: string, employeeId: number, recruiter?: number, createSystem?: number): Promise<BookArticleCommandResult> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/bookArticle`, {
         customerId,
