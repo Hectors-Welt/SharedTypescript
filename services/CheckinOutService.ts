@@ -35,7 +35,7 @@ export class CheckinOutService implements ICheckinOutService {
     }
   }
 
-  async getCheckins(customerId: number): Promise<Checkin> {
+  async getCheckins(customerId: number): Promise<Checkin[]> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/getCheckins/${customerId}`);
     } catch (err) {

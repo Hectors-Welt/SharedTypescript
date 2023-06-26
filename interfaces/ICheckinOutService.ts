@@ -10,7 +10,7 @@ export interface ICheckinOutService extends IService {
 
   getCheckinStatus(customerId: number): Promise<CheckinStatus>;
 
-  getCheckins(customerId: number): Promise<Checkin>;
+  getCheckins(customerId: number): Promise<Checkin[]>;
 
   isAccessAllowed(customerId: number, timeSlotRequired: boolean, checkOpeningHours: boolean, accessAreas?: string[]): Promise<boolean>;
 
