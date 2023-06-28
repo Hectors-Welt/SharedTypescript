@@ -51,6 +51,8 @@ import {IEgymCloudConnector} from "../interfaces/IEgymCloudConnector";
 import {EgymCloudConnector} from "./EgymCloudConnector";
 
 export class DiscoveryService implements IDiscoveryService {
+  public host: string;
+  public port: number;
   public baseUrl: string;
   public timer: NodeJS.Timer;
   private locationInfo: LocationInfo;
@@ -82,7 +84,9 @@ export class DiscoveryService implements IDiscoveryService {
   private secaConnector: ISecaConnector;
   private egymCloudConnector: IEgymCloudConnector;
 
-  constructor(private readonly host: string, private readonly port: number, private readonly requestingServiceName: string, private readonly requestingServiceVersion: string) {
+  constructor(host: string, port: number, private readonly requestingServiceName: string, private readonly requestingServiceVersion: string) {
+    this.host = host;
+    this.port = port;
     this.baseUrl = `http://${this.host}:${this.port}`;
     console.log("DiscoveryService running at:", this.baseUrl);
   }

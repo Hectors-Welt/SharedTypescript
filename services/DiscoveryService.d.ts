@@ -30,10 +30,10 @@ import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 import { ISecaConnector } from '../interfaces/ISecaConnector';
 import { IEgymCloudConnector } from "../interfaces/IEgymCloudConnector";
 export declare class DiscoveryService implements IDiscoveryService {
-    private readonly host;
-    private readonly port;
     private readonly requestingServiceName;
     private readonly requestingServiceVersion;
+    host: string;
+    port: number;
     baseUrl: string;
     timer: NodeJS.Timer;
     private locationInfo;

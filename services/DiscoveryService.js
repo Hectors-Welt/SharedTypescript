@@ -40,10 +40,10 @@ const SecaConnector_1 = require("./SecaConnector");
 const EgymCloudConnector_1 = require("./EgymCloudConnector");
 class DiscoveryService {
     constructor(host, port, requestingServiceName, requestingServiceVersion) {
-        this.host = host;
-        this.port = port;
         this.requestingServiceName = requestingServiceName;
         this.requestingServiceVersion = requestingServiceVersion;
+        this.host = host;
+        this.port = port;
         this.baseUrl = `http://${this.host}:${this.port}`;
         console.log("DiscoveryService running at:", this.baseUrl);
     }
