@@ -801,7 +801,7 @@ export class DiscoveryService implements IDiscoveryService {
       return await ApiClient.POST(`${this.baseUrl}`, {
         serviceName,
         proxyRoute,
-        host,
+        host: this.host,
         port: servicePort,
         timeToLive: new Date(new Date().getTime() + 5 * 1000).toJSON(),
         serviceVersion,

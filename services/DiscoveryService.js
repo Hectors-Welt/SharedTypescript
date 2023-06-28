@@ -699,7 +699,7 @@ class DiscoveryService {
                 return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}`, {
                     serviceName,
                     proxyRoute,
-                    host,
+                    host: this.host,
                     port: servicePort,
                     timeToLive: new Date(new Date().getTime() + 5 * 1000).toJSON(),
                     serviceVersion,
