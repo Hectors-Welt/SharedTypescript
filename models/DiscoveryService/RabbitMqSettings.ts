@@ -4,6 +4,7 @@ export class RabbitMqSettings {
   vhost: string;
   username: string;
   password: string;
+  useTls: boolean;
 
   constructor(settings: any) {
     if (!settings || !settings.host) {
@@ -15,5 +16,6 @@ export class RabbitMqSettings {
     this.vhost = settings.vhost;
     this.username = settings.username;
     this.password = settings.password;
+    this.useTls = settings.useTls;
   }
 }

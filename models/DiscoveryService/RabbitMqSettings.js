@@ -11,6 +11,7 @@ class RabbitMqSettings {
         this.vhost = settings.vhost;
         this.username = settings.username;
         this.password = settings.password;
+        this.useTls = settings.useTls;
     }
 }
 exports.RabbitMqSettings = RabbitMqSettings;

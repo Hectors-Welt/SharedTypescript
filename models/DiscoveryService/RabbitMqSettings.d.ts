@@ -4,5 +4,6 @@ export declare class RabbitMqSettings {
     vhost: string;
     username: string;
     password: string;
+    useTls: boolean;
     constructor(settings: any);
 }
