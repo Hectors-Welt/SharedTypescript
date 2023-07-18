@@ -9,5 +9,6 @@ export declare enum PaymentType {
     Paycult = 9,
     CardPayments = 10,
     Paypal = 26,
-    Mollie = 28
+    Mollie = 28,
+    Klarna = 30
 }

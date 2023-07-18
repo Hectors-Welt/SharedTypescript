@@ -10,4 +10,5 @@ export enum PaymentType {
   CardPayments = 10, 
   Paypal = 26, 
   Mollie = 28,
+  Klarna = 30,
 }

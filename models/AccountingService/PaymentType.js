@@ -14,4 +14,5 @@ var PaymentType;
     PaymentType[PaymentType["CardPayments"] = 10] = "CardPayments";
     PaymentType[PaymentType["Paypal"] = 26] = "Paypal";
     PaymentType[PaymentType["Mollie"] = 28] = "Mollie";
+    PaymentType[PaymentType["Klarna"] = 30] = "Klarna";
 })(PaymentType = exports.PaymentType || (exports.PaymentType = {}));
