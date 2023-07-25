@@ -13,7 +13,7 @@ import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
-import { AddCustomerCommandResult } from '../models/CustomerService/AddCUstomerCOmmandResult';
+import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
 
 export class CustomerService implements ICustomerService {
   host: string;
