@@ -13,6 +13,7 @@ import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
+import { AddCustomerCommandResult } from '../models/CustomerService/AddCUstomerCOmmandResult';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -27,7 +28,7 @@ export class CustomerService implements ICustomerService {
     this.baseUrl = `http://${host}:${port}`;
   }
   
-  async addCustomer(command: AddCustomerCommand): Promise<any> {
+  async addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/customers`, command);
     } catch (err) {
