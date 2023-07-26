@@ -3,8 +3,8 @@ export class MollieSettings {
   apiKeys: Map<number, string>;
 
   constructor(settings: any) {
-    if (!settings || !settings.apiKey) {
-      throw new Error('invalid data. ensure apiKey is present.');
+    if (!settings) {
+      throw new Error('invalid data.');
     }
 
     this.apiKey = settings.apiKey;
