@@ -20,6 +20,7 @@ export declare class CustomerService implements ICustomerService {
     baseUrl: string;
     constructor(host: string, port: number, version: string);
     addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
+    updateCustomer(customerId: number, command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
     getDefaultStatusValues(): Promise<StatusValues>;
     getStatusEntriesAvailable(): Promise<StatusEntry[]>;
     lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]>;

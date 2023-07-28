@@ -13,9 +13,13 @@ import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
+import { UpdateCustomerCommand } from '../models/CustomerService/UpdateCustomerCommand';
+import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCustomerCommandResult';
 
 export interface ICustomerService extends IService {
   addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
+
+  updateCustomer(customerId: number, command: UpdateCustomerCommand): Promise<UpdateCustomerCommandResult>;
 
   getDefaultStatusValues(): Promise<StatusValues>;
 
