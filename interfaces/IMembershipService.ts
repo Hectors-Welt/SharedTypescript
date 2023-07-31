@@ -6,6 +6,7 @@ import { TerminateContractCommand } from '../models/MembershipService/TerminateC
 import { TerminateAllContractsCommand } from '../models/MembershipService/TerminateAllContractsCommand';
 import { TerminateContractsCommandResult } from '../models/MembershipService/TerminateContractsCommandResult';
 import { Recommendation } from '../models/MembershipService/Recommendation';
+import { CreateContractsCommandResult } from '../models/MembershipService/CreateContractsCommandResult';
 
 export interface IMembershipService extends IService {
   getActiveContractNames(): Promise<string[]>;
@@ -20,7 +21,7 @@ export interface IMembershipService extends IService {
 
   rejectPendingMembership(processId: number): Promise<void>;
 
-  createContracts(command: CreateContractsCommand): Promise<void>;
+  createContracts(command: CreateContractsCommand): Promise<CreateContractsCommandResult>;
 
   terminateContract(command: TerminateContractCommand): Promise<TerminateContractsCommandResult>;
 
