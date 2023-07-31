@@ -27,4 +27,6 @@ export declare class Contract {
     freeTestingPhaseActivated: boolean;
     isAddon?: boolean;
     followUpContractId?: number;
+    articles: any;
+    accountSystems: any;
 }
