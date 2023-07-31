@@ -1,4 +1,4 @@
-export declare class SalesInfo {
+export declare class BistroAccountBooking {
     date: string;
     article: string;
     note: string;

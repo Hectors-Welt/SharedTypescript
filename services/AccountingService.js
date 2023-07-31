@@ -28,10 +28,50 @@ class AccountingService {
             }
         });
     }
+    getBistroAccount(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bistroAccount`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve bistro account information from accounting service');
+            }
+        });
+    }
+    getBistroAccountBookings(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bistroAccount/bookings`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve bistro account bookings from accounting service');
+            }
+        });
+    }
+    getMembershipAccount(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/membershipAccount`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve membership account information from accounting service');
+            }
+        });
+    }
+    getMembershipAccountBookings(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/membershipAccount/bookings`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve membership account bookings from accounting service');
+            }
+        });
+    }
     getSepaBookings(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getSepaBookingsByCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/sepaBookings`);
             }
             catch (err) {
                 new Error('failed to retrieve sepa bookings from accounting service');
@@ -41,27 +81,19 @@ class AccountingService {
     sepaBookingInformation(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/sepaBookingInformation/${customerId}?type=PositionsByAccountFrame`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/sepaBookingInformations?type=PositionsByAccountFrame`);
             }
             catch (err) {
                 new Error('failed to retrieve sepa bookings from accounting service');
             }
         });
     }
-    getSalesInfo(customerId, days) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getSalesInfoByCustomerId/${customerId}/ForTheLast/${days}/Days`);
-            }
-            catch (err) {
-                throw new Error('failed to retrieve sepa bookings from accounting service');
-            }
-        });
-    }
     moveSalesToBistroAccount(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/moveSalesToBistroAccount/${customerId}`, {});
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/moveSalesToBistroAccount`, {
+                    customerId
+                });
             }
             catch (err) {
                 throw new Error('failed to move sales to bistro account at accounting service');
