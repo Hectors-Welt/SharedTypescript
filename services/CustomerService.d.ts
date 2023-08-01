@@ -41,4 +41,5 @@ export declare class CustomerService implements ICustomerService {
     lookupInteractions(customerId: number, contactType: number, selectTop?: number): Promise<InteractionDTO[]>;
     getInteractionAttachment(interactionId: number): Promise<File>;
     deleteCustomerRelatedData(customerId: number): Promise<any[]>;
+    deleteCustomer(customerId: number): Promise<any[]>;
 }

@@ -210,4 +210,12 @@ export class CustomerService implements ICustomerService {
       throw new Error('failed to delete customer related data at customer service');
     }
   }
+
+  async deleteCustomer(customerId: number): Promise<any[]> {
+    try {
+      return await ApiClient.DELETE(`${this.baseUrl}/customer/${customerId}`);
+    } catch (err) {
+      throw new Error('failed to delete customer at customer service');
+    }
+  }
 }
