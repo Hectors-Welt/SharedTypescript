@@ -177,7 +177,7 @@ export class CustomerService implements ICustomerService {
 
   async getCustomerInteractions(customerId: number): Promise<InteractionDTO[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/interactions`);
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/interactions`);
     } catch (err) {
       throw new Error('failed to retrieve customer interactions from customer service');
     }
