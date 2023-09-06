@@ -36,6 +36,7 @@ import { CourseManagementService } from './CourseManagementService';
 import { IMarkdownEditor } from '../interfaces/IMarkdownEditor';
 import { MarkdownEditor } from './MarkdownEditor';
 import { DeviceConfig } from '../models/DiscoveryService/DeviceConfig';
+import { RedisSettings } from '../models/DiscoveryService/RedisSettings'
 
 export class DiscoveryService implements IDiscoveryService {
   public baseUrl: string;
@@ -47,6 +48,7 @@ export class DiscoveryService implements IDiscoveryService {
   private eventStoreSettings: EventStoreSettings;
   private mongoDbSettings: MongoDbSettings;
   private rabbitMqSettings: RabbitMqSettings;
+  private redisSettings: RedisSettings;
   private hectorDbSettings: HectorDbSettings;
   private braintreeSettings: BraintreeSettings;
   private customerService: ICustomerService;
@@ -157,6 +159,20 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve rabbitmq settings from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getRedisSettings(): Promise<RedisSettings> {
+    try {
+      if (!this.redisSettings) {
+        this.redisSettings = new RedisSettings(await ApiClient.GET(`${this.baseUrl}/redis`));
+      }
+      return this.redisSettings;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve redis settings from discovery service: ${err.message}`,
       };
     }
   }

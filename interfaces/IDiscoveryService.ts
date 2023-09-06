@@ -18,6 +18,7 @@ import { IMailingService } from './IMailingService'
 import { ITemplateDesigner } from './ITemplateDesigner'
 import { ICourseManagementService } from './ICourseManagamentService';
 import { IMarkdownEditor } from './IMarkdownEditor';
+import { RedisSettings } from '../models/DiscoveryService/RedisSettings';
 
 export interface IDiscoveryService {
   port: number;
@@ -37,6 +38,8 @@ export interface IDiscoveryService {
   getMongoDbSettings(): Promise<MongoDbSettings>;
 
   getRabbitMqSettings(): Promise<RabbitMqSettings>;
+
+  getRedisSettings(): Promise<RedisSettings>;
 
   getHectorDbSettings(): Promise<HectorDbSettings>;
 
