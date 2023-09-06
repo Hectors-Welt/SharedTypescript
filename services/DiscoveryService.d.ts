@@ -29,6 +29,7 @@ import { IPaypalIntegrationService } from '../interfaces/IPaypalIntegrationServi
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 import { ISecaConnector } from '../interfaces/ISecaConnector';
 import { IEgymCloudConnector } from "../interfaces/IEgymCloudConnector";
+import { RedisSettings } from '../models/DiscoveryService/RedisSettings';
 export declare class DiscoveryService implements IDiscoveryService {
     private readonly requestingServiceName;
     private readonly requestingServiceVersion;
@@ -42,6 +43,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private mongoDbSettings;
     private rabbitMqSettings;
     private backendSettings;
+    private redisSettings;
     private hectorDbSettings;
     private braintreeSettings;
     private mollieSettings;
@@ -74,6 +76,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getDevices(): Promise<Array<DeviceConfig>>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
     getBackendSettings(): Promise<BackendSettings>;
+    getRedisSettings(): Promise<RedisSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
     getMollieSettings(): Promise<MollieSettings>;

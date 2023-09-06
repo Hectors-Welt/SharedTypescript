@@ -25,6 +25,7 @@ import { IPaypalIntegrationService } from './IPaypalIntegrationService';
 import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 import { ISecaConnector } from './ISecaConnector';
 import { IEgymCloudConnector } from "./IEgymCloudConnector";
+import { RedisSettings } from '../models/DiscoveryService/RedisSettings';
 export interface IDiscoveryService {
     port: number;
     host: string;
@@ -37,6 +38,7 @@ export interface IDiscoveryService {
     getMongoDbSettings(): Promise<MongoDbSettings>;
     getRabbitMqSettings(): Promise<RabbitMqSettings>;
     getBackendSettings(): Promise<BackendSettings>;
+    getRedisSettings(): Promise<RedisSettings>;
     getHectorDbSettings(): Promise<HectorDbSettings>;
     getBraintreeSettings(): Promise<BraintreeSettings>;
     getMollieSettings(): Promise<MollieSettings>;

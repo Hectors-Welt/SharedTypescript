@@ -6,4 +6,4 @@ var RatingItemType;
     RatingItemType[RatingItemType["Stars"] = 0] = "Stars";
     RatingItemType[RatingItemType["Text"] = 1] = "Text";
     RatingItemType[RatingItemType["Binary"] = 2] = "Binary";
-})(RatingItemType = exports.RatingItemType || (exports.RatingItemType = {}));
+})(RatingItemType || (exports.RatingItemType = RatingItemType = {}));

@@ -38,6 +38,7 @@ const PaypalIntegrationService_1 = require("./PaypalIntegrationService");
 const MollieSettings_1 = require("../models/DiscoveryService/MollieSettings");
 const SecaConnector_1 = require("./SecaConnector");
 const EgymCloudConnector_1 = require("./EgymCloudConnector");
+const RedisSettings_1 = require("../models/DiscoveryService/RedisSettings");
 class DiscoveryService {
     constructor(host, port, requestingServiceName, requestingServiceVersion) {
         this.requestingServiceName = requestingServiceName;
@@ -164,6 +165,22 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve backend settings from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getRedisSettings() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (!this.redisSettings) {
+                    this.redisSettings = new RedisSettings_1.RedisSettings(yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/redis`));
+                }
+                return this.redisSettings;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve redis settings from discovery service: ${err.message}`,
                 };
             }
         });

@@ -38,6 +38,6 @@
     "nyc": "^11.9.0",
     "pre-commit": "^1.2.2",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
+    "typescript": "^5.2.2"
   }
 }

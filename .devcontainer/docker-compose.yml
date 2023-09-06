@@ -1,0 +1,11 @@
+version: '3.4'
+services:
+  shared_typescript:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint:
+    - sleep
+    - infinity
+    volumes:
+      - ..:/workspaces:cached

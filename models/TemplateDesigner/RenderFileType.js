@@ -6,4 +6,4 @@ var RenderFileType;
     RenderFileType["PDF"] = "pdf";
     RenderFileType["SVG"] = "svg";
     RenderFileType["PNG"] = "png";
-})(RenderFileType = exports.RenderFileType || (exports.RenderFileType = {}));
+})(RenderFileType || (exports.RenderFileType = RenderFileType = {}));

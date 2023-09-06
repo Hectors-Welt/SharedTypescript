@@ -7,4 +7,4 @@ var ServiceType;
     ServiceType[ServiceType["Application"] = 2] = "Application";
     ServiceType[ServiceType["Hardware"] = 3] = "Hardware";
     ServiceType[ServiceType["ThirdParty"] = 4] = "ThirdParty";
-})(ServiceType = exports.ServiceType || (exports.ServiceType = {}));
+})(ServiceType || (exports.ServiceType = ServiceType = {}));

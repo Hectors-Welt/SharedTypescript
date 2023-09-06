@@ -1,0 +1,22 @@
+{
+	"name": "SharedTypescript",
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+	"service": "shared_typescript",
+	"workspaceFolder": "/workspaces",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "18"
+		}
+	},
+	"postCreateCommand": "npm i",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"mhutchie.git-graph",
+				"github.vscode-github-actions"
+			]
+		}
+	}
+}
