@@ -49,6 +49,7 @@ import { ISecaConnector } from '../interfaces/ISecaConnector';
 import { SecaConnector } from './SecaConnector';
 import {IEgymCloudConnector} from "../interfaces/IEgymCloudConnector";
 import {EgymCloudConnector} from "./EgymCloudConnector";
+import { RedisSettings } from '../models/DiscoveryService/RedisSettings'
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -61,6 +62,7 @@ export class DiscoveryService implements IDiscoveryService {
   private mongoDbSettings: MongoDbSettings;
   private rabbitMqSettings: RabbitMqSettings;
   private backendSettings: BackendSettings;
+  private redisSettings: RedisSettings;
   private hectorDbSettings: HectorDbSettings;
   private braintreeSettings: BraintreeSettings;
   private mollieSettings: MollieSettings;
@@ -213,6 +215,20 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve backend settings from discovery service: ${err.message}`,
+      }
+    }
+  }
+
+  async getRedisSettings(): Promise<RedisSettings> {
+    try {
+      if (!this.redisSettings) {
+        this.redisSettings = new RedisSettings(await ApiClient.GET(`${this.baseUrl}/redis`));
+      }
+      return this.redisSettings;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve redis settings from discovery service: ${err.message}`,
       };
     }
   }
