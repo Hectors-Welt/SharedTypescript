@@ -10,6 +10,7 @@ export class ValidationService implements IValidationService {
   }
 
   isBicValid(bic: string): boolean {
+    bic = bic.trim();
     if (bic.length < 8 || bic.length == 9 || bic.length == 10 || bic.length > 11) {
       return false;
     }

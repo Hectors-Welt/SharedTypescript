@@ -8,6 +8,7 @@ class ValidationService {
         return IbanTools.isValidIBAN(iban);
     }
     isBicValid(bic) {
+        bic = bic.trim();
         if (bic.length < 8 || bic.length == 9 || bic.length == 10 || bic.length > 11) {
             return false;
         }
