@@ -9,6 +9,8 @@ import { Recommendation } from '../models/MembershipService/Recommendation';
 import { CreateContractsCommandResult } from '../models/MembershipService/CreateContractsCommandResult';
 import { UpdatePricePerIntervalCommand } from '../models/MembershipService/UpdatePricePerIntervalCommand';
 import { UpdatePricePerIntervalCommandResult } from '../models/MembershipService/UpdatePricePerIntervalCommandResult';
+import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllContractsCommand';
+import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
 
 export interface IMembershipService extends IService {
   getActiveContractNames(): Promise<string[]>;
@@ -28,6 +30,8 @@ export interface IMembershipService extends IService {
   terminateContract(command: TerminateContractCommand): Promise<TerminateContractsCommandResult>;
 
   terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateContractsCommandResult>;
+
+  pauseAllContracts(command: PauseAllContractsCommand): Promise<PauseAllContractsCommandResult>;
 
   updatePricePerInterval(command: UpdatePricePerIntervalCommand): Promise<UpdatePricePerIntervalCommandResult>;
 }

@@ -112,6 +112,16 @@ class MembershipService {
             }
         });
     }
+    pauseAllContracts(command) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/pauseAllContracts`, command);
+            }
+            catch (err) {
+                throw new Error('failed to pause contracts at membership service');
+            }
+        });
+    }
     updatePricePerInterval(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

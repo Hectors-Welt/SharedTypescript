@@ -9,6 +9,8 @@ import { TerminateContractsCommandResult } from '../models/MembershipService/Ter
 import { CreateContractsCommandResult } from '../models/MembershipService/CreateContractsCommandResult';
 import { UpdatePricePerIntervalCommand } from '../models/MembershipService/UpdatePricePerIntervalCommand';
 import { UpdatePricePerIntervalCommandResult } from '../models/MembershipService/UpdatePricePerIntervalCommandResult';
+import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllContractsCommand';
+import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
 export declare class MembershipService implements IMembershipService {
     host: string;
     port: number;
@@ -24,5 +26,6 @@ export declare class MembershipService implements IMembershipService {
     createContracts(command: CreateContractsCommand): Promise<CreateContractsCommandResult>;
     terminateContract(command: TerminateContractCommand): Promise<TerminateContractsCommandResult>;
     terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateContractsCommandResult>;
+    pauseAllContracts(command: PauseAllContractsCommand): Promise<PauseAllContractsCommandResult>;
     updatePricePerInterval(command: UpdatePricePerIntervalCommand): Promise<UpdatePricePerIntervalCommandResult>;
 }

@@ -10,6 +10,8 @@ import { TerminateContractsCommandResult } from '../models/MembershipService/Ter
 import { CreateContractsCommandResult } from '../models/MembershipService/CreateContractsCommandResult';
 import { UpdatePricePerIntervalCommand } from '../models/MembershipService/UpdatePricePerIntervalCommand';
 import { UpdatePricePerIntervalCommandResult } from '../models/MembershipService/UpdatePricePerIntervalCommandResult';
+import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllContractsCommand';
+import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -98,6 +100,14 @@ export class MembershipService implements IMembershipService {
       return await ApiClient.POST(`${this.baseUrl}/commands/terminateAllContracts`, command);
     } catch (err) {
       throw new Error('failed to terminate contracts at membership service');
+    }
+  }
+
+  async pauseAllContracts(command: PauseAllContractsCommand): Promise<PauseAllContractsCommandResult> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/commands/pauseAllContracts`, command);
+    } catch (err) {
+      throw new Error('failed to pause contracts at membership service');
     }
   }
 
