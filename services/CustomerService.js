@@ -207,7 +207,7 @@ class CustomerService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/defaultStudio`, {
-                    studioNumber: studioNumber,
+                    defaultStudioNumber: studioNumber,
                 });
             }
             catch (err) {

@@ -180,7 +180,7 @@ export class CustomerService implements ICustomerService {
   async updateDefaultStudio(customerId: number, studioNumber: number): Promise<void> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/defaultStudio`, {
-        studioNumber: studioNumber,
+        defaultStudioNumber: studioNumber,
       });
     } catch (err) {
       throw new Error('failed to update default studio at customer service');
