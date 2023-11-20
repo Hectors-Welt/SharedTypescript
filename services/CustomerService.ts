@@ -177,6 +177,16 @@ export class CustomerService implements ICustomerService {
     }
   }
 
+  async updateCheckinRemark(customerId: number, checkinRemark: string): Promise<void> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/checkinRemark`, {
+        checkinRemark: checkinRemark,
+      });
+    } catch (err) {
+      throw new Error('failed to update checkin remark at customer service');
+    }
+  }
+
   async addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/interaction`, interaction);
