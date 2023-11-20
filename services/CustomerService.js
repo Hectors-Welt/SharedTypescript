@@ -94,7 +94,7 @@ class CustomerService {
     getCustomerByCustomerId(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCustomerByCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}`);
             }
             catch (err) {
                 throw new Error('failed to retrieve customer from customer service');
@@ -114,7 +114,7 @@ class CustomerService {
     getProfilePicture(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customer/${customerId}/profilePicture`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/profilePicture`);
             }
             catch (err) {
                 throw new Error('failed to retrieve profile picture from customer service');
@@ -124,7 +124,7 @@ class CustomerService {
     setProfilePicture(customerId, file) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customer/${customerId}/profilePicture`, file);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/profilePicture`, file);
             }
             catch (err) {
                 throw new Error('failed to set profile picture at customer service');
@@ -154,7 +154,7 @@ class CustomerService {
     updateAddress(customerId, address) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/address`, address);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/address`, address);
             }
             catch (err) {
                 throw new Error('failed to update address at customer service');
@@ -164,7 +164,7 @@ class CustomerService {
     updateBankAccount(customerId, bankAccount) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/bankAccount`, bankAccount);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/bankAccount`, bankAccount);
             }
             catch (err) {
                 throw new Error('failed to update bank account at customer service');
@@ -174,7 +174,7 @@ class CustomerService {
     updateContactData(customerId, contact) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/contact`, contact);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/contact`, contact);
             }
             catch (err) {
                 throw new Error('failed to update contact data at customer service');
@@ -184,7 +184,7 @@ class CustomerService {
     updateCompany(customerId, company) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/company/${company}`, {});
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${company}`, {});
             }
             catch (err) {
                 throw new Error('failed to update company at customer service');
@@ -194,7 +194,7 @@ class CustomerService {
     updateStatus(customerId, statusId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/status`, {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/status`, {
                     statusId: statusId,
                 });
             }
@@ -206,7 +206,7 @@ class CustomerService {
     updateDefaultStudio(customerId, studioNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/defaultStudio`, {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/defaultStudio`, {
                     defaultStudioNumber: studioNumber,
                 });
             }
@@ -218,10 +218,10 @@ class CustomerService {
     addCustomerInteraction(customerId, interaction) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customer/${customerId}/interaction`, interaction);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, interaction);
             }
             catch (err) {
-                throw new Error('failed to customer interaction at customer service');
+                throw new Error('failed to add customer interaction at customer service');
             }
         });
     }
@@ -262,7 +262,7 @@ class CustomerService {
     deleteCustomerRelatedData(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customer/${customerId}`);
+                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`);
             }
             catch (err) {
                 throw new Error('failed to delete customer related data at customer service');
@@ -272,7 +272,7 @@ class CustomerService {
     deleteCustomer(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customer/${customerId}`);
+                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`);
             }
             catch (err) {
                 throw new Error('failed to delete customer at customer service');

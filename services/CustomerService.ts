@@ -89,7 +89,7 @@ export class CustomerService implements ICustomerService {
 
   async getCustomerByCustomerId(customerId: number): Promise<Customer> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getCustomerByCustomerId/${customerId}`);
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}`);
     } catch (err) {
       throw new Error('failed to retrieve customer from customer service');
     }
@@ -105,7 +105,7 @@ export class CustomerService implements ICustomerService {
 
   async getProfilePicture(customerId: number): Promise<File> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/profilePicture`);
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/profilePicture`);
     } catch (err) {
       throw new Error('failed to retrieve profile picture from customer service');
     }
@@ -113,7 +113,7 @@ export class CustomerService implements ICustomerService {
 
   async setProfilePicture(customerId: number, file: File): Promise<any> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/profilePicture`, file);
+      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/profilePicture`, file);
     } catch (err) {
       throw new Error('failed to set profile picture at customer service');
     }
@@ -137,7 +137,7 @@ export class CustomerService implements ICustomerService {
 
   async updateAddress(customerId: number, address: Address): Promise<void> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/address`, address);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/address`, address);
     } catch (err) {
       throw new Error('failed to update address at customer service');
     }
@@ -145,7 +145,7 @@ export class CustomerService implements ICustomerService {
 
   async updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<void> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/bankAccount`, bankAccount);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/bankAccount`, bankAccount);
     } catch (err) {
       throw new Error('failed to update bank account at customer service');
     }
@@ -153,7 +153,7 @@ export class CustomerService implements ICustomerService {
 
   async updateContactData(customerId: number, contact: Contact): Promise<void> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/contact`, contact);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/contact`, contact);
     } catch (err) {
       throw new Error('failed to update contact data at customer service');
     }
@@ -161,7 +161,7 @@ export class CustomerService implements ICustomerService {
 
   async updateCompany(customerId: number, company: string): Promise<void> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/company/${company}`, {});
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${company}`, {});
     } catch (err) {
       throw new Error('failed to update company at customer service');
     }
@@ -169,7 +169,7 @@ export class CustomerService implements ICustomerService {
 
   async updateStatus(customerId: number, statusId: number): Promise<void> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/status`, {
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/status`, {
         statusId: statusId,
       });
     } catch (err) {
@@ -179,7 +179,7 @@ export class CustomerService implements ICustomerService {
 
   async updateDefaultStudio(customerId: number, studioNumber: number): Promise<void> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/defaultStudio`, {
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/defaultStudio`, {
         defaultStudioNumber: studioNumber,
       });
     } catch (err) {
@@ -189,9 +189,9 @@ export class CustomerService implements ICustomerService {
 
   async addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/interaction`, interaction);
+      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, interaction);
     } catch (err) {
-      throw new Error('failed to customer interaction at customer service');
+      throw new Error('failed to add customer interaction at customer service');
     }
   }
 
@@ -225,7 +225,7 @@ export class CustomerService implements ICustomerService {
 
   async deleteCustomerRelatedData(customerId: number): Promise<any[]> {
     try {
-      return await ApiClient.DELETE(`${this.baseUrl}/customer/${customerId}`);
+      return await ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`);
     } catch (err) {
       throw new Error('failed to delete customer related data at customer service');
     }
@@ -233,7 +233,7 @@ export class CustomerService implements ICustomerService {
 
   async deleteCustomer(customerId: number): Promise<any[]> {
     try {
-      return await ApiClient.DELETE(`${this.baseUrl}/customer/${customerId}`);
+      return await ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`);
     } catch (err) {
       throw new Error('failed to delete customer at customer service');
     }
