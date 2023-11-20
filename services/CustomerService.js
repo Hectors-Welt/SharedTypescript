@@ -203,6 +203,18 @@ class CustomerService {
             }
         });
     }
+    updateDefaultStudio(customerId, studioNumber) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/defaultStudio`, {
+                    studioNumber: studioNumber,
+                });
+            }
+            catch (err) {
+                throw new Error('failed to update default studio at customer service');
+            }
+        });
+    }
     addCustomerInteraction(customerId, interaction) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
