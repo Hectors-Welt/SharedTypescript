@@ -33,6 +33,7 @@ export interface ICustomerService extends IService {
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<void>;
     updateContactData(customerId: number, contact: Contact): Promise<void>;
     updateCompany(customerId: number, company: string): Promise<void>;
+    updateStatus(customerId: number, statusId: number): Promise<void>;
     addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void>;
     getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
     lookupInteractions(customerId: number, contactType: number, selectTop: number): Promise<InteractionDTO[]>;

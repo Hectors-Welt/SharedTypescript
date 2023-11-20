@@ -191,6 +191,18 @@ class CustomerService {
             }
         });
     }
+    updateStatus(customerId, statusId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customer/${customerId}/status`, {
+                    statusId: statusId,
+                });
+            }
+            catch (err) {
+                throw new Error('failed to update status at customer service');
+            }
+        });
+    }
     addCustomerInteraction(customerId, interaction) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
