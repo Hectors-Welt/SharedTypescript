@@ -142,4 +142,14 @@ export class CheckinOutService implements ICheckinOutService {
       throw new Error('failed to retrieve access areas from checkinout service');
     }
   }
+
+  async updateCheckinRemark(customerId: number, checkinRemark: string): Promise<void> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/checkinRemark`, {
+        checkinRemark: checkinRemark,
+      });
+    } catch (err) {
+      throw new Error('failed to update checkin remark at checkinout service');
+    }
+  }
 }

@@ -156,5 +156,17 @@ class CheckinOutService {
             }
         });
     }
+    updateCheckinRemark(customerId, checkinRemark) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/checkinRemark`, {
+                    checkinRemark: checkinRemark,
+                });
+            }
+            catch (err) {
+                throw new Error('failed to update checkin remark at checkinout service');
+            }
+        });
+    }
 }
 exports.CheckinOutService = CheckinOutService;
