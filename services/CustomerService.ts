@@ -167,6 +167,14 @@ export class CustomerService implements ICustomerService {
     }
   }
 
+  async updateCompany2(customerId: number, company: string): Promise<void> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${company}`, {});
+    } catch (err) {
+      throw new Error('failed to update company2 at customer service');
+    }
+  }
+
   async updateStatus(customerId: number, statusId: number): Promise<void> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/status`, {

@@ -191,6 +191,16 @@ class CustomerService {
             }
         });
     }
+    updateCompany2(customerId, company) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${company}`, {});
+            }
+            catch (err) {
+                throw new Error('failed to update company2 at customer service');
+            }
+        });
+    }
     updateStatus(customerId, statusId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
