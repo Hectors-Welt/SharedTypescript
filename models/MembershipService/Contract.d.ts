@@ -29,4 +29,5 @@ export declare class Contract {
     followUpContractId?: number;
     articles: any;
     accountSystems: any;
+    priceHistory?: any;
 }

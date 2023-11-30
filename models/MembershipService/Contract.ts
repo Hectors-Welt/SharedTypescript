@@ -30,4 +30,5 @@ export class Contract {
   followUpContractId?: number;
   articles: any;
   accountSystems: any;
+  priceHistory?: any;
 }
