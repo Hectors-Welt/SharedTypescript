@@ -1,4 +1,4 @@
-import { File } from './File';
+import { Attachment } from './Attachment';
 
 export class Interaction {
   contactCategory: number;
@@ -6,7 +6,6 @@ export class Interaction {
   employeeId: number;
   subject: string;
   note: string;
-  attachment: File;
-  attachmentUrl: string;
+  attachment: Attachment;
   rawData: string;
 }
