@@ -6,5 +6,6 @@ export declare class Interaction {
     subject: string;
     note: string;
     attachment: Attachment;
+    attachments: Attachment[];
     rawData: string;
 }
