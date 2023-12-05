@@ -1,6 +1,6 @@
 import { Attachment } from './Attachment';
 
-export class Interaction {
+export class AddInteractionCommand {
   contactCategory: number;
   contactType: number;
   employeeId: number;

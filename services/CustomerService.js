@@ -225,10 +225,10 @@ class CustomerService {
             }
         });
     }
-    addCustomerInteraction(customerId, interaction) {
+    addCustomerInteraction(customerId, command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, interaction);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, command);
             }
             catch (err) {
                 throw new Error('failed to add customer interaction at customer service');

@@ -5,7 +5,6 @@ import { BankAccount } from '../models/CustomerService/BankAccount';
 import { Contact } from '../models/CustomerService/Contact';
 import { File } from '../models/CustomerService/File';
 import { ApiClient } from './ApiClient';
-import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
@@ -14,6 +13,8 @@ import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
+import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
+import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -195,9 +196,9 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void> {
+  async addCustomerInteraction(customerId: number, command: AddInteractionCommand): Promise<AddInteractionCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, interaction);
+      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, command);
     } catch (err) {
       throw new Error('failed to add customer interaction at customer service');
     }

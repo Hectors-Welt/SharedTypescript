@@ -4,7 +4,6 @@ import { Address } from '../models/CustomerService/Address';
 import { BankAccount } from '../models/CustomerService/BankAccount';
 import { Contact } from '../models/CustomerService/Contact';
 import { File } from '../models/CustomerService/File';
-import { Interaction } from '../models/CustomerService/Interaction';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
@@ -13,6 +12,8 @@ import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
 import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
+import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
+import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
@@ -39,7 +40,7 @@ export declare class CustomerService implements ICustomerService {
     updateCompany2(customerId: number, company: string): Promise<void>;
     updateStatus(customerId: number, statusId: number): Promise<void>;
     updateDefaultStudio(customerId: number, studioNumber: number): Promise<void>;
-    addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void>;
+    addCustomerInteraction(customerId: number, command: AddInteractionCommand): Promise<AddInteractionCommandResult>;
     getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
     lookupInteractions(customerId: number, contactType: number, selectTop?: number): Promise<InteractionDTO[]>;
     getInteractionAttachment(interactionId: number): Promise<File>;

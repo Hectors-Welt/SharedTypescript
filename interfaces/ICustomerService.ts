@@ -3,7 +3,7 @@ import { Address } from '../models/CustomerService/Address';
 import { BankAccount } from '../models/CustomerService/BankAccount';
 import { Contact } from '../models/CustomerService/Contact';
 import { File } from '../models/CustomerService/File';
-import { Interaction } from '../models/CustomerService/Interaction';
+import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { IService } from './IService';
 import { StatusValues } from '../models/CustomerService/StatusValues';
@@ -15,6 +15,7 @@ import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
 import { UpdateCustomerCommand } from '../models/CustomerService/UpdateCustomerCommand';
 import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCustomerCommandResult';
+import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
 
 export interface ICustomerService extends IService {
   addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
@@ -57,7 +58,7 @@ export interface ICustomerService extends IService {
 
   updateDefaultStudio(customerId: number, studioNumber: number): Promise<void>;
 
-  addCustomerInteraction(customerId: number, interaction: Interaction): Promise<void>;
+  addCustomerInteraction(customerId: number, command: AddInteractionCommand): Promise<AddInteractionCommandResult>;
 
   getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
 
