@@ -1,6 +1,7 @@
 export class CreateContractsCommand {
   customerId: number;
-  mainTemplate: number;
+  mainTemplate?: number;
+  template?: CreateContractsTemplateDefinition;
   additionalTemplates: CreateContractsTemplateDefinition[];
   additionalTemplatesToBookAfterFreeTestingPhase: CreateContractsTemplateDefinition[];
   additionalTemplatesToBookAtTheEnd: CreateContractsTemplateDefinition[];
