@@ -16,6 +16,7 @@ import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerC
 import { UpdateCustomerCommand } from '../models/CustomerService/UpdateCustomerCommand';
 import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCustomerCommandResult';
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
+import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 
 export interface ICustomerService extends IService {
   addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
@@ -68,5 +69,5 @@ export interface ICustomerService extends IService {
 
   deleteCustomerRelatedData(customerId: number): Promise<any>;
 
-  deleteCustomer(customerId: number): Promise<any>;
+  deleteCustomer(customerId: number): Promise<DeleteCustomerCommandResult>;
 }

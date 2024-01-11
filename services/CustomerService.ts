@@ -15,6 +15,7 @@ import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
 import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
+import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -240,7 +241,7 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async deleteCustomer(customerId: number): Promise<any[]> {
+  async deleteCustomer(customerId: number): Promise<DeleteCustomerCommandResult> {
     try {
       return await ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`);
     } catch (err) {

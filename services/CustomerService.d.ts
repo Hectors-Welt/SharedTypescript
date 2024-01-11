@@ -14,6 +14,7 @@ import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
 import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
+import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
@@ -45,5 +46,5 @@ export declare class CustomerService implements ICustomerService {
     lookupInteractions(customerId: number, contactType: number, selectTop?: number): Promise<InteractionDTO[]>;
     getInteractionAttachment(interactionId: number): Promise<File>;
     deleteCustomerRelatedData(customerId: number): Promise<any[]>;
-    deleteCustomer(customerId: number): Promise<any[]>;
+    deleteCustomer(customerId: number): Promise<DeleteCustomerCommandResult>;
 }

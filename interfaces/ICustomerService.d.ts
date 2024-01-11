@@ -16,6 +16,7 @@ import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerC
 import { UpdateCustomerCommand } from '../models/CustomerService/UpdateCustomerCommand';
 import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCustomerCommandResult';
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
+import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 export interface ICustomerService extends IService {
     addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
     updateCustomer(customerId: number, command: UpdateCustomerCommand): Promise<UpdateCustomerCommandResult>;
@@ -42,5 +43,5 @@ export interface ICustomerService extends IService {
     lookupInteractions(customerId: number, contactType: number, selectTop: number): Promise<InteractionDTO[]>;
     getInteractionAttachment(interactionId: number): Promise<File>;
     deleteCustomerRelatedData(customerId: number): Promise<any>;
-    deleteCustomer(customerId: number): Promise<any>;
+    deleteCustomer(customerId: number): Promise<DeleteCustomerCommandResult>;
 }
