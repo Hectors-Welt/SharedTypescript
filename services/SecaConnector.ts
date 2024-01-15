@@ -1,4 +1,5 @@
 import { ISecaConnector } from "../interfaces/ISecaConnector";
+import { DeleteSecaMeasurementCommandResult } from '../models/SecaConnector/DeleteSecaMeasurementCommandResult';
 import { ApiClient } from "./ApiClient";
 
 export class SecaConnector implements ISecaConnector {
@@ -38,7 +39,7 @@ export class SecaConnector implements ISecaConnector {
         }
     }
 
-    async deleteMeasurement(customerId: number, measurementId: string) {
+    async deleteMeasurement(customerId: number, measurementId: string): Promise<DeleteSecaMeasurementCommandResult> {
         try {
             return await ApiClient.DELETE(`${this.baseUrl}/internal/customers/${customerId}/measurements/${measurementId}`);
         } catch (err) {
