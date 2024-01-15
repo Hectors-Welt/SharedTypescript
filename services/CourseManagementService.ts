@@ -14,6 +14,7 @@ import { ClassAttendee } from '../models/CourseManagementService/ClassAttendee';
 import { PunishmentContainer } from '../models/CourseManagementService/PunishmentContainer';
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
 import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
+import { DeleteAppointmentCommandResult } from '../models/CourseManagementService/DeleteAppointmentCommandResult';
 
 export class CourseManagementService implements ICourseManagementService {
   host: string;
@@ -140,7 +141,7 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
-  async cancelAppointment(appointmentId: number): Promise<void> {
+  async cancelAppointment(appointmentId: number): Promise<DeleteAppointmentCommandResult> {
     try {
       return await ApiClient.DELETE(`${this.baseUrl}/appointments/${appointmentId}`);
     } catch (err) {
