@@ -14,11 +14,12 @@ import { IService } from './IService';
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
 import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
 import { DeleteAppointmentCommandResult } from '../models/CourseManagementService/DeleteAppointmentCommandResult';
+import { CancellationResult } from '../models/CourseManagementService/CancellationResult';
 export interface ICourseManagementService extends IService {
     getClasses(filter: ClassFilter): Promise<Class[]>;
-    getPriceInformation(classId: number, customerId: number): Promise<any>;
-    doReservation(classId: number, customerId: number): Promise<ReservationResult>;
-    doCancellation(classId: number, customerId: number): Promise<any>;
+    getPriceInformationForClass(classId: number, customerId: number): Promise<any>;
+    bookCustomerIntoClass(classId: number, customerId: number): Promise<ReservationResult>;
+    cancelCustomerFromClass(classId: number, customerId: number): Promise<CancellationResult>;
     getCourses(): Promise<Course[]>;
     getCourseTypes(): Promise<CourseType[]>;
     getCourseLevels(): Promise<CourseLevel[]>;

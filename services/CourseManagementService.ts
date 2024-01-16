@@ -45,27 +45,27 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
-  async getPriceInformation(classId: number, customerId: number): Promise<any> {
+  async getPriceInformationForClass(classId: number, customerId: number): Promise<any> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/classes/${classId}/priceInformationForCustomerId/${customerId}`);
     } catch (err) {
-      throw new Error('failed to get priceinformation from course management service');
+      throw new Error('failed to get price information from course management service');
     }
   }
 
-  async doReservation(classId: number, customerId: number): Promise<ReservationResult> {
+  async bookCustomerIntoClass(classId: number, customerId: number): Promise<ReservationResult> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/doReservationForCustomerId/${customerId}`);
     } catch (err) {
-      throw new Error('failed to do reservation at course management service');
+      throw new Error('failed to book customer into class at course management service');
     }
   }
 
-  async doCancellation(classId: number, customerId: number): Promise<any> {
+  async cancelCustomerFromClass(classId: number, customerId: number): Promise<any> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/doCancellationForCustomerId/${customerId}`);
     } catch (err) {
-      throw new Error('failed to do cancellation at course management service');
+      throw new Error('failed to cancel customer from class at course management service');
     }
   }
 

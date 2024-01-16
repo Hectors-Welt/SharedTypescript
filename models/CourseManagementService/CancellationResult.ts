@@ -1,7 +1,6 @@
-export class ReservationResult {
+export class CancellationResult {
   success: boolean;
   message: string;
   errors: any;
   code: number;
-  appointmentId?: number;
 }

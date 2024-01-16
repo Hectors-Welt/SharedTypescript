@@ -38,33 +38,33 @@ class CourseManagementService {
             }
         });
     }
-    getPriceInformation(classId, customerId) {
+    getPriceInformationForClass(classId, customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/classes/${classId}/priceInformationForCustomerId/${customerId}`);
             }
             catch (err) {
-                throw new Error('failed to get priceinformation from course management service');
+                throw new Error('failed to get price information from course management service');
             }
         });
     }
-    doReservation(classId, customerId) {
+    bookCustomerIntoClass(classId, customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/doReservationForCustomerId/${customerId}`);
             }
             catch (err) {
-                throw new Error('failed to do reservation at course management service');
+                throw new Error('failed to book customer into class at course management service');
             }
         });
     }
-    doCancellation(classId, customerId) {
+    cancelCustomerFromClass(classId, customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/doCancellationForCustomerId/${customerId}`);
             }
             catch (err) {
-                throw new Error('failed to do cancellation at course management service');
+                throw new Error('failed to cancel customer from class at course management service');
             }
         });
     }
