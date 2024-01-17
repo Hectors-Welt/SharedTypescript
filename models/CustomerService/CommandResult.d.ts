@@ -1,4 +1,4 @@
-export declare class UpdateAddressCommandResult {
+export declare class CommandResult {
     success: boolean;
     message: string;
     errors: any;

@@ -15,7 +15,7 @@ import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerC
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
 import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
-import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCustomerCommandResult';
+import { CommandResult } from '../models/CustomerService/CommandResult';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
@@ -35,8 +35,8 @@ export declare class CustomerService implements ICustomerService {
     setProfilePicture(customerId: number, file: File): Promise<any>;
     getTagIds(customerId: number, format?: number): Promise<string[]>;
     registerTagId(customerId: number, command: AddTagIdCommand): Promise<void>;
-    updateAddress(customerId: number, address: Address): Promise<UpdateCustomerCommandResult>;
-    updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<void>;
+    updateAddress(customerId: number, address: Address): Promise<CommandResult>;
+    updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult>;
     updateContactData(customerId: number, contact: Contact): Promise<void>;
     updateCompany(customerId: number, company: string): Promise<void>;
     updateCompany2(customerId: number, company: string): Promise<void>;

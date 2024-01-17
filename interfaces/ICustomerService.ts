@@ -17,7 +17,8 @@ import { UpdateCustomerCommand } from '../models/CustomerService/UpdateCustomerC
 import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCustomerCommandResult';
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
-import { UpdateAddressCommandResult } from '../models/CustomerService/UpdateAddressCommandResult';
+import { CommandResult } from '../models/CustomerService/CommandResult';
+
 
 export interface ICustomerService extends IService {
   addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
@@ -46,9 +47,9 @@ export interface ICustomerService extends IService {
 
   registerTagId(customerId: number, command: AddTagIdCommand): Promise<void>;
 
-  updateAddress(customerId: number, address: Address): Promise<UpdateAddressCommandResult>;
+  updateAddress(customerId: number, address: Address): Promise<CommandResult>;
 
-  updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<void>;
+  updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult>;
 
   updateContactData(customerId: number, contact: Contact): Promise<void>;
 
