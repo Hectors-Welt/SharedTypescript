@@ -16,6 +16,7 @@ import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerC
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
 import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
+import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCustomerCommandResult';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -137,7 +138,7 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async updateAddress(customerId: number, address: Address): Promise<void> {
+  async updateAddress(customerId: number, address: Address): Promise<UpdateCustomerCommandResult> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/address`, address);
     } catch (err) {
