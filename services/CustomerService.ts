@@ -155,7 +155,7 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async updateContactData(customerId: number, contact: Contact): Promise<void> {
+  async updateContactData(customerId: number, contact: Contact): Promise<CommandResult> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/contact`, contact);
     } catch (err) {

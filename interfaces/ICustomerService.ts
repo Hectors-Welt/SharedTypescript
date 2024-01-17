@@ -51,7 +51,7 @@ export interface ICustomerService extends IService {
 
   updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult>;
 
-  updateContactData(customerId: number, contact: Contact): Promise<void>;
+  updateContactData(customerId: number, contact: Contact): Promise<CommandResult>;
 
   updateCompany(customerId: number, company: string): Promise<CommandResult>;
 
