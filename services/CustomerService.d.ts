@@ -38,8 +38,8 @@ export declare class CustomerService implements ICustomerService {
     updateAddress(customerId: number, address: Address): Promise<CommandResult>;
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult>;
     updateContactData(customerId: number, contact: Contact): Promise<void>;
-    updateCompany(customerId: number, company: string): Promise<void>;
-    updateCompany2(customerId: number, company: string): Promise<void>;
+    updateCompany(customerId: number, company: string): Promise<CommandResult>;
+    updateCompany2(customerId: number, company: string): Promise<CommandResult>;
     updateStatus(customerId: number, statusId: number): Promise<void>;
     updateDefaultStudio(customerId: number, studioNumber: number): Promise<void>;
     addCustomerInteraction(customerId: number, command: AddInteractionCommand): Promise<AddInteractionCommandResult>;
