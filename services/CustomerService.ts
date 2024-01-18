@@ -189,7 +189,7 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async updateDefaultStudio(customerId: number, studioNumber: number): Promise<void> {
+  async updateDefaultStudio(customerId: number, studioNumber: number): Promise<CommandResult> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/defaultStudio`, {
         defaultStudioNumber: studioNumber,

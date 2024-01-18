@@ -59,7 +59,7 @@ export interface ICustomerService extends IService {
   
   updateStatus(customerId: number, statusId: number): Promise<void>;
 
-  updateDefaultStudio(customerId: number, studioNumber: number): Promise<void>;
+  updateDefaultStudio(customerId: number, studioNumber: number): Promise<CommandResult>;
 
   addCustomerInteraction(customerId: number, command: AddInteractionCommand): Promise<AddInteractionCommandResult>;
 

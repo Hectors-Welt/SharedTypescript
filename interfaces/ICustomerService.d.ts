@@ -38,7 +38,7 @@ export interface ICustomerService extends IService {
     updateCompany(customerId: number, company: string): Promise<CommandResult>;
     updateCompany2(customerId: number, company: string): Promise<CommandResult>;
     updateStatus(customerId: number, statusId: number): Promise<void>;
-    updateDefaultStudio(customerId: number, studioNumber: number): Promise<void>;
+    updateDefaultStudio(customerId: number, studioNumber: number): Promise<CommandResult>;
     addCustomerInteraction(customerId: number, command: AddInteractionCommand): Promise<AddInteractionCommandResult>;
     getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
     lookupInteractions(customerId: number, contactType: number, selectTop: number): Promise<InteractionDTO[]>;
