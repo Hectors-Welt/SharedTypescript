@@ -13,8 +13,8 @@ import { PunishmentContainer } from '../models/CourseManagementService/Punishmen
 import { IService } from './IService';
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
 import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
-import { DeleteAppointmentCommandResult } from '../models/CourseManagementService/DeleteAppointmentCommandResult';
 import { CancellationResult } from '../models/CourseManagementService/CancellationResult';
+import { CommandResult } from '../models/CourseManagementService/CommandResult';
 export interface ICourseManagementService extends IService {
     getClasses(filter: ClassFilter): Promise<Class[]>;
     getPriceInformationForClass(classId: number, customerId: number): Promise<any>;
@@ -28,8 +28,8 @@ export interface ICourseManagementService extends IService {
     lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupNextFreeTimeBlocks(appointmentId: number, searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     bookAppointment(bookingRequest: AppointmentBooking): Promise<ReservationResult>;
-    moveAppointment(appointmentId: number, bookingRequest: AppointmentBooking): Promise<void>;
-    cancelAppointment(appointmentId: number): Promise<DeleteAppointmentCommandResult>;
+    moveAppointment(appointmentId: number, bookingRequest: AppointmentBooking): Promise<CommandResult>;
+    cancelAppointment(appointmentId: number): Promise<CommandResult>;
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupReplacements(classId: number): Promise<number[]>;
     setInstructor(classId: number, oldInstructorId: number, newInstructorId: number, markAsReplacement?: boolean): Promise<any>;

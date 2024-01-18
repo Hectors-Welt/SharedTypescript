@@ -13,7 +13,7 @@ import { ClassAttendee } from '../models/CourseManagementService/ClassAttendee';
 import { PunishmentContainer } from '../models/CourseManagementService/PunishmentContainer';
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
 import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
-import { DeleteAppointmentCommandResult } from '../models/CourseManagementService/DeleteAppointmentCommandResult';
+import { CommandResult } from '../models/CourseManagementService/CommandResult';
 export declare class CourseManagementService implements ICourseManagementService {
     host: string;
     port: number;
@@ -33,8 +33,8 @@ export declare class CourseManagementService implements ICourseManagementService
     lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupNextFreeTimeBlocks(appointmentId: number, searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     bookAppointment(appointmentRequest: AppointmentBooking): Promise<ReservationResult>;
-    moveAppointment(appointmentId: number, appointmentRequest: AppointmentBooking): Promise<void>;
-    cancelAppointment(appointmentId: number): Promise<DeleteAppointmentCommandResult>;
+    moveAppointment(appointmentId: number, appointmentRequest: AppointmentBooking): Promise<CommandResult>;
+    cancelAppointment(appointmentId: number): Promise<CommandResult>;
     lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupReplacements(classId: number): Promise<number[]>;
     setInstructor(classId: number, oldInstructorId: number, newInstructorId: number, markAsReplacement?: boolean): Promise<any>;

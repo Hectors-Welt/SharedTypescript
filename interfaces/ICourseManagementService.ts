@@ -13,8 +13,8 @@ import { PunishmentContainer } from '../models/CourseManagementService/Punishmen
 import { IService } from './IService';
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
 import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
-import { DeleteAppointmentCommandResult } from '../models/CourseManagementService/DeleteAppointmentCommandResult';
 import { CancellationResult } from '../models/CourseManagementService/CancellationResult';
+import { CommandResult } from '../models/CourseManagementService/CommandResult';
 
 export interface ICourseManagementService extends IService {
   getClasses(filter: ClassFilter): Promise<Class[]>;
@@ -41,9 +41,9 @@ export interface ICourseManagementService extends IService {
 
   bookAppointment(bookingRequest: AppointmentBooking): Promise<ReservationResult>;
 
-  moveAppointment(appointmentId: number, bookingRequest: AppointmentBooking): Promise<void>;
+  moveAppointment(appointmentId: number, bookingRequest: AppointmentBooking): Promise<CommandResult>;
 
-  cancelAppointment(appointmentId: number): Promise<DeleteAppointmentCommandResult>;
+  cancelAppointment(appointmentId: number): Promise<CommandResult>;
 
   lookupCounselingTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
 
