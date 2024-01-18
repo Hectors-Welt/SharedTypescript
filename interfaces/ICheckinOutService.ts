@@ -4,6 +4,7 @@ import { AccessArea } from '../models/CheckinOutService/AccessArea';
 import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 import { IService } from './IService';
 import { CurrentCheckins } from '../models/CheckinOutService/CurrentCheckins';
+import { CommandResult } from '../models/CheckinOutService/CommandResult';
 
 export interface ICheckinOutService extends IService {
   getAccessAreasAvailable(): Promise<AccessArea[]>;
@@ -36,5 +37,5 @@ export interface ICheckinOutService extends IService {
   
   getAccessAreasCurrentlyAllowed(customerId: number): Promise<AccessArea[]>;
 
-  updateCheckinRemark(customerId: number, checkinRemark: string): Promise<void>;
+  updateCheckinRemark(customerId: number, checkinRemark: string): Promise<CommandResult>;
 }

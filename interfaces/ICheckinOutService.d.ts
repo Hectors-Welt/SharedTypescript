@@ -4,6 +4,7 @@ import { AccessArea } from '../models/CheckinOutService/AccessArea';
 import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 import { IService } from './IService';
 import { CurrentCheckins } from '../models/CheckinOutService/CurrentCheckins';
+import { CommandResult } from '../models/CheckinOutService/CommandResult';
 export interface ICheckinOutService extends IService {
     getAccessAreasAvailable(): Promise<AccessArea[]>;
     getCheckinStatus(customerId: number): Promise<CheckinStatus>;
@@ -17,5 +18,5 @@ export interface ICheckinOutService extends IService {
     setAccessGrantedTill(customerId: number, accessGrantedTill: string): Promise<any>;
     removeAccessGrantedTill(customerId: number): Promise<any>;
     getAccessAreasCurrentlyAllowed(customerId: number): Promise<AccessArea[]>;
-    updateCheckinRemark(customerId: number, checkinRemark: string): Promise<void>;
+    updateCheckinRemark(customerId: number, checkinRemark: string): Promise<CommandResult>;
 }

@@ -5,6 +5,7 @@ import { ApiClient } from './ApiClient';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
 import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 import { CurrentCheckins } from '../models/CheckinOutService/CurrentCheckins';
+import { CommandResult } from '../models/CheckinOutService/CommandResult';
 
 export class CheckinOutService implements ICheckinOutService {
   host: string;
@@ -143,7 +144,7 @@ export class CheckinOutService implements ICheckinOutService {
     }
   }
 
-  async updateCheckinRemark(customerId: number, checkinRemark: string): Promise<void> {
+  async updateCheckinRemark(customerId: number, checkinRemark: string): Promise<CommandResult> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/checkinRemark`, {
         checkinRemark: checkinRemark,
