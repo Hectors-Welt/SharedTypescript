@@ -179,7 +179,7 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async updateStatus(customerId: number, statusId: number): Promise<void> {
+  async updateStatus(customerId: number, statusId: number): Promise<CommandResult> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/status`, {
         statusId: statusId,

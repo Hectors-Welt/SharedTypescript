@@ -40,7 +40,7 @@ export declare class CustomerService implements ICustomerService {
     updateContactData(customerId: number, contact: Contact): Promise<CommandResult>;
     updateCompany(customerId: number, company: string): Promise<CommandResult>;
     updateCompany2(customerId: number, company: string): Promise<CommandResult>;
-    updateStatus(customerId: number, statusId: number): Promise<void>;
+    updateStatus(customerId: number, statusId: number): Promise<CommandResult>;
     updateDefaultStudio(customerId: number, studioNumber: number): Promise<CommandResult>;
     addCustomerInteraction(customerId: number, command: AddInteractionCommand): Promise<AddInteractionCommandResult>;
     getCustomerInteractions(customerId: number): Promise<InteractionDTO[]>;
