@@ -3,9 +3,11 @@ import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus';
 import { Checkin } from '../models/CheckinOutService/Checkin';
 import { ApiClient } from './ApiClient';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
-import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 import { CurrentCheckins } from '../models/CheckinOutService/CurrentCheckins';
 import { CommandResult } from '../models/CheckinOutService/CommandResult';
+import { CheckinCommand } from '../models/CheckinOutService/CheckinCommand';
+import { CheckinOutCommandResult } from '../models/CheckinOutService/CheckinOutCommandResult';
+import { CheckoutCommand } from '../models/CheckinOutService/CheckoutCommand';
 
 export class CheckinOutService implements ICheckinOutService {
   host: string;
@@ -59,18 +61,12 @@ export class CheckinOutService implements ICheckinOutService {
 
   async checkin(
     customerId: number,
-    tagId?: number,
-    accessPossibility?: number,
-    accessLevel?: number,
-    checkoutIfAlreadyPresent?: boolean,
-  ): Promise<CheckinOutResponse> {
+    checkinCommand: CheckinCommand,
+  ): Promise<CheckinOutCommandResult> {
     try {
-      const result = await ApiClient.POST(`${this.baseUrl}/checkin`, {
+      const result = await ApiClient.POST(`${this.baseUrl}/commands/checkin`, {
         customerId,
-        tagId,
-        accessPossibility,
-        accessLevel,
-        checkoutIfAlreadyPresent,
+        ...checkinCommand,
       });
       return result;
     } catch (err) {
@@ -78,12 +74,11 @@ export class CheckinOutService implements ICheckinOutService {
     }
   }
 
-  async checkout(customerId: number, accessPossibility?: number, accessLevel?: number): Promise<CheckinOutResponse> {
+  async checkout(customerId: number, checkoutCommand: CheckoutCommand): Promise<CheckinOutCommandResult> {
     try {
       const result = await ApiClient.POST(`${this.baseUrl}/checkout`, {
         customerId,
-        accessPossibility,
-        accessLevel,
+        ...checkoutCommand,
       });
       return result;
     } catch (err) {

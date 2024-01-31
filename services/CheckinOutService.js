@@ -59,16 +59,10 @@ class CheckinOutService {
             }
         });
     }
-    checkin(customerId, tagId, accessPossibility, accessLevel, checkoutIfAlreadyPresent) {
+    checkin(customerId, checkinCommand) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/checkin`, {
-                    customerId,
-                    tagId,
-                    accessPossibility,
-                    accessLevel,
-                    checkoutIfAlreadyPresent,
-                });
+                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/checkin`, Object.assign({ customerId }, checkinCommand));
                 return result;
             }
             catch (err) {
@@ -76,14 +70,10 @@ class CheckinOutService {
             }
         });
     }
-    checkout(customerId, accessPossibility, accessLevel) {
+    checkout(customerId, checkoutCommand) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/checkout`, {
-                    customerId,
-                    accessPossibility,
-                    accessLevel,
-                });
+                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/checkout`, Object.assign({ customerId }, checkoutCommand));
                 return result;
             }
             catch (err) {

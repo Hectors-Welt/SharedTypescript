@@ -2,9 +2,11 @@ import { ICheckinOutService } from '../interfaces/ICheckinOutService';
 import { CheckinStatus } from '../models/CheckinOutService/CheckinStatus';
 import { Checkin } from '../models/CheckinOutService/Checkin';
 import { AccessArea } from '../models/CheckinOutService/AccessArea';
-import { CheckinOutResponse } from '../models/CheckinOutService/CheckinOutResponse';
 import { CurrentCheckins } from '../models/CheckinOutService/CurrentCheckins';
 import { CommandResult } from '../models/CheckinOutService/CommandResult';
+import { CheckinCommand } from '../models/CheckinOutService/CheckinCommand';
+import { CheckinOutCommandResult } from '../models/CheckinOutService/CheckinOutCommandResult';
+import { CheckoutCommand } from '../models/CheckinOutService/CheckoutCommand';
 export declare class CheckinOutService implements ICheckinOutService {
     host: string;
     port: number;
@@ -15,8 +17,8 @@ export declare class CheckinOutService implements ICheckinOutService {
     getCheckinStatus(customerId: number): Promise<CheckinStatus>;
     getCheckins(customerId: number): Promise<Checkin[]>;
     isAccessAllowed(customerId: number, timeSlotRequired: boolean, checkOpeningHours: boolean, accessAreas?: string[]): Promise<boolean>;
-    checkin(customerId: number, tagId?: number, accessPossibility?: number, accessLevel?: number, checkoutIfAlreadyPresent?: boolean): Promise<CheckinOutResponse>;
-    checkout(customerId: number, accessPossibility?: number, accessLevel?: number): Promise<CheckinOutResponse>;
+    checkin(customerId: number, checkinCommand: CheckinCommand): Promise<CheckinOutCommandResult>;
+    checkout(customerId: number, checkoutCommand: CheckoutCommand): Promise<CheckinOutCommandResult>;
     getCustomersPresent(): Promise<CheckinStatus[]>;
     getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins>;
     getCurrentCheckinCounts(): Promise<CurrentCheckins[]>;
