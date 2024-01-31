@@ -3,7 +3,7 @@ export class CheckinCommand {
   tagId: string = null;
   accessPossibility?: number;
   accessLevel?: number;
-  checkoutIfAlreadyPrersent: boolean = false;
+  checkoutIfAlreadyPresent: boolean = false;
   timeslotRequired: boolean = false;
   dryRun: boolean = false;
 }
