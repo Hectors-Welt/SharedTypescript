@@ -3,4 +3,5 @@ export class SimulateContractCreationCommandResult {
   message: string;
   errors: any;
   contractSimulation: any;
+  returnCode: number;
 }
