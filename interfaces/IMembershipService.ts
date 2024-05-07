@@ -11,6 +11,8 @@ import { UpdatePricePerIntervalCommand } from '../models/MembershipService/Updat
 import { UpdatePricePerIntervalCommandResult } from '../models/MembershipService/UpdatePricePerIntervalCommandResult';
 import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllContractsCommand';
 import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
+import { SimulateContractCreationCommand } from '../models/MembershipService/SimulateContractCreationCommand';
+import { SimulateContractCreationCommandResult } from '../models/MembershipService/SimulateContractCreationCommandResult';
 
 export interface IMembershipService extends IService {
   getActiveContractNames(): Promise<string[]>;
@@ -26,6 +28,8 @@ export interface IMembershipService extends IService {
   rejectPendingMembership(processId: number): Promise<void>;
 
   createContracts(command: CreateContractsCommand): Promise<CreateContractsCommandResult>;
+
+  simulateContractCreation(command: SimulateContractCreationCommand): Promise<SimulateContractCreationCommandResult>;
 
   terminateContract(command: TerminateContractCommand): Promise<TerminateContractsCommandResult>;
 

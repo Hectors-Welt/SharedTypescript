@@ -92,6 +92,16 @@ class MembershipService {
             }
         });
     }
+    simulateContractCreation(command) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command);
+            }
+            catch (err) {
+                throw new Error('failed to simulate contract creation at membership service');
+            }
+        });
+    }
     terminateContract(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

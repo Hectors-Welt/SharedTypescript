@@ -1,3 +1,4 @@
+import { CreateContractsTemplateDefinition } from './CreateContractsTemplateDefinition';
 export declare class CreateContractsCommand {
     customerId: number;
     mainTemplate?: number;
@@ -11,8 +12,4 @@ export declare class CreateContractsCommand {
     recruiterId?: number;
     createSystem?: number;
     waitForCustomerConfirmation: boolean;
-}
-export declare class CreateContractsTemplateDefinition {
-    templateId: number;
-    templateType: string;
 }

@@ -12,6 +12,8 @@ import { UpdatePricePerIntervalCommand } from '../models/MembershipService/Updat
 import { UpdatePricePerIntervalCommandResult } from '../models/MembershipService/UpdatePricePerIntervalCommandResult';
 import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllContractsCommand';
 import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
+import { SimulateContractCreationCommand } from '../models/MembershipService/SimulateContractCreationCommand';
+import { SimulateContractCreationCommandResult } from '../models/MembershipService/SimulateContractCreationCommandResult';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -84,6 +86,14 @@ export class MembershipService implements IMembershipService {
       return await ApiClient.POST(`${this.baseUrl}/commands/createContracts`, command);
     } catch (err) {
       throw new Error('failed to create contracts at membership service');
+    }
+  }
+
+  async simulateContractCreation(command: SimulateContractCreationCommand): Promise<SimulateContractCreationCommandResult> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command);
+    } catch (err) {
+      throw new Error('failed to simulate contract creation at membership service');
     }
   }
 
