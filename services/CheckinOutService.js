@@ -38,6 +38,16 @@ class CheckinOutService {
             }
         });
     }
+    getCheckinStatuses(studioNumber) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/checkinStatuses?studioNumber=${studioNumber}`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve checkin statuses from checkinout service');
+            }
+        });
+    }
     getCheckins(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

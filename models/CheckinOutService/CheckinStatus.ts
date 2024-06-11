@@ -1,5 +1,6 @@
 export class CheckinStatus {
   customerId: number;
+  studioNumber?: number;
   name: string;
   surname: string;
   isCheckedIn: boolean;

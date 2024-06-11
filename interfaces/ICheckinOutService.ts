@@ -12,6 +12,8 @@ export interface ICheckinOutService extends IService {
   getAccessAreasAvailable(): Promise<AccessArea[]>;
 
   getCheckinStatus(customerId: number): Promise<CheckinStatus>;
+  
+  getCheckinStatuses(studioNumber?: number): Promise<CheckinStatus[]>;
 
   getCheckins(customerId: number): Promise<Checkin[]>;
 

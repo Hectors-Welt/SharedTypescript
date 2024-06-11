@@ -15,6 +15,7 @@ export declare class CheckinOutService implements ICheckinOutService {
     constructor(host: string, port: number, version: string);
     getAccessAreasAvailable(): Promise<AccessArea[]>;
     getCheckinStatus(customerId: number): Promise<CheckinStatus>;
+    getCheckinStatuses(studioNumber?: number): Promise<CheckinStatus[]>;
     getCheckins(customerId: number): Promise<Checkin[]>;
     isAccessAllowed(customerId: number, timeSlotRequired: boolean, checkOpeningHours: boolean, accessAreas?: string[]): Promise<boolean>;
     checkin(customerId: number, checkinCommand: CheckinCommand): Promise<CheckinOutCommandResult>;

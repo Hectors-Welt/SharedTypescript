@@ -38,6 +38,14 @@ export class CheckinOutService implements ICheckinOutService {
     }
   }
 
+  async getCheckinStatuses(studioNumber?: number): Promise<CheckinStatus[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/checkinStatuses?studioNumber=${studioNumber}`);
+    } catch (err) {
+      throw new Error('failed to retrieve checkin statuses from checkinout service');
+    }
+  }
+
   async getCheckins(customerId: number): Promise<Checkin[]> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/getCheckins/${customerId}`);
