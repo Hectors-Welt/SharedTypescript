@@ -1,3 +1,4 @@
+import { Worktime } from './Worktime';
 export declare class Employee {
     id: number;
     customerId: number;
@@ -6,4 +7,5 @@ export declare class Employee {
     rights: string[];
     roles: string[];
     studioIds: number[];
+    currentWorkTime?: Worktime;
 }

@@ -1,3 +1,5 @@
+import { Worktime } from './Worktime';
+
 export class Employee {
   id: number;
   customerId: number;
@@ -6,4 +8,5 @@ export class Employee {
   rights: string[];
   roles: string[];
   studioIds: number[];
+  currentWorkTime?: Worktime;
 }
