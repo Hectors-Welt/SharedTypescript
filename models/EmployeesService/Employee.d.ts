@@ -7,5 +7,5 @@ export declare class Employee {
     rights: string[];
     roles: string[];
     studioIds: number[];
-    currentWorkTime?: Worktime;
+    currentWorktime?: Worktime;
 }
