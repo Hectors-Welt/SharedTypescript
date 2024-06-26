@@ -46,7 +46,7 @@ export interface ICustomerService extends IService {
 
   getTagIds(customerId: number, format: number): Promise<string[]>;
 
-  registerTagId(customerId: number, command: AddTagIdCommand): Promise<void>;
+  registerTagId(customerId: number, command: AddTagIdCommand): Promise<CommandResult>;
 
   updateAddress(customerId: number, address: Address): Promise<CommandResult>;
 

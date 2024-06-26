@@ -32,7 +32,7 @@ export interface ICustomerService extends IService {
     getProfilePicture(customerId: number): Promise<File>;
     setProfilePicture(customerId: number, file: File): Promise<any>;
     getTagIds(customerId: number, format: number): Promise<string[]>;
-    registerTagId(customerId: number, command: AddTagIdCommand): Promise<void>;
+    registerTagId(customerId: number, command: AddTagIdCommand): Promise<CommandResult>;
     updateAddress(customerId: number, address: Address): Promise<CommandResult>;
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult>;
     updateContactData(customerId: number, contact: Contact): Promise<CommandResult>;
