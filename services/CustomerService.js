@@ -144,7 +144,7 @@ class CustomerService {
     registerTagId(customerId, command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customer/${customerId}/registerTagId`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/tagIds`, command);
             }
             catch (err) {
                 throw new Error('failed to register tag id at customer service');

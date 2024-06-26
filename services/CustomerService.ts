@@ -134,7 +134,7 @@ export class CustomerService implements ICustomerService {
 
   async registerTagId(customerId: number, command: AddTagIdCommand): Promise<CommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customer/${customerId}/registerTagId`, command);
+      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/tagIds`, command);
     } catch (err) {
       throw new Error('failed to register tag id at customer service');
     }
