@@ -289,5 +289,25 @@ class CustomerService {
             }
         });
     }
+    getLicensePlates(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/licensePlates`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve license plates from customer service');
+            }
+        });
+    }
+    updateLicensePlates(customerId, licensePlates) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/licensePlates`, licensePlates);
+            }
+            catch (err) {
+                throw new Error('failed to update license plates at customer service');
+            }
+        });
+    }
 }
 exports.CustomerService = CustomerService;

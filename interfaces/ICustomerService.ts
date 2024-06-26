@@ -18,6 +18,7 @@ import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCus
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 import { CommandResult } from '../models/CustomerService/CommandResult';
+import { LicensePlates } from '../models/CustomerService/LicensePlates';
 
 
 export interface ICustomerService extends IService {
@@ -72,4 +73,8 @@ export interface ICustomerService extends IService {
   deleteCustomerRelatedData(customerId: number): Promise<any>;
 
   deleteCustomer(customerId: number): Promise<DeleteCustomerCommandResult>;
+
+  getLicensePlates(customerId: number): Promise<LicensePlates>;
+
+  updateLicensePlates(customerId: number, licensePlates: LicensePlates): Promise<CommandResult>;
 }

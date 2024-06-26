@@ -17,6 +17,7 @@ import { AddInteractionCommandResult } from '../models/CustomerService/AddIntera
 import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 import { CommandResult } from '../models/CustomerService/CommandResult';
+import { LicensePlates } from '../models/CustomerService/LicensePlates';
 
 
 export class CustomerService implements ICustomerService {
@@ -248,6 +249,22 @@ export class CustomerService implements ICustomerService {
       return await ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`);
     } catch (err) {
       throw new Error('failed to delete customer at customer service');
+    }
+  }
+
+  async getLicensePlates(customerId: number): Promise<LicensePlates> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/licensePlates`);
+    } catch (err) {
+      throw new Error('failed to retrieve license plates from customer service');
+    }
+  }
+
+  async updateLicensePlates(customerId: number, licensePlates: LicensePlates): Promise<CommandResult> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/licensePlates`, licensePlates);
+    } catch (err) {
+      throw new Error('failed to update license plates at customer service');
     }
   }
 }

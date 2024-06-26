@@ -16,6 +16,7 @@ import { AddInteractionCommandResult } from '../models/CustomerService/AddIntera
 import { AddInteractionCommand } from '../models/CustomerService/AddInteractionCommand';
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 import { CommandResult } from '../models/CustomerService/CommandResult';
+import { LicensePlates } from '../models/CustomerService/LicensePlates';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
@@ -48,4 +49,6 @@ export declare class CustomerService implements ICustomerService {
     getInteractionAttachment(interactionId: number): Promise<File>;
     deleteCustomerRelatedData(customerId: number): Promise<any[]>;
     deleteCustomer(customerId: number): Promise<DeleteCustomerCommandResult>;
+    getLicensePlates(customerId: number): Promise<LicensePlates>;
+    updateLicensePlates(customerId: number, licensePlates: LicensePlates): Promise<CommandResult>;
 }
