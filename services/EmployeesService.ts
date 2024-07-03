@@ -17,12 +17,13 @@ export class EmployeesService implements IEmployeesService {
     this.baseUrl = `http://${host}:${port}`;
   }
 
-  async validateEmployeeByCredentials(name: string, surname: string, password: string): Promise<Employee> {
+  async validateEmployeeByCredentials(name: string, surname: string, password: string, application: string): Promise<Employee> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/validateEmployeeByCredentials`, {
         name,
         surname,
         password,
+        application,
       });
     } catch (err) {
       throw new Error('failed to validate credentials at employees service');

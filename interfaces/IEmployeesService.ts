@@ -4,7 +4,7 @@ import { WorktimeType } from '../models/EmployeesService/WorktimeType';
 import { Worktime } from '../models/EmployeesService/Worktime';
 
 export interface IEmployeesService extends IService {
-  validateEmployeeByCredentials(firstname: string, lastname: string, password: string): Promise<Employee>;
+  validateEmployeeByCredentials(firstname: string, lastname: string, password: string, application: string): Promise<Employee>;
 
   getEmployeeById(employeeId: number): Promise<Employee>;
 

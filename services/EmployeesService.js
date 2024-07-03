@@ -18,13 +18,14 @@ class EmployeesService {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
-    validateEmployeeByCredentials(name, surname, password) {
+    validateEmployeeByCredentials(name, surname, password, application) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/validateEmployeeByCredentials`, {
                     name,
                     surname,
                     password,
+                    application,
                 });
             }
             catch (err) {
