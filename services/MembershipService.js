@@ -75,7 +75,7 @@ class MembershipService {
     rejectPendingMembership(processId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/rejectPendingMembership/${processId}`);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/rejectPendingMembership/${processId}`, null, null, true);
             }
             catch (err) {
                 throw new Error('failed to reject pending mebership from membership service');
@@ -85,60 +85,89 @@ class MembershipService {
     createContracts(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/createContracts`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/createContracts`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to create contracts at membership service');
+                return {
+                    success: false,
+                    message: 'failed to create contracts at membership service',
+                    errors: [err],
+                    contracts: null,
+                };
             }
         });
     }
     simulateContractCreation(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to simulate contract creation at membership service');
+                return {
+                    success: false,
+                    message: 'failed to simulate contract creation at membership service',
+                    errors: [err],
+                    returnCode: null,
+                    contractSimulation: null,
+                };
             }
         });
     }
     terminateContract(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/terminateContract`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/terminateContract`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to terminate contract at membership service');
+                return {
+                    success: false,
+                    message: 'failed to terminate contract at membership service',
+                    errors: [err],
+                };
             }
         });
     }
     terminateAllContracts(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/terminateAllContracts`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/terminateAllContracts`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to terminate contracts at membership service');
+                return {
+                    success: false,
+                    message: 'failed to terminate contracts at membership service',
+                    errors: [err],
+                };
             }
         });
     }
     pauseAllContracts(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/pauseAllContracts`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/pauseAllContracts`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to pause contracts at membership service');
+                return {
+                    success: false,
+                    message: 'failed to pause contracts at membership service',
+                    errors: [err],
+                    returnCode: null,
+                };
             }
         });
     }
     updatePricePerInterval(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/updatePricePerInterval`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/updatePricePerInterval`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to update price at membership service');
+                return {
+                    success: false,
+                    message: 'failed to update price at membership service',
+                    errors: [err],
+                    returnCode: null,
+                };
             }
         });
     }

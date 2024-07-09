@@ -75,7 +75,7 @@ export class MembershipService implements IMembershipService {
 
   async rejectPendingMembership(processId: number): Promise<void> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/rejectPendingMembership/${processId}`);
+      return await ApiClient.POST(`${this.baseUrl}/rejectPendingMembership/${processId}`, null, null, true);
     } catch (err) {
       throw new Error('failed to reject pending mebership from membership service');
     }
@@ -83,49 +83,78 @@ export class MembershipService implements IMembershipService {
 
   async createContracts(command: CreateContractsCommand): Promise<CreateContractsCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/createContracts`, command);
+      return await ApiClient.POST(`${this.baseUrl}/commands/createContracts`, command, null, true);
     } catch (err) {
-      throw new Error('failed to create contracts at membership service');
+      return {
+        success: false,
+        message: 'failed to create contracts at membership service',
+        errors: [err],
+        contracts: null,
+      };
     }
   }
 
   async simulateContractCreation(command: SimulateContractCreationCommand): Promise<SimulateContractCreationCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command);
+      return await ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command, null, true);
     } catch (err) {
-      throw new Error('failed to simulate contract creation at membership service');
+      return {
+        success: false,
+        message: 'failed to simulate contract creation at membership service',
+        errors: [err], 
+        returnCode: null,
+        contractSimulation: null,
+      };
     }
   }
 
   async terminateContract(command: TerminateContractCommand): Promise<TerminateContractsCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/terminateContract`, command);
+      return await ApiClient.POST(`${this.baseUrl}/commands/terminateContract`, command,  null, true);
     } catch (err) {
-      throw new Error('failed to terminate contract at membership service');
+      return {
+        success: false,
+        message: 'failed to terminate contract at membership service',
+        errors: [err],
+      };
     }
   }
 
   async terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateContractsCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/terminateAllContracts`, command);
+      return await ApiClient.POST(`${this.baseUrl}/commands/terminateAllContracts`, command, null, true);
     } catch (err) {
-      throw new Error('failed to terminate contracts at membership service');
+      return {
+        success: false,
+        message: 'failed to terminate contracts at membership service',
+        errors: [err],
+      };
     }
   }
 
   async pauseAllContracts(command: PauseAllContractsCommand): Promise<PauseAllContractsCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/pauseAllContracts`, command);
+      return await ApiClient.POST(`${this.baseUrl}/commands/pauseAllContracts`, command, null, true);
     } catch (err) {
-      throw new Error('failed to pause contracts at membership service');
+      return {
+        success: false,
+        message: 'failed to pause contracts at membership service',
+        errors: [err],
+        returnCode: null,
+      };
     }
   }
 
   async updatePricePerInterval(command: UpdatePricePerIntervalCommand): Promise<UpdatePricePerIntervalCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/updatePricePerInterval`, command);
+      return await ApiClient.POST(`${this.baseUrl}/commands/updatePricePerInterval`, command, null, true);
     } catch (err) {
-      throw new Error('failed to update price at membership service');
+      return {
+        success: false,
+        message: 'failed to update price at membership service',
+        errors: [err],
+        returnCode: null,
+      };
     }
   }
 }
