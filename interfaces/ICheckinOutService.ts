@@ -13,17 +13,17 @@ export interface ICheckinOutService extends IService {
 
   getCheckinStatus(customerId: number): Promise<CheckinStatus>;
   
-  getCheckinStatuses(studioNumber?: number): Promise<CheckinStatus[]>;
+  getCustomersPresent(studioNumber?: number): Promise<CheckinStatus[]>;
 
   getCheckins(customerId: number): Promise<Checkin[]>;
 
   isAccessAllowed(customerId: number, timeSlotRequired: boolean, checkOpeningHours: boolean, accessAreas?: string[]): Promise<boolean>;
+  
+  isCheckoutAllowed(customerId: number): Promise<boolean>;
 
   checkin(customerId: number, checkinCommand: CheckinCommand): Promise<CheckinOutCommandResult>;
 
   checkout(customerId: number, checkoutCommand: CheckoutCommand): Promise<CheckinOutCommandResult>;
-
-  getCustomersPresent(): Promise<CheckinStatus[]>;
 
   getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins>;
 
@@ -36,4 +36,8 @@ export interface ICheckinOutService extends IService {
   getAccessAreasCurrentlyAllowed(customerId: number): Promise<AccessArea[]>;
 
   updateCheckinRemark(customerId: number, checkinRemark: string): Promise<CommandResult>;
+
+  enterLocation(customerId: number, location: string, studioNumber: number): Promise<any>;
+
+  leaveLocation(customerId: number, studioNumber: number): Promise<any>;
 }

@@ -21,24 +21,54 @@ class CheckinOutService {
     getAccessAreasAvailable() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getAccessAreasAvailable`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/accessAreas`);
             }
             catch (err) {
                 throw new Error('failed to retrieve access areas from checkinout service');
             }
         });
     }
+    getAccessAreasInformation(accessArea) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/accessAreas/${accessArea}/information`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve access area information from checkinout service');
+            }
+        });
+    }
+    getCheckins(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/checkins`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve checkins from checkinout service');
+            }
+        });
+    }
     getCheckinStatus(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCheckinStatus/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/checkinStatus`);
             }
             catch (err) {
                 throw new Error('failed to retrieve checkin status from checkinout service');
             }
         });
     }
-    getCheckinStatuses(studioNumber) {
+    getCurrentCheckinCount(studioNumber) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/studios/${studioNumber}/checkinCount`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve current checkin count from checkinout service');
+            }
+        });
+    }
+    getCustomersPresent(studioNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/checkinStatuses?studioNumber=${studioNumber}`);
@@ -48,24 +78,35 @@ class CheckinOutService {
             }
         });
     }
-    getCheckins(customerId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCheckins/${customerId}`);
-            }
-            catch (err) {
-                throw new Error('failed to retrieve checkins from checkinout service');
-            }
-        });
-    }
     isAccessAllowed(customerId, timeSlotRequired, checkOpeningHours, accessAreas) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/isAccessAllowed/${customerId}/WithTimeSlotRequired/${timeSlotRequired}?accessAreas=${accessAreas != null ? accessAreas.join(',') : ''}&checkOpeningHours=${checkOpeningHours}`);
+                const result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/accessAllowed?accessAreas=${accessAreas != null ? accessAreas.join(',') : ''}&checkOpeningHours=${checkOpeningHours}&timeSlotRequired=${timeSlotRequired}`);
                 return result.accessGranted;
             }
             catch (err) {
                 throw new Error('failed to get access granted information from checkinout service');
+            }
+        });
+    }
+    isCheckoutAllowed(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/checkoutAllowed`);
+                return result.accessGranted;
+            }
+            catch (err) {
+                throw new Error('failed to get checkout allowed information from checkinout service');
+            }
+        });
+    }
+    getCurrentCheckinCounts() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/checkinCounts`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve current checkin counts from checkinout service');
             }
         });
     }
@@ -83,7 +124,7 @@ class CheckinOutService {
     checkout(customerId, checkoutCommand) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/checkout`, Object.assign({ customerId }, checkoutCommand));
+                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/checkout`, Object.assign({ customerId }, checkoutCommand));
                 return result;
             }
             catch (err) {
@@ -91,42 +132,38 @@ class CheckinOutService {
             }
         });
     }
-    getCustomersPresent() {
+    enterLocation(customerId, location, studioNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCustomersPresent`);
+                const result = yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/location`, {
+                    name: location,
+                    studioNumber,
+                });
+                return result;
             }
             catch (err) {
-                throw new Error('failed to retrieve customers present from checkinout service');
+                throw new Error('failed to get enter location at checkinout service');
             }
         });
     }
-    getCurrentCheckinCount(studioNumber) {
+    leaveLocation(customerId, studioNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCurrentCheckinCount/${studioNumber}`);
+                const result = yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}/location`, {
+                    studioNumber,
+                });
+                return result;
             }
             catch (err) {
-                throw new Error('failed to retrieve current checkin count from checkinout service');
-            }
-        });
-    }
-    getCurrentCheckinCounts() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCurrentCheckinCounts`);
-            }
-            catch (err) {
-                throw new Error('failed to retrieve current checkin counts from checkinout service');
+                throw new Error('failed to get enter location at checkinout service');
             }
         });
     }
     setAccessGrantedTill(customerId, accessGrantedTill) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/accessGrantedTill`, {
-                    customerId,
-                    accessGrantedTill,
+                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/accessGranted`, {
+                    till: accessGrantedTill,
                 });
                 return result;
             }
@@ -138,7 +175,7 @@ class CheckinOutService {
     removeAccessGrantedTill(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/accessGrantedTill/${customerId}`);
+                const result = yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}/accessGranted`);
                 return result;
             }
             catch (err) {
@@ -152,7 +189,7 @@ class CheckinOutService {
                 return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/accessAreas`);
             }
             catch (err) {
-                throw new Error('failed to retrieve access areas from checkinout service');
+                throw new Error('failed to retrieve access areas allowed for customer from checkinout service');
             }
         });
     }

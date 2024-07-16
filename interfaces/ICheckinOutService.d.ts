@@ -10,16 +10,18 @@ import { CheckoutCommand } from '../models/CheckinOutService/CheckoutCommand';
 export interface ICheckinOutService extends IService {
     getAccessAreasAvailable(): Promise<AccessArea[]>;
     getCheckinStatus(customerId: number): Promise<CheckinStatus>;
-    getCheckinStatuses(studioNumber?: number): Promise<CheckinStatus[]>;
+    getCustomersPresent(studioNumber?: number): Promise<CheckinStatus[]>;
     getCheckins(customerId: number): Promise<Checkin[]>;
     isAccessAllowed(customerId: number, timeSlotRequired: boolean, checkOpeningHours: boolean, accessAreas?: string[]): Promise<boolean>;
+    isCheckoutAllowed(customerId: number): Promise<boolean>;
     checkin(customerId: number, checkinCommand: CheckinCommand): Promise<CheckinOutCommandResult>;
     checkout(customerId: number, checkoutCommand: CheckoutCommand): Promise<CheckinOutCommandResult>;
-    getCustomersPresent(): Promise<CheckinStatus[]>;
     getCurrentCheckinCount(studioNumber: number): Promise<CurrentCheckins>;
     getCurrentCheckinCounts(): Promise<CurrentCheckins[]>;
     setAccessGrantedTill(customerId: number, accessGrantedTill: string): Promise<any>;
     removeAccessGrantedTill(customerId: number): Promise<any>;
     getAccessAreasCurrentlyAllowed(customerId: number): Promise<AccessArea[]>;
     updateCheckinRemark(customerId: number, checkinRemark: string): Promise<CommandResult>;
+    enterLocation(customerId: number, location: string, studioNumber: number): Promise<any>;
+    leaveLocation(customerId: number, studioNumber: number): Promise<any>;
 }
