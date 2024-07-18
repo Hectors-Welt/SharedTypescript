@@ -4,4 +4,5 @@ export class CreateContractsTemplateDefinition {
   duration?: number;
   price?: number;
   maxEndDate?: string;
+  contractName?: string;
 }
