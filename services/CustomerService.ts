@@ -35,17 +35,27 @@ export class CustomerService implements ICustomerService {
   
   async addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customers`, command);
+      return await ApiClient.POST(`${this.baseUrl}/customers`, command, null, true);
     } catch (err) {
-      throw new Error('failed to add customer on customer service');
+      return {
+        success: false,
+        message: 'failed to add customer on customer service',
+        errors: [err],
+        customer: null,
+      };
     }
   }
 
   async updateCustomer(customerId: number, command: AddCustomerCommand): Promise<AddCustomerCommandResult> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}`, command);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}`, command, null, true);
     } catch (err) {
-      throw new Error('failed to update customer on customer service');
+      return { 
+        success: false,
+        message: 'failed to update customer on customer service',
+        errors: [err],
+        customer: null,
+      };
     }
   }
 
@@ -134,9 +144,13 @@ export class CustomerService implements ICustomerService {
 
   async registerTagId(customerId: number, command: AddTagIdCommand): Promise<CommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/tagIds`, command);
+      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/tagIds`, command, null, true);
     } catch (err) {
-      throw new Error('failed to register tag id at customer service');
+      return { 
+        success: false,
+        message: 'failed to register tag id at customer service',
+        errors: [err],
+      };
     }
   }
 
@@ -144,39 +158,59 @@ export class CustomerService implements ICustomerService {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/address`, address);
     } catch (err) {
-      throw new Error('failed to update address at customer service');
+      return { 
+        success: false,
+        message: 'failed to update address at customer service',
+        errors: [err],
+      };
     }
   }
 
   async updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/bankAccount`, bankAccount);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/bankAccount`, bankAccount, null, true);
     } catch (err) {
-      throw new Error('failed to update bank account at customer service');
+      return {
+        success: false,
+        message: 'failed to update bank account at customer service',
+        errors: [err],
+      };
     }
   }
 
   async updateContactData(customerId: number, contact: Contact): Promise<CommandResult> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/contact`, contact);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/contact`, contact, null, true);
     } catch (err) {
-      throw new Error('failed to update contact data at customer service');
+      return {
+        success: false,
+        message: 'failed to update contact data at customer service',
+        errors: [err],
+      };
     }
   }
 
   async updateCompany(customerId: number, company: string): Promise<CommandResult> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${company}`, {});
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${company}`, {}, null, true);
     } catch (err) {
-      throw new Error('failed to update company at customer service');
+      return {
+        success: false,
+        message: 'failed to update company at customer service',
+        errors: [err],
+      };
     }
   }
 
   async updateCompany2(customerId: number, company: string): Promise<CommandResult> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${company}`, {});
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${company}`, {}, null, true);
     } catch (err) {
-      throw new Error('failed to update company2 at customer service');
+      return {
+        success: false,
+        message: 'failed to update company2 at customer service',
+        errors: [err],
+      };
     }
   }
 
@@ -184,9 +218,13 @@ export class CustomerService implements ICustomerService {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/status`, {
         statusId: statusId,
-      });
+      }, null, true);
     } catch (err) {
-      throw new Error('failed to update status at customer service');
+      return {
+        success: false,
+        message: 'failed to update status at customer service',
+        errors: [err],
+      };
     }
   }
 
@@ -194,17 +232,26 @@ export class CustomerService implements ICustomerService {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/defaultStudio`, {
         defaultStudioNumber: studioNumber,
-      });
+      }, null, true);
     } catch (err) {
-      throw new Error('failed to update default studio at customer service');
+      return {
+        success: false,
+        message: 'failed to update default studio at customer service',
+        errors: [err],
+      };
     }
   }
 
   async addCustomerInteraction(customerId: number, command: AddInteractionCommand): Promise<AddInteractionCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, command);
+      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, command, null, true);
     } catch (err) {
-      throw new Error('failed to add customer interaction at customer service');
+      return {
+        success: false,
+        message: 'failed to add customer interaction at customer service',
+        errors: [err],
+        interactionId: null,
+      };
     }
   }
 
@@ -246,9 +293,13 @@ export class CustomerService implements ICustomerService {
 
   async deleteCustomer(customerId: number): Promise<DeleteCustomerCommandResult> {
     try {
-      return await ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`);
+      return await ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`, null, true);
     } catch (err) {
-      throw new Error('failed to delete customer at customer service');
+      return {
+        success: false,
+        message: 'failed to delete customer at customer service',
+        errors: [err],
+      };
     }
   }
 
@@ -262,9 +313,13 @@ export class CustomerService implements ICustomerService {
 
   async updateLicensePlates(customerId: number, licensePlates: LicensePlates): Promise<CommandResult> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/licensePlates`, licensePlates);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/licensePlates`, licensePlates, null, true);
     } catch (err) {
-      throw new Error('failed to update license plates at customer service');
+      return {
+        success: false,
+        message: 'failed to update license plates at customer service',
+        errors: [err],
+      };
     }
   }
 }

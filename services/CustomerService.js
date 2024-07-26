@@ -21,20 +21,30 @@ class CustomerService {
     addCustomer(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to add customer on customer service');
+                return {
+                    success: false,
+                    message: 'failed to add customer on customer service',
+                    errors: [err],
+                    customer: null,
+                };
             }
         });
     }
     updateCustomer(customerId, command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}`, command);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to update customer on customer service');
+                return {
+                    success: false,
+                    message: 'failed to update customer on customer service',
+                    errors: [err],
+                    customer: null,
+                };
             }
         });
     }
@@ -144,10 +154,14 @@ class CustomerService {
     registerTagId(customerId, command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/tagIds`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/tagIds`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to register tag id at customer service');
+                return {
+                    success: false,
+                    message: 'failed to register tag id at customer service',
+                    errors: [err],
+                };
             }
         });
     }
@@ -157,47 +171,67 @@ class CustomerService {
                 return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/address`, address);
             }
             catch (err) {
-                throw new Error('failed to update address at customer service');
+                return {
+                    success: false,
+                    message: 'failed to update address at customer service',
+                    errors: [err],
+                };
             }
         });
     }
     updateBankAccount(customerId, bankAccount) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/bankAccount`, bankAccount);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/bankAccount`, bankAccount, null, true);
             }
             catch (err) {
-                throw new Error('failed to update bank account at customer service');
+                return {
+                    success: false,
+                    message: 'failed to update bank account at customer service',
+                    errors: [err],
+                };
             }
         });
     }
     updateContactData(customerId, contact) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/contact`, contact);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/contact`, contact, null, true);
             }
             catch (err) {
-                throw new Error('failed to update contact data at customer service');
+                return {
+                    success: false,
+                    message: 'failed to update contact data at customer service',
+                    errors: [err],
+                };
             }
         });
     }
     updateCompany(customerId, company) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${company}`, {});
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${company}`, {}, null, true);
             }
             catch (err) {
-                throw new Error('failed to update company at customer service');
+                return {
+                    success: false,
+                    message: 'failed to update company at customer service',
+                    errors: [err],
+                };
             }
         });
     }
     updateCompany2(customerId, company) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${company}`, {});
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${company}`, {}, null, true);
             }
             catch (err) {
-                throw new Error('failed to update company2 at customer service');
+                return {
+                    success: false,
+                    message: 'failed to update company2 at customer service',
+                    errors: [err],
+                };
             }
         });
     }
@@ -206,10 +240,14 @@ class CustomerService {
             try {
                 return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/status`, {
                     statusId: statusId,
-                });
+                }, null, true);
             }
             catch (err) {
-                throw new Error('failed to update status at customer service');
+                return {
+                    success: false,
+                    message: 'failed to update status at customer service',
+                    errors: [err],
+                };
             }
         });
     }
@@ -218,20 +256,29 @@ class CustomerService {
             try {
                 return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/defaultStudio`, {
                     defaultStudioNumber: studioNumber,
-                });
+                }, null, true);
             }
             catch (err) {
-                throw new Error('failed to update default studio at customer service');
+                return {
+                    success: false,
+                    message: 'failed to update default studio at customer service',
+                    errors: [err],
+                };
             }
         });
     }
     addCustomerInteraction(customerId, command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, command);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/interactions`, command, null, true);
             }
             catch (err) {
-                throw new Error('failed to add customer interaction at customer service');
+                return {
+                    success: false,
+                    message: 'failed to add customer interaction at customer service',
+                    errors: [err],
+                    interactionId: null,
+                };
             }
         });
     }
@@ -282,10 +329,14 @@ class CustomerService {
     deleteCustomer(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`);
+                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}`, null, true);
             }
             catch (err) {
-                throw new Error('failed to delete customer at customer service');
+                return {
+                    success: false,
+                    message: 'failed to delete customer at customer service',
+                    errors: [err],
+                };
             }
         });
     }
@@ -302,10 +353,14 @@ class CustomerService {
     updateLicensePlates(customerId, licensePlates) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/licensePlates`, licensePlates);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/licensePlates`, licensePlates, null, true);
             }
             catch (err) {
-                throw new Error('failed to update license plates at customer service');
+                return {
+                    success: false,
+                    message: 'failed to update license plates at customer service',
+                    errors: [err],
+                };
             }
         });
     }
