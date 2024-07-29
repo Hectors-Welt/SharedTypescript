@@ -193,6 +193,20 @@ class CustomerService {
             }
         });
     }
+    deleteDirectDebitGroup(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}/directDebitGroup`, null, true);
+            }
+            catch (err) {
+                return {
+                    success: false,
+                    message: 'failed to update bank account at customer service',
+                    errors: [err],
+                };
+            }
+        });
+    }
     updateContactData(customerId, contact) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

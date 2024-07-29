@@ -35,6 +35,7 @@ export interface ICustomerService extends IService {
     registerTagId(customerId: number, command: AddTagIdCommand): Promise<CommandResult>;
     updateAddress(customerId: number, address: Address): Promise<CommandResult>;
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult>;
+    deleteDirectDebitGroup(customerId: number): Promise<CommandResult>;
     updateContactData(customerId: number, contact: Contact): Promise<CommandResult>;
     updateCompany(customerId: number, company: string): Promise<CommandResult>;
     updateCompany2(customerId: number, company: string): Promise<CommandResult>;

@@ -19,7 +19,6 @@ import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCus
 import { CommandResult } from '../models/CustomerService/CommandResult';
 import { LicensePlates } from '../models/CustomerService/LicensePlates';
 
-
 export class CustomerService implements ICustomerService {
   host: string;
   port: number;
@@ -169,6 +168,18 @@ export class CustomerService implements ICustomerService {
   async updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult> {
     try {
       return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/bankAccount`, bankAccount, null, true);
+    } catch (err) {
+      return {
+        success: false,
+        message: 'failed to update bank account at customer service',
+        errors: [err],
+      };
+    }
+  }
+
+  async deleteDirectDebitGroup(customerId: number): Promise<CommandResult> {
+    try {
+      return await ApiClient.DELETE(`${this.baseUrl}/customers/${customerId}/directDebitGroup`, null, true);
     } catch (err) {
       return {
         success: false,
