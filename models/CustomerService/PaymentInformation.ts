@@ -1,4 +1,5 @@
 import { BankAccount } from './BankAccount';
+import { DirectDebitGroup } from './DirectDebitGroup';
 import { SepaMandate } from './SepaMandate';
 
 export class PaymentInformation {
@@ -6,4 +7,5 @@ export class PaymentInformation {
   bankAccount: BankAccount;
   sepaMandate: SepaMandate;
   stopDirectDebit: boolean;
+  directDebitGroup: DirectDebitGroup;
 }
