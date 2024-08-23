@@ -109,10 +109,14 @@ class AccountingService {
                     note,
                     paymentType,
                     transactionType,
-                });
+                }, null, true);
             }
             catch (err) {
-                throw new Error('failed to book to bistro account at accounting service');
+                return {
+                    success: false,
+                    message: 'failed to book to bistro account at accounting service',
+                    errors: [err]
+                };
             }
         });
     }
@@ -125,10 +129,14 @@ class AccountingService {
                     note,
                     paymentType,
                     transactionType,
-                });
+                }, null, true);
             }
             catch (err) {
-                throw new Error('failed to book to membership account at accounting service');
+                return {
+                    success: false,
+                    message: 'failed to book to membership account at accounting service',
+                    errors: [err]
+                };
             }
         });
     }
