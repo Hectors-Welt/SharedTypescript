@@ -141,10 +141,15 @@ class CourseManagementService {
     bookAppointment(appointmentRequest) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/appointments/bookAppointment`, appointmentRequest);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/appointments/bookAppointment`, appointmentRequest, null, true);
             }
             catch (err) {
-                throw new Error('failed to book appointment at course management service');
+                return {
+                    success: false,
+                    message: 'failed to book appointment at course management service',
+                    errors: [err],
+                    code: null,
+                };
             }
         });
     }

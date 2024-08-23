@@ -127,9 +127,14 @@ export class CourseManagementService implements ICourseManagementService {
 
   async bookAppointment(appointmentRequest: AppointmentBooking): Promise<ReservationResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/appointments/bookAppointment`, appointmentRequest);
+      return await ApiClient.POST(`${this.baseUrl}/appointments/bookAppointment`, appointmentRequest, null, true);
     } catch (err) {
-      throw new Error('failed to book appointment at course management service');
+      return {
+        success: false,
+        message: 'failed to book appointment at course management service',
+        errors: [err],
+        code: null,
+      };
     }
   }
 
