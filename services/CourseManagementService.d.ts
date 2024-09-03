@@ -14,6 +14,7 @@ import { PunishmentContainer } from '../models/CourseManagementService/Punishmen
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
 import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
 import { CommandResult } from '../models/CourseManagementService/CommandResult';
+import { CancellationResult } from '../models/CourseManagementService/CancellationResult';
 export declare class CourseManagementService implements ICourseManagementService {
     host: string;
     port: number;
@@ -24,7 +25,7 @@ export declare class CourseManagementService implements ICourseManagementService
     getClasses(filter: ClassFilter): Promise<Class[]>;
     getPriceInformationForClass(classId: number, customerId: number): Promise<any>;
     bookCustomerIntoClass(classId: number, customerId: number): Promise<ReservationResult>;
-    cancelCustomerFromClass(classId: number, customerId: number): Promise<any>;
+    cancelCustomerFromClass(classId: number, customerId: number): Promise<CancellationResult>;
     getCourses(): Promise<Course[]>;
     getCourseTypes(): Promise<CourseType[]>;
     getCourseLevels(): Promise<CourseLevel[]>;

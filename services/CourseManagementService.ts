@@ -15,6 +15,7 @@ import { PunishmentContainer } from '../models/CourseManagementService/Punishmen
 import { ReservationResult } from '../models/CourseManagementService/ReservationResult';
 import { ClickAndMeetSettings } from '../models/CourseManagementService/ClickAndMeetSettings';
 import { CommandResult } from '../models/CourseManagementService/CommandResult';
+import { CancellationResult } from '../models/CourseManagementService/CancellationResult';
 
 export class CourseManagementService implements ICourseManagementService {
   host: string;
@@ -61,11 +62,16 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
-  async cancelCustomerFromClass(classId: number, customerId: number): Promise<any> {
+  async cancelCustomerFromClass(classId: number, customerId: number): Promise<CancellationResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/doCancellationForCustomerId/${customerId}`);
+      return await ApiClient.POST(`${this.baseUrl}/classes/${classId}/doCancellationForCustomerId/${customerId}`, null, null, true);
     } catch (err) {
-      throw new Error('failed to cancel customer from class at course management service');
+      return {
+        success: false,
+        message: 'failed to cancel customer from class at course management service',
+        errors: [err],
+        code: null,
+      };
     }
   }
 

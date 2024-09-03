@@ -61,10 +61,15 @@ class CourseManagementService {
     cancelCustomerFromClass(classId, customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/doCancellationForCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/classes/${classId}/doCancellationForCustomerId/${customerId}`, null, null, true);
             }
             catch (err) {
-                throw new Error('failed to cancel customer from class at course management service');
+                return {
+                    success: false,
+                    message: 'failed to cancel customer from class at course management service',
+                    errors: [err],
+                    code: null,
+                };
             }
         });
     }
