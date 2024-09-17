@@ -10,6 +10,7 @@ import { BistroAccountBooking } from '../models/AccountingService/BistroAccountB
 import { MembershipAccount } from '../models/AccountingService/MembershipAccount';
 import { MembershipAccountBooking } from '../models/AccountingService/MembershipAccountBooking';
 import { DepositCashCommandResult } from '../models/AccountingService/DepositCashCommandResult';
+import { PaybackBistroAccountBalanceResult } from '../models/AccountingService/PaybackBistroAccountBalanceResult';
 
 export class AccountingService implements IAccountingService {
   host: string;
@@ -121,6 +122,20 @@ export class AccountingService implements IAccountingService {
       return {
         success: false,
         message: 'failed to book to membership account at accounting service',
+        errors: [err]
+      }
+    }
+  }
+
+  async paybackBistroAccountBalance(customerId: number): Promise<PaybackBistroAccountBalanceResult> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/bistroAccount/payback`, {
+        customerId,
+      }, null, true);
+    } catch (err) {
+      return {
+        success: false,
+        message: 'failed to payback bistro account balance at accounting service',
         errors: [err]
       }
     }

@@ -140,5 +140,21 @@ class AccountingService {
             }
         });
     }
+    paybackBistroAccountBalance(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/bistroAccount/payback`, {
+                    customerId,
+                }, null, true);
+            }
+            catch (err) {
+                return {
+                    success: false,
+                    message: 'failed to payback bistro account balance at accounting service',
+                    errors: [err]
+                };
+            }
+        });
+    }
 }
 exports.AccountingService = AccountingService;
