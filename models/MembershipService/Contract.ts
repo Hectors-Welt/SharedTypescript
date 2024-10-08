@@ -2,6 +2,7 @@ import { Fee } from './Fee';
 import { Limit } from './Limit';
 
 export class Contract {
+  customerId: number;
   id: number;
   name: string;
   type: string;
