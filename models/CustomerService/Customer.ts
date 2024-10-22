@@ -16,4 +16,5 @@ export class Customer {
   supervisorId?: number;
   company: string;
   company2: string;
+  healthInsurance: string;
 }
