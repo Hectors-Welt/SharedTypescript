@@ -19,6 +19,7 @@ import { AddInteractionCommandResult } from '../models/CustomerService/AddIntera
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 import { CommandResult } from '../models/CustomerService/CommandResult';
 import { LicensePlates } from '../models/CustomerService/LicensePlates';
+import { HealthInsurance } from '../models/CustomerService/HealthInsurance';
 export interface ICustomerService extends IService {
     addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
     updateCustomer(customerId: number, command: UpdateCustomerCommand): Promise<UpdateCustomerCommandResult>;
@@ -49,4 +50,6 @@ export interface ICustomerService extends IService {
     deleteCustomer(customerId: number): Promise<DeleteCustomerCommandResult>;
     getLicensePlates(customerId: number): Promise<LicensePlates>;
     updateLicensePlates(customerId: number, licensePlates: LicensePlates): Promise<CommandResult>;
+    updateHealthInsurance(customerId: number, healthInsuranceId: number): Promise<CommandResult>;
+    getHealthInsurances(): Promise<HealthInsurance[]>;
 }

@@ -1,0 +1,4 @@
+export class HealthInsurance {
+  id: number;
+  name: string;
+}

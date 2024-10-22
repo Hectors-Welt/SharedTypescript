@@ -18,6 +18,7 @@ import { AddInteractionCommand } from '../models/CustomerService/AddInteractionC
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 import { CommandResult } from '../models/CustomerService/CommandResult';
 import { LicensePlates } from '../models/CustomerService/LicensePlates';
+import { HealthInsurance } from '../models/CustomerService/HealthInsurance';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -331,6 +332,28 @@ export class CustomerService implements ICustomerService {
         message: 'failed to update license plates at customer service',
         errors: [err],
       };
+    }
+  }
+
+  async updateHealthInsurance(customerId: number, healthInsuranceId: number): Promise<CommandResult> {
+    try {
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/healthInsurance`, {
+        healthInsuranceId: healthInsuranceId,
+      }, null, true);
+    } catch (err) {
+      return {
+        success: false,
+        message: 'failed to update status at customer service',
+        errors: [err],
+      };
+    }
+  }
+
+  async getHealthInsurances(): Promise<HealthInsurance[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/healthInsurances`);
+    } catch (err) {
+      throw new Error('failed to retrieve health insurances from customer service');
     }
   }
 }

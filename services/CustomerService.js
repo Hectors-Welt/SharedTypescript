@@ -378,5 +378,31 @@ class CustomerService {
             }
         });
     }
+    updateHealthInsurance(customerId, healthInsuranceId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/healthInsurance`, {
+                    healthInsuranceId: healthInsuranceId,
+                }, null, true);
+            }
+            catch (err) {
+                return {
+                    success: false,
+                    message: 'failed to update status at customer service',
+                    errors: [err],
+                };
+            }
+        });
+    }
+    getHealthInsurances() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/healthInsurances`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve health insurances from customer service');
+            }
+        });
+    }
 }
 exports.CustomerService = CustomerService;
