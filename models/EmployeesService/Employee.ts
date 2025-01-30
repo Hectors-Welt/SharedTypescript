@@ -9,4 +9,5 @@ export class Employee {
   roles: string[];
   studioIds: number[];
   currentWorktime?: Worktime;
+  isZmv: boolean;
 }
