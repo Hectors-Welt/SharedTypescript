@@ -18,16 +18,6 @@ class AccountingService {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
-    getClubAccountInformation(customerId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getClubAccountInformationByCustomerId/${customerId}`);
-            }
-            catch (err) {
-                throw new Error('failed to retrieve club account information from accounting service');
-            }
-        });
-    }
     getBistroAccount(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

@@ -1,4 +1,3 @@
-import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation';
 import { SepaBookingSet } from '../models/AccountingService/SepaBookingSet';
 import { IService } from './IService';
 import { SepaDirectDebit } from '../models/AccountingService/SepaDirectDebit';
@@ -12,8 +11,6 @@ import { DepositCashCommandResult } from '../models/AccountingService/DepositCas
 import { PaybackBistroAccountBalanceResult } from '../models/AccountingService/PaybackBistroAccountBalanceResult';
 
 export interface IAccountingService extends IService {
-  getClubAccountInformation(customerId: number): Promise<ClubAccountInformation>;
-
   getBistroAccount(customerId: number): Promise<BistroAccount>;
   
   getBistroAccountBookings(customerId: number): Promise<BistroAccountBooking[]>;

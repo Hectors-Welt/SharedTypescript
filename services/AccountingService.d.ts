@@ -1,5 +1,4 @@
 import { IAccountingService } from '../interfaces/IAccountingService';
-import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation';
 import { SepaBookingSet } from '../models/AccountingService/SepaBookingSet';
 import { SepaDirectDebit } from '../models/AccountingService/SepaDirectDebit';
 import { PaymentType } from '../models/AccountingService/PaymentType';
@@ -16,7 +15,6 @@ export declare class AccountingService implements IAccountingService {
     version: string;
     baseUrl: string;
     constructor(host: string, port: number, version: string);
-    getClubAccountInformation(customerId: number): Promise<ClubAccountInformation>;
     getBistroAccount(customerId: number): Promise<BistroAccount>;
     getBistroAccountBookings(customerId: number): Promise<BistroAccountBooking[]>;
     getMembershipAccount(customerId: number): Promise<MembershipAccount>;

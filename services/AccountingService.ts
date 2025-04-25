@@ -1,5 +1,4 @@
 import { IAccountingService } from '../interfaces/IAccountingService';
-import { ClubAccountInformation } from '../models/AccountingService/ClubAccountInformation';
 import { SepaBookingSet } from '../models/AccountingService/SepaBookingSet';
 import { ApiClient } from './ApiClient';
 import { SepaDirectDebit } from '../models/AccountingService/SepaDirectDebit';
@@ -23,14 +22,6 @@ export class AccountingService implements IAccountingService {
     this.port = port;
     this.version = version;
     this.baseUrl = `http://${host}:${port}`;
-  }
-  
-  async getClubAccountInformation(customerId: number): Promise<ClubAccountInformation> {
-    try {
-      return await ApiClient.GET(`${this.baseUrl}/getClubAccountInformationByCustomerId/${customerId}`);
-    } catch (err) {
-      throw new Error('failed to retrieve club account information from accounting service');
-    }
   }
 
   async getBistroAccount(customerId: number): Promise<BistroAccount> {
