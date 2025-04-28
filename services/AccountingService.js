@@ -21,10 +21,10 @@ class AccountingService {
     getBistroAccount(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bistroAccount`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bistroAccount`, null, true);
             }
             catch (err) {
-                throw new Error('failed to retrieve bistro account information from accounting service');
+                throw new Error(`failed to retrieve bistro account information from accounting service: ${err}`);
             }
         });
     }

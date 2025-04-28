@@ -26,9 +26,9 @@ export class AccountingService implements IAccountingService {
 
   async getBistroAccount(customerId: number): Promise<BistroAccount> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bistroAccount`);
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bistroAccount`, null, true);
     } catch (err) {
-      throw new Error('failed to retrieve bistro account information from accounting service');
+      throw new Error(`failed to retrieve bistro account information from accounting service: ${err}`);
     }
   }
 
