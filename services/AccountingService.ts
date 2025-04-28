@@ -28,7 +28,7 @@ export class AccountingService implements IAccountingService {
     try {
       return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bistroAccount`, null, true);
     } catch (err) {
-      throw new Error(`failed to retrieve bistro account information from accounting service: ${err}`);
+      throw new Error(`failed to retrieve bistro account information from accounting service: ${err.message}`);
     }
   }
 
