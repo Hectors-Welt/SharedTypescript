@@ -26,6 +26,7 @@ import { MollieSettings } from '../models/DiscoveryService/MollieSettings';
 import { ISecaConnector } from './ISecaConnector';
 import {IEgymCloudConnector} from "./IEgymCloudConnector";
 import { RedisSettings } from '../models/DiscoveryService/RedisSettings';
+import { IPaymentService } from './IPaymentService';
 
 export interface IDiscoveryService {
   port: number;
@@ -99,6 +100,8 @@ export interface IDiscoveryService {
   getSecaConnector(): Promise<ISecaConnector>;
   
   getEgymCloudConnector(): Promise<IEgymCloudConnector>;
+
+  getPaymentService(): Promise<IPaymentService>;
 
   getClubs(): Promise<any>;
 

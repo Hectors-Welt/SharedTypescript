@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaymentgService = void 0;
+exports.PaymentService = void 0;
 const ApiClient_1 = require("./ApiClient");
-class PaymentgService {
+class PaymentService {
     constructor(host, port, version) {
         this.host = host;
         this.port = port;
@@ -29,4 +29,4 @@ class PaymentgService {
         });
     }
 }
-exports.PaymentgService = PaymentgService;
+exports.PaymentService = PaymentService;

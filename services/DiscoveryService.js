@@ -39,6 +39,7 @@ const MollieSettings_1 = require("../models/DiscoveryService/MollieSettings");
 const SecaConnector_1 = require("./SecaConnector");
 const EgymCloudConnector_1 = require("./EgymCloudConnector");
 const RedisSettings_1 = require("../models/DiscoveryService/RedisSettings");
+const PaymentService_1 = require("./PaymentService");
 class DiscoveryService {
     constructor(host, port, requestingServiceName, requestingServiceVersion) {
         this.requestingServiceName = requestingServiceName;
@@ -706,6 +707,29 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve egym cloud connector from discovery service: ${err.message}`,
+                };
+            }
+        });
+    }
+    getPaymentService() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (this.paymentService) {
+                    return this.paymentService;
+                }
+                const paymentService = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/PaymentService`);
+                if (paymentService.port == 0) {
+                    throw {
+                        message: 'not running'
+                    };
+                }
+                this.paymentService = new PaymentService_1.PaymentService(paymentService.host, paymentService.port, paymentService.serviceVersion);
+                return this.paymentService;
+            }
+            catch (err) {
+                throw {
+                    status: 503,
+                    message: `failed to retrieve payment service from discovery service: ${err.message}`,
                 };
             }
         });

@@ -3,7 +3,7 @@ import { ApiClient } from './ApiClient';
 import { IPaymentService } from '../interfaces/IPaymentService';
 import { PaymentRun } from '../models/PaymentService/PaymentRun';
 
-export class PaymentgService implements IPaymentService {
+export class PaymentService implements IPaymentService {
   host: string;
   port: number;
   version: string;

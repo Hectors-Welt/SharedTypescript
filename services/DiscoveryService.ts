@@ -50,6 +50,8 @@ import { SecaConnector } from './SecaConnector';
 import {IEgymCloudConnector} from "../interfaces/IEgymCloudConnector";
 import {EgymCloudConnector} from "./EgymCloudConnector";
 import { RedisSettings } from '../models/DiscoveryService/RedisSettings'
+import { IPaymentService } from '../interfaces/IPaymentService';
+import { PaymentService } from './PaymentService';
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -85,6 +87,7 @@ export class DiscoveryService implements IDiscoveryService {
   private paypalIntegrationService: IPaypalIntegrationService;
   private secaConnector: ISecaConnector;
   private egymCloudConnector: IEgymCloudConnector;
+  private paymentService: IPaymentService;
 
   constructor(host: string, port: number, private readonly requestingServiceName: string, private readonly requestingServiceVersion: string) {
     this.host = host;
@@ -800,6 +803,33 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve egym cloud connector from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getPaymentService(): Promise<IPaymentService> {
+    try {
+      if (this.paymentService) {
+        return this.paymentService;
+      }
+
+      const paymentService = await ApiClient.GET(`${this.baseUrl}/PaymentService`);
+      if (paymentService.port == 0){
+        throw {
+          message: 'not running'
+        };
+      }
+      this.paymentService = new PaymentService(
+        paymentService.host,
+        paymentService.port,
+        paymentService.serviceVersion,
+      );
+
+      return this.paymentService;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve payment service from discovery service: ${err.message}`,
       };
     }
   }

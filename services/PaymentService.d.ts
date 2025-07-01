@@ -1,6 +1,6 @@
 import { IPaymentService } from '../interfaces/IPaymentService';
 import { PaymentRun } from '../models/PaymentService/PaymentRun';
-export declare class PaymentgService implements IPaymentService {
+export declare class PaymentService implements IPaymentService {
     host: string;
     port: number;
     version: string;
