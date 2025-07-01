@@ -146,5 +146,15 @@ class AccountingService {
             }
         });
     }
+    getPaymentRunById(paymentRunId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/paymentRuns/${paymentRunId}`);
+            }
+            catch (err) {
+                new Error('failed to retrieve payment run from accounting service');
+            }
+        });
+    }
 }
 exports.AccountingService = AccountingService;

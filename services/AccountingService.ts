@@ -10,6 +10,7 @@ import { MembershipAccount } from '../models/AccountingService/MembershipAccount
 import { MembershipAccountBooking } from '../models/AccountingService/MembershipAccountBooking';
 import { DepositCashCommandResult } from '../models/AccountingService/DepositCashCommandResult';
 import { PaybackBistroAccountBalanceResult } from '../models/AccountingService/PaybackBistroAccountBalanceResult';
+import { PaymentRun } from '../models/AccountingService/PaymentRun';
 
 export class AccountingService implements IAccountingService {
   host: string;
@@ -129,6 +130,14 @@ export class AccountingService implements IAccountingService {
         message: 'failed to payback bistro account balance at accounting service',
         errors: [err]
       }
+    }
+  }
+
+  async getPaymentRunById(paymentRunId: number): Promise<PaymentRun> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/paymentRuns/${paymentRunId}`);
+    } catch (err) {
+      new Error('failed to retrieve payment run from accounting service');
     }
   }
 }

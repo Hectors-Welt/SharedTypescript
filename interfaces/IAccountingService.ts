@@ -9,6 +9,7 @@ import { MembershipAccountBooking } from '../models/AccountingService/Membership
 import { BistroAccountBooking } from '../models/AccountingService/BistroAccountBooking';
 import { DepositCashCommandResult } from '../models/AccountingService/DepositCashCommandResult';
 import { PaybackBistroAccountBalanceResult } from '../models/AccountingService/PaybackBistroAccountBalanceResult';
+import { PaymentRun } from '../models/AccountingService/PaymentRun';
 
 export interface IAccountingService extends IService {
   getBistroAccount(customerId: number): Promise<BistroAccount>;
@@ -30,4 +31,6 @@ export interface IAccountingService extends IService {
   bookToMembershipAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult>;
 
   paybackBistroAccountBalance(customerId: number): Promise<PaybackBistroAccountBalanceResult>;
+
+  getPaymentRunById(paymentRunId: number): Promise<PaymentRun>;
 }
