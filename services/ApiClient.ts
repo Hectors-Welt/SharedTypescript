@@ -2,7 +2,6 @@ import * as popsicle from 'popsicle';
 
 export class ApiClient {
   static headers: any = {
-    'content-type': 'application/json',
     accept: 'application/json',
   };
 
@@ -38,7 +37,9 @@ export class ApiClient {
     };
     if (body) {
       request.body = body;
+      request.headers['content-type'] = 'application/json';
     }
+
 
     const result = await popsicle.request(request).use(popsicle.plugins.parse('json'));
 
@@ -58,6 +59,7 @@ export class ApiClient {
     };
     if (body) {
       request.body = body;
+      request.headers['content-type'] = 'application/json';
     }
 
     const result = await popsicle.request(request).use(popsicle.plugins.parse('json'));

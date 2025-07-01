@@ -49,6 +49,7 @@ class ApiClient {
             };
             if (body) {
                 request.body = body;
+                request.headers['content-type'] = 'application/json';
             }
             const result = yield popsicle.request(request).use(popsicle.plugins.parse('json'));
             return result.status === 200 || result.status === 204 ? result.body || {} : null;
@@ -63,6 +64,7 @@ class ApiClient {
             };
             if (body) {
                 request.body = body;
+                request.headers['content-type'] = 'application/json';
             }
             const result = yield popsicle.request(request).use(popsicle.plugins.parse('json'));
             if (result.status !== 200 && result.status !== 204) {
@@ -74,6 +76,5 @@ class ApiClient {
 }
 exports.ApiClient = ApiClient;
 ApiClient.headers = {
-    'content-type': 'application/json',
     accept: 'application/json',
 };
