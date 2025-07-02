@@ -2,6 +2,7 @@ import { ApiClient } from './ApiClient';
 
 import { IPaymentService } from '../interfaces/IPaymentService';
 import { PaymentRun } from '../models/PaymentService/PaymentRun';
+import { RevokePaymentCommandResult } from '../models/PaymentService/RevokePaymentCommandResult';
 
 export class PaymentService implements IPaymentService {
   host: string;
@@ -24,7 +25,7 @@ export class PaymentService implements IPaymentService {
     }
   }
 
-  async revokePayment(paymentRunId: number, customerId: number, reason: string, fee?: number): Promise<void> {
+  async revokePayment(paymentRunId: number, customerId: number, reason: string, fee?: number): Promise<RevokePaymentCommandResult> {
     try {
       return await ApiClient.DELETE(`${this.baseUrl}/paymentRuns/${paymentRunId}/customers/${customerId}`, {
         reason,
