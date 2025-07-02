@@ -24,7 +24,7 @@ class PaymentService {
                 return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/paymentRuns/${paymentRunId}`);
             }
             catch (err) {
-                new Error('failed to retrieve payment run from payment service');
+                throw new Error('failed to retrieve payment run from payment service');
             }
         });
     }
@@ -37,7 +37,7 @@ class PaymentService {
                 }, true);
             }
             catch (err) {
-                new Error('failed to revoke payment at payment service');
+                throw new Error('failed to revoke payment at payment service');
             }
         });
     }
