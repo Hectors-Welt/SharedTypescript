@@ -23,4 +23,15 @@ export class PaymentService implements IPaymentService {
       new Error('failed to retrieve payment run from payment service');
     }
   }
+
+  async revokePayment(paymentRunId: number, customerId: number, reason: string, fee?: number): Promise<void> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/paymentRuns/${paymentRunId}/customers/${customerId}`, {
+        reason,
+        fee,
+      });
+    } catch (err) {
+      new Error('failed to revoke payment at payment service');
+    }
+  }
 }
