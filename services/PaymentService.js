@@ -31,10 +31,10 @@ class PaymentService {
     revokePayment(paymentRunId, customerId, reason, fee) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/paymentRuns/${paymentRunId}/customers/${customerId}`, {
+                return yield ApiClient_1.ApiClient.DELETE(`${this.baseUrl}/paymentRuns/${paymentRunId}/customers/${customerId}`, {
                     reason,
                     fee,
-                });
+                }, true);
             }
             catch (err) {
                 new Error('failed to revoke payment at payment service');
