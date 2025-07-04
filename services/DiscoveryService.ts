@@ -52,6 +52,8 @@ import {EgymCloudConnector} from "./EgymCloudConnector";
 import { RedisSettings } from '../models/DiscoveryService/RedisSettings'
 import { IPaymentService } from '../interfaces/IPaymentService';
 import { PaymentService } from './PaymentService';
+import { IWellpassCloudConnector } from '../interfaces/IWellpassCloudConnector';
+import { WellpassCloudConnector } from './WellpassCloudConnector';
 
 export class DiscoveryService implements IDiscoveryService {
   public host: string;
@@ -87,6 +89,7 @@ export class DiscoveryService implements IDiscoveryService {
   private paypalIntegrationService: IPaypalIntegrationService;
   private secaConnector: ISecaConnector;
   private egymCloudConnector: IEgymCloudConnector;
+  private wellpassCloudConnector: IWellpassCloudConnector;
   private paymentService: IPaymentService;
 
   constructor(host: string, port: number, private readonly requestingServiceName: string, private readonly requestingServiceVersion: string) {
@@ -803,6 +806,33 @@ export class DiscoveryService implements IDiscoveryService {
       throw {
         status: 503,
         message: `failed to retrieve egym cloud connector from discovery service: ${err.message}`,
+      };
+    }
+  }
+
+  async getWellpassCloudConnector(): Promise<IWellpassCloudConnector> {
+    try {
+      if (this.wellpassCloudConnector) {
+        return this.wellpassCloudConnector;
+      }
+
+      const wellpassConnector = await ApiClient.GET(`${this.baseUrl}/WellpassCloudConnector`);
+      if (wellpassConnector.port == 0){
+        throw {
+          message: 'not running'
+        };
+      }
+      this.wellpassCloudConnector = new WellpassCloudConnector(
+          wellpassConnector.host,
+          wellpassConnector.port,
+          wellpassConnector.serviceVersion,
+      );
+
+      return this.wellpassCloudConnector;
+    } catch (err) {
+      throw {
+        status: 503,
+        message: `failed to retrieve wellpass cloud connector from discovery service: ${err.message}`,
       };
     }
   }

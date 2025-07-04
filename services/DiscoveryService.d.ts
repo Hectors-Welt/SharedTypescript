@@ -31,6 +31,7 @@ import { ISecaConnector } from '../interfaces/ISecaConnector';
 import { IEgymCloudConnector } from "../interfaces/IEgymCloudConnector";
 import { RedisSettings } from '../models/DiscoveryService/RedisSettings';
 import { IPaymentService } from '../interfaces/IPaymentService';
+import { IWellpassCloudConnector } from '../interfaces/IWellpassCloudConnector';
 export declare class DiscoveryService implements IDiscoveryService {
     private readonly requestingServiceName;
     private readonly requestingServiceVersion;
@@ -67,6 +68,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     private paypalIntegrationService;
     private secaConnector;
     private egymCloudConnector;
+    private wellpassCloudConnector;
     private paymentService;
     constructor(host: string, port: number, requestingServiceName: string, requestingServiceVersion: string);
     startSelfRegistration(serviceName: string, serviceVersion: string, host: string, servicePort: number | string, proxyRoute: string, isPublic: boolean, serviceType: ServiceType): Promise<void>;
@@ -105,6 +107,7 @@ export declare class DiscoveryService implements IDiscoveryService {
     getPaypalIntegrationService(): Promise<IPaypalIntegrationService>;
     getSecaConnector(): Promise<ISecaConnector>;
     getEgymCloudConnector(): Promise<IEgymCloudConnector>;
+    getWellpassCloudConnector(): Promise<IWellpassCloudConnector>;
     getPaymentService(): Promise<IPaymentService>;
     private registerService;
 }
