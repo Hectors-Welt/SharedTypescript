@@ -1,6 +1,9 @@
 import { IWellpassCloudConnector } from '../interfaces/IWellpassCloudConnector';
 import { AddUserCommand } from '../models/WellpassCloudConnector/AddUserCommand';
 import { AddUserCommandResult } from '../models/WellpassCloudConnector/AddUserCommandResult';
+import { PagedResponse } from '../models/WellpassCloudConnector/PagedResponse';
+import { PaginationRequest } from '../models/WellpassCloudConnector/PaginationRequest';
+import { User } from '../models/WellpassCloudConnector/User';
 import { ApiClient } from './ApiClient';
 
 export class WellpassCloudConnector implements IWellpassCloudConnector {
@@ -25,6 +28,14 @@ export class WellpassCloudConnector implements IWellpassCloudConnector {
         message: 'failed to add user at wellpass cloud connector',
         errors: [err]
       }
+    }
+  }
+
+  async getUsers(request: PaginationRequest): Promise<PagedResponse<User>> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/users?page=${request.page}&take=${request.take}&order=${request.oder}&orderBy=${request.orderBy}`, null, null);
+    } catch (err) {
+      throw new Error('failed to get users from wellpass cloud connector');
     }
   }
 }
