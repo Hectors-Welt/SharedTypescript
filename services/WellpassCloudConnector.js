@@ -35,7 +35,11 @@ class WellpassCloudConnector {
     getUsers(request) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/users?page=${request.page}&take=${request.take}&order=${request.order}&orderBy=${request.orderBy}`, null, null);
+                let query = `page=${request.page}&take=${request.take}&order=${request.order}`;
+                if (request.orderBy !== undefined) {
+                    query += `&orderBy=${request.orderBy}`;
+                }
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/users?${query}`, null, null);
             }
             catch (err) {
                 throw new Error('failed to get users from wellpass cloud connector');
