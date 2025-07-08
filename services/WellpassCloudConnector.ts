@@ -33,7 +33,7 @@ export class WellpassCloudConnector implements IWellpassCloudConnector {
 
   async getUsers(request: PaginationRequest): Promise<PagedResponse<User>> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/users?page=${request.page}&take=${request.take}&order=${request.oder}&orderBy=${request.orderBy}`, null, null);
+      return await ApiClient.GET(`${this.baseUrl}/users?page=${request.page}&take=${request.take}&order=${request.order}&orderBy=${request.orderBy}`, null, null);
     } catch (err) {
       throw new Error('failed to get users from wellpass cloud connector');
     }

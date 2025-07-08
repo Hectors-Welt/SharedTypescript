@@ -1,6 +1,6 @@
 export declare class PaginationRequest {
     orderBy: string;
-    oder: string;
+    order: string;
     page: number;
     take: number;
 }
