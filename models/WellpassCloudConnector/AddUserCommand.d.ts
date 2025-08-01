@@ -3,4 +3,5 @@ export declare class AddUserCommand {
     verificationTan: string;
     email: string;
     studioNumber: number;
+    isDaypassUser: boolean;
 }
