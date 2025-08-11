@@ -204,7 +204,7 @@ export class CustomerService implements ICustomerService {
 
   async updateCompany(customerId: number, company: string): Promise<CommandResult> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${company}`, {}, null, true);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${encodeURIComponent(company)}`, {}, null, true);
     } catch (err) {
       return {
         success: false,
@@ -216,7 +216,7 @@ export class CustomerService implements ICustomerService {
 
   async updateCompany2(customerId: number, company: string): Promise<CommandResult> {
     try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${company}`, {}, null, true);
+      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${encodeURIComponent(company)}`, {}, null, true);
     } catch (err) {
       return {
         success: false,

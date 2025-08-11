@@ -224,7 +224,7 @@ class CustomerService {
     updateCompany(customerId, company) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${company}`, {}, null, true);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company/${encodeURIComponent(company)}`, {}, null, true);
             }
             catch (err) {
                 return {
@@ -238,7 +238,7 @@ class CustomerService {
     updateCompany2(customerId, company) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${company}`, {}, null, true);
+                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/company2/${encodeURIComponent(company)}`, {}, null, true);
             }
             catch (err) {
                 return {
