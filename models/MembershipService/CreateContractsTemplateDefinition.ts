@@ -5,5 +5,4 @@ export class CreateContractsTemplateDefinition {
   price?: number;
   maxEndDate?: string;
   contractName?: string;
-  partialFee?: number;
 }
