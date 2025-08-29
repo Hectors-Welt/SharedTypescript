@@ -1,6 +1,9 @@
 import { CreateContractsTemplateDefinition } from './CreateContractsTemplateDefinition';
 export declare class SimulateContractCreationCommand {
-    customerId: number;
-    template: CreateContractsTemplateDefinition;
+    mainTemplate?: number;
+    template?: CreateContractsTemplateDefinition;
+    additionalTemplates: CreateContractsTemplateDefinition[];
+    additionalTemplatesToBookAfterFreeTestingPhase: CreateContractsTemplateDefinition[];
+    additionalTemplatesToBookAtTheEnd: CreateContractsTemplateDefinition[];
     begin: string;
 }

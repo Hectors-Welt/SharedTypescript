@@ -26,7 +26,6 @@ export declare class MembershipService implements IMembershipService {
     getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]>;
     rejectPendingMembership(processId: number): Promise<void>;
     createContracts(command: CreateContractsCommand): Promise<CreateContractsCommandResult>;
-    simulateContracts(command: CreateContractsCommand): Promise<any>;
     simulateContractCreation(command: SimulateContractCreationCommand): Promise<SimulateContractCreationCommandResult>;
     terminateContract(command: TerminateContractCommand): Promise<TerminateContractsCommandResult>;
     terminateAllContracts(command: TerminateAllContractsCommand): Promise<TerminateContractsCommandResult>;

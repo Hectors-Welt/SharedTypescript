@@ -97,21 +97,6 @@ class MembershipService {
             }
         });
     }
-    simulateContracts(command) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/simulateContracts`, command, null, true);
-            }
-            catch (err) {
-                return {
-                    success: false,
-                    message: 'failed to simulate contracts at membership service',
-                    errors: [err],
-                    contracts: null,
-                };
-            }
-        });
-    }
     simulateContractCreation(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
