@@ -28,6 +28,8 @@ export interface IMembershipService extends IService {
   rejectPendingMembership(processId: number): Promise<void>;
 
   createContracts(command: CreateContractsCommand): Promise<CreateContractsCommandResult>;
+  
+  simulateContracts(command: CreateContractsCommand): Promise<any>;
 
   simulateContractCreation(command: SimulateContractCreationCommand): Promise<SimulateContractCreationCommandResult>;
 
