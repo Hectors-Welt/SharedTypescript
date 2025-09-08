@@ -12,5 +12,5 @@ export declare class ContractTemplate {
     isAddon?: boolean;
     customerId?: number;
     customerHadFreeTestingPhaseBefore?: boolean;
-    activeMainContractNeeded?: boolean;
+    mainContractNeeded?: boolean;
 }
