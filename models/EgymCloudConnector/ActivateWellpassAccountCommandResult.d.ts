@@ -1,4 +1,4 @@
-export class AddUserCommandResult {
+export declare class ActivateWellpassAccountCommandResult {
     success: boolean;
     message: string;
     errors: any;

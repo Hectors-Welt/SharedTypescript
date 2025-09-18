@@ -1,7 +1,9 @@
-export declare class User {
+export declare class WellpassAccount {
     customerId: number;
     accountId: string;
-    gymId: number;
+    email: string;
+    isDaypassUser: boolean;
+    membershipId: string;
     contractsTerminatedAtRegistration: number[];
     contractsCreatedAtRegistration: number[];
 }

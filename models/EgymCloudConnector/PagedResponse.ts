@@ -1,4 +1,4 @@
-import { PageMetaData } from './PageMetaData';
+import { PageMetaData } from '../EgymCloudConnector/PageMetaData';
 
 export class PagedResponse<T> {
     data: T[];

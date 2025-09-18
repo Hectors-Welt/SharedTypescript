@@ -40,7 +40,6 @@ const SecaConnector_1 = require("./SecaConnector");
 const EgymCloudConnector_1 = require("./EgymCloudConnector");
 const RedisSettings_1 = require("../models/DiscoveryService/RedisSettings");
 const PaymentService_1 = require("./PaymentService");
-const WellpassCloudConnector_1 = require("./WellpassCloudConnector");
 class DiscoveryService {
     constructor(host, port, requestingServiceName, requestingServiceVersion) {
         this.requestingServiceName = requestingServiceName;
@@ -708,29 +707,6 @@ class DiscoveryService {
                 throw {
                     status: 503,
                     message: `failed to retrieve egym cloud connector from discovery service: ${err.message}`,
-                };
-            }
-        });
-    }
-    getWellpassCloudConnector() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                if (this.wellpassCloudConnector) {
-                    return this.wellpassCloudConnector;
-                }
-                const wellpassConnector = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/WellpassCloudConnector`);
-                if (wellpassConnector.port == 0) {
-                    throw {
-                        message: 'not running'
-                    };
-                }
-                this.wellpassCloudConnector = new WellpassCloudConnector_1.WellpassCloudConnector(wellpassConnector.host, wellpassConnector.port, wellpassConnector.serviceVersion);
-                return this.wellpassCloudConnector;
-            }
-            catch (err) {
-                throw {
-                    status: 503,
-                    message: `failed to retrieve wellpass cloud connector from discovery service: ${err.message}`,
                 };
             }
         });

@@ -26,7 +26,35 @@ class EgymCloudConnector {
                 });
             }
             catch (err) {
-                throw new Error('failed to verify accesstoken at articles service');
+                throw new Error('failed to verify accesstoken at egym cloud connector');
+            }
+        });
+    }
+    activateWellpassAccount(command) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/users`, command, null, true);
+            }
+            catch (err) {
+                return {
+                    success: false,
+                    message: 'failed to activate user at egym cloud connector',
+                    errors: [err]
+                };
+            }
+        });
+    }
+    getAccounts(request) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let query = `page=${request.page}&take=${request.take}&order=${request.order}`;
+                if (request.orderBy !== undefined) {
+                    query += `&orderBy=${request.orderBy}`;
+                }
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/users?${query}`, null, null);
+            }
+            catch (err) {
+                throw new Error('failed to get users from egym cloud connector');
             }
         });
     }

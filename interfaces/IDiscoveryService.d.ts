@@ -27,7 +27,6 @@ import { ISecaConnector } from './ISecaConnector';
 import { IEgymCloudConnector } from "./IEgymCloudConnector";
 import { RedisSettings } from '../models/DiscoveryService/RedisSettings';
 import { IPaymentService } from './IPaymentService';
-import { IWellpassCloudConnector } from './IWellpassCloudConnector';
 export interface IDiscoveryService {
     port: number;
     host: string;
@@ -63,7 +62,6 @@ export interface IDiscoveryService {
     getSecaConnector(): Promise<ISecaConnector>;
     getEgymCloudConnector(): Promise<IEgymCloudConnector>;
     getPaymentService(): Promise<IPaymentService>;
-    getWellpassCloudConnector(): Promise<IWellpassCloudConnector>;
     getClubs(): Promise<any>;
     getTitles(): Promise<any>;
     getContactCategories(): Promise<any>;

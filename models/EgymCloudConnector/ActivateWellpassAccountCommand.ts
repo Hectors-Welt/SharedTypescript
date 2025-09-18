@@ -1,7 +1,6 @@
-export declare class AddUserCommand {
+export class ActivateWellpassAccountCommand {
     customerId: number;
     verificationTan: string;
     email: string;
-    studioNumber: number;
     isDaypassUser: boolean;
 }
