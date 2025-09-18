@@ -6,6 +6,6 @@ import { PaginationRequest } from '../models/EgymCloudConnector/PaginationReques
 import { WellpassAccount } from '../models/EgymCloudConnector/WellpassAccount';
 export interface IEgymCloudConnector {
     verifyAccessToken(accessToken: string): Promise<AccessTokenResponse>;
-    activateWellpassAccount(command: ActivateWellpassAccountCommand): Promise<ActivateWellpassAccountCommandResult>;
-    getAccounts(request: PaginationRequest): Promise<PagedResponse<WellpassAccount>>;
+    activateWellpassAccount(customerId: number, command: ActivateWellpassAccountCommand): Promise<ActivateWellpassAccountCommandResult>;
+    getWellpassAccounts(request: PaginationRequest): Promise<PagedResponse<WellpassAccount>>;
 }

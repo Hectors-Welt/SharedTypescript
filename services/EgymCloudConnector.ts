@@ -30,27 +30,27 @@ export class EgymCloudConnector implements IEgymCloudConnector{
         }
     }
 
-    async activateWellpassAccount(command: ActivateWellpassAccountCommand): Promise<ActivateWellpassAccountCommandResult> {
-    try {
-      return await ApiClient.POST(`${this.baseUrl}/users`, command, null, true);
-    } catch (err) {
-      return {
-        success: false,
-        message: 'failed to activate user at egym cloud connector',
-        errors: [err]
+    async activateWellpassAccount(customerId: number, command: ActivateWellpassAccountCommand): Promise<ActivateWellpassAccountCommandResult> {
+      try {
+        return await ApiClient.POST(`${this.baseUrl}/accounts/wellpass/${customerId}/activate`, command, null, true);
+      } catch (err) {
+        return {
+          success: false,
+          message: 'failed to activate user at egym cloud connector',
+          errors: [err]
+        }
       }
     }
-  }
 
-  async getAccounts(request: PaginationRequest): Promise<PagedResponse<WellpassAccount>> {
-    try {
-      let query = `page=${request.page}&take=${request.take}&order=${request.order}`;
-      if (request.orderBy !== undefined) {
-          query += `&orderBy=${request.orderBy}`;
+    async getWellpassAccounts(request: PaginationRequest): Promise<PagedResponse<WellpassAccount>> {
+      try {
+        let query = `page=${request.page}&take=${request.take}&order=${request.order}`;
+        if (request.orderBy !== undefined) {
+            query += `&orderBy=${request.orderBy}`;
+        }
+        return await ApiClient.GET(`${this.baseUrl}/users?${query}`, null, null);
+      } catch (err) {
+        throw new Error('failed to get users from egym cloud connector');
       }
-      return await ApiClient.GET(`${this.baseUrl}/users?${query}`, null, null);
-    } catch (err) {
-      throw new Error('failed to get users from egym cloud connector');
     }
-  }
 }

@@ -12,6 +12,6 @@ export declare class EgymCloudConnector implements IEgymCloudConnector {
     baseUrl: string;
     constructor(host: string, port: number, version: string);
     verifyAccessToken(accessToken: string): Promise<AccessTokenResponse>;
-    activateWellpassAccount(command: ActivateWellpassAccountCommand): Promise<ActivateWellpassAccountCommandResult>;
-    getAccounts(request: PaginationRequest): Promise<PagedResponse<WellpassAccount>>;
+    activateWellpassAccount(customerId: number, command: ActivateWellpassAccountCommand): Promise<ActivateWellpassAccountCommandResult>;
+    getWellpassAccounts(request: PaginationRequest): Promise<PagedResponse<WellpassAccount>>;
 }

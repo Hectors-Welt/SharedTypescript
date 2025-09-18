@@ -30,10 +30,10 @@ class EgymCloudConnector {
             }
         });
     }
-    activateWellpassAccount(command) {
+    activateWellpassAccount(customerId, command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/users`, command, null, true);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/accounts/wellpass/${customerId}/activate`, command, null, true);
             }
             catch (err) {
                 return {
@@ -44,7 +44,7 @@ class EgymCloudConnector {
             }
         });
     }
-    getAccounts(request) {
+    getWellpassAccounts(request) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 let query = `page=${request.page}&take=${request.take}&order=${request.order}`;
