@@ -46,16 +46,11 @@ class EgymCloudConnector {
     }
     queryWellpassAccounts(request, filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                let query = `page=${request.page}&take=${request.take}`;
-                if (request.orderBy !== undefined) {
-                    query += `&order=${request.order}&orderBy=${request.orderBy}`;
-                }
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/accounts/query?${query}`, filter, null);
+            let query = `page=${request.page}&take=${request.take}`;
+            if (request.orderBy !== undefined) {
+                query += `&order=${request.order}&orderBy=${request.orderBy}`;
             }
-            catch (err) {
-                throw new Error('failed to get accounts from egym cloud connector');
-            }
+            return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/accounts/query?${query}`, filter, null, true);
         });
     }
 }
