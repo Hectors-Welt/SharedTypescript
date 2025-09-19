@@ -42,15 +42,15 @@ export class EgymCloudConnector implements IEgymCloudConnector{
       }
     }
 
-    async getWellpassAccounts(request: PaginationRequest): Promise<PagedResponse<WellpassAccount>> {
+    async queryWellpassAccounts(request: PaginationRequest, filter: any): Promise<PagedResponse<WellpassAccount>> {
       try {
-        let query = `page=${request.page}&take=${request.take}&order=${request.order}`;
+        let query = `page=${request.page}&take=${request.take}`;
         if (request.orderBy !== undefined) {
-            query += `&orderBy=${request.orderBy}`;
+            query += `&order=${request.order}&orderBy=${request.orderBy}`;
         }
-        return await ApiClient.GET(`${this.baseUrl}/users?${query}`, null, null);
+        return await ApiClient.POST(`${this.baseUrl}/accounts/query?${query}`, filter, null);
       } catch (err) {
-        throw new Error('failed to get users from egym cloud connector');
+        throw new Error('failed to get accounts from egym cloud connector');
       }
     }
 }
