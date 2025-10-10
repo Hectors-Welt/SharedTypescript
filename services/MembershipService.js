@@ -108,7 +108,7 @@ class MembershipService {
                     message: 'failed to simulate contract creation at membership service',
                     errors: [err],
                     returnCode: null,
-                    contractSimulation: null,
+                    simulationData: null,
                 };
             }
         });
