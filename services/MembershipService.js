@@ -100,7 +100,7 @@ class MembershipService {
     simulateContractCreation(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command, null, true);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/simulateOnlineMembership`, command, null, true);
             }
             catch (err) {
                 return {
