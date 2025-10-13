@@ -96,7 +96,7 @@ export class MembershipService implements IMembershipService {
 
   async simulateContractCreation(command: SimulateContractCreationCommand): Promise<SimulateContractCreationCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command, null, true);
+      return await ApiClient.POST(`${this.baseUrl}/commands/simulateOnlineMembership`, command, null, true);
     } catch (err) {
       return {
         success: false,
