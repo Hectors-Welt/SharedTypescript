@@ -1,6 +1,6 @@
-export declare class MemberContractStatus{
-    public customerId?: number;
-    public isAMainContract?: boolean;
-    public isExternalBilling?: boolean;
-    public standalone?: boolean;
+export declare class MemberContractStatus {
+    customerId?: number;
+    isAMainContract?: boolean;
+    isExternalBilling?: boolean;
+    standalone?: boolean;
 }
