@@ -22,7 +22,7 @@ export interface IMembershipService extends IService {
 
   getActiveMembersContractStatus(customerId: number, request: PaginationRequest): Promise<PagedResponse<MemberContractStatus>>;
 
-  getContractTemplatesAvailable(customerId: number): Promise<ContractTemplate[]>;
+  getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
 
   getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
 
