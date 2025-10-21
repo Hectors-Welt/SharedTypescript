@@ -28,7 +28,7 @@ class MembershipService {
             }
         });
     }
-    getActiveMembersContractStatus() {
+    getActiveMembersContractStatus(customerId, page, take) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/contracts/active-members/status?CustomerId=${customerId}&Page=${page}&Take=${take}`);
