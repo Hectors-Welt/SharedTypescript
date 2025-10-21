@@ -1,6 +1,6 @@
 export class MemberContractStatus{
-    public customerId?: number;
-    public isAMainContract?: boolean;
-    public isExternalBilling?: boolean;
-    public standalone?: boolean;
+    customerId?: number;
+    isAMainContract?: boolean;
+    isExternalBilling?: boolean;
+    standalone?: boolean;
 }
