@@ -20,7 +20,7 @@ import { PagedResponse } from '../models/MembershipService/PagedResponse';
 export interface IMembershipService extends IService {
   getActiveContractNames(): Promise<string[]>;
 
-  getActiveMembersContractStatus(customerId: number, request: PaginationRequest): Promise<PagedResponse<MemberContractStatus>>;
+  getActiveMembersContractStatus(customerId: number, page: number, take: number): Promise<PagedResponse<MemberContractStatus>>;
 
   getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
 
