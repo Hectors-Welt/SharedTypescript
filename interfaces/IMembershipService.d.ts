@@ -13,8 +13,11 @@ import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllCo
 import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
 import { SimulateContractCreationCommand } from '../models/MembershipService/SimulateContractCreationCommand';
 import { SimulateContractCreationCommandResult } from '../models/MembershipService/SimulateContractCreationCommandResult';
+import { MemberContractStatus } from '../models/MembershipService/MemberContractStatus';
+import { PagedResponse } from '../models/MembershipService/PagedResponse';
 export interface IMembershipService extends IService {
     getActiveContractNames(): Promise<string[]>;
+    getActiveMembersContractStatus(customerId: number, page: number, take: number): Promise<PagedResponse<MemberContractStatus>>;
     getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]>;
