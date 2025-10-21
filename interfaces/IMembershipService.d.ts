@@ -17,7 +17,7 @@ import { MemberContractStatus } from '../models/MembershipService/MemberContract
 import { PagedResponse } from '../models/MembershipService/PagedResponse';
 export interface IMembershipService extends IService {
     getActiveContractNames(): Promise<string[]>;
-    getActiveMembersContractStatus(customerId: number, page: number, take: number): Promise<PagedResponse<MemberContractStatus>>;
+    getActiveMembersContractStatus(customerId?: number, page?: number, take?: number): Promise<PagedResponse<MemberContractStatus>>;
     getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]>;
