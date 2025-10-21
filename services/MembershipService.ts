@@ -37,7 +37,7 @@ export class MembershipService implements IMembershipService {
     }
   }
 
-  async getActiveMembersContractStatus(): Promise<MemberContractStatus> {
+  async getActiveMembersContractStatus(): Promise<MemberContractStatus[]> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/getActiveMembersContractStatus`);
     } catch (err) {

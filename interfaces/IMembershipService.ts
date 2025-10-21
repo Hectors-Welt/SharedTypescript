@@ -18,7 +18,7 @@ import { MemberContractStatus } from '../models/MembershipService/MemberContract
 export interface IMembershipService extends IService {
   getActiveContractNames(): Promise<string[]>;
 
-  getActiveMembersContractStatus(customerId?: number): Promise<MemberContractStatus>;
+  getActiveMembersContractStatus(customerId?: number): Promise<MemberContractStatus[]>;
 
   getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
 
