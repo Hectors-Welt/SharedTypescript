@@ -15,6 +15,8 @@ import { PauseAllContractsCommandResult } from '../models/MembershipService/Paus
 import { SimulateContractCreationCommand } from '../models/MembershipService/SimulateContractCreationCommand';
 import { SimulateContractCreationCommandResult } from '../models/MembershipService/SimulateContractCreationCommandResult';
 import { MemberContractStatus } from '../models/MembershipService/MemberContractStatus';
+import { PaginationRequest } from '../models/MembershipService/PaginationRequest';
+import { PagedResponse } from '../models/MembershipService/PagedResponse';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -37,9 +39,9 @@ export class MembershipService implements IMembershipService {
     }
   }
 
-  async getActiveMembersContractStatus(): Promise<MemberContractStatus[]> {
+  async getActiveMembersContractStatus(customerId: number, request: PaginationRequest): Promise<PagedResponse<MemberContractStatus>> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getActiveMembersContractStatus`);
+      return await ApiClient.GET(`${this.baseUrl}/getActiveMembersContractStatus?CustomerId=${customerId}&Page=${request?.page}&Take=${request?.take}`);
     } catch (err) {
       throw new Error('failed to retrieve active members contract status from membership service');
     }
