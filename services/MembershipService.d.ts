@@ -13,6 +13,7 @@ import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllCo
 import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
 import { SimulateContractCreationCommand } from '../models/MembershipService/SimulateContractCreationCommand';
 import { SimulateContractCreationCommandResult } from '../models/MembershipService/SimulateContractCreationCommandResult';
+import { MemberContractStatus } from '../models/MembershipService/MemberContractStatus';
 export declare class MembershipService implements IMembershipService {
     host: string;
     port: number;
@@ -20,6 +21,7 @@ export declare class MembershipService implements IMembershipService {
     baseUrl: string;
     constructor(host: string, port: number, version: string);
     getActiveContractNames(): Promise<string[]>;
+    getActiveMembersContractStatus(): Promise<MemberContractStatus>;
     getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]>;

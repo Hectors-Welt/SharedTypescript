@@ -14,6 +14,7 @@ import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllCo
 import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
 import { SimulateContractCreationCommand } from '../models/MembershipService/SimulateContractCreationCommand';
 import { SimulateContractCreationCommandResult } from '../models/MembershipService/SimulateContractCreationCommandResult';
+import { MemberContractStatus } from '../models/MembershipService/MemberContractStatus';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -33,6 +34,14 @@ export class MembershipService implements IMembershipService {
       return await ApiClient.GET(`${this.baseUrl}/getActiveContractNames`);
     } catch (err) {
       throw new Error('failed to retrieve active contract names from membership service');
+    }
+  }
+
+  async getActiveMembersContractStatus(): Promise<MemberContractStatus> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getActiveMembersContractStatus`);
+    } catch (err) {
+      throw new Error('failed to retrieve active members contract status from membership service');
     }
   }
 
