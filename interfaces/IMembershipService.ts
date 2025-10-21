@@ -16,9 +16,9 @@ import { SimulateContractCreationCommandResult } from '../models/MembershipServi
 import { MemberContractStatus } from '../models/MembershipService/MemberContractStatus';
 
 export interface IMembershipService extends IService {
-  getActiveContractNames(customerId?: number): Promise<string[]>;
+  getActiveContractNames(): Promise<string[]>;
 
-  getActiveMembersContractStatus(): Promise<MemberContractStatus>;
+  getActiveMembersContractStatus(customerId?: number): Promise<MemberContractStatus>;
 
   getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
 
