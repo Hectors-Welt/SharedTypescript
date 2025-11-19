@@ -16,6 +16,7 @@ export class FinancialClaim {
 
 export class FinancialClaimItem {
     id: number;
+    executionDate: string;
     accountingCode: number;
     amount: number;
     netAmount: number;

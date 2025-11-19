@@ -14,6 +14,7 @@ export declare class FinancialClaim {
 }
 export declare class FinancialClaimItem {
     id: number;
+    executionDate: string;
     accountingCode: number;
     amount: number;
     netAmount: number;
