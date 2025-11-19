@@ -14,6 +14,8 @@ import { PauseAllContractsCommand } from '../models/MembershipService/PauseAllCo
 import { PauseAllContractsCommandResult } from '../models/MembershipService/PauseAllContractsCommandResult';
 import { SimulateContractCreationCommand } from '../models/MembershipService/SimulateContractCreationCommand';
 import { SimulateContractCreationCommandResult } from '../models/MembershipService/SimulateContractCreationCommandResult';
+import { MemberContractStatus } from '../models/MembershipService/MemberContractStatus';
+import { PagedResponse } from '../models/MembershipService/PagedResponse';
 
 export class MembershipService implements IMembershipService {
   host: string;
@@ -33,6 +35,14 @@ export class MembershipService implements IMembershipService {
       return await ApiClient.GET(`${this.baseUrl}/getActiveContractNames`);
     } catch (err) {
       throw new Error('failed to retrieve active contract names from membership service');
+    }
+  }
+
+  async getActiveMembersContractStatus(customerId: number, page: number, take: number): Promise<PagedResponse<MemberContractStatus>> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/contracts/active-members/status?CustomerId=${customerId}&Page=${page}&Take=${take}`);
+    } catch (err) {
+      throw new Error('failed to retrieve active members contract status from membership service');
     }
   }
 
@@ -96,7 +106,7 @@ export class MembershipService implements IMembershipService {
 
   async simulateContractCreation(command: SimulateContractCreationCommand): Promise<SimulateContractCreationCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command, null, true);
+      return await ApiClient.POST(`${this.baseUrl}/commands/simulateOnlineMembership`, command, null, true);
     } catch (err) {
       return {
         success: false,

@@ -28,6 +28,16 @@ class MembershipService {
             }
         });
     }
+    getActiveMembersContractStatus(customerId, page, take) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/contracts/active-members/status?CustomerId=${customerId}&Page=${page}&Take=${take}`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve active members contract status from membership service');
+            }
+        });
+    }
     getContractTemplatesAvailable(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -100,7 +110,7 @@ class MembershipService {
     simulateContractCreation(command) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/simulateContractCreation`, command, null, true);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/simulateOnlineMembership`, command, null, true);
             }
             catch (err) {
                 return {
