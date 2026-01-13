@@ -25,6 +25,7 @@ export interface ICourseManagementService extends IService {
     getCourseLevels(): Promise<CourseLevel[]>;
     getRooms(): Promise<Room[]>;
     getAppointments(customerId: number): Promise<Appointment[]>;
+    getAppointment(appointmentId: number): Promise<Appointment>;
     lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     lookupNextFreeTimeBlocks(appointmentId: number, searchRequest: AppointmentSearch): Promise<TimeBlock[]>;
     bookAppointment(bookingRequest: AppointmentBooking): Promise<ReservationResult>;

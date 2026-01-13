@@ -115,6 +115,14 @@ export class CourseManagementService implements ICourseManagementService {
     }
   }
 
+  async getAppointment(appointmentId: number): Promise<Appointment> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/appointments/${appointmentId}`);
+    } catch (err) {
+      throw new Error('failed to get appointment from course management service');
+    }
+  }
+
   async lookupFreeTimeBlocks(searchRequest: AppointmentSearch): Promise<TimeBlock[]> {
     try {
       return await ApiClient.POST(`${this.baseUrl}/appointments/lookupFreeTimeBlocks`, searchRequest);
