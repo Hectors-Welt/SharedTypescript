@@ -9,6 +9,7 @@ class BackendSettings {
         this.baseUrl = settings.baseUrl;
         this.backendId = settings.backendId;
         this.seoTitle = settings.seoTitle;
+        this.cloudOnly = settings.cloudOnly || false;
     }
 }
 exports.BackendSettings = BackendSettings;

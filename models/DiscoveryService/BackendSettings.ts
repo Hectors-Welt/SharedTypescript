@@ -2,6 +2,7 @@ export class BackendSettings {
   baseUrl: string;
   backendId: string;
   seoTitle: string;
+  cloudOnly: boolean;
 
   constructor(settings: any) {
     if (!settings || !settings.baseUrl) {
@@ -11,5 +12,6 @@ export class BackendSettings {
     this.baseUrl = settings.baseUrl;
     this.backendId = settings.backendId;
     this.seoTitle = settings.seoTitle;
+    this.cloudOnly = settings.cloudOnly || false;
   }
 }
