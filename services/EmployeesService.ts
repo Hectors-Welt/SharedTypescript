@@ -17,9 +17,9 @@ export class EmployeesService implements IEmployeesService {
     this.baseUrl = `http://${host}:${port}`;
   }
 
-  async validateEmployeeByCredentials(name: string, surname: string, password: string, application: string): Promise<Employee> {
+  async validateEmployee(name: string, surname: string, password: string, application: string): Promise<Employee> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/validateEmployeeByCredentials`, {
+      return await ApiClient.POST(`${this.baseUrl}/commands/validateEmployee`, {
         name,
         surname,
         password,
@@ -40,7 +40,7 @@ export class EmployeesService implements IEmployeesService {
 
   async getEmployeeByCustomerId(customerId: number): Promise<Employee> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getEmployeeByCustomerId/${customerId}`);
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/employee`);
     } catch (err) {
       throw new Error(`failed to retrieve employee from employees service: ${err.message}`);
     }
@@ -48,7 +48,7 @@ export class EmployeesService implements IEmployeesService {
 
   async getEmployeesPresent(studioId: number): Promise<Employee[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getEmployeesPresentInClub/${studioId}`);
+      return await ApiClient.GET(`${this.baseUrl}/studios/${studioId}/employees`);
     } catch (err) {
       throw new Error(`failed to retrieve employees from employees service: ${err.message}`);
     }

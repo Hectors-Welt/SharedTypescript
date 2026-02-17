@@ -8,7 +8,7 @@ export declare class EmployeesService implements IEmployeesService {
     version: string;
     baseUrl: string;
     constructor(host: string, port: number, version: string);
-    validateEmployeeByCredentials(name: string, surname: string, password: string, application: string): Promise<Employee>;
+    validateEmployee(name: string, surname: string, password: string, application: string): Promise<Employee>;
     getEmployeeById(employeeId: number): Promise<Employee>;
     getEmployeeByCustomerId(customerId: number): Promise<Employee>;
     getEmployeesPresent(studioId: number): Promise<Employee[]>;

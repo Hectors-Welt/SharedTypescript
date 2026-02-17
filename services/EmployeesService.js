@@ -18,10 +18,10 @@ class EmployeesService {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
-    validateEmployeeByCredentials(name, surname, password, application) {
+    validateEmployee(name, surname, password, application) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/validateEmployeeByCredentials`, {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/validateEmployee`, {
                     name,
                     surname,
                     password,
@@ -46,7 +46,7 @@ class EmployeesService {
     getEmployeeByCustomerId(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getEmployeeByCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/employee`);
             }
             catch (err) {
                 throw new Error(`failed to retrieve employee from employees service: ${err.message}`);
@@ -56,7 +56,7 @@ class EmployeesService {
     getEmployeesPresent(studioId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getEmployeesPresentInClub/${studioId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/studios/${studioId}/employees`);
             }
             catch (err) {
                 throw new Error(`failed to retrieve employees from employees service: ${err.message}`);

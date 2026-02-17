@@ -32,7 +32,7 @@ export class MembershipService implements IMembershipService {
 
   async getActiveContractNames(): Promise<string[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getActiveContractNames`);
+      return await ApiClient.GET(`${this.baseUrl}/contracts/name?filter=Active`);
     } catch (err) {
       throw new Error('failed to retrieve active contract names from membership service');
     }
@@ -48,9 +48,12 @@ export class MembershipService implements IMembershipService {
 
   async getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]> {
     try {
-      let route = 'getContractTemplatesAvailable';
+      let route = 'contractTemplates';
       if (customerId) {
-        route += `?customerId=${customerId}`;
+        route += `?customerId=${customerId}&filter=Active`;
+      }
+      else {
+        route += '?filter=Active';
       }
 
       return await ApiClient.GET(`${this.baseUrl}/${route}`);
@@ -61,7 +64,7 @@ export class MembershipService implements IMembershipService {
 
   async getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getCurrentContractsByCustomerId/${customerId}`);
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/contracts?filter=Current`);
     } catch (err) {
       throw new Error('failed to retrieve contracts from membership service');
     }
@@ -69,7 +72,7 @@ export class MembershipService implements IMembershipService {
 
   async getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getRecommendationsByCustomerId/${customerId}`);
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/recommendations`);
     } catch (err) {
       throw new Error('failed to retrieve recommendations from membership service');
     }
@@ -77,7 +80,7 @@ export class MembershipService implements IMembershipService {
 
   async getContractsTerminatedByCustomerId(customerId: number): Promise<Contract[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getContractsTerminatedByCustomerId/${customerId}`);
+      return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/contracts?filter=Terminated`);
     } catch (err) {
       throw new Error('failed to retrieve terminated contracts from membership service');
     }
@@ -85,7 +88,7 @@ export class MembershipService implements IMembershipService {
 
   async rejectPendingMembership(processId: number): Promise<void> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/rejectPendingMembership/${processId}`, null, null, true);
+      return await ApiClient.POST(`${this.baseUrl}/commands/rejectPendingMembership`, { processId }, null, true);
     } catch (err) {
       throw new Error('failed to reject pending mebership from membership service');
     }

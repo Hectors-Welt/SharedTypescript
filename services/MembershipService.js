@@ -21,7 +21,7 @@ class MembershipService {
     getActiveContractNames() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getActiveContractNames`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/contracts/name?filter=Active`);
             }
             catch (err) {
                 throw new Error('failed to retrieve active contract names from membership service');
@@ -41,9 +41,12 @@ class MembershipService {
     getContractTemplatesAvailable(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                let route = 'getContractTemplatesAvailable';
+                let route = 'contractTemplates';
                 if (customerId) {
-                    route += `?customerId=${customerId}`;
+                    route += `?customerId=${customerId}&filter=Active`;
+                }
+                else {
+                    route += '?filter=Active';
                 }
                 return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/${route}`);
             }
@@ -55,7 +58,7 @@ class MembershipService {
     getCurrentContractsByCustomerId(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCurrentContractsByCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/contracts?filter=Current`);
             }
             catch (err) {
                 throw new Error('failed to retrieve contracts from membership service');
@@ -65,7 +68,7 @@ class MembershipService {
     getRecommendationsByCustomerId(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getRecommendationsByCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/recommendations`);
             }
             catch (err) {
                 throw new Error('failed to retrieve recommendations from membership service');
@@ -75,7 +78,7 @@ class MembershipService {
     getContractsTerminatedByCustomerId(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getContractsTerminatedByCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/contracts?filter=Terminated`);
             }
             catch (err) {
                 throw new Error('failed to retrieve terminated contracts from membership service');
@@ -85,7 +88,7 @@ class MembershipService {
     rejectPendingMembership(processId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/rejectPendingMembership/${processId}`, null, null, true);
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/rejectPendingMembership`, { processId }, null, true);
             }
             catch (err) {
                 throw new Error('failed to reject pending mebership from membership service');
