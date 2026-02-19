@@ -8,8 +8,6 @@ import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
 import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
-import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
-import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
@@ -25,11 +23,6 @@ export declare class CustomerService implements ICustomerService {
     baseUrl: string;
     constructor(host: string, port: number, version: string);
     addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
-    updateCustomer(customerId: number, command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
-    getDefaultStatusValues(): Promise<StatusValues>;
-    getStatusEntriesAvailable(): Promise<StatusEntry[]>;
-    lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]>;
-    search(searchCriteria: SearchCriteria): Promise<Customer[]>;
     findDoublets(name: string, birthday: string): Promise<Customer[]>;
     getCustomerByCustomerId(customerId: number): Promise<Customer>;
     getCustomerByTagId(tagId: string): Promise<Customer>;
@@ -55,4 +48,6 @@ export declare class CustomerService implements ICustomerService {
     updateLicensePlates(customerId: number, licensePlates: LicensePlates): Promise<CommandResult>;
     updateHealthInsurance(customerId: number, healthInsuranceId: number): Promise<CommandResult>;
     getHealthInsurances(): Promise<HealthInsurance[]>;
+    getDefaultStatusValues(): Promise<StatusValues>;
+    getStatusEntriesAvailable(): Promise<StatusEntry[]>;
 }

@@ -25,15 +25,9 @@ import { HealthInsurance } from '../models/CustomerService/HealthInsurance';
 export interface ICustomerService extends IService {
   addCustomer(command: AddCustomerCommand): Promise<AddCustomerCommandResult>;
 
-  updateCustomer(customerId: number, command: UpdateCustomerCommand): Promise<UpdateCustomerCommandResult>;
-
   getDefaultStatusValues(): Promise<StatusValues>;
 
   getStatusEntriesAvailable(): Promise<StatusEntry[]>;
-
-  lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]>;
-
-  search(searchCriteria: SearchCriteria): Promise<Customer[]>;
 
   findDoublets(name: string, birthday: string): Promise<Customer[]>;
 

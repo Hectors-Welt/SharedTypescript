@@ -33,68 +33,11 @@ class CustomerService {
             }
         });
     }
-    updateCustomer(customerId, command) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}`, command, null, true);
-            }
-            catch (err) {
-                return {
-                    success: false,
-                    message: 'failed to update customer on customer service',
-                    errors: [err],
-                    customer: null,
-                };
-            }
-        });
-    }
-    getDefaultStatusValues() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getDefaultStatusValues`);
-            }
-            catch (err) {
-                throw new Error('failed to get default status values from customer service');
-            }
-        });
-    }
-    getStatusEntriesAvailable() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
-            }
-            catch (err) {
-                throw new Error('failed to get status entries from customer service');
-            }
-        });
-    }
-    lookupCustomers(lookupCriteria) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/lookup`, lookupCriteria);
-            }
-            catch (err) {
-                throw new Error('failed to get customers from customer service');
-            }
-        });
-    }
-    search(searchCriteria) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/search`, searchCriteria);
-            }
-            catch (err) {
-                throw new Error('failed to get customers from customer service');
-            }
-        });
-    }
     findDoublets(name, birthday) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/findDoublets`, {
-                    name,
-                    birthday,
-                });
+                var result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/paginated/customers?name=${name}&birthday=${birthday}&take=100`);
+                return result.data;
             }
             catch (err) {
                 throw new Error('failed to retrieve doublet from customer service');
@@ -401,6 +344,26 @@ class CustomerService {
             }
             catch (err) {
                 throw new Error('failed to retrieve health insurances from customer service');
+            }
+        });
+    }
+    getDefaultStatusValues() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getDefaultStatusValues`);
+            }
+            catch (err) {
+                throw new Error('failed to get default status values from customer service');
+            }
+        });
+    }
+    getStatusEntriesAvailable() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
+            }
+            catch (err) {
+                throw new Error('failed to get status entries from customer service');
             }
         });
     }

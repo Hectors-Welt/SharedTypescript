@@ -46,57 +46,10 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async updateCustomer(customerId: number, command: AddCustomerCommand): Promise<AddCustomerCommandResult> {
-    try {
-      return await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}`, command, null, true);
-    } catch (err) {
-      return { 
-        success: false,
-        message: 'failed to update customer on customer service',
-        errors: [err],
-        customer: null,
-      };
-    }
-  }
-
-  async getDefaultStatusValues(): Promise<StatusValues> {
-    try {
-      return await ApiClient.GET(`${this.baseUrl}/getDefaultStatusValues`);
-    } catch (err) {
-      throw new Error('failed to get default status values from customer service');
-    }
-  }
-
-  async getStatusEntriesAvailable(): Promise<StatusEntry[]> {
-    try {
-      return await ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
-    } catch (err) {
-      throw new Error('failed to get status entries from customer service');
-    }
-  }
-
-  async lookupCustomers(lookupCriteria: LookupCriteria): Promise<Customer[]> {
-    try {
-      return await ApiClient.POST(`${this.baseUrl}/lookup`, lookupCriteria);
-    } catch (err) {
-      throw new Error('failed to get customers from customer service');
-    }
-  }
-
-  async search(searchCriteria: SearchCriteria): Promise<Customer[]> {
-    try {
-      return await ApiClient.POST(`${this.baseUrl}/customers/search`, searchCriteria);
-    } catch (err) {
-      throw new Error('failed to get customers from customer service');
-    }
-  }
-
   async findDoublets(name: string, birthday: string): Promise<Customer[]> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/findDoublets`, {
-        name,
-        birthday,
-      });
+      var result = await ApiClient.GET(`${this.baseUrl}/paginated/customers?name=${name}&birthday=${birthday}&take=100`);
+      return result.data;
     } catch (err) {
       throw new Error('failed to retrieve doublet from customer service');
     }
@@ -354,6 +307,22 @@ export class CustomerService implements ICustomerService {
       return await ApiClient.GET(`${this.baseUrl}/healthInsurances`);
     } catch (err) {
       throw new Error('failed to retrieve health insurances from customer service');
+    }
+  }
+
+  async getDefaultStatusValues(): Promise<StatusValues> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getDefaultStatusValues`);
+    } catch (err) {
+      throw new Error('failed to get default status values from customer service');
+    }
+  }
+
+  async getStatusEntriesAvailable(): Promise<StatusEntry[]> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
+    } catch (err) {
+      throw new Error('failed to get status entries from customer service');
     }
   }
 }
