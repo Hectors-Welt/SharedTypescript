@@ -9,6 +9,7 @@ export declare class ArticlesService implements IArticlesService {
     baseUrl: string;
     constructor(host: string, port: number, version: string);
     getArticles(): Promise<Article[]>;
+    getArticle(articleId: number): Promise<Article>;
     lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation>;
-    bookArticle(customerId: number, articleId: number, note: string, employeeId: number, recruiter?: number, createSystem?: number): Promise<BookArticleCommandResult>;
+    bookArticle(customerId: number, articleId: number, note: string, employeeId: number, recruiter?: number, createSystem?: number, price?: number): Promise<BookArticleCommandResult>;
 }

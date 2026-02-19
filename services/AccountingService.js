@@ -18,6 +18,58 @@ class AccountingService {
         this.version = version;
         this.baseUrl = `http://${host}:${port}`;
     }
+    bookToBistroAccount(customerId, amount, note, paymentType, transactionType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/bookToBistroAccount`, {
+                    customerId,
+                    amount,
+                    note,
+                    paymentType,
+                    transactionType,
+                }, null, true);
+            }
+            catch (err) {
+                return {
+                    success: false,
+                    message: 'failed to book to bistro account at accounting service',
+                    errors: [err]
+                };
+            }
+        });
+    }
+    bookToMembershipAccount(customerId, amount, note, paymentType, transactionType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/bookToMembershipAccount`, {
+                    customerId,
+                    amount,
+                    note,
+                    paymentType,
+                    transactionType,
+                }, null, true);
+            }
+            catch (err) {
+                return {
+                    success: false,
+                    message: 'failed to book to membership account at accounting service',
+                    errors: [err]
+                };
+            }
+        });
+    }
+    moveSalesToBistroAccount(customerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/moveSalesToBistroAccount`, {
+                    customerId
+                });
+            }
+            catch (err) {
+                throw new Error('failed to move sales to bistro account at accounting service');
+            }
+        });
+    }
     getBistroAccount(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -75,58 +127,6 @@ class AccountingService {
             }
             catch (err) {
                 new Error('failed to retrieve sepa bookings from accounting service');
-            }
-        });
-    }
-    moveSalesToBistroAccount(customerId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/moveSalesToBistroAccount`, {
-                    customerId
-                });
-            }
-            catch (err) {
-                throw new Error('failed to move sales to bistro account at accounting service');
-            }
-        });
-    }
-    bookToBistroAccount(customerId, amount, note, paymentType, transactionType) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/bookToBistroAccount`, {
-                    customerId,
-                    amount,
-                    note,
-                    paymentType,
-                    transactionType,
-                }, null, true);
-            }
-            catch (err) {
-                return {
-                    success: false,
-                    message: 'failed to book to bistro account at accounting service',
-                    errors: [err]
-                };
-            }
-        });
-    }
-    bookToMembershipAccount(customerId, amount, note, paymentType, transactionType) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/bookToMembershipAccount`, {
-                    customerId,
-                    amount,
-                    note,
-                    paymentType,
-                    transactionType,
-                }, null, true);
-            }
-            catch (err) {
-                return {
-                    success: false,
-                    message: 'failed to book to membership account at accounting service',
-                    errors: [err]
-                };
             }
         });
     }

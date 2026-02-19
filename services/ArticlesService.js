@@ -21,33 +21,44 @@ class ArticlesService {
     getArticles() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getArticles`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/articles`);
             }
             catch (err) {
                 throw new Error('failed to retrieve articles from articles service');
             }
         });
     }
+    getArticle(articleId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/articles/${articleId}`);
+            }
+            catch (err) {
+                throw new Error('failed to retrieve article from articles service');
+            }
+        });
+    }
     lookupBookingInformation(customerId, articleId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getBookingInformationForArticleId/${articleId}/AndCustomerId/${customerId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bookingInformation/${articleId}`);
             }
             catch (err) {
                 throw new Error('failed to retrieve booking information from articles service');
             }
         });
     }
-    bookArticle(customerId, articleId, note, employeeId, recruiter, createSystem) {
+    bookArticle(customerId, articleId, note, employeeId, recruiter, createSystem, price) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/bookArticle`, {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/commands/bookArticle`, {
                     customerId,
                     articleId,
                     note,
                     employeeId,
                     recruiter,
                     createSystem,
+                    price,
                 });
             }
             catch (err) {

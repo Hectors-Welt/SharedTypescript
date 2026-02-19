@@ -19,31 +19,40 @@ export class ArticlesService implements IArticlesService {
 
   async getArticles(): Promise<Article[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getArticles`);
+      return await ApiClient.GET(`${this.baseUrl}/articles`);
     } catch (err) {
       throw new Error('failed to retrieve articles from articles service');
+    }
+  }
+
+  async getArticle(articleId: number): Promise<Article> {
+    try {
+      return await ApiClient.GET(`${this.baseUrl}/articles/${articleId}`);
+    } catch (err) {
+      throw new Error('failed to retrieve article from articles service');
     }
   }
 
   async lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation> {
     try {
       return await ApiClient.GET(
-        `${this.baseUrl}/getBookingInformationForArticleId/${articleId}/AndCustomerId/${customerId}`,
+        `${this.baseUrl}/customers/${customerId}/bookingInformation/${articleId}`,
       );
     } catch (err) {
       throw new Error('failed to retrieve booking information from articles service');
     }
   }
 
-  async bookArticle(customerId: number, articleId: number, note: string, employeeId: number, recruiter?: number, createSystem?: number): Promise<BookArticleCommandResult> {
+  async bookArticle(customerId: number, articleId: number, note: string, employeeId: number, recruiter?: number, createSystem?: number, price?: number): Promise<BookArticleCommandResult> {
     try {
-      return await ApiClient.POST(`${this.baseUrl}/bookArticle`, {
+      return await ApiClient.POST(`${this.baseUrl}/commands/bookArticle`, {
         customerId,
         articleId,
         note,
         employeeId,
         recruiter,
         createSystem,
+        price,
       });
     } catch (err) {
       throw new Error('failed to book article at articles service');

@@ -5,6 +5,8 @@ import { BookArticleCommandResult } from '../models/ArticlesService/BookArticleC
 
 export interface IArticlesService extends IService {
   getArticles(): Promise<Article[]>;
+  
+  getArticle(articleId: number): Promise<Article>;
 
   lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation>;
 

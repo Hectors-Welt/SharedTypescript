@@ -24,6 +24,52 @@ export class AccountingService implements IAccountingService {
     this.baseUrl = `http://${host}:${port}`;
   }
 
+  async bookToBistroAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/commands/bookToBistroAccount`, {
+        customerId,
+        amount,
+        note,
+        paymentType,
+        transactionType,
+      }, null, true);
+    } catch (err) {
+      return {
+        success: false,
+        message: 'failed to book to bistro account at accounting service',
+        errors: [err]
+      }
+    }
+  }
+
+  async bookToMembershipAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/commands/bookToMembershipAccount`, {
+        customerId,
+        amount,
+        note,
+        paymentType,
+        transactionType,
+      }, null, true);
+    } catch (err) {
+      return {
+        success: false,
+        message: 'failed to book to membership account at accounting service',
+        errors: [err]
+      }
+    }
+  }
+
+  async moveSalesToBistroAccount(customerId: number): Promise<any> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/commands/moveSalesToBistroAccount`, {
+        customerId
+      });
+    } catch (err) {
+      throw new Error('failed to move sales to bistro account at accounting service');
+    }
+  }
+
   async getBistroAccount(customerId: number): Promise<BistroAccount> {
     try {
       return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bistroAccount`, null, true);
@@ -69,52 +115,6 @@ export class AccountingService implements IAccountingService {
       return await ApiClient.GET(`${this.baseUrl}/customers/${customerId}/sepaBookingInformations?type=PositionsByAccountFrame`);
     } catch (err) {
       new Error('failed to retrieve sepa bookings from accounting service');
-    }
-  }
-
-  async moveSalesToBistroAccount(customerId: number): Promise<any> {
-    try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/moveSalesToBistroAccount`, {
-        customerId
-      });
-    } catch (err) {
-      throw new Error('failed to move sales to bistro account at accounting service');
-    }
-  }
-
-  async bookToBistroAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult> {
-    try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/bookToBistroAccount`, {
-        customerId,
-        amount,
-        note,
-        paymentType,
-        transactionType,
-      }, null, true);
-    } catch (err) {
-      return {
-        success: false,
-        message: 'failed to book to bistro account at accounting service',
-        errors: [err]
-      }
-    }
-  }
-
-  async bookToMembershipAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult> {
-    try {
-      return await ApiClient.POST(`${this.baseUrl}/commands/bookToMembershipAccount`, {
-        customerId,
-        amount,
-        note,
-        paymentType,
-        transactionType,
-      }, null, true);
-    } catch (err) {
-      return {
-        success: false,
-        message: 'failed to book to membership account at accounting service',
-        errors: [err]
-      }
     }
   }
 

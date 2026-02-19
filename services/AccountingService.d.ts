@@ -15,14 +15,14 @@ export declare class AccountingService implements IAccountingService {
     version: string;
     baseUrl: string;
     constructor(host: string, port: number, version: string);
+    bookToBistroAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult>;
+    bookToMembershipAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult>;
+    moveSalesToBistroAccount(customerId: number): Promise<any>;
     getBistroAccount(customerId: number): Promise<BistroAccount>;
     getBistroAccountBookings(customerId: number): Promise<BistroAccountBooking[]>;
     getMembershipAccount(customerId: number): Promise<MembershipAccount>;
     getMembershipAccountBookings(customerId: number): Promise<MembershipAccountBooking[]>;
     getSepaBookings(customerId: number): Promise<SepaBookingSet[]>;
     sepaBookingInformation(customerId: number): Promise<SepaDirectDebit[]>;
-    moveSalesToBistroAccount(customerId: number): Promise<any>;
-    bookToBistroAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult>;
-    bookToMembershipAccount(customerId: number, amount: number, note: string, paymentType: PaymentType, transactionType: TransactionType): Promise<DepositCashCommandResult>;
     paybackBistroAccountBalance(customerId: number): Promise<PaybackBistroAccountBalanceResult>;
 }
