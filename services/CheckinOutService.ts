@@ -161,7 +161,7 @@ export class CheckinOutService implements ICheckinOutService {
   
   async setAccessGrantedTill(customerId: number, accessGrantedTill: string): Promise<any> {
     try {
-      const result = await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/accessGranted`, {
+      const result = await ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/accessGranted`, {
         till: accessGrantedTill,
       });
       return result;

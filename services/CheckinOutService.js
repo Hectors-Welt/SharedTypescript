@@ -162,7 +162,7 @@ class CheckinOutService {
     setAccessGrantedTill(customerId, accessGrantedTill) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/accessGranted`, {
+                const result = yield ApiClient_1.ApiClient.PUT(`${this.baseUrl}/customers/${customerId}/accessGranted`, {
                     till: accessGrantedTill,
                 });
                 return result;
