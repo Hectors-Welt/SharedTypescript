@@ -7,10 +7,7 @@ import { File } from '../models/CustomerService/File';
 import { ApiClient } from './ApiClient';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
-import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
-import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
-import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
@@ -65,7 +62,7 @@ export class CustomerService implements ICustomerService {
 
   async getCustomerByTagId(tagId: string): Promise<Customer> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getCustomerByTagId/${tagId}`);
+      return await ApiClient.GET(`${this.baseUrl}/tagIds/${tagId}/customer`);
     } catch (err) {
       throw new Error('failed to retrieve customer from customer service');
     }
@@ -87,23 +84,11 @@ export class CustomerService implements ICustomerService {
     }
   }
 
-  async getTagIds(customerId: number, format: number = 0): Promise<string[]> {
+  async getTagIds(customerId: number): Promise<string[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/getTagIds?format=${format}`);
+      return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/tagIds`);
     } catch (err) {
       throw new Error('failed to retrieve tag ids from customer service');
-    }
-  }
-
-  async registerTagId(customerId: number, command: AddTagIdCommand): Promise<CommandResult> {
-    try {
-      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/tagIds`, command, null, true);
-    } catch (err) {
-      return { 
-        success: false,
-        message: 'failed to register tag id at customer service',
-        errors: [err],
-      };
     }
   }
 
@@ -312,7 +297,7 @@ export class CustomerService implements ICustomerService {
 
   async getDefaultStatusValues(): Promise<StatusValues> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getDefaultStatusValues`);
+      return await ApiClient.GET(`${this.baseUrl}/statusValues`);
     } catch (err) {
       throw new Error('failed to get default status values from customer service');
     }
@@ -320,7 +305,7 @@ export class CustomerService implements ICustomerService {
 
   async getStatusEntriesAvailable(): Promise<StatusEntry[]> {
     try {
-      return await ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
+      return await ApiClient.GET(`${this.baseUrl}/statusEntries`);
     } catch (err) {
       throw new Error('failed to get status entries from customer service');
     }

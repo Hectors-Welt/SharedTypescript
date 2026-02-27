@@ -57,7 +57,7 @@ class CustomerService {
     getCustomerByTagId(tagId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getCustomerByTagId/${tagId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/tagIds/${tagId}/customer`);
             }
             catch (err) {
                 throw new Error('failed to retrieve customer from customer service');
@@ -84,27 +84,13 @@ class CustomerService {
             }
         });
     }
-    getTagIds(customerId, format = 0) {
+    getTagIds(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customer/${customerId}/getTagIds?format=${format}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customer/${customerId}/tagIds`);
             }
             catch (err) {
                 throw new Error('failed to retrieve tag ids from customer service');
-            }
-        });
-    }
-    registerTagId(customerId, command) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/tagIds`, command, null, true);
-            }
-            catch (err) {
-                return {
-                    success: false,
-                    message: 'failed to register tag id at customer service',
-                    errors: [err],
-                };
             }
         });
     }
@@ -350,7 +336,7 @@ class CustomerService {
     getDefaultStatusValues() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getDefaultStatusValues`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/statusValues`);
             }
             catch (err) {
                 throw new Error('failed to get default status values from customer service');
@@ -360,7 +346,7 @@ class CustomerService {
     getStatusEntriesAvailable() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/getStatusEntriesAvailable`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/statusEntries`);
             }
             catch (err) {
                 throw new Error('failed to get status entries from customer service');

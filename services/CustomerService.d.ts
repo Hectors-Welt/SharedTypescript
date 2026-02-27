@@ -6,7 +6,6 @@ import { Contact } from '../models/CustomerService/Contact';
 import { File } from '../models/CustomerService/File';
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { StatusValues } from '../models/CustomerService/StatusValues';
-import { AddTagIdCommand } from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
@@ -28,8 +27,7 @@ export declare class CustomerService implements ICustomerService {
     getCustomerByTagId(tagId: string): Promise<Customer>;
     getProfilePicture(customerId: number): Promise<File>;
     setProfilePicture(customerId: number, file: File): Promise<any>;
-    getTagIds(customerId: number, format?: number): Promise<string[]>;
-    registerTagId(customerId: number, command: AddTagIdCommand): Promise<CommandResult>;
+    getTagIds(customerId: number): Promise<string[]>;
     updateAddress(customerId: number, address: Address): Promise<CommandResult>;
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult>;
     deleteDirectDebitGroup(customerId: number): Promise<CommandResult>;

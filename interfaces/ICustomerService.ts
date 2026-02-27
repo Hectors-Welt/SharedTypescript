@@ -7,14 +7,9 @@ import { AddInteractionCommand } from '../models/CustomerService/AddInteractionC
 import { StatusEntry } from '../models/CustomerService/StatusEntry';
 import { IService } from './IService';
 import { StatusValues } from '../models/CustomerService/StatusValues';
-import { AddTagIdCommand} from '../models/CustomerService/AddTagIdCommand';
 import { InteractionDTO } from '../models/CustomerService/InteractionDTO';
-import { LookupCriteria } from '../models/CustomerService/LookupCriteria';
-import { SearchCriteria } from '../models/CustomerService/SearchCriteria';
 import { AddCustomerCommand } from '../models/CustomerService/AddCustomerCommand';
 import { AddCustomerCommandResult } from '../models/CustomerService/AddCustomerCommandResult';
-import { UpdateCustomerCommand } from '../models/CustomerService/UpdateCustomerCommand';
-import { UpdateCustomerCommandResult } from '../models/CustomerService/UpdateCustomerCommandResult';
 import { AddInteractionCommandResult } from '../models/CustomerService/AddInteractionCommandResult';
 import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCustomerCommandResult';
 import { CommandResult } from '../models/CustomerService/CommandResult';
@@ -39,9 +34,7 @@ export interface ICustomerService extends IService {
 
   setProfilePicture(customerId: number, file: File): Promise<any>;
 
-  getTagIds(customerId: number, format: number): Promise<string[]>;
-
-  registerTagId(customerId: number, command: AddTagIdCommand): Promise<CommandResult>;
+  getTagIds(customerId: number): Promise<string[]>;
 
   updateAddress(customerId: number, address: Address): Promise<CommandResult>;
 
