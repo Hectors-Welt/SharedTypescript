@@ -45,7 +45,7 @@ export class CustomerService implements ICustomerService {
 
   async findDoublets(name: string, birthday: string): Promise<Customer[]> {
     try {
-      var result = await ApiClient.GET(`${this.baseUrl}/paginated/customers?name=${name}&birthday=${birthday}&take=100`);
+      var result = await ApiClient.GET(`${this.baseUrl}/paginated/customers?name=${encodeURIComponent(name)}&birthday=${birthday}&take=100`);
       return result.data;
     } catch (err) {
       throw new Error('failed to retrieve doublet from customer service');

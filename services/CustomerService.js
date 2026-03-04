@@ -36,7 +36,7 @@ class CustomerService {
     findDoublets(name, birthday) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                var result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/paginated/customers?name=${name}&birthday=${birthday}&take=100`);
+                var result = yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/paginated/customers?name=${encodeURIComponent(name)}&birthday=${birthday}&take=100`);
                 return result.data;
             }
             catch (err) {
