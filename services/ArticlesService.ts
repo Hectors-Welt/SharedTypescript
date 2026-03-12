@@ -36,7 +36,7 @@ export class ArticlesService implements IArticlesService {
   async lookupBookingInformation(customerId: number, articleId: number): Promise<BookingInformation> {
     try {
       return await ApiClient.GET(
-        `${this.baseUrl}/customers/${customerId}/bookingInformation/${articleId}`,
+        `${this.baseUrl}/customers/${customerId}/bookingInformations/${articleId}`,
       );
     } catch (err) {
       throw new Error('failed to retrieve booking information from articles service');

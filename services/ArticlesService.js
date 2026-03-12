@@ -41,7 +41,7 @@ class ArticlesService {
     lookupBookingInformation(customerId, articleId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bookingInformation/${articleId}`);
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/customers/${customerId}/bookingInformations/${articleId}`);
             }
             catch (err) {
                 throw new Error('failed to retrieve booking information from articles service');
