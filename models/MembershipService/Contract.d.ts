@@ -31,4 +31,5 @@ export declare class Contract {
     articles: any;
     accountSystems: any;
     priceHistory?: any;
+    paused?: boolean;
 }
