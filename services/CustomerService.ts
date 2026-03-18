@@ -16,6 +16,8 @@ import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCus
 import { CommandResult } from '../models/CustomerService/CommandResult';
 import { LicensePlates } from '../models/CustomerService/LicensePlates';
 import { HealthInsurance } from '../models/CustomerService/HealthInsurance';
+import { RegisterCardCommandResult } from '../models/CustomerService/RegisterCardCommandResult';
+import { RegisterCardCommand } from '../models/CustomerService/RegisterCardCommand';
 
 export class CustomerService implements ICustomerService {
   host: string;
@@ -89,6 +91,18 @@ export class CustomerService implements ICustomerService {
       return await ApiClient.GET(`${this.baseUrl}/customer/${customerId}/tagIds`);
     } catch (err) {
       throw new Error('failed to retrieve tag ids from customer service');
+    }
+  }
+
+  async registerCard(customerId: number, command: RegisterCardCommand): Promise<RegisterCardCommandResult> {
+    try {
+      return await ApiClient.POST(`${this.baseUrl}/customers/${customerId}/cards`, command, null, true);
+    } catch (err) {
+      return {
+        success: false,
+        message: 'failed to register card at customer service',
+        errors: [err],
+      };
     }
   }
 

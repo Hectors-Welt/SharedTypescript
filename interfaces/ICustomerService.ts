@@ -15,6 +15,8 @@ import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCus
 import { CommandResult } from '../models/CustomerService/CommandResult';
 import { LicensePlates } from '../models/CustomerService/LicensePlates';
 import { HealthInsurance } from '../models/CustomerService/HealthInsurance';
+import { RegisterCardCommand } from '../models/CustomerService/RegisterCardCommand';
+import { RegisterCardCommandResult } from '../models/CustomerService/RegisterCardCommandResult';
 
 
 export interface ICustomerService extends IService {
@@ -35,6 +37,8 @@ export interface ICustomerService extends IService {
   setProfilePicture(customerId: number, file: File): Promise<any>;
 
   getTagIds(customerId: number): Promise<string[]>;
+
+  registerCard(customerId: number, command: RegisterCardCommand): Promise<RegisterCardCommandResult>;
 
   updateAddress(customerId: number, address: Address): Promise<CommandResult>;
 

@@ -94,6 +94,20 @@ class CustomerService {
             }
         });
     }
+    registerCard(customerId, command) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield ApiClient_1.ApiClient.POST(`${this.baseUrl}/customers/${customerId}/cards`, command, null, true);
+            }
+            catch (err) {
+                return {
+                    success: false,
+                    message: 'failed to register card at customer service',
+                    errors: [err],
+                };
+            }
+        });
+    }
     updateAddress(customerId, address) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

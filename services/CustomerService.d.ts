@@ -15,6 +15,8 @@ import { DeleteCustomerCommandResult } from '../models/CustomerService/DeleteCus
 import { CommandResult } from '../models/CustomerService/CommandResult';
 import { LicensePlates } from '../models/CustomerService/LicensePlates';
 import { HealthInsurance } from '../models/CustomerService/HealthInsurance';
+import { RegisterCardCommandResult } from '../models/CustomerService/RegisterCardCommandResult';
+import { RegisterCardCommand } from '../models/CustomerService/RegisterCardCommand';
 export declare class CustomerService implements ICustomerService {
     host: string;
     port: number;
@@ -28,6 +30,7 @@ export declare class CustomerService implements ICustomerService {
     getProfilePicture(customerId: number): Promise<File>;
     setProfilePicture(customerId: number, file: File): Promise<any>;
     getTagIds(customerId: number): Promise<string[]>;
+    registerCard(customerId: number, command: RegisterCardCommand): Promise<RegisterCardCommandResult>;
     updateAddress(customerId: number, address: Address): Promise<CommandResult>;
     updateBankAccount(customerId: number, bankAccount: BankAccount): Promise<CommandResult>;
     deleteDirectDebitGroup(customerId: number): Promise<CommandResult>;
