@@ -71,7 +71,7 @@ class CheckinOutService {
     getCustomersPresent(studioNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/checkinStatuses?studioNumber=${studioNumber}`);
+                return yield ApiClient_1.ApiClient.GET(studioNumber != null ? `${this.baseUrl}/checkinStatuses?studioNumber=${studioNumber}` : `${this.baseUrl}/checkinStatuses`);
             }
             catch (err) {
                 throw new Error('failed to retrieve checkin statuses from checkinout service');
