@@ -14,7 +14,6 @@ import { PauseAllContractsCommandResult } from '../models/MembershipService/Paus
 import { SimulateContractCreationCommand } from '../models/MembershipService/SimulateContractCreationCommand';
 import { SimulateContractCreationCommandResult } from '../models/MembershipService/SimulateContractCreationCommandResult';
 import { MemberContractStatus } from '../models/MembershipService/MemberContractStatus';
-import { PaginationRequest } from '../models/MembershipService/PaginationRequest';
 import { PagedResponse } from '../models/MembershipService/PagedResponse';
 
 export interface IMembershipService extends IService {

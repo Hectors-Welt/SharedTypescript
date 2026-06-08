@@ -22,7 +22,7 @@ export declare class MembershipService implements IMembershipService {
     baseUrl: string;
     constructor(host: string, port: number, version: string);
     getActiveContractNames(): Promise<string[]>;
-    getActiveMembersContractStatus(customerId: number, page: number, take: number): Promise<PagedResponse<MemberContractStatus>>;
+    getActiveMembersContractStatus(customerId?: number, page?: number, take?: number): Promise<PagedResponse<MemberContractStatus>>;
     getContractTemplatesAvailable(customerId?: number): Promise<ContractTemplate[]>;
     getCurrentContractsByCustomerId(customerId: number): Promise<Contract[]>;
     getRecommendationsByCustomerId(customerId: number): Promise<Recommendation[]>;
