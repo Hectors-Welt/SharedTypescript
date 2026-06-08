@@ -31,8 +31,14 @@ class MembershipService {
     getActiveMembersContractStatus(customerId, page, take) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const query = customerId ? `?customerId=${customerId}&page=${page !== null && page !== void 0 ? page : 1}&take=${take !== null && take !== void 0 ? take : 10}` : `?page=${page !== null && page !== void 0 ? page : 1}&take=${take !== null && take !== void 0 ? take : 10}`;
-                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/contracts/active-members/status?${query}`);
+                let route = 'contracts/active-members/status';
+                if (customerId) {
+                    route += `?customerId=${customerId}&page=${page !== null && page !== void 0 ? page : 1}&take=${take !== null && take !== void 0 ? take : 10}`;
+                }
+                else {
+                    route += `?page=${page !== null && page !== void 0 ? page : 1}&take=${take !== null && take !== void 0 ? take : 10}`;
+                }
+                return yield ApiClient_1.ApiClient.GET(`${this.baseUrl}/${route}`);
             }
             catch (err) {
                 throw new Error('failed to retrieve active members contract status from membership service');

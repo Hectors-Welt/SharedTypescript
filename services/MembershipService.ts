@@ -40,8 +40,14 @@ export class MembershipService implements IMembershipService {
 
   async getActiveMembersContractStatus(customerId?: number, page?: number, take?: number): Promise<PagedResponse<MemberContractStatus>> {
     try {
-      const query = customerId ? `?customerId=${customerId}&page=${page ?? 1}&take=${take ?? 10}` : `?page=${page ?? 1}&take=${take ?? 10}`;
-      return await ApiClient.GET(`${this.baseUrl}/contracts/active-members/status?${query}`);
+      let route = 'contracts/active-members/status';
+      if (customerId) {
+        route += `?customerId=${customerId}&page=${page ?? 1}&take=${take ?? 10}`;
+      }
+      else {
+        route += `?page=${page ?? 1}&take=${take ?? 10}`;
+      }
+      return await ApiClient.GET(`${this.baseUrl}/${route}`);
     } catch (err) {
       throw new Error('failed to retrieve active members contract status from membership service');
     }
